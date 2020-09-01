@@ -1,29 +1,23 @@
 #include "rtv1.h"
 
-int main()
+int main(int args, char **argv)
 {
-    SDL_Init(SDL_INIT_EVERYTHING);
-    SDL_Window *win;
-    SDL_Renderer *renderer;
-    SDL_Event win_event;
-    t_sdl       sdl_components;
+    t_sdl sdl;
 
-    SDL_CreateWindowAndRenderer(HEI, WID, 0, &win, &renderer);
-    SDL_RenderClear(renderer);
-    SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255);
-    sdl_components.win = win;
-    sdl_components.renderer = renderer;
-    julia(sdl_components);
+    SDL_Init(SDL_INIT_EVERYTHING);
+    SDL_CreateWindowAndRenderer(WID, HEI, 0, &sdl.win, &sdl.renderer);
+    SDL_RenderClear(sdl.renderer);
+    julia(sdl);
     while (1)
     {
-        if (SDL_PollEvent(&win_event))
+        if (SDL_PollEvent(&sdl.event))
         {
-            if (SDL_QUIT == win_event.type)
+            if (SDL_QUIT == sdl.event.type)
                 break ;
         }
     }
-    SDL_DestroyRenderer(renderer);
-    SDL_DestroyWindow(win);
+    SDL_DestroyRenderer(sdl.renderer);
+    SDL_DestroyWindow(sdl.win);
     SDL_Quit();
     return (0);
 }

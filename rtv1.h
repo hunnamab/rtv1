@@ -9,12 +9,15 @@
 # include <stdint.h>
 # include "libft.h"
 # include <unistd.h>
-# define HEI 1024
+
+# define HEI 768
 # define WID 1024
+
 typedef struct 		sdl
 {
 	SDL_Window		*win;
 	SDL_Renderer	*renderer;
+	SDL_Event		event;
 }                	t_sdl;
 
 void	julia(t_sdl sdl);
