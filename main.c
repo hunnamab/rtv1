@@ -6,13 +6,14 @@ int main()
     SDL_Window *win;
     SDL_Renderer *renderer;
     SDL_Event win_event;
+    t_sdl       sdl_components;
 
-    SDL_CreateWindowAndRenderer(900, 900, 0, &win, &renderer);
-    SDL_SetRenderDrawColor(renderer, 0, 0, 0, 0);
+    SDL_CreateWindowAndRenderer(HEI, WID, 0, &win, &renderer);
     SDL_RenderClear(renderer);
     SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255);
-    SDL_RenderDrawPoint(renderer, 450, 450);
-    SDL_RenderPresent(renderer);
+    sdl_components.win = win;
+    sdl_components.renderer = renderer;
+    julia(sdl_components);
     while (1)
     {
         if (SDL_PollEvent(&win_event))

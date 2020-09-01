@@ -4,7 +4,7 @@ FLAGS = -I SDL2.framework/Headers -F ./ -framework SDL2
 LIBRARY = ./libft/libft.a
 HEADER = rtv1.h
 LINUX_FLAGS = -lSDL2
-SRC = main.c
+SRC = main.c fractal.c
 OBJ = $(SRC:.c=.o)
 
 all: $(NAME)
