@@ -1,8 +1,8 @@
 #ifndef RTV1_H
 # define RTV1_H
 
-//# include "SDL2.framework/Headers/SDL.h" //for macOS
-# include <SDL2/SDL.h> //for linux
+# include "SDL2.framework/Headers/SDL.h" //for macOS
+//# include <SDL2/SDL.h> //for linux
 # include <stdio.h>
 # include <math.h>
 # include <fcntl.h>
@@ -28,13 +28,6 @@ typedef struct		point
 	int16_t z;
 }					t_point;
 
-typedef	struct 		sphere
-{
-	t_point			center;
-	int16_t			radius;
-	t_color			color;
-}					t_sphere;
-
 typedef	struct 		color
 {
 	uint8_t			red;
@@ -42,6 +35,13 @@ typedef	struct 		color
 	uint8_t			blue;
 	uint8_t			alpha;
 }					t_color;
+
+typedef	struct 		sphere
+{
+	t_point			center;
+	int16_t			radius;
+	t_color			color;
+}					t_sphere;
 
 
 void	julia(t_sdl sdl);
