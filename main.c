@@ -7,7 +7,7 @@ int main(int args, char **argv)
     SDL_Init(SDL_INIT_EVERYTHING);
     SDL_CreateWindowAndRenderer(WID, HEI, 0, &sdl.win, &sdl.renderer);
     SDL_RenderClear(sdl.renderer);
-    draw_sphere(&sdl);
+    draw_sphere(&sdl); //draw.c
     while (1)
     {
         if (SDL_PollEvent(&sdl.event))

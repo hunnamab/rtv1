@@ -8,7 +8,7 @@ void draw_sphere(t_sdl *sdl)
     int y;
     int is_intersect;
 
-    sphere_settings(&s, &r);
+    sphere_settings(&s, &r); //settings.c
     x = 0;
     y = 0;
     is_intersect = 0;
@@ -18,7 +18,7 @@ void draw_sphere(t_sdl *sdl)
         while (x < WID)
         {
             r.start.x = x;
-            is_intersect = intersect_ray_sphere(&r, &s, 0);
+            is_intersect = intersect_ray_sphere(&r, &s, 0); //sphere.c
             if (is_intersect)
             {
                 SDL_SetRenderDrawColor(sdl->renderer, 255, 0, 0, 255);
