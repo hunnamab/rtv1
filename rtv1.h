@@ -9,6 +9,7 @@
 # include <stdint.h>
 # include "libft.h"
 # include <unistd.h>
+# include <stdint.h>
 
 # define HEI 768
 # define WID 1024
@@ -19,6 +20,29 @@ typedef struct 		sdl
 	SDL_Renderer	*renderer;
 	SDL_Event		event;
 }                	t_sdl;
+
+typedef struct		point
+{
+	int16_t x;
+	int16_t y;
+	int16_t z;
+}					t_point;
+
+typedef	struct 		sphere
+{
+	t_point			center;
+	int16_t			radius;
+	t_color			color;
+}					t_sphere;
+
+typedef	struct 		color
+{
+	uint8_t			red;
+	uint8_t			green;
+	uint8_t			blue;
+	uint8_t			alpha;
+}					t_color;
+
 
 void	julia(t_sdl sdl);
 
