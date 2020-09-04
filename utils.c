@@ -2,7 +2,7 @@
 
 t_point     get_point(float x, float y, float z)
 {
-    t_point reuslt;
+    t_point result;
     result.x = x;
     result.y = y;
     result.z = z;

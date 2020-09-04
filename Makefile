@@ -40,7 +40,7 @@ fclean: clean
 	@rm -rf ~/Library/Frameworks/SDL2.framework
 	@make -C libft fclean
 
-fclean_linux:
+fclean_linux: clean
 	@rm -f $(NAME_LINUX)
 	@make -C libft fclean
 
