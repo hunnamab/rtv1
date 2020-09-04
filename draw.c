@@ -12,6 +12,7 @@ void draw_sphere(t_sdl *sdl)
     int i = 0;
     float t0;
     float t1;
+    t_color color;
 
     sphere_num = 3 ;
     s = malloc(sizeof(t_sphere *) * sphere_num);
@@ -20,6 +21,7 @@ void draw_sphere(t_sdl *sdl)
         s[f] = new_sphere(get_point(j, HEI/2, 100), 20);
         j+= 200;
     }
+    color.alpha = 255;
     s[1]->color.red = 0;
     s[1]->color.blue = 255;
     s[2]->color.red = 0;
@@ -37,10 +39,10 @@ void draw_sphere(t_sdl *sdl)
             r.start.x = x;
             while(i < 1)
             {
-                is_intersect = intersect_ray_sphere(&r, s[i]); //sphere.c
+                is_intersect = intersect_ray_sphere(&r, s[i], &color); //sphere.c
                 if (is_intersect)
                 {
-                    SDL_SetRenderDrawColor(sdl->renderer, s[i]->color.red, s[i]->color.green, s[i]->color.blue, s[i]->color.alpha);
+                    SDL_SetRenderDrawColor(sdl->renderer, color.red, color.green, color.blue, color.alpha);
                     SDL_RenderDrawPoint(sdl->renderer, x, y);
                     break;
                 }

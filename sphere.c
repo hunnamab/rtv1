@@ -37,7 +37,7 @@ float   vector_length(t_point *vector)
     return(result);
 }
 
-int intersect_ray_sphere(t_ray *r, t_sphere *s)
+int intersect_ray_sphere(t_ray *r, t_sphere *s, t_color *reflected_color)
 {
     float a;
     float b;
@@ -49,28 +49,12 @@ int intersect_ray_sphere(t_ray *r, t_sphere *s)
     t_point dist;
     t_point intersection_point;
     t_point normal;
-    /* a = d.d, the vector dot product of the direction */
+
     a = vector_dot(&r->dir, &r->dir);
-
-    /* We need a vector representing the distance between the start of 
-    * the ray and the position of the circle.
-    * This is the term (p0 - c)
-    */
     dist = vector_sub(&r->start, &s->center);
-
-    /* b = 2d.(p0 - c) */
     b = 2 * vector_dot(&r->dir, &dist);
-
-    /* c = (p0 - c).(p0 - c) - r^2 */
     c = vector_dot(&dist, &dist) - (s->radius * s->radius);
-
-    /* Solving the discriminant */
     discr = b * b - 4 * a * c;
-    
-    /* If the discriminant is negative, there are no real roots.
-    * Return false in that case as the ray misses the sphere.
-    * Return true in all other cases (can be one or two intersections)
-    */
     if (discr <= 0)
         return (0);
     else
@@ -91,7 +75,7 @@ int intersect_ray_sphere(t_ray *r, t_sphere *s)
         }
         normal = vector_sub(&intersection_point, &s->center);
         normal = vector_div_by_scalar(&normal, vector_length(&normal));
-        reflection_color(&intersection_point, &normal, &s->color);
+        *(t_color *)reflected_color = reflection_color(&intersection_point, &normal, &s->color);
         return(1);
     }
     return (0);
