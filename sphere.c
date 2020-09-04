@@ -55,7 +55,7 @@ int intersect_ray_sphere(t_ray *r, t_sphere *s, t_color *reflected_color)
     b = 2 * vector_dot(&r->dir, &dist);
     c = vector_dot(&dist, &dist) - (s->radius * s->radius);
     discr = b * b - 4 * a * c;
-    if (discr <= 0)
+    if (discr < 0)
         return (0);
     else
     {
