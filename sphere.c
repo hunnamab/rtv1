@@ -1,38 +1,17 @@
 #include "rtv1.h"
 
-t_point vector_add(t_point *v1, t_point *v2)
+t_sphere *new_sphere(t_point center, int16_t radius)
 {
-    t_point res;
+    t_sphere *new_sphere;
 
-    res.x = v1->x + v2->x;
-    res.y = v1->y + v2->y;
-    res.z = v1->z + v2->z;
-    return (res);
-}
-
-t_point vector_scale(float c, t_point *v)
-{
-    t_point res;
-
-    res.x = v->x * c;
-    res.y = v->y * c;
-    res.z = v->z * c;
-    return (res);
-}
-
-t_point vector_sub(t_point *v1, t_point *v2)
-{
-    t_point res;
-
-    res.x = v1->x - v2->x;
-    res.y = v1->y - v2->y;
-    res.z = v1->z - v2->z;
-    return (res);
-}
-
-float vector_dot(t_point *v1, t_point *v2)
-{
-    return (v1->x * v2->x + v1->y * v2->y + v1->z * v2->z);
+    new_sphere = malloc(sizeof(t_sphere));
+    new_sphere->center = center;
+    new_sphere->radius = radius;
+    new_sphere->color.red = 255;
+    new_sphere->color.green = 0;
+    new_sphere->color.blue = 0;
+    new_sphere->color.alpha = 255;
+    return(new_sphere);
 }
 
 int intersect_ray_sphere(t_ray *r, t_sphere *s, float *t)
@@ -68,7 +47,7 @@ int intersect_ray_sphere(t_ray *r, t_sphere *s, float *t)
     * Return false in that case as the ray misses the sphere.
     * Return true in all other cases (can be one or two intersections)
     */
-    if (discr < 0)
+    if (discr <= 0)
         return (0);
     else
     {

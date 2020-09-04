@@ -5,7 +5,7 @@ MAC_FLAGS = -I SDL2.framework/Headers -F ./ -framework SDL2
 LINUX_FLAGS = -lSDL2
 LIBRARY = ./libft/libft.a
 HEADER = rtv1.h
-SRC = main.c fractal.c sphere.c settings.c draw.c
+SRC = main.c fractal.c sphere.c settings.c draw.c vector.c utils.c
 OBJ = $(SRC:.c=.o)
 
 all: $(NAME)
@@ -20,15 +20,16 @@ $(NAME): $(LIBRARY) $(OBJ)
 		@cp -r SDL2.framework ~/Library/Frameworks/
 		@gcc $(OBJ) $(LIBRARY) -o $(NAME) $(MAC_FLAGS) -I $(HEADER)
 
-linux: $(NAME_LINUX)
-	$(OBJ): %.o: %.c
+linux: $(NAME_LINUX) 
+
+$(OBJ): %.o: %.c $(HEADER)
 	gcc -c $(LIB_FLAGS) -I libft/ -o $@ $<
 
 $(LIBRARY):
 		@make -C libft/
 
 $(NAME_LINUX): $(LIBRARY) $(OBJ)
-		@gcc $(OBJ) $(LIBRARY) -o $(NAME) $(LINUX_FLAGS) -I $(HEADER)
+		@gcc $(OBJ) $(LIBRARY) -o $(NAME_LINUX) $(LINUX_FLAGS) -I $(HEADER)
 
 clean:
 	@rm -f $(OBJ)
@@ -40,7 +41,7 @@ fclean: clean
 	@make -C libft fclean
 
 fclean_linux:
-	@rm -f $(NAME)
+	@rm -f $(NAME_LINUX)
 	@make -C libft fclean
 
 re: fclean all
