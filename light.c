@@ -8,15 +8,15 @@ t_color     reflection_color(t_point *P, t_point *N, t_color *s_color)
     float n_dot_l;
     t_color result_color;
 
-    i = 0;
+    i = 0.5;
     //эта часть не работает, потому что хз, но цвет меняется нормально
-    light.intencity = 0.6;
+    /*light.intencity = 0.6;
     light.position = get_point(2, 1, 0);
     light.direction = get_point(2, 1, 0);
     L = vector_sub(&light.position, P);
     n_dot_l = vector_dot(N, &light.position);
     if (n_dot_l > 0)
-        i += light.intencity * n_dot_l / (vector_length(&L));
+        i += light.intencity * n_dot_l / (vector_length(&L));*/
     result_color.red = s_color->red * i;
     result_color.green = s_color->green * i;
     result_color.blue = s_color->blue * i;

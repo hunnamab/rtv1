@@ -18,7 +18,7 @@ void draw_sphere(t_sdl *sdl)
     s = malloc(sizeof(t_sphere *) * sphere_num);
     for(int f = 0; f < sphere_num; f++)
     {
-        s[f] = new_sphere(get_point(j, HEI/2, 100), 20);
+        s[f] = new_sphere(get_point(j, HEI/2, 100), 90);
         j+= 200;
     }
     color.alpha = 255;
@@ -37,7 +37,7 @@ void draw_sphere(t_sdl *sdl)
         while (x < WID)
         {
             r.start.x = x;
-            while(i < 1)
+            while(i < sphere_num)
             {
                 is_intersect = intersect_ray_sphere(&r, s[i], &color); //sphere.c
                 if (is_intersect)
