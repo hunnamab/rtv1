@@ -28,6 +28,12 @@ typedef struct		s_point
 	float			z;
 }					t_point;
 
+typedef struct		s_ray
+{
+	t_point			start;
+	t_point			dir;
+}					t_ray;
+
 typedef	struct 		s_color
 {
 	uint8_t			red;
@@ -35,6 +41,19 @@ typedef	struct 		s_color
 	uint8_t			blue;
 	uint8_t			alpha;
 }					t_color;
+
+typedef	struct		s_light
+{
+	float			intensity;
+	t_point			position;
+	t_point			direction;
+}					t_light;
+
+typedef struct		s_material
+{
+	t_color			diffuse;
+	t_color			reflection;
+}					t_material;
 
 typedef	struct 		s_sphere
 {
@@ -44,37 +63,23 @@ typedef	struct 		s_sphere
 	int				material;
 }					t_sphere;
 
-typedef struct		s_ray
-{
-	t_point			start;
-	t_point			dir;
-}					t_ray;
-
-typedef struct		s_material
-{
-	t_color			diffuse;
-	float			reflection;
-}					t_material;
-
-typedef	struct		s_light
-{
-	float			intensity;
-	t_point			position;
-	t_point			direction;
-}					t_light;
-
-void		julia(t_sdl sdl);
+// settings.c
 void 		sphere_settings(t_sphere *s, t_ray *r);
-int 		intersect_ray_sphere(t_ray *r, t_sphere *s, t_color *reflected_color);
+// draw.c
 void 		draw_sphere(t_sdl *sdl);
+// vector.c
 t_point 	vector_add(t_point *v1, t_point *v2);
 t_point 	vector_scale(float c, t_point *v);
 t_point 	vector_sub(t_point *v1, t_point *v2);
 float 		vector_dot(t_point *v1, t_point *v2);
+// sphere.c
 t_sphere	*new_sphere(t_point center, int16_t radius);
+float   	vector_length(t_point *vector);
+int 		intersect_ray_sphere(t_ray *r, t_sphere *s, t_color *reflected_color);
+// utils.c
 t_point		get_point(float x, float y, float z);
 t_color     reflection_color(t_point *P, t_point *N, t_color *color);
-float   	vector_length(t_point *vector);
+// debug.c
 void 		debug(t_sdl sdl);
 
 #endif

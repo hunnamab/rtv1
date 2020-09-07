@@ -17,6 +17,7 @@ t_sphere *new_sphere(t_point center, int16_t radius)
 t_point     vector_sub_by_scalar(t_point *vector, float scalar)
 {
     t_point result;
+
     result.x = vector->x + scalar;
     result.y = vector->y + scalar;
     result.z = vector->z + scalar;
@@ -25,7 +26,8 @@ t_point     vector_sub_by_scalar(t_point *vector, float scalar)
 
 t_point     vector_div_by_scalar(t_point *vector, float scalar)
 {
-      t_point result;
+    t_point result;
+
     result.x = vector->x / scalar;
     result.y = vector->y / scalar;
     result.z = vector->z / scalar;
@@ -34,7 +36,7 @@ t_point     vector_div_by_scalar(t_point *vector, float scalar)
 
 float   vector_length(t_point *vector)
 {
-    float dot = vector_dot(vector, vector);\
+    float dot = vector_dot(vector, vector);
     float result = sqrt(dot);
     return(result);
 }

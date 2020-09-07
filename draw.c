@@ -7,7 +7,7 @@ void draw_sphere(t_sdl *sdl)
     int x;
     int y;
     int is_intersect;
-    int sphere_num; 
+    int sphere_num;
     int j = 200;
     int i = 0;
     float t0;
