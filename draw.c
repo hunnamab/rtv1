@@ -14,9 +14,9 @@ void draw_sphere(t_sdl *sdl)
     float t1;
     t_color color;
 
-    sphere_num = 3 ;
+    sphere_num = 3;
     s = malloc(sizeof(t_sphere *) * sphere_num);
-    for(int f = 0; f < sphere_num; f++)
+    for (int f = 0; f < sphere_num; f++)
     {
         s[f] = new_sphere(get_point(j, HEI/2, j / 2), 90);
         j+= 200;

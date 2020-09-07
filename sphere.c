@@ -13,6 +13,7 @@ t_sphere *new_sphere(t_point center, int16_t radius)
     new_sphere->color.alpha = 255;
     return(new_sphere);
 }
+
 t_point     vector_sub_by_scalar(t_point *vector, float scalar)
 {
     t_point result;
@@ -21,6 +22,7 @@ t_point     vector_sub_by_scalar(t_point *vector, float scalar)
     result.z = vector->z + scalar;
     return(result);
 }
+
 t_point     vector_div_by_scalar(t_point *vector, float scalar)
 {
       t_point result;
@@ -49,6 +51,7 @@ int intersect_ray_sphere(t_ray *r, t_sphere *s, t_color *reflected_color)
     t_point dist;
     t_point intersection_point;
     t_point normal;
+    t_point buf;
 
     /*поиск точек пересечения луча и сферы по квадратному уравнению, части которого:
     a - скалярное происзведение направления луча,
@@ -71,7 +74,6 @@ int intersect_ray_sphere(t_ray *r, t_sphere *s, t_color *reflected_color)
         t0 = (-b + sqrt_discr) / (2 * a);
         t1 = (-b - sqrt_discr) / (2 * a);
         /*t0 и t1 - длина вектора до точек пересечения лучом сферы*/
-        t_point buf;
         if (t0 > t1)
         {
             /*выбираем ближайшую точку пересечения со сферой
@@ -89,7 +91,7 @@ int intersect_ray_sphere(t_ray *r, t_sphere *s, t_color *reflected_color)
         /*для получения значения цвета в точке нужно послать луч, идущий по нормали от
         точки пересечения изначального луча и сферы, в сторону источника света.
         нормаль сферы в конкретной точке - единичный вектор, лежащий на прямой, проходящей
-        через центр сферы и искомую точку( в нашем случае через точку пересечения изначального луча и сферы)*/
+        через центр сферы и искомую точку (в нашем случае через точку пересечения изначального луча и сферы)*/
 
         normal = vector_sub(&intersection_point, &s->center);
         /*для получения вектора с единичной длиной нужно поделить его на квадратный корень из суммы

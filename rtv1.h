@@ -55,11 +55,12 @@ typedef struct		s_material
 	t_color			diffuse;
 	float			reflection;
 }					t_material;
+
 typedef	struct		s_light
 {
-	float intencity;
-	t_point position;
-	t_point	direction;
+	float			intensity;
+	t_point			position;
+	t_point			direction;
 }					t_light;
 
 void		julia(t_sdl sdl);

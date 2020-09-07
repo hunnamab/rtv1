@@ -13,7 +13,7 @@ int main(int args, char **argv)
     {
         if (SDL_PollEvent(&sdl.event))
         {
-            if (SDL_QUIT == sdl.event.type)
+            if (SDL_QUIT == sdl.event.type || SDLK_ESCAPE == sdl.event.key.keysym.sym)
                 break ;
         }
     }
