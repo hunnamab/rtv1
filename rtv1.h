@@ -78,7 +78,7 @@ float   	vector_length(t_point *vector);
 int 		intersect_ray_sphere(t_ray *r, t_sphere *s, t_color *reflected_color);
 // utils.c
 t_point		get_point(float x, float y, float z);
-t_color     reflection_color(t_point *P, t_point *N, t_color *color);
+t_color     reflection_color(t_point *P, t_point *N, t_point *V, t_color *color);
 // debug.c
 void 		debug(t_sdl sdl);
 

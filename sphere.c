@@ -100,7 +100,7 @@ int intersect_ray_sphere(t_ray *r, t_sphere *s, t_color *reflected_color)
         квадратов его компонентов(т.е из его скалярного произведения на самого себя)*/
         normal = vector_div_by_scalar(&normal, vector_length(&normal));
         /*тут рассчитываем сам конечный цвет в файле light.c*/
-        *(t_color *)reflected_color = reflection_color(&intersection_point, &normal, &s->color);
+        *(t_color *)reflected_color = reflection_color(&intersection_point, &normal, &r->dir, &s->color);
         return(1);
     }
     return (0);
