@@ -38,7 +38,7 @@ float   vector_length(t_point *vector)
 {
     float dot = vector_dot(vector, vector);
     float result = sqrt(dot);
-    return(result);
+    return (result);
 }
 
 int intersect_ray_sphere(t_ray *r, t_sphere *s, t_color *reflected_color)
