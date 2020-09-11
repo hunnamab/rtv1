@@ -1,0 +1,24 @@
+sphere {
+    center: 0, 0, 0
+    radius: 200
+    color: 255, 0, 0, 255
+    specular: 50.0
+}
+
+plane {
+
+}
+
+cone {
+
+}
+
+cylinder {
+
+}
+
+light {
+    intensity: 0.2
+    position: 100, 100, 200
+    direction: 2, 1, 0
+}

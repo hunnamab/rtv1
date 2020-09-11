@@ -49,18 +49,12 @@ typedef	struct		s_light
 	t_point			direction;
 }					t_light;
 
-typedef struct		s_material
-{
-	t_color			diffuse;
-	t_color			reflection;
-}					t_material;
-
 typedef	struct 		s_sphere
 {
 	t_point			center;
 	int16_t			radius;
 	t_color			color;
-	int				material;
+	double			specular; // коэффициент зеркальности объекта
 }					t_sphere;
 
 // settings.c
@@ -78,7 +72,7 @@ float   	vector_length(t_point *vector);
 int 		intersect_ray_sphere(t_ray *r, t_sphere *s, t_color *reflected_color);
 // utils.c
 t_point		get_point(float x, float y, float z);
-t_color     reflection_color(t_point *P, t_point *N, t_point *V, t_color *color);
+t_color     reflection_color(t_point *P, t_point *N, t_point *V, t_sphere *s);
 // debug.c
 void 		debug(t_sdl sdl);
 
