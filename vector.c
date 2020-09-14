@@ -34,3 +34,31 @@ float vector_dot(t_point *v1, t_point *v2)
 {
     return (v1->x * v2->x + v1->y * v2->y + v1->z * v2->z);
 }
+
+
+t_point     vector_sub_by_scalar(t_point *vector, float scalar)
+{
+    t_point result;
+
+    result.x = vector->x + scalar;
+    result.y = vector->y + scalar;
+    result.z = vector->z + scalar;
+    return(result);
+}
+
+t_point     vector_div_by_scalar(t_point *vector, float scalar)
+{
+    t_point result;
+
+    result.x = vector->x / scalar;
+    result.y = vector->y / scalar;
+    result.z = vector->z / scalar;
+    return(result);
+}
+
+float   vector_length(t_point *vector)
+{
+    float dot = vector_dot(vector, vector);
+    float result = sqrt(dot);
+    return (result);
+}

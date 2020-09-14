@@ -1,9 +1,11 @@
 #include "rtv1.h"
 
-t_sphere *new_sphere(t_point center, int16_t radius)
+t_object *new_sphere(t_point center, int16_t radius)
 {
     t_sphere *new_sphere;
-
+    t_object *new_object;
+    
+    new_object = malloc(sizeof(t_object));
     new_sphere = malloc(sizeof(t_sphere));
     new_sphere->center = center;
     new_sphere->radius = radius;
@@ -12,34 +14,10 @@ t_sphere *new_sphere(t_point center, int16_t radius)
     new_sphere->color.green = 0;
     new_sphere->color.blue = 0;
     new_sphere->color.alpha = 255;
-    return(new_sphere);
-}
-
-t_point     vector_sub_by_scalar(t_point *vector, float scalar)
-{
-    t_point result;
-
-    result.x = vector->x + scalar;
-    result.y = vector->y + scalar;
-    result.z = vector->z + scalar;
-    return(result);
-}
-
-t_point     vector_div_by_scalar(t_point *vector, float scalar)
-{
-    t_point result;
-
-    result.x = vector->x / scalar;
-    result.y = vector->y / scalar;
-    result.z = vector->z / scalar;
-    return(result);
-}
-
-float   vector_length(t_point *vector)
-{
-    float dot = vector_dot(vector, vector);
-    float result = sqrt(dot);
-    return (result);
+    new_object->data = (void *)new_sphere;
+    new_object->tag = "sphere";
+    new_object->intersect = &intersect_ray_sphere;
+    return(new_object);
 }
 
 int intersect_ray_sphere(t_ray *r, t_sphere *s, t_color *reflected_color)

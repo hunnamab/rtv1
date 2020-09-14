@@ -1,9 +1,17 @@
 #include "rtv1.h"
 
+void zabei(t_sphere *s1, t_sphere *s2)
+{
+    s1->color.red = 0;
+    s1->color.blue = 255;
+    s2->color.red = 0;
+    s2->color.green = 255;
+}
+
 void draw_sphere(t_sdl *sdl)
 {
     t_ray r;
-    t_sphere **s;
+    t_object **s; //теперь создаем объект сферический
     int x;
     int y;
     int is_intersect;
@@ -15,18 +23,17 @@ void draw_sphere(t_sdl *sdl)
     t_color color;
 
     sphere_num = 3;
-    s = malloc(sizeof(t_sphere *) * sphere_num);
+    s = malloc(sizeof(t_object *) * sphere_num);
     for (int f = 0; f < sphere_num; f++)
     {
         s[f] = new_sphere(get_point(j, (HEI/2 + j/5), j / 2), 90);
         j+= 200;
     }
     color.alpha = 255;
-    s[1]->color.red = 0;
-    s[1]->color.blue = 255;
-    s[2]->color.red = 0;
-    s[2]->color.green = 255;
-    sphere_settings(s[0], &r); //settings.c
+    zabei((t_sphere *)s[1]->data, (t_sphere *)s[2]->data);
+//    s[1]->*(t_sphere *)data->color.red = 0; а вот так не могу, ток в функцию если передавать
+//   s[1]->*(t_sphere *)data->color.blue = 255;
+    sphere_settings((t_sphere *)s[0]->data, &r); //settings.c
     x = 0;
     y = 0;
     is_intersect = 0;
@@ -39,7 +46,7 @@ void draw_sphere(t_sdl *sdl)
             r.start.x = x;
             while(i < sphere_num)
             {
-                is_intersect = intersect_ray_sphere(&r, s[i], &color); //sphere.c
+                is_intersect = s[i]->intersect(&r, (t_sphere *)s[i]->data, &color); //sphere.c
                 if (is_intersect)
                 {
                     SDL_SetRenderDrawColor(sdl->renderer, color.red, color.green, color.blue, color.alpha);
