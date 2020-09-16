@@ -94,5 +94,6 @@ t_point		get_point(float x, float y, float z);
 t_color     reflection_color(t_point *P, t_point *N, t_point *V, t_sphere *s);
 // triangle.c
 t_object 	*new_triangle(t_point v1, t_point v2, t_point v3);
+float   	ftoi(char *str);
 
 #endif
