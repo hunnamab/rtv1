@@ -17,6 +17,14 @@ cylinder {
 
 }
 
+triangle {
+    vertex1: 10, 10, 10
+    vertex2: 50, 100, 50
+    vertex3: -20, -10, -10
+    color: 0, 255, 0, 255
+    specular: 50.0
+}
+
 light {
     intensity: 0.2
     position: 100, 100, 200

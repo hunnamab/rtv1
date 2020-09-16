@@ -5,8 +5,8 @@ MAC_FLAGS = -I SDL2.framework/Headers -F ./ -framework SDL2
 LINUX_FLAGS = -lSDL2 -lm
 LIBRARY = ./libft/libft.a
 HEADER = rtv1.h
-SRC = main.c sphere.c settings.c draw.c vector.c utils.c \
-light.c debug.c triangle.c
+SRC = main.c sphere.c settings.c vector.c utils.c \
+	light.c triangle.c scenes_reader.c draw.c
 OBJ = $(SRC:.c=.o)
 
 all: $(NAME)

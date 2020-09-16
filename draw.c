@@ -31,8 +31,6 @@ void draw_sphere(t_sdl *sdl)
     }
     color.alpha = 255;
     zabei((t_sphere *)s[1]->data, (t_sphere *)s[2]->data);
-//    s[1]->*(t_sphere *)data->color.red = 0; а вот так не могу, ток в функцию если передавать
-//   s[1]->*(t_sphere *)data->color.blue = 255;
     sphere_settings((t_sphere *)s[0]->data, &r); //settings.c
     x = 0;
     y = 0;
