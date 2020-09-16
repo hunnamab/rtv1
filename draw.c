@@ -46,7 +46,7 @@ void draw_sphere(t_sdl *sdl)
             r.start.x = x;
             while(i < sphere_num)
             {
-                is_intersect = s[i]->intersect(&r, (t_sphere *)s[i]->data, &color); //sphere.c
+                is_intersect = s[i]->intersect(&r, s[i], &color); //sphere.c
                 if (is_intersect)
                 {
                     SDL_SetRenderDrawColor(sdl->renderer, color.red, color.green, color.blue, color.alpha);

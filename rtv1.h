@@ -57,11 +57,18 @@ typedef	struct 		s_sphere
 	double			specular; // коэффициент зеркальности объекта
 }					t_sphere;
 
+typedef	struct		s_triangle
+{
+	t_point			vertex[2];
+	t_color			color;
+	double			specular;
+}					t_triangle;
+
 typedef	struct		s_object3d
 {
 	void			*data;
 	const char		*tag;
-	int				(*intersect)(t_ray *, t_sphere *, t_color *);
+	int				(*intersect)(t_ray *, struct s_object3d *, t_color *);
 }					t_object;
 // settings.c
 void 		sphere_settings(t_sphere *s, t_ray *r);
@@ -75,7 +82,7 @@ float 		vector_dot(t_point *v1, t_point *v2);
 // sphere.c
 t_object	*new_sphere(t_point center, int16_t radius);
 float   	vector_length(t_point *vector);
-int 		intersect_ray_sphere(t_ray *r, t_sphere *s, t_color *reflected_color);
+int 		intersect_ray_sphere(t_ray *r, t_object *object, t_color *reflected_color);
 // utils.c
 t_point		get_point(float x, float y, float z);
 t_color     reflection_color(t_point *P, t_point *N, t_point *V, t_sphere *s);
@@ -84,5 +91,6 @@ void 		debug(t_sdl sdl);
 float   	vector_length(t_point *vector);
 t_point     vector_div_by_scalar(t_point *vector, float scalar);
 t_point     vector_sub_by_scalar(t_point *vector, float scalar);
+t_object 	*new_triangle(t_point v1, t_point v2, t_point v3);
 
 #endif

@@ -20,7 +20,7 @@ t_object *new_sphere(t_point center, int16_t radius)
     return(new_object);
 }
 
-int intersect_ray_sphere(t_ray *r, t_sphere *s, t_color *reflected_color)
+int intersect_ray_sphere(t_ray *r, t_object *object, t_color *reflected_color)
 {
     float a;
     float b;
@@ -33,7 +33,9 @@ int intersect_ray_sphere(t_ray *r, t_sphere *s, t_color *reflected_color)
     t_point intersection_point;
     t_point normal;
     t_point buf;
+    t_sphere *s;
 
+    s = (t_sphere *)object->data;
     /*поиск точек пересечения луча и сферы по квадратному уравнению, части которого:
     a - скалярное происзведение направления луча,
     dist - координаты вектора от центра сферы к центру луча
