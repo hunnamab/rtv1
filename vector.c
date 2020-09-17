@@ -59,6 +59,16 @@ t_point     vector_div_by_scalar(t_point *vector, float scalar)
 float   vector_length(t_point *vector)
 {
     float dot = vector_dot(vector, vector);
-    float result = sqrt(dot);
-    return (result);
+    return (sqrt(dot));
+}
+
+t_point  vector_cross(t_point *v1, t_point *v2)
+{
+    t_point result;
+
+    result.x = v1->y * v2->z - v1->z * v2->y;
+    result.y = v1->z * v2->x - v1->x * v2->z;
+    result.z = v1->x * v2->y - v1->y * v2->x;
+
+    return(result);
 }

@@ -9,11 +9,11 @@ t_object *new_sphere(t_point center, int16_t radius)
     new_sphere = malloc(sizeof(t_sphere));
     new_sphere->center = center;
     new_sphere->radius = radius;
-    new_sphere->specular = 50.0;
-    new_sphere->color.red = 255;
-    new_sphere->color.green = 0;
-    new_sphere->color.blue = 0;
-    new_sphere->color.alpha = 255;
+    new_object->specular = 50.0;
+    new_object->color.red = 255;
+    new_object->color.green = 0;
+    new_object->color.blue = 0;
+    new_object->color.alpha = 255;
     new_object->data = (void *)new_sphere;
     new_object->tag = "sphere";
     new_object->intersect = &intersect_ray_sphere;
@@ -87,7 +87,7 @@ int intersect_ray_sphere(t_ray *r, t_object *object, t_color *reflected_color)
         
         /*тут рассчитываем сам конечный цвет в файле light.c*/
         
-        *(t_color *)reflected_color = reflection_color(&intersection_point, &normal, &r->dir, s);
+        *(t_color *)reflected_color = reflection_color(&intersection_point, &normal, &r->dir, object);
         return(1);
     }
     return (0);

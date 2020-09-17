@@ -1,6 +1,6 @@
 #include "rtv1.h"
 
-t_color     reflection_color(t_point *P, t_point *N, t_point *V, t_sphere *s)
+t_color     reflection_color(t_point *P, t_point *N, t_point *V, t_object *o)
 {
     float i;
     t_color result_color;
@@ -26,7 +26,7 @@ t_color     reflection_color(t_point *P, t_point *N, t_point *V, t_sphere *s)
     if (n_dot_l > 0)
         i += light.intensity * n_dot_l / (vector_length(N) * vector_length(&L));
     // создаем эффект зеркальности
-    if (s->specular != -1) // коэффициент s должен быть положительным числом, если объект обладает свойством зеркальности
+    if (o->specular != -1) // коэффициент s должен быть положительным числом, если объект обладает свойством зеркальности
     {
         // для каждого идеально отполированного объекта падающий луч отражается в единственном направлении R (зеркальное отражение)
         // высчитываем это значение по формуле
@@ -43,11 +43,11 @@ t_color     reflection_color(t_point *P, t_point *N, t_point *V, t_sphere *s)
         // скалярное произведение зеркального отражения и вектора, указывающего от объекта в камеру
         r_dot_v = vector_dot(&R, &D);
         if (r_dot_v > 0)
-            i += light.intensity * pow((double)r_dot_v / (vector_length(&R) * vector_length(&D)), s->specular);
+            i += light.intensity * pow((double)r_dot_v / (vector_length(&R) * vector_length(&D)), o->specular);
     }
     // получаем цвета
-    result_color.red = s->color.red * i;
-    result_color.green = s->color.green * i;
-    result_color.blue = s->color.blue * i;
+    result_color.red = o->color.red * i;
+    result_color.green = o->color.green * i;
+    result_color.blue = o->color.blue * i;
     return(result_color);
 }
