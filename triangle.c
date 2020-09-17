@@ -13,6 +13,10 @@ int intersect_ray_triangle(t_ray *r, t_object *object, t_color *reflected_color)
     float u;
     float v;
     float t;
+    t_point intersection_point;
+    t_point normal;
+    t_point buf;
+
     triangle = (t_triangle *)object->data;
     edge1 = vector_sub(&triangle->vertex[1], &triangle->vertex[0]);
     edge2 = vector_sub(&triangle->vertex[2], &triangle->vertex[0]);
@@ -30,7 +34,10 @@ int intersect_ray_triangle(t_ray *r, t_object *object, t_color *reflected_color)
     if (v < 0 || u + v > 1)
         return (0);
     t = vector_dot(&edge2, &qvec) * inv_det;
-    *(t_color *)reflected_color = object->color;
+    buf = vector_scale(t, &r->dir);
+    intersection_point = vector_add(&r->start, &buf);
+    normal = vector_cross(&triangle->vertex[0], &triangle->vertex[1]);
+    *(t_color *)reflected_color = reflection_color(&intersection_point, &normal, &r->dir, object);
     return(1);
 }
 
