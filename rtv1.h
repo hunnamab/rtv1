@@ -85,14 +85,16 @@ float   	vector_length(t_point *vector);
 t_point     vector_div_by_scalar(t_point *vector, float scalar);
 t_point     vector_sub_by_scalar(t_point *vector, float scalar);
 // sphere.c
-t_object	*new_sphere(t_point center, int16_t radius);
-float   	vector_length(t_point *vector);
 int 		intersect_ray_sphere(t_ray *r, t_object *object, t_color *reflected_color);
 // utils.c
 t_point		get_point(float x, float y, float z);
 t_color     reflection_color(t_point *P, t_point *N, t_point *V, t_object *o);
 // triangle.c
+int intersect_ray_triangle(t_ray *r, t_object *object, t_color *reflected_color);
+// new_objects.c
 t_object 	*new_triangle(t_point v1, t_point v2, t_point v3);
+t_object	*new_sphere(t_point center, int16_t radius);
+// ftoi.c
 float   	ftoi(char *str);
 
 #endif

@@ -18,7 +18,7 @@ void draw_sphere(t_sdl *sdl)
     s = malloc(sizeof(t_object *) * obj_num);
     for (int f = 0; f < 3; f++)
     {
-        s[f] = new_sphere(get_point(j, (HEI/2 + j/5), j / 2), 90);
+        s[f] = new_sphere(get_point(j, (HEI/2 + j/5), j / 2), 90); // new_objects.c
         j+= 200;
     }
     color.alpha = 255;
@@ -26,7 +26,7 @@ void draw_sphere(t_sdl *sdl)
     s[1]->color.blue = 255;
     s[2]->color.red = 0;
     s[2]->color.green = 255;
-    s[3] = new_triangle(get_point(300, 300, 0), get_point(200, 200, 0), get_point(400, 200, 0));
+    s[3] = new_triangle(get_point(300, 300, 0), get_point(200, 200, 0), get_point(400, 200, 0)); // new_objects.c
     //s[3] = new_sphere(get_point(100, 100, 100), 90);
     sphere_settings((t_sphere *)s[0]->data, &r); //settings.c
     x = 0;

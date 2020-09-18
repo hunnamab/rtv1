@@ -1,25 +1,5 @@
 #include "rtv1.h"
 
-t_object *new_sphere(t_point center, int16_t radius)
-{
-    t_sphere *new_sphere;
-    t_object *new_object;
-    
-    new_object = malloc(sizeof(t_object));
-    new_sphere = malloc(sizeof(t_sphere));
-    new_sphere->center = center;
-    new_sphere->radius = radius;
-    new_object->specular = 50.0;
-    new_object->color.red = 255;
-    new_object->color.green = 0;
-    new_object->color.blue = 0;
-    new_object->color.alpha = 255;
-    new_object->data = (void *)new_sphere;
-    new_object->tag = "sphere";
-    new_object->intersect = &intersect_ray_sphere;
-    return(new_object);
-}
-
 int intersect_ray_sphere(t_ray *r, t_object *object, t_color *reflected_color)
 {
     float a;
@@ -36,6 +16,7 @@ int intersect_ray_sphere(t_ray *r, t_object *object, t_color *reflected_color)
     t_sphere *s;
 
     s = (t_sphere *)object->data;
+
     /*поиск точек пересечения луча и сферы по квадратному уравнению, части которого:
     a - скалярное происзведение направления луча,
     dist - координаты вектора от центра сферы к центру луча

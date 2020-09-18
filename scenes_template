@@ -30,3 +30,7 @@ light {
     position: 100, 100, 200
     direction: 2, 1, 0
 }
+
+camera {
+    
+}

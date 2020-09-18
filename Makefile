@@ -6,7 +6,8 @@ LINUX_FLAGS = -lSDL2 -lm
 LIBRARY = ./libft/libft.a
 HEADER = rtv1.h
 SRC = main.c sphere.c settings.c vector.c utils.c \
-	light.c triangle.c scenes_reader.c draw.c ftoi.c
+	light.c triangle.c scenes_reader.c draw.c ftoi.c \
+	new_objects.c
 OBJ = $(SRC:.c=.o)
 
 all: $(NAME)
