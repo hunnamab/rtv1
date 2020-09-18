@@ -96,5 +96,7 @@ t_object 	*new_triangle(t_point v1, t_point v2, t_point v3);
 t_object	*new_sphere(t_point center, int16_t radius);
 // ftoi.c
 float   	ftoi(char *str);
+// objects_parameters.c
+t_object *get_sphere(char *description);
 
 #endif

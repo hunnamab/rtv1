@@ -5,7 +5,7 @@ int main(int args, char **argv)
     int     fd;
     t_sdl   sdl;
 
-    /*if (args != 2)
+    if (args != 2)
     {
         ft_putstr("usage: ./rtv1 [scene_file]\n");
         return (0);
@@ -15,7 +15,7 @@ int main(int args, char **argv)
         fd = open(argv[1], O_RDONLY);
         read_scene(fd);
         return (0);
-    }*/
+    }
     SDL_Init(SDL_INIT_EVERYTHING);
     SDL_CreateWindowAndRenderer(WID, HEI, 0, &sdl.win, &sdl.renderer);
     SDL_RenderClear(sdl.renderer);
