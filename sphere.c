@@ -25,7 +25,7 @@ int intersect_ray_sphere(t_ray *r, t_object *object, t_color *reflected_color)
     
     a = vector_dot(&r->dir, &r->dir);
     dist = vector_sub(&r->start, &s->center);
-    b = 2 * vector_dot(&r->dir, &dist);
+    b = 2 * vector_dot(&dist, &r->dir);
     c = vector_dot(&dist, &dist) - (s->radius * s->radius);
     
     /*поиск решений квадратного уравнения

@@ -52,7 +52,7 @@ typedef	struct		s_light
 typedef	struct 		s_sphere
 {
 	t_point			center;
-	int16_t			radius;
+	float			radius;
 }					t_sphere;
 
 typedef	struct		s_triangle
