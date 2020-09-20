@@ -12,7 +12,7 @@
 # include <stdint.h>
 
 # define WID 800
-# define HEI 600
+# define HEI 800
 
 typedef struct 		s_sdl
 {
@@ -98,5 +98,6 @@ t_object	*new_sphere(t_point center, int16_t radius);
 float   	ftoi(char *str);
 // objects_parameters.c
 t_object *get_sphere(char *description);
+t_color     get_color(int r, int g, int b, int a);
 
 #endif

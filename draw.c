@@ -4,8 +4,8 @@ void draw_sphere(t_sdl *sdl)
 {
     t_ray r;
     t_object **s; //теперь создаем объект сферический
-    int x;
-    int y;
+    float x;
+    float y;
     int is_intersect;
     int obj_num;
     int j = 200;
@@ -16,20 +16,13 @@ void draw_sphere(t_sdl *sdl)
 
     obj_num = 4;
     s = malloc(sizeof(t_object *) * obj_num);
-    s[0] = new_sphere(get_point(0, -1, 0.00001), 1);
-    for (int f = 1; f < 3; f++)
-    {
-        s[f] = new_sphere(get_point(j, (HEI/2 + j), j / 2), 60); // new_objects.c
-        j+= 200;
-    }
-    color.alpha = 255;
-    s[1]->color.red = 0;
-    s[1]->color.blue = 255;
-    s[2]->color.red = 0;
-    s[2]->color.green = 255;
-    s[3] = new_triangle(get_point(600, 600, 200), get_point(400, 400, 200), get_point(600, 400, 200)); // new_objects.c
-    //s[3] = new_sphere(get_point(100, 100, 100), 90);
-   // sphere_settings((t_sphere *)s[0]->data, &r); //settings.c
+    s[0] = new_sphere(get_point(0, 0, 10), 1);
+    s[1] = new_sphere(get_point(1, 1, 5), 1);
+    s[1]->color = get_color(0, 255, 0, 255);
+    s[2] = new_sphere(get_point(1, -1, 3), 1);
+    s[2]->color = get_color(0, 0, 255, 255);
+    s[3] = new_triangle(get_point(-1, 1, 10), get_point(1, 1, 10), get_point(-1, -1, 10));
+    s[3]->color = get_color(255, 0, 255, 255);
     x = 0;
     y = 0;
     is_intersect = 0;
@@ -40,14 +33,14 @@ void draw_sphere(t_sdl *sdl)
     view_port_point.z = 1;
     while (y < HEI)
     {
-        view_port_point.y = -(y - HEI / 2) * (1 / HEI);
+        view_port_point.y = -(y - (float)HEI / 2) * (1 / (float)HEI);
         while (x < WID)
         {
-            view_port_point.x = (x - WID / 2) * (1 / WID);
+            view_port_point.x = (x - (float)WID / 2) * (1 / (float)WID);
             r.dir = vector_sub(&view_port_point, &r.start);
-            while(i < 1)
+            while(i < obj_num)
             {
-                is_intersect = s[i]->intersect(&r, s[i], &color); //sphere.c
+                is_intersect = s[i]->intersect(&r, s[i], &color);
                 if (is_intersect)
                 {
                     SDL_SetRenderDrawColor(sdl->renderer, color.red, color.green, color.blue, color.alpha);
