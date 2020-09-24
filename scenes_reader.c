@@ -1,47 +1,48 @@
 #include "rtv1.h"
 
-t_object *get_parameters(char *name, char *description)
+t_object *get_parameters(char *name, char **description)
 {
     t_object *obj;
 
     if (!ft_strcmp(name, "sphere"))
     {
-        printf("sphere");
-        obj = get_sphere(description);
+        printf("sphere\n");
+        obj = get_sphere(description); // objects_parameters.c
     }
     else if (!ft_strcmp(name, "triangle"))
     {
-        printf("triangle");
+        printf("triangle\n");
         obj = get_triangle(description);
     }
     /* else if (!ft_strcmp(name, "cone"))
     {
-        printf("cone");
+        printf("cone\n");
     }
     else if (!ft_strcmp(name, "cylinder"))
     {
-        printf("cylinder");
+        printf("cylinder\n");
     }
     else if (!ft_strcmp(name, "plane"))
     {
-        printf("plane");
+        printf("plane\n");
     }
     else if (!ft_strcmp(name, "light"))
     {
-        printf("light");
+        printf("light\n");
     }
     else if (!ft_strcmp(name, "camera"))
     {
-        printf("camera");
+        printf("camera\n");
     } */
     else
         return (NULL);
     return (obj);
 }
 
-char *get_description(char *scene, int i)
+char **get_description(char *scene, int i)
 {
-    char *description;
+    char *descr_buf;
+    char **description;
     int len;
     int start;
 
@@ -52,16 +53,17 @@ char *get_description(char *scene, int i)
         i++;
         len++;
     }
-    description = ft_strsub(scene, start, len);
+    descr_buf = ft_strsub(scene, start, len);
+    description = ft_strsplit(descr_buf, '\n');
     return (description);
 }
 
-void get_objects(char *scene)
+t_object **get_objects(char *scene, int *obj_nmb)
 {
     t_object **objs;
     char *obj_name;
-    char *obj_desc;
-    int obj_num;
+    char **obj_desc;
+    int nmb;
     int start;
     int n;
     int i;
@@ -69,22 +71,23 @@ void get_objects(char *scene)
 
     i = 0;
     len = ft_strlen(scene);
-    obj_num = 0;
+    nmb = 0;
     // выясняем кол-во объектов сцены
     while (i < len)
     {
         if (scene[i] == '{')
-            obj_num++;
+            nmb++;
         i++;
     }
+    *(int *)obj_nmb = nmb;
     // создаем массив структур для объектов
-    objs = malloc(sizeof(t_object *) * obj_num);
+    objs = malloc(sizeof(t_object *) * nmb);
     i = 0;
     n = 0;
     start = 0;
     while (i < len)
     {
-        if (scene[i + 1] == '{' && n < obj_num)
+        if (scene[i + 1] == '{' && n < nmb)
         {
             // записываем название объекта
             obj_name = ft_strsub(scene, start, (i - start));
@@ -94,7 +97,7 @@ void get_objects(char *scene)
             objs[n] = get_parameters(obj_name, obj_desc);
             // освобождаем строки
             free(obj_name);
-            free(obj_desc);
+            //free(obj_desc);
             // плюсуем индекс массива
             n++;
             // переходим к описанию следующего объекта
@@ -104,14 +107,15 @@ void get_objects(char *scene)
         }
         i++;
     }
+    return (objs);
 }
 
-void read_scene(int fd)
+t_object **read_scene(int fd, int *obj_nmb)
 {
     int		ret;
 	char	buf[64000];
 
 	while ((ret = read(fd, buf, 64000)) > 0)
 		buf[ret] = '\0';
-	get_objects(buf);
+	return (get_objects(buf, obj_nmb));
 }

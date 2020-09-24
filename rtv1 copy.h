@@ -12,7 +12,7 @@
 # include <stdint.h>
 
 # define WID 800
-# define HEI 800
+# define HEI 600
 
 typedef struct 		s_sdl
 {
@@ -70,13 +70,11 @@ typedef	struct		s_object3d
 }					t_object;
 
 // scenes_reader.c
-t_object	**read_scene(int fd, int *obj_nmb);
+t_object	**read_scene(int fd);
 // settings.c
 void 		sphere_settings(t_sphere *s, t_ray *r);
 // draw.c
-void 		draw_objects(t_sdl *sdl, t_object **objs, int obj_nmb);
-// light.c
-t_color     reflection_color(t_point *P, t_point *N, t_point *V, t_object *o);
+void 		draw_sphere(t_sdl *sdl);
 // vector.c
 t_point 	vector_add(t_point *v1, t_point *v2);
 t_point 	vector_scale(float c, t_point *v);
@@ -90,6 +88,7 @@ t_point     vector_sub_by_scalar(t_point *vector, float scalar);
 int 		intersect_ray_sphere(t_ray *r, t_object *object, t_color *reflected_color);
 // utils.c
 t_point		get_point(float x, float y, float z);
+t_color     reflection_color(t_point *P, t_point *N, t_point *V, t_object *o);
 // triangle.c
 int			intersect_ray_triangle(t_ray *r, t_object *object, t_color *reflected_color);
 // new_objects.c

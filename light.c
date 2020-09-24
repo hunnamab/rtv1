@@ -49,5 +49,5 @@ t_color     reflection_color(t_point *P, t_point *N, t_point *V, t_object *o)
     result_color.red = o->color.red * i;
     result_color.green = o->color.green * i;
     result_color.blue = o->color.blue * i;
-    return(result_color);
+    return (result_color);
 }

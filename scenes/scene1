@@ -1,0 +1,28 @@
+sphere {
+    center: -20, -20, 100
+    radius: 5
+    color: 255, 0, 0, 255
+    specular: 50.0
+}
+
+sphere {
+    center: 0, 0, 100
+    radius: 5
+    color: 0, 255, 0, 255
+    specular: 50.0
+}
+
+sphere {
+    center: 10, 20, 100
+    radius: 5
+    color: 0, 0, 255, 255
+    specular: 50.0
+}
+
+triangle {
+    vertex: 30, 10, 100
+    vertex: 40, 10, 100
+    vertex: 35, 30, 100
+    color: 0, 255, 255, 255
+    specular: 50.0
+}
