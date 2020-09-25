@@ -8,7 +8,7 @@ char *get_coordinates(char *description)
 
     i = 0;
     len = ft_strlen(description);
-    while (!(ft_isdigit(description[i])))
+    while (!(ft_isdigit(description[i])) && description[i] != '-')
         i++;
     coordinates = ft_strsub(description, i, len - i);
     return (coordinates);

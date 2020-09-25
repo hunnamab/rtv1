@@ -25,17 +25,17 @@ void draw_objects(t_sdl *sdl, t_object **objs, int obj_nmb)
     x = 0;
     y = 0;
     is_intersect = 0;
-    r.start.y = 0;
-    r.start.z = 0;
-    r.start.x = 0;
+    r.start.y = 5;
+    r.start.z = -10;
+    r.start.x = 5;
     t_point view_port_point;
-    view_port_point.z = 1;
+    view_port_point.z = r.start.z + 1;
     while (y < HEI)
     {
-        view_port_point.y = -(y - (float)HEI / 2) * (1 / (float)HEI);
+        view_port_point.y = -(y - (float)HEI / 2) * (1 / (float)HEI) + r.start.y;
         while (x < WID)
         {
-            view_port_point.x = (x - (float)WID / 2) * (1 / (float)WID);
+            view_port_point.x = (x - (float)WID / 2) * (((float)WID / (float)HEI)/ (float)WID) + r.start.x;
             r.dir = vector_sub(&view_port_point, &r.start);
             while(i < obj_nmb)
             {

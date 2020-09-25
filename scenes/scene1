@@ -1,5 +1,5 @@
 sphere {
-    center: -20, -20, 100
+    center: 0, -10, 30
     radius: 5
     color: 255, 0, 0, 255
     specular: 50.0
