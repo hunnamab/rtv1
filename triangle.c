@@ -1,5 +1,22 @@
 #include "rtv1.h"
 
+t_object *new_triangle(t_point *vertex, double specular, t_color color)
+{
+    t_triangle *new_triangle;
+    t_object *new_object;
+    
+    new_object = malloc(sizeof(t_object));
+    new_triangle = malloc(sizeof(t_triangle));
+    new_triangle->vertex = malloc(sizeof(t_point) * 3);
+    new_triangle->vertex = vertex;
+    new_object->specular = specular;
+    new_object->color = color;
+    new_object->data = (void *)new_triangle;
+    new_object->tag = "triangle";
+    new_object->intersect = &intersect_ray_triangle;
+    return(new_object);
+}
+
 int intersect_ray_triangle(t_ray *r, t_object *object, t_color *reflected_color)
 {
     t_triangle *triangle;

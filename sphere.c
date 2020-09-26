@@ -1,5 +1,22 @@
 #include "rtv1.h"
 
+t_object *new_sphere(t_point center, float radius, float specular, t_color color)
+{
+    t_sphere *new_sphere;
+    t_object *new_object;
+    
+    new_object = malloc(sizeof(t_object));
+    new_sphere = malloc(sizeof(t_sphere));
+    new_sphere->center = center;
+    new_sphere->radius = radius;
+    new_object->specular = specular;
+    new_object->color = color;
+    new_object->data = (void *)new_sphere;
+    new_object->tag = "sphere";
+    new_object->intersect = &intersect_ray_sphere;
+    return(new_object);
+}
+
 int intersect_ray_sphere(t_ray *r, t_object *object, t_color *reflected_color)
 {
     float a;

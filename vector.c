@@ -61,6 +61,19 @@ float   vector_length(t_point *vector)
     return (sqrt(dot));
 }
 
+void  normilize_vector(t_point *v1)
+{
+    float q;
+
+    q = sqrt(v1->x * v1->x + v1->y * v1->y + v1->z + v1->z);
+    if (q != 0)
+    {
+        v1->x /= q;
+        v1->y /= q;
+        v1->z /= q;
+    }
+}
+
 t_point  vector_cross(t_point *v1, t_point *v2)
 {
     t_point result;

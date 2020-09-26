@@ -3,25 +3,14 @@
 void draw_objects(t_sdl *sdl, t_object **objs, int obj_nmb)
 {
     t_ray r;
-    //t_object **s; //теперь создаем объект сферический
     float x;
     float y;
     int is_intersect;
-    //int j = 200;
     int i = 0;
     float t0;
     float t1;
     t_color color;
 
-    /* obj_num = 4;
-    s = malloc(sizeof(t_object *) * obj_num);
-    s[0] = new_sphere(get_point(0, 0, 10), 1);
-    s[1] = new_sphere(get_point(1, 1, 5), 1);
-    s[1]->color = get_color(0, 255, 0, 255);
-    s[2] = new_sphere(get_point(1, -1, 3), 1);
-    s[2]->color = get_color(0, 0, 255, 255);
-    s[3] = new_triangle(get_point(-1, 1, 10), get_point(1, 1, 10), get_point(-1, -1, 10));
-    s[3]->color = get_color(255, 0, 255, 255); */
     x = 0;
     y = 0;
     is_intersect = 0;
@@ -30,6 +19,13 @@ void draw_objects(t_sdl *sdl, t_object **objs, int obj_nmb)
     r.start.x = 5;
     t_point view_port_point;
     view_port_point.z = r.start.z + 1;
+    t_color buf;
+    buf.red = 100;
+    buf.green = 100;
+    buf.blue = 100;
+    buf.alpha = 255;
+    objs[obj_nmb] = new_plane(get_point(0,0,0), get_point(1,1,1), 20, buf);
+    obj_nmb += 1;
     while (y < HEI)
     {
         view_port_point.y = -(y - (float)HEI / 2) * (1 / (float)HEI) + r.start.y;

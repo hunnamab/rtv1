@@ -1,8 +1,8 @@
 #ifndef RTV1_H
 # define RTV1_H
 
-# include "SDL2.framework/Headers/SDL.h" //for macOS
-//# include <SDL2/SDL.h> //for linux
+//# include "SDL2.framework/Headers/SDL.h" //for macOS
+# include <SDL2/SDL.h> //for linux
 # include <stdio.h>
 # include <math.h>
 # include <fcntl.h>
@@ -55,6 +55,12 @@ typedef	struct 		s_sphere
 	float			radius;
 }					t_sphere;
 
+typedef struct		s_plane
+{
+	t_point			normal;
+	t_point			point;
+}					t_plane;
+
 typedef	struct		s_triangle
 {
 	t_point			*vertex;
@@ -86,15 +92,18 @@ t_point  	vector_cross(t_point *v1, t_point *v2);
 float   	vector_length(t_point *vector);
 t_point     vector_div_by_scalar(t_point *vector, float scalar);
 t_point     vector_sub_by_scalar(t_point *vector, float scalar);
+void  		normilize_vector(t_point *v1);
 // sphere.c
 int 		intersect_ray_sphere(t_ray *r, t_object *object, t_color *reflected_color);
+t_object	*new_sphere(t_point center, float radius, float specular, t_color color);
 // utils.c
 t_point		get_point(float x, float y, float z);
 // triangle.c
 int			intersect_ray_triangle(t_ray *r, t_object *object, t_color *reflected_color);
-// new_objects.c
 t_object 	*new_triangle(t_point *vertex, double specular, t_color color);
-t_object	*new_sphere(t_point center, float radius, float specular, t_color color);
+// plane.c
+int 		intersect_ray_plane(t_ray *r, t_object *object, t_color *reflected_color);
+t_object 	*new_plane(t_point point, t_point normal, double specular, t_color color);
 // ftoi.c
 float   	ftoi(char *str);
 // objects_parameters.c

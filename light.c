@@ -15,8 +15,8 @@ t_color     reflection_color(t_point *P, t_point *N, t_point *V, t_object *o)
     //тут пока только заполняющий источник света
     light.intensity = 0.2;
     i += light.intensity;
-    light.position = get_point(WID * 2, HEI/3, -10);
-    light.direction = get_point(2, 1, 0);
+    light.position = get_point(0, 0, 0);
+    light.direction = get_point(0, 0, 1);
     //берем вектор из точки пересечения P к позиции источника света
     L = vector_sub(&light.position, P);
     //скалярное произведение нормали и позиции света
