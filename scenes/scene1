@@ -1,5 +1,5 @@
 sphere {
-    center: 0, -10, 30
+    center: 0, 0, 10
     radius: 5
     color: 255, 0, 0, 255
     specular: 50.0
@@ -22,7 +22,15 @@ sphere {
 triangle {
     vertex: 30, 10, 100
     vertex: 40, 10, 100
-    vertex: 35, 30, 100
+    vertex: 35, 30, 200
     color: 0, 255, 255, 255
+    specular: 50.0
+}
+
+triangle {
+    vertex: -10, 0, 1
+    vertex: -5, 0, 100
+    vertex: -10, 10, 1
+    color: 123, 123, 123, 255
     specular: 50.0
 }

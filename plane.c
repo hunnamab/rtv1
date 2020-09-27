@@ -8,7 +8,7 @@ t_object *new_plane(t_point point, t_point normal, double specular, t_color colo
     new_object = malloc(sizeof(t_object));
     new_plane = malloc(sizeof(t_plane));
     new_plane->normal = normal;
-    normilize_vector(&new_plane->normal);
+    normalize_vector(&new_plane->normal);
     new_plane->point = point;
     new_object->specular = specular;
     new_object->color = color;
@@ -18,7 +18,7 @@ t_object *new_plane(t_point point, t_point normal, double specular, t_color colo
     return(new_object);
 }
 
-int intersect_ray_plane(t_ray *r, t_object *object, t_color *reflected_color)
+int intersect_ray_plane(t_ray *r, t_object *object, t_color *reflected_color, t_light **light)
 {
     float d;
     float t;
@@ -32,6 +32,6 @@ int intersect_ray_plane(t_ray *r, t_object *object, t_color *reflected_color)
     t = -(plane->normal.x * r->start.x + plane->normal.y * r->start.y + plane->normal.z * r->start.z + d) \
     / r->dir.x * plane->normal.x + r->dir.y * plane->normal.y + r->dir.z * plane->normal.z;
     intersection_point = vector_scale(t, &r->start);
-    *(t_color *)reflected_color = reflection_color(&intersection_point, &plane->normal, &r->dir, object);
+    *(t_color *)reflected_color = reflection_color(&intersection_point, &plane->normal, &r->dir, object, light);
     return(1);
 }

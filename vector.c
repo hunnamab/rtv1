@@ -61,7 +61,7 @@ float   vector_length(t_point *vector)
     return (sqrt(dot));
 }
 
-void  normilize_vector(t_point *v1)
+void  normalize_vector(t_point *v1)
 {
     float q;
 
@@ -84,3 +84,8 @@ t_point  vector_cross(t_point *v1, t_point *v2)
 
     return(result);
 }
+
+/* int     vectorequal(t_point *v1, t_point *v2)
+{
+
+} */
