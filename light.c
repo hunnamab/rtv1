@@ -6,7 +6,7 @@ t_light     *new_light(t_point position, t_point direction, const char *type)
 
     new_light = malloc(sizeof(t_light));
     new_light->type = ft_strcpy_alloc(new_light->type, type);
-    if(ft_strequ(new_light->type, "point"))
+    if (ft_strequ(new_light->type, "point"))
         new_light->intensity = 0.6;
     else
         new_light->intensity = 0.2;

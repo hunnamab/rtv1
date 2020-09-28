@@ -6,24 +6,9 @@ sphere {
 }
 
 sphere {
-    center: 0, 0, 100
-    radius: 5
-    color: 0, 255, 0, 255
-    specular: 50.0
-}
-
-sphere {
     center: 10, 20, 100
     radius: 5
     color: 0, 0, 255, 255
-    specular: 50.0
-}
-
-triangle {
-    vertex: 30, 10, 100
-    vertex: 40, 10, 100
-    vertex: 35, 30, 200
-    color: 0, 255, 255, 255
     specular: 50.0
 }
 
@@ -33,4 +18,11 @@ triangle {
     vertex: -10, 10, 1
     color: 123, 123, 123, 255
     specular: 50.0
+}
+
+plane {
+    point: 0, 0, 100
+    normal: 20, -20, 20
+    color: 255, 255, 0, 255
+    specular: 0
 }

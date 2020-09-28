@@ -1,6 +1,6 @@
 #include "rtv1.h"
 
-t_object *new_plane(t_point point, t_point normal, double specular, t_color color)
+t_object *new_plane(t_point point, t_point normal, float specular, t_color color)
 {
     t_plane *new_plane;
     t_object *new_object;
@@ -33,5 +33,5 @@ int intersect_ray_plane(t_ray *r, t_object *object, t_color *reflected_color, t_
     / r->dir.x * plane->normal.x + r->dir.y * plane->normal.y + r->dir.z * plane->normal.z;
     intersection_point = vector_scale(t, &r->start);
     *(t_color *)reflected_color = reflection_color(&intersection_point, &plane->normal, &r->dir, object, light);
-    return(1);
+    return (1);
 }

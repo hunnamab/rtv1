@@ -105,11 +105,12 @@ int			intersect_ray_triangle(t_ray *r, t_object *object, t_color *reflected_colo
 t_object 	*new_triangle(t_point *vertex, double specular, t_color color);
 // plane.c
 int 		intersect_ray_plane(t_ray *r, t_object *object, t_color *reflected_color, t_light **light);
-t_object 	*new_plane(t_point point, t_point normal, double specular, t_color color);
+t_object 	*new_plane(t_point point, t_point normal, float specular, t_color color);
 // ftoi.c
 float   	ftoi(char *str);
 // objects_parameters.c
 t_object	*get_sphere(char **description);
 t_object	*get_triangle(char **description);
+t_object 	*get_plane(char **description);
 
 #endif

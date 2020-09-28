@@ -55,5 +55,5 @@ int intersect_ray_triangle(t_ray *r, t_object *object, t_color *reflected_color,
     intersection_point = vector_add(&r->start, &buf);
     normal = vector_cross(&triangle->vertex[0], &triangle->vertex[1]);
     *(t_color *)reflected_color = reflection_color(&intersection_point, &normal, &r->dir, object, light);
-    return(1);
+    return (1);
 }

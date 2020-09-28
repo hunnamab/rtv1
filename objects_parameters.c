@@ -80,3 +80,20 @@ t_object *get_triangle(char **description)
     triangle = new_triangle(vertex, specular, color);
     return (triangle);
 }
+
+t_object *get_plane(char **description)
+{
+    t_object *plane;
+    t_point point;
+    t_point normal;
+    float specular;
+    t_color color;
+
+    plane = malloc(sizeof(t_object));
+    point = get_points(description[0]);
+    normal = get_points(description[1]);
+    color = get_color(description[2]);
+    specular = ftoi(get_coordinates(description[3]));
+    plane = new_plane(point, normal, specular, color);
+    return (plane);
+}
