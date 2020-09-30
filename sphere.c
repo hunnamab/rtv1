@@ -35,16 +35,16 @@ int intersect_ray_sphere(t_ray *r, t_object *object, t_color *reflected_color, t
     s = (t_sphere *)object->data;
 
     /*поиск точек пересечения луча и сферы по квадратному уравнению, части которого:
-    a - скалярное происзведение направления луча,
+    a - скалярное произведение направления луча,
     dist - координаты вектора от центра сферы к центру луча
     b - скалярное произведение вектора направления луча и вектора из центра сферы
     c - разница скалярного произведения вектора из центра сферы к началу луча и квадрата радиуса сферы*/
-    
+
     a = vector_dot(&r->dir, &r->dir);
     dist = vector_sub(&r->start, &s->center);
     b = 2 * vector_dot(&dist, &r->dir);
     c = vector_dot(&dist, &dist) - (s->radius * s->radius);
-    
+
     /*поиск решений квадратного уравнения
     если решений нет - луч не пересекает сферу, если решение одно - проходит по касательной к сфере
     если два решения - пересекает сферу в двух точках*/
@@ -84,7 +84,7 @@ int intersect_ray_sphere(t_ray *r, t_object *object, t_color *reflected_color, t
         normal = vector_div_by_scalar(&normal, vector_length(&normal));
         
         /*тут рассчитываем сам конечный цвет в файле light.c*/
-        
+
         *(t_color *)reflected_color = reflection_color(&intersection_point, &normal, &r->dir, object, light);
         return(1);
     }

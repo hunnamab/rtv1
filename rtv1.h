@@ -62,6 +62,12 @@ typedef struct		s_plane
 	t_point			point;
 }					t_plane;
 
+typedef	struct 		s_cylinder
+{
+	t_point			position;
+	float			radius;
+}					t_cylinder;
+
 typedef	struct		s_triangle
 {
 	t_point			*vertex;
@@ -106,11 +112,15 @@ t_object 	*new_triangle(t_point *vertex, double specular, t_color color);
 // plane.c
 int 		intersect_ray_plane(t_ray *r, t_object *object, t_color *reflected_color, t_light **light);
 t_object 	*new_plane(t_point point, t_point normal, float specular, t_color color);
+// cylinder.c
+int			intersect_ray_cylinder(t_ray *r, t_object *object, t_color *reflected_color, t_light **light);
+t_object	*new_cylinder(t_point position, float radius, double specular, t_color color);
 // ftoi.c
 float   	ftoi(char *str);
 // objects_parameters.c
 t_object	*get_sphere(char **description);
 t_object	*get_triangle(char **description);
 t_object 	*get_plane(char **description);
+t_object 	*get_cylinder(char **description);
 
 #endif

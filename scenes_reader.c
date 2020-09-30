@@ -19,13 +19,14 @@ t_object *get_parameters(char *name, char **description)
         printf("plane\n");
         obj = get_plane(description);
     }
-    /* else if (!ft_strcmp(name, "cone"))
-    {
-        printf("cone\n");
-    }
     else if (!ft_strcmp(name, "cylinder"))
     {
         printf("cylinder\n");
+        obj = get_cylinder(description);
+    }
+    /* else if (!ft_strcmp(name, "cone"))
+    {
+        printf("cone\n");
     }
     else if (!ft_strcmp(name, "light"))
     {

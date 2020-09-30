@@ -7,7 +7,7 @@ t_light     *new_light(t_point position, t_point direction, const char *type)
     new_light = malloc(sizeof(t_light));
     new_light->type = ft_strcpy_alloc(new_light->type, type);
     if (ft_strequ(new_light->type, "point"))
-        new_light->intensity = 0.6;
+        new_light->intensity = 0.2;
     else
         new_light->intensity = 0.2;
     new_light->position = position;
@@ -28,20 +28,16 @@ t_color     reflection_color(t_point *P, t_point *N, t_point *V, t_object *o, t_
 
     j = 0;
     i = 0;
-    while(light[j])
+    while (light[j])
     {
-        if (ft_strequ(light[j]->type, "point"))
-        {
-            L = vector_sub(&light[j]->position, P);
-            n_dot_l = vector_dot(N, &L);
-            if (n_dot_l > 0)
-                i += (light[j]->intensity * n_dot_l) / vector_length(&L);
-        }
         if (ft_strequ(light[j]->type, "ambient"))
             i += light[j]->intensity;
-        if (ft_strequ(light[j]->type, "directional"))
+        else
         {
-            L = light[j]->direction;
+            if (ft_strequ(light[j]->type, "point"))
+                L = vector_sub(&light[j]->position, P);
+            if (ft_strequ(light[j]->type, "directional"))
+                L = light[j]->direction;
             n_dot_l = vector_dot(N, &L);
             if (n_dot_l > 0)
                 i += (light[j]->intensity * n_dot_l) / vector_length(&L);
@@ -68,8 +64,8 @@ t_color     reflection_color(t_point *P, t_point *N, t_point *V, t_object *o, t_
         j++;
     }
     i = i > 1 ? 1 : i;
-    result_color.red = o->color.red * i > 255 ? 255 : o->color.red * i;
-    result_color.green = o->color.green * i > 255 ? 255 : o->color.green * i;
-    result_color.blue = o->color.blue * i > 255 ? 255 : o->color.blue * i;
+    result_color.red = (o->color.red * i > 255) ? 255 : (o->color.red * i);
+    result_color.green = (o->color.green * i > 255) ? 255 : (o->color.green * i);
+    result_color.blue = (o->color.blue * i > 255) ? 255 : (o->color.blue * i);
     return (result_color);
 }

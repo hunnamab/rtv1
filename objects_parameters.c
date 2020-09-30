@@ -63,6 +63,23 @@ t_object *get_sphere(char **description)
     return (sphere);
 }
 
+t_object *get_cylinder(char **description)
+{
+    t_object *cylinder;
+    t_point position;
+    float radius;
+    float specular;
+    t_color color;
+
+    cylinder = malloc(sizeof(t_object));
+    position = get_points(description[0]);
+    radius = ftoi(get_coordinates(description[1]));
+    color = get_color(description[2]);
+    specular = ftoi(get_coordinates(description[3]));
+    cylinder = new_cylinder(position, radius, specular, color); // new_objects.c
+    return (cylinder);
+}
+
 t_object *get_triangle(char **description)
 {
     t_object *triangle;
