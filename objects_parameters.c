@@ -59,7 +59,7 @@ t_object *get_sphere(char **description)
     radius = ftoi(get_coordinates(description[1]));
     color = get_color(description[2]);
     specular = ftoi(get_coordinates(description[3]));
-    sphere = new_sphere(center, radius, specular, color); // new_objects.c
+    sphere = new_sphere(center, radius, specular, color);
     return (sphere);
 }
 
@@ -76,8 +76,23 @@ t_object *get_cylinder(char **description)
     radius = ftoi(get_coordinates(description[1]));
     color = get_color(description[2]);
     specular = ftoi(get_coordinates(description[3]));
-    cylinder = new_cylinder(position, radius, specular, color); // new_objects.c
+    cylinder = new_cylinder(position, radius, specular, color);
     return (cylinder);
+}
+
+t_object *get_cone(char **description)
+{
+    t_object *cone;
+    t_point position;
+    float specular;
+    t_color color;
+
+    cone = malloc(sizeof(t_object));
+    position = get_points(description[0]);
+    color = get_color(description[1]);
+    specular = ftoi(get_coordinates(description[2]));
+    cone = new_cone(position, specular, color);
+    return (cone);
 }
 
 t_object *get_triangle(char **description)

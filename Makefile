@@ -7,7 +7,7 @@ LIBRARY = ./libft/libft.a
 HEADER = rtv1.h
 SRC = main.c sphere.c settings.c vector.c utils.c \
 	light.c triangle.c scenes_reader.c draw.c ftoi.c \
-	objects_parameters.c plane.c cylinder.c
+	objects_parameters.c plane.c cylinder.c cone.c
 OBJ = $(SRC:.c=.o)
 
 all: $(NAME)

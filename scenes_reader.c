@@ -24,10 +24,12 @@ t_object *get_parameters(char *name, char **description)
         printf("cylinder\n");
         obj = get_cylinder(description);
     }
-    /* else if (!ft_strcmp(name, "cone"))
+    else if (!ft_strcmp(name, "cone"))
     {
         printf("cone\n");
+        obj = get_cone(description);
     }
+    /*
     else if (!ft_strcmp(name, "light"))
     {
         printf("light\n");

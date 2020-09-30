@@ -1,6 +1,6 @@
 #include "rtv1.h"
 
-t_object *new_cylinder(t_point position, float radius, double specular, t_color color)
+t_object *new_cylinder(t_point position, float radius, float specular, t_color color)
 {
     t_cylinder *new_cylinder;
     t_object *new_object;

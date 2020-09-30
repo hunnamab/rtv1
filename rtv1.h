@@ -68,6 +68,11 @@ typedef	struct 		s_cylinder
 	float			radius;
 }					t_cylinder;
 
+typedef	struct 		s_cone
+{
+	t_point			position;
+}					t_cone;
+
 typedef	struct		s_triangle
 {
 	t_point			*vertex;
@@ -101,11 +106,11 @@ float   	vector_length(t_point *vector);
 t_point     vector_div_by_scalar(t_point *vector, float scalar);
 t_point     vector_sub_by_scalar(t_point *vector, float scalar);
 void  		normalize_vector(t_point *v1);
+// utils.c
+t_point		get_point(float x, float y, float z);
 // sphere.c
 int 		intersect_ray_sphere(t_ray *r, t_object *object, t_color *reflected_color, t_light **light);
 t_object	*new_sphere(t_point center, float radius, float specular, t_color color);
-// utils.c
-t_point		get_point(float x, float y, float z);
 // triangle.c
 int			intersect_ray_triangle(t_ray *r, t_object *object, t_color *reflected_color, t_light **light);
 t_object 	*new_triangle(t_point *vertex, double specular, t_color color);
@@ -114,7 +119,10 @@ int 		intersect_ray_plane(t_ray *r, t_object *object, t_color *reflected_color, 
 t_object 	*new_plane(t_point point, t_point normal, float specular, t_color color);
 // cylinder.c
 int			intersect_ray_cylinder(t_ray *r, t_object *object, t_color *reflected_color, t_light **light);
-t_object	*new_cylinder(t_point position, float radius, double specular, t_color color);
+t_object	*new_cylinder(t_point position, float radius, float specular, t_color color);
+// cone.c
+int			intersect_ray_cone(t_ray *r, t_object *object, t_color *reflected_color, t_light **light);
+t_object	*new_cone(t_point position, float specular, t_color color);
 // ftoi.c
 float   	ftoi(char *str);
 // objects_parameters.c
@@ -122,5 +130,6 @@ t_object	*get_sphere(char **description);
 t_object	*get_triangle(char **description);
 t_object 	*get_plane(char **description);
 t_object 	*get_cylinder(char **description);
+t_object 	*get_cone(char **description);
 
 #endif
