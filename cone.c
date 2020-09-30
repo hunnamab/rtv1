@@ -32,10 +32,14 @@ int intersect_ray_cone(t_ray *r, t_object *object, t_color *reflected_color, t_l
     t_point normal;
 
     cone = (t_cone *)object->data;
-    a = r->dir.x * r->dir.x + r->dir.z * r->dir.z - r->dir.y * r->dir.y;
+    float radius = 1;
+    float height = 2;
+    float tan = (radius / height) * (radius / height);
+    a = r->dir.x * r->dir.x + r->dir.z * r->dir.z - (tan * (r->dir.y * r->dir.y));
     dist = vector_sub(&r->start, &cone->position);
-    b = 2 * dist.x * r->dir.x + 2 * dist.z * r->dir.z - 2 * dist.y * r->dir.y;
-    c = dist.x * dist.x + dist.z * dist.z - dist.y * dist.y;
+    dist.y = height - r->start.y + cone->position.y;
+    b = 2 * dist.x * r->dir.x + 2 * dist.z * r->dir.z + (2 * tan * dist.y * r->dir.y);
+    c = dist.x * dist.x + dist.z * dist.z - (tan * (dist.y * dist.y));
     discr = b * b - 4 * a * c;
     if (discr < 0)
         return (0);
@@ -49,8 +53,18 @@ int intersect_ray_cone(t_ray *r, t_object *object, t_color *reflected_color, t_l
         else
             buf = vector_scale(t0, &r->dir);
         intersection_point = vector_add(&r->start, &buf);
-        // normal
-        normalize_vector(&normal);
+        normal.x = intersection_point.x - cone->position.x;
+        normal.y = 0;
+        normal.z = intersection_point.z - cone->position.z;
+        float n = sqrt((normal.x * normal.x) + (normal.z * normal.z));
+        normal.x /= n;
+        normal.z /= n;
+        normal.x = normal.x * (height / radius);
+        normal.y = radius / height;
+        normal.z = normal.z * (height / radius);
+        //normalize_vector(&normal);
+        //if (vector_dot(&r->dir, &normal) > 0.0001)
+		//    normal = vector_scale(-1, &normal);
         *(t_color *)reflected_color = reflection_color(&intersection_point, &normal, &r->dir, object, light);
         return (1);
     }

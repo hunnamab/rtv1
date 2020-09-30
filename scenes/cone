@@ -1,5 +1,5 @@
 cone {
-    position: 0, 0, 150
+    position: 20, 0, 100
     color: 200, 50, 60, 255
-    specular: 60
+    specular: 100
 }
