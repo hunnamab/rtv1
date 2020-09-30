@@ -1,0 +1,6 @@
+sphere {
+    center: 0, 0, 150
+    radius: 30
+    color: 10, 150, 200, 255
+    specular: 100
+}

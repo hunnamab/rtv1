@@ -1,0 +1,15 @@
+triangle {
+    vertex: -25, -15, 20
+    vertex: 40, 30, 140
+    vertex: -50, 40, 140
+    color: 45, 205, 10, 255
+    specular: 50
+}
+
+triangle {
+    vertex: 25, -15, 80
+    vertex: 60, -40, 80
+    vertex: 50, 40, 80
+    color: 210, 205, 10, 255
+    specular: 50
+}
