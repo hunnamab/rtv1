@@ -60,6 +60,7 @@ typedef struct		s_plane
 {
 	t_point			normal;
 	t_point			point;
+	float			d;
 }					t_plane;
 
 typedef	struct 		s_cylinder

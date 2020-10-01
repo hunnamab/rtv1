@@ -20,7 +20,7 @@ void draw_objects(t_sdl *sdl, t_object **objs, int obj_nmb)
     x = 0;
     y = 0;
     is_intersect = 0;
-    r.start.y = 0;
+    r.start.y = 20;
     r.start.z = -20;
     r.start.x = 0;
     t_point view_port_point;

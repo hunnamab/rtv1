@@ -1,13 +1,13 @@
-plane {
-    point: 0, 0, 150
-    normal: 0, 0.3, 1
-    color: 255, 255, 0, 255
-    specular: 0
-}
-
 sphere {
     center: 0, 0, 120
     radius: 30
     color: 100, 50, 200, 255
     specular: 60
+}
+
+plane {
+    point: 0, 1, 0
+    normal: 0, 1, 0
+    color: 123, 32, 33, 255
+    specular: -1
 }
