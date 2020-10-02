@@ -8,7 +8,7 @@ t_object *new_plane(t_point point, t_point normal, float specular, t_color color
     new_object = malloc(sizeof(t_object));
     new_plane = malloc(sizeof(t_plane));
     new_plane->normal = normal;
-    //normalize_vector(&new_plane->normal);
+    normalize_vector(&new_plane->normal);
     new_plane->point = point;
     new_object->specular = specular;
     new_object->color = color;
@@ -36,12 +36,9 @@ int intersect_ray_plane(t_ray *r, t_object *object, t_color *reflected_color, t_
     if (k1 == 0 || (k1 < 0 && k2 < 0) || (k1 > 0 && k2 > 0))
         return(0);
     t = -k1 / k2;
-/*     t = (-1 * (plane->normal.x * r->start.x + plane->normal.y * r->start.y + plane->normal.z * r->start.z + plane->d)) \
-    / (r->dir.x * plane->normal.x + r->dir.y * plane->normal.y + r->dir.z * plane->normal.z); */
-    //intersection_point = vector_add(&intersection_point, &r->start);
-    /* printf("plane.normal.x = %f, plane.normal.y %f, plane.normal.z %f\n", plane->normal.x, plane->normal.y, plane->normal.z);
-    printf("second part %f\n", (r->dir.x * plane->normal.x + r->dir.y * plane->normal.y + r->dir.z * plane->normal.z));
-    printf("first part %f\n", (-1 * (plane->normal.x * r->start.x + plane->normal.y * r->start.y + plane->normal.z * r->start.z + plane->d)));
+    intersection_point = vector_scale(t, &r->dir);
+   /*  printf("plane.normal.x = %f, plane.normal.y %f, plane.normal.z %f\n", plane->normal.x, plane->normal.y, plane->normal.z);
+    printf("first_part %f, second part %f\n", -k1, k2);
     printf("r.start.x %f, r.start.y %f, r.start.z %f, r.dir.x %f, r.dir.y %f, r.dir.z %f\n",r->start.x,r->start.y,r->start.z,r->dir.x,r->dir.y,r->dir.z);
     printf("int_p.x == %f int_p.y == %f int_p.z == %f t == %f\n",intersection_point.x, intersection_point.y, intersection_point.z, t); */
     if (vector_dot(&r->dir, &plane->normal) > 0.0001)
