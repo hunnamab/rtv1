@@ -15,7 +15,7 @@ SRC = main.c sphere.c settings.c vector.c utils.c \
 	./matrix/matr_sub_scalar.c ./matrix/matr_swap_cols.c \
 	./matrix/matr_swap_rows.c ./matrix/matr_to_line.c \
 	./matrix/matr_trace.c ./matrix/matr_transpose.c \
-	./matrix/print_matrix.c translate.c ./matrix/matrix_identity.c
+	./matrix/print_matrix.c transform.c ./matrix/matrix_identity.c
 OBJ = $(SRC:.c=.o)
 
 all: $(NAME)

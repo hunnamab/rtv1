@@ -134,6 +134,8 @@ t_object 	*get_plane(char **description);
 t_object 	*get_cylinder(char **description);
 t_object 	*get_cone(char **description);
 //translate.c
-void     translate(t_point *points, float *angle, float *move, float *scale);
-float   *get_angles(float x, float y, float z);
+float		**get_transform_matrix(float *angle, float *move, float *scale);
+float		*get_three_floats(float x, float y, float z);
+void		transform(t_point *point, float **matrix, float *coord_matrix, int point_nmb);
+
 #endif
