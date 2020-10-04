@@ -93,7 +93,7 @@ t_object	**read_scene(int fd, int *obj_nmb);
 // settings.c
 void 		sphere_settings(t_sphere *s, t_ray *r);
 // draw.c
-void 		draw_objects(t_sdl *sdl, t_object **objs, int obj_nmb);
+void 		draw_objects(t_sdl *sdl, t_object **objs, int obj_nmb, t_light **light);
 // light.c
 t_color     reflection_color(t_point *P, t_point *N, t_point *V, t_object *o, t_light **light);
 t_light     *new_light(t_point position, t_point direction, const char *type);

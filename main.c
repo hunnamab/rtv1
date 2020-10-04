@@ -5,6 +5,7 @@ int main(int args, char **argv)
     int         fd;
     t_sdl       sdl;
     t_object    **objs;
+    t_light     **light;
     int         obj_nmb;
 
     if (args != 2)
@@ -23,7 +24,7 @@ int main(int args, char **argv)
     SDL_Init(SDL_INIT_EVERYTHING);
     SDL_CreateWindowAndRenderer(WID, HEI, 0, &sdl.win, &sdl.renderer);
     SDL_RenderClear(sdl.renderer);
-    draw_objects(&sdl, objs, obj_nmb); //draw.c
+    draw_objects(&sdl, objs, obj_nmb, light); //draw.c
     while (1)
     {
         if (SDL_PollEvent(&sdl.event))

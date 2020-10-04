@@ -16,7 +16,7 @@ t_object *new_plane(t_point point, t_point normal, float specular, t_color color
     new_object->tag = "plane";
     new_object->intersect = &intersect_ray_plane;
     new_plane->d = -new_plane->normal.x * new_plane->point.x - new_plane->normal.y * new_plane->point.y - new_plane->normal.z * new_plane->point.z;
-    printf("plane d %f\n", new_plane->d);
+    //printf("plane d %f\n", new_plane->d);
     return(new_object);
 }
 
