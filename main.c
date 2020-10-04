@@ -20,6 +20,10 @@ int main(int args, char **argv)
         printf("objs = %d\n", obj_nmb);
         //return (0);
     }
+  /*   t_point test = get_point(2, 2, 2);
+    printf("point.x == %f, point.y == %f, point.z == %f\n", test.x, test.y, test.z);
+    int l = translate(&test, get_angles(30, 0, 0), get_angles(2,2,2), get_angles(2,2,2));
+    printf("point.x == %f, point.y == %f, point.z == %f\n", test.x, test.y, test.z); */
     SDL_Init(SDL_INIT_EVERYTHING);
     SDL_CreateWindowAndRenderer(WID, HEI, 0, &sdl.win, &sdl.renderer);
     SDL_RenderClear(sdl.renderer);

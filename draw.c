@@ -40,6 +40,7 @@ void draw_objects(t_sdl *sdl, t_object **objs, int obj_nmb)
         {
             view_port_point.x = (x - (float)WID / 2) * (((float)WID / (float)HEI)/ (float)WID) + r.start.x;
             r.dir = vector_sub(&view_port_point, &r.start);
+            translate(&r.dir, get_angles(0,0,0), get_angles(0,0,0), get_angles(1,1,1));
             while(i < obj_nmb)
             {
                 is_intersect = objs[i]->intersect(&r, objs[i], &color, light);
