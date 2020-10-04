@@ -12,11 +12,11 @@ void draw_objects(t_sdl *sdl, t_object **objs, int obj_nmb)
     t_color color;
     t_light **light;
 
-    light = malloc(sizeof(t_light *) * 3);
+    light = malloc(sizeof(t_light *) * 4);
     light[0] = new_light(get_point(0, 1000, 0), get_point(0, 0, 0), "point");
-    light[1] = new_light(get_point(0, 1000, 0), get_point(0, 0, 0), "point");
-    //light[2] = new_light(get_point(-10, 100, -200), get_point(0, 100, 10), "point");
-    light[2] = NULL;
+    light[1] = new_light(get_point(0, 50, 0), get_point(0, 0, 0), "point");
+    light[2] = new_light(get_point(0, 0, 0), get_point(0, 0, 10), "ambient");
+    light[3] = NULL;
     x = 0;
     y = 0;
     is_intersect = 0;
