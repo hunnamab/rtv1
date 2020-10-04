@@ -7,13 +7,21 @@ LIBRARY = ./libft/libft.a
 HEADER = rtv1.h
 SRC = main.c sphere.c settings.c vector.c utils.c \
 	light.c triangle.c scenes_reader.c draw.c ftoi.c \
-	objects_parameters.c plane.c cylinder.c cone.c
+	objects_parameters.c plane.c cylinder.c cone.c \
+	./matrix_lib/matr_add_matr.c ./matrix_lib/create_matrix.c \
+	./matrix_lib/matr_copy.c ./matrix_lib/matr_div_by_scalar.c \
+	./matrix_lib/matr_free.c ./matrix_lib/matr_mul_by_scalar.c \
+	./matrix_lib/matr_mul.c ./matrix_lib/matr_resize.c ./matrix_lib/matr_sub_matr.c \
+	./matrix_lib/matr_sub_scalar.c ./matrix_lib/matr_swap_cols.c \
+	./matrix_lib/matr_swap_rows.c ./matrix_lib/matr_to_line.c \
+	./matrix_lib/matr_trace.c ./matrix_lib/matr_transpose.c \
+	./matrix_lib/print_matrix.c transform.c ./matrix_lib/matrix_identity.c
 OBJ = $(SRC:.c=.o)
 
 all: $(NAME)
 
 $(OBJ): %.o: %.c $(HEADER)
-		gcc -c $(LIB_FLAGS) -I libft/ -o $@ $<
+		gcc -c $(LIB_FLAGS) -I libft/ -I matrix_lib/ -o $@ $<
 
 $(LIBRARY):
 		@make -C libft/
@@ -25,7 +33,7 @@ $(NAME): $(LIBRARY) $(OBJ)
 linux: $(NAME_LINUX) 
 
 $(OBJ): %.o: %.c $(HEADER)
-	gcc -c $(LIB_FLAGS) -I libft/ -o $@ $<
+	gcc -c $(LIB_FLAGS) -I libft/ -I matrix_lib/ -o $@ $<
 
 $(LIBRARY):
 		@make -C libft/

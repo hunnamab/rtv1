@@ -10,6 +10,7 @@
 # include "libft.h"
 # include <unistd.h>
 # include <stdint.h>
+# include "matrix.h"
 
 # define WID 1280
 # define HEI 720
@@ -132,5 +133,9 @@ t_object	*get_triangle(char **description);
 t_object 	*get_plane(char **description);
 t_object 	*get_cylinder(char **description);
 t_object 	*get_cone(char **description);
+//translate.c
+float		**get_transform_matrix(float *angle, float *move, float *scale);
+float		*get_three_floats(float x, float y, float z);
+void		transform(t_point *point, float **matrix, float *coord_matrix, int point_nmb);
 
 #endif

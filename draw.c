@@ -10,8 +10,12 @@ void draw_objects(t_sdl *sdl, t_object **objs, int obj_nmb, t_light **light)
     float t0;
     float t1;
     t_color color;
-    /* t_light **light;
+    t_light **light;
+    float **transform_matrix;
+    float *coord_matrix;
 
+    coord_matrix = malloc(sizeof(float) * 4);
+    transform_matrix = get_transform_matrix(get_three_floats(0.5, 0, 0), get_three_floats(0,0,0), get_three_floats(1,1,1));
     light = malloc(sizeof(t_light *) * 4);
     light[0] = new_light(get_point(0, 1000, 0), get_point(0, 0, 0), "point");
     light[1] = new_light(get_point(0, 50, 0), get_point(0, 0, 0), "point");
@@ -40,6 +44,7 @@ void draw_objects(t_sdl *sdl, t_object **objs, int obj_nmb, t_light **light)
         {
             view_port_point.x = (x - (float)WID / 2) * (((float)WID / (float)HEI)/ (float)WID) + r.start.x;
             r.dir = vector_sub(&view_port_point, &r.start);
+            transform(&r.dir, transform_matrix, coord_matrix, 1);
             while(i < obj_nmb)
             {
                 is_intersect = objs[i]->intersect(&r, objs[i], &color, light);
