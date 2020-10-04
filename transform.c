@@ -59,6 +59,8 @@ float **get_rotation_matrix(float *angle)
     return(rotation_matrix);
 }
 
+/* умножает координаты точки на матрицу трансформации, для вызова нужен указатель на буфер coord_matrix для хранения изначальных координат точек
+принимает массив точек, матрицу трансформации, буфер и количество точек */
 void    transform(t_point *point, float **matrix, float *coord_matrix, int point_nmb)
 {
     int i;
@@ -78,7 +80,7 @@ void    transform(t_point *point, float **matrix, float *coord_matrix, int point
     }
 }
 
-/* пока что будет работать на одну точку/вектор, в дальнейшем можно принимать структуру, с массивом точек и количеством этих точек и другой доп.инфой */
+/* создает матрицу трансформации по указанным значениям вращения/перемещения/рескейла и возвращает ее */
 float     **get_transform_matrix(float *angle, float *move, float *scale)
 {
     float **t_matrix; //translation matrix
