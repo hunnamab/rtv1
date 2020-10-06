@@ -129,3 +129,43 @@ t_object *get_plane(char **description)
     plane = new_plane(point, normal, specular, color);
     return (plane);
 }
+
+char *get_light_type(char *description)
+{
+    char *type;
+    int i;
+    int len;
+
+    i = 0;
+    len = ft_strlen(description);
+    while (description[i] != ':')
+        i++;
+    i++;
+    type = ft_strsub(description, i, len - i);
+    return (ft_strtrim(type));
+}
+
+t_object *get_light(char **description)
+{
+    t_object *light;
+    t_point position;
+    t_point direction;
+    char *type;
+
+    light = malloc(sizeof(t_object));
+    type = get_light_type(description[0]);
+    printf("light type = |%s|\n", type);
+    position.x = 0.0;
+    position.y = 0.0;
+    position.z = 0.0;
+    direction.x = 0.0;
+    direction.y = 0.0;
+    direction.z = 0.0;
+    if (!ft_strcmp(type, "point"))
+        position = get_points(description[1]);
+    else if (!ft_strcmp(type, "directional"))
+        direction = get_points(description[1]);
+    light->data = (void *)new_light(position, direction, (const char *)type);
+    light->tag = ft_strdup("light");
+    return (light);
+}

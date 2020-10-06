@@ -11,3 +11,12 @@ plane {
     color: 123, 33, 56, 255
     specular: -1
 }
+
+light {
+    type: point
+    position: 100, 10, -20
+}
+
+light {
+    type: ambient
+}

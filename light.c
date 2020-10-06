@@ -15,7 +15,7 @@ t_light     *new_light(t_point position, t_point direction, const char *type)
     return(new_light);
 }
 
-t_color     reflection_color(t_point *P, t_point *N, t_point *V, t_object *o, t_light **light)
+t_color     reflection_color(t_point *P, t_point *N, t_point *V, t_object *o, t_light **light, int light_nmb)
 {
     float i;
     t_color result_color;
@@ -28,7 +28,7 @@ t_color     reflection_color(t_point *P, t_point *N, t_point *V, t_object *o, t_
 
     j = 0;
     i = 0;
-    while (light[j])
+    while (j < light_nmb)
     {
         if (ft_strequ(light[j]->type, "ambient"))
             i += light[j]->intensity;

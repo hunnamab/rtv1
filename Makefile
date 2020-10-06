@@ -7,7 +7,7 @@ LIBRARY = ./libft/libft.a
 HEADER = rtv1.h
 SRC = main.c sphere.c settings.c vector.c utils.c \
 	light.c triangle.c scenes_reader.c draw.c ftoi.c \
-	objects_parameters.c plane.c cylinder.c cone.c \
+	objects_parameters.c plane.c cylinder.c cone.c get_structures.c \
 	./matrix_lib/matr_add_matr.c ./matrix_lib/create_matrix.c \
 	./matrix_lib/matr_copy.c ./matrix_lib/matr_div_by_scalar.c \
 	./matrix_lib/matr_free.c ./matrix_lib/matr_mul_by_scalar.c \

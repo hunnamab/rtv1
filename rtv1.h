@@ -10,7 +10,7 @@
 # include "libft.h"
 # include <unistd.h>
 # include <stdint.h>
-# include "matrix.h"
+# include "matrix_lib/matrix.h"
 
 # define WID 1280
 # define HEI 720
@@ -86,17 +86,17 @@ typedef	struct		s_object3d
 	const char		*tag;
 	t_color			color;
 	float			specular;
-	int				(*intersect)(t_ray *, struct s_object3d *, t_color *, t_light **);
+	int				(*intersect)(t_ray *, struct s_object3d *, t_color *, t_light **, int);
 }					t_object;
 
 // scenes_reader.c
-t_object	**read_scene(int fd, int *obj_nmb);
+t_object	**read_scene(int fd, int *obj_nmb, int *light_nmb);
 // settings.c
 void 		sphere_settings(t_sphere *s, t_ray *r);
 // draw.c
-void 		draw_objects(t_sdl *sdl, t_object **objs, int obj_nmb, t_light **light);
+void 		draw_objects(t_sdl *sdl, t_object **objs, int obj_nmb, t_light **light, int light_nmb);
 // light.c
-t_color     reflection_color(t_point *P, t_point *N, t_point *V, t_object *o, t_light **light);
+t_color     reflection_color(t_point *P, t_point *N, t_point *V, t_object *o, t_light **light, int light_nmb);
 t_light     *new_light(t_point position, t_point direction, const char *type);
 // vector.c
 t_point 	vector_add(t_point *v1, t_point *v2);
@@ -111,19 +111,19 @@ void  		normalize_vector(t_point *v1);
 // utils.c
 t_point		get_point(float x, float y, float z);
 // sphere.c
-int 		intersect_ray_sphere(t_ray *r, t_object *object, t_color *reflected_color, t_light **light);
+int 		intersect_ray_sphere(t_ray *r, t_object *object, t_color *reflected_color, t_light **light, int light_nmb);
 t_object	*new_sphere(t_point center, float radius, float specular, t_color color);
 // triangle.c
-int			intersect_ray_triangle(t_ray *r, t_object *object, t_color *reflected_color, t_light **light);
+int			intersect_ray_triangle(t_ray *r, t_object *object, t_color *reflected_color, t_light **light, int light_nmb);
 t_object 	*new_triangle(t_point *vertex, double specular, t_color color);
 // plane.c
-int 		intersect_ray_plane(t_ray *r, t_object *object, t_color *reflected_color, t_light **light);
+int 		intersect_ray_plane(t_ray *r, t_object *object, t_color *reflected_color, t_light **light, int light_nmb);
 t_object 	*new_plane(t_point point, t_point normal, float specular, t_color color);
 // cylinder.c
-int			intersect_ray_cylinder(t_ray *r, t_object *object, t_color *reflected_color, t_light **light);
+int			intersect_ray_cylinder(t_ray *r, t_object *object, t_color *reflected_color, t_light **light, int light_nmb);
 t_object	*new_cylinder(t_point position, float radius, float specular, t_color color);
 // cone.c
-int			intersect_ray_cone(t_ray *r, t_object *object, t_color *reflected_color, t_light **light);
+int			intersect_ray_cone(t_ray *r, t_object *object, t_color *reflected_color, t_light **light, int light_nmb);
 t_object	*new_cone(t_point position, float specular, t_color color);
 // ftoi.c
 float   	ftoi(char *str);
@@ -133,9 +133,13 @@ t_object	*get_triangle(char **description);
 t_object 	*get_plane(char **description);
 t_object 	*get_cylinder(char **description);
 t_object 	*get_cone(char **description);
-//translate.c
+t_object 	*get_light(char **description);
+// translate.c
 float		**get_transform_matrix(float *angle, float *move, float *scale);
 float		*get_three_floats(float x, float y, float z);
 void		transform(t_point *point, float **matrix, float *coord_matrix, int point_nmb);
+// get_structures.c
+t_object 	**get_objects_structures(int obj_nmb, t_object **buf);
+t_light 	**get_light_structures(int light_nmb, t_object **buf);
 
 #endif

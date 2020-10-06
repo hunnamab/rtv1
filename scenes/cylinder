@@ -4,3 +4,12 @@ cylinder {
     color: 170, 100, 98, 255
     specular: 60
 }
+
+light {
+    type: point
+    position: 100, 10, -20
+}
+
+light {
+    type: ambient
+}

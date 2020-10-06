@@ -4,9 +4,11 @@ int main(int args, char **argv)
 {
     int         fd;
     t_sdl       sdl;
+    t_object    **buf;
     t_object    **objs;
     t_light     **light;
     int         obj_nmb;
+    int         light_nmb;
 
     if (args != 2)
     {
@@ -16,9 +18,12 @@ int main(int args, char **argv)
     else
     {
         fd = open(argv[1], O_RDONLY);
-        objs = read_scene(fd, &obj_nmb); // scene_reader.c
+        buf = read_scene(fd, &obj_nmb, &light_nmb); // scene_reader.c
         close(fd);
-        printf("objs = %d\n", obj_nmb);
+        printf("obj_nmb = %d\n", obj_nmb);
+        printf("light_nmb = %d\n", light_nmb);
+        objs = get_objects_structures(obj_nmb, buf); // get_structures.c
+        light = get_light_structures(light_nmb, buf); // get_structures.c
         //return (0);
     }
     // t_point test = get_point(2, 2, 2);
@@ -33,7 +38,7 @@ int main(int args, char **argv)
     SDL_Init(SDL_INIT_EVERYTHING);
     SDL_CreateWindowAndRenderer(WID, HEI, 0, &sdl.win, &sdl.renderer);
     SDL_RenderClear(sdl.renderer);
-    draw_objects(&sdl, objs, obj_nmb, light); //draw.c
+    draw_objects(&sdl, objs, obj_nmb, light, light_nmb); //draw.c
     while (1)
     {
         if (SDL_PollEvent(&sdl.event))

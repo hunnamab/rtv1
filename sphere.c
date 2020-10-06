@@ -17,7 +17,7 @@ t_object *new_sphere(t_point center, float radius, float specular, t_color color
     return(new_object);
 }
 
-int intersect_ray_sphere(t_ray *r, t_object *object, t_color *reflected_color, t_light **light)
+int intersect_ray_sphere(t_ray *r, t_object *object, t_color *reflected_color, t_light **light, int light_nmb)
 {
     float a;
     float b;
@@ -85,7 +85,7 @@ int intersect_ray_sphere(t_ray *r, t_object *object, t_color *reflected_color, t
         
         /*тут рассчитываем сам конечный цвет в файле light.c*/
 
-        *(t_color *)reflected_color = reflection_color(&intersection_point, &normal, &r->dir, object, light);
+        *(t_color *)reflected_color = reflection_color(&intersection_point, &normal, &r->dir, object, light, light_nmb);
         return(1);
     }
     return (0);

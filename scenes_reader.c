@@ -1,6 +1,6 @@
 #include "rtv1.h"
 
-t_object *get_parameters(char *name, char **description)
+t_object *get_parameters(char *name, char **description, int *light_nmb)
 {
     t_object *obj;
 
@@ -29,12 +29,13 @@ t_object *get_parameters(char *name, char **description)
         printf("cone\n");
         obj = get_cone(description);
     }
-    /*
     else if (!ft_strcmp(name, "light"))
     {
         printf("light\n");
+        obj = get_light(description);
+        *(int *)light_nmb += 1;
     }
-    else if (!ft_strcmp(name, "camera"))
+    /* else if (!ft_strcmp(name, "camera"))
     {
         printf("camera\n");
     } */
@@ -62,7 +63,7 @@ char **get_description(char *scene, int i)
     return (description);
 }
 
-t_object **get_objects(char *scene, int *obj_nmb)
+t_object **get_objects(char *scene, int *obj_nmb, int *light_nmb)
 {
     t_object **objs;
     char *obj_name;
@@ -74,6 +75,7 @@ t_object **get_objects(char *scene, int *obj_nmb)
     int len;
 
     i = 0;
+    *(int *)light_nmb = 0;
     len = ft_strlen(scene);
     nmb = 0;
     // выясняем кол-во объектов сцены
@@ -83,7 +85,6 @@ t_object **get_objects(char *scene, int *obj_nmb)
             nmb++;
         i++;
     }
-    *(int *)obj_nmb = nmb;
     // создаем массив структур для объектов
     objs = malloc(sizeof(t_object *) * nmb);
     i = 0;
@@ -98,7 +99,7 @@ t_object **get_objects(char *scene, int *obj_nmb)
             // записываем описание объекта
             obj_desc = get_description(scene, i + 3);
             // создаем объект и получаем его характеристики
-            objs[n] = get_parameters(obj_name, obj_desc);
+            objs[n] = get_parameters(obj_name, obj_desc, light_nmb);
             // освобождаем строки
             free(obj_name);
             //free(obj_desc);
@@ -111,15 +112,16 @@ t_object **get_objects(char *scene, int *obj_nmb)
         }
         i++;
     }
+    *(int *)obj_nmb = nmb - *(int *)light_nmb;
     return (objs);
 }
 
-t_object **read_scene(int fd, int *obj_nmb)
+t_object **read_scene(int fd, int *obj_nmb, int *light_nmb)
 {
     int		ret;
 	char	buf[64000];
 
 	while ((ret = read(fd, buf, 64000)) > 0)
 		buf[ret] = '\0';
-	return (get_objects(buf, obj_nmb));
+	return (get_objects(buf, obj_nmb, light_nmb));
 }
