@@ -3,40 +3,38 @@
 void draw_objects(t_sdl *sdl, t_object **objs, int obj_nmb, t_light **light, int light_nmb)
 {
     t_ray r;
-    float x;
-    float y;
+    int x;
+    int y;
     int is_intersect;
     int i = 0;
-    float t0;
-    float t1;
-    t_color color;
-    //t_light **light;
+    float t;
+    float t_buf;
+    t_color *color;
     float **transform_matrix;
     float *coord_matrix;
+    t_point *normal;
+    t_point intersection_point;
+    t_color **normal_map;
+    int p;
+    int buf_i;
 
+    p = 0;
+    color = malloc(sizeof(t_color));
+    normal = malloc(sizeof(t_point));
     coord_matrix = malloc(sizeof(float) * 4);
-    transform_matrix = get_transform_matrix(get_three_floats(0.5, 0, 0), get_three_floats(0,0,0), get_three_floats(1,1,1));
-    /* light = malloc(sizeof(t_light *) * 4);
-    light[0] = new_light(get_point(0, 1000, 0), get_point(0, 0, 0), "point");
-    light[1] = new_light(get_point(0, 50, 0), get_point(0, 0, 0), "point");
-    light[2] = new_light(get_point(0, 0, 0), get_point(0, 0, 10), "ambient");
-    light[3] = NULL; */
+    transform_matrix = get_transform_matrix(get_three_floats(0, 0, 0), get_three_floats(0,0,0), get_three_floats(1,1,1));
     x = 0;
     y = 0;
     is_intersect = 0;
-    r.start.y = 20;
-    r.start.z = -10;
-    r.start.x = 0;
+    t = 0;
+    t_buf = 0;
+    r.start.y = 25;
+    r.start.z = -20;
+    r.start.x = -10;
     t_point view_port_point;
     view_port_point.z = r.start.z + 1;
-    t_color buf;
-    buf.red = 185;
-    buf.green = 0;
-    buf.blue = 70;
-    buf.alpha = 255;
-    //objs[obj_nmb] = new_plane(get_point(0,0,1), get_point(0,0.3,1), -1, buf);
-    //obj_nmb += 1;
-    //i = obj_nmb - 1;
+    intersection_point = get_point(0,0,0);
+    buf_i = 0;
     while (y < HEI)
     {
         view_port_point.y = -(y - (float)HEI / 2) * (1 / (float)HEI) + r.start.y;
@@ -47,22 +45,34 @@ void draw_objects(t_sdl *sdl, t_object **objs, int obj_nmb, t_light **light, int
             transform(&r.dir, transform_matrix, coord_matrix, 1);
             while(i < obj_nmb)
             {
-                is_intersect = objs[i]->intersect(&r, objs[i], &color, light, light_nmb);
+                is_intersect = objs[i]->intersect(&r, objs[i], normal, &t);
                 if (is_intersect)
-                {
-                    SDL_SetRenderDrawColor(sdl->renderer, color.red, color.green, color.blue, color.alpha);
-                    SDL_RenderDrawPoint(sdl->renderer, x, y);
                     break;
-                }
-                else
-                {
-                    SDL_SetRenderDrawColor(sdl->renderer, 0, 0, 0, 255);
-                    SDL_RenderDrawPoint(sdl->renderer, x, y);
-                }
                 i++;
             }
+            buf_i = i;
+            t_buf = t;
+            while(i < obj_nmb)
+            {
+                is_intersect = objs[i]->intersect(&r, objs[i], normal, &t);
+                if (t < t_buf)
+                {
+                    t_buf = t;
+                    buf_i = i;
+                }
+                i++;
+            } 
+            if (t_buf)
+            {
+                intersection_point = vector_scale(t_buf, &r.dir);
+                intersection_point = vector_add(&r.start, &intersection_point);
+                *(t_color *)color = reflection_color(&intersection_point, normal, &r.dir, objs[buf_i], light, light_nmb);
+                SDL_SetRenderDrawColor(sdl->renderer, color->red, color->green, color->blue, color->alpha);
+                SDL_RenderDrawPoint(sdl->renderer, x, y);
+            }
             x++;
-            is_intersect = 0;
+            t = 0;
+            t_buf = 0;
             i = 0;
         }
         x = 0;

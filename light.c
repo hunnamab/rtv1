@@ -15,7 +15,7 @@ t_light     *new_light(t_point position, t_point direction, const char *type)
     return(new_light);
 }
 
-t_color     reflection_color(t_point *P, t_point *N, t_point *V, t_object *o, t_light **light, int light_nmb)
+t_color     reflection_color(t_point *P, t_color *normal, t_point *V, t_object *o, t_light **light, int light_nmb)
 {
     float i;
     t_color result_color;
@@ -38,7 +38,7 @@ t_color     reflection_color(t_point *P, t_point *N, t_point *V, t_object *o, t_
                 L = vector_sub(&light[j]->position, P);
             if (ft_strequ(light[j]->type, "directional"))
                 L = light[j]->direction;
-            n_dot_l = vector_dot(N, &L);
+            n_dot_l = vector_dot(normal, &L);
             if (n_dot_l > 0)
                 i += (light[j]->intensity * n_dot_l) / vector_length(&L);
         }
@@ -46,7 +46,7 @@ t_color     reflection_color(t_point *P, t_point *N, t_point *V, t_object *o, t_
             {
                 // для каждого идеально отполированного объекта падающий луч отражается в единственном направлении R (зеркальное отражение)
                 // высчитываем это значение по формуле
-                R = vector_scale(2.0, N);
+                R = vector_scale(2.0, normal);
                 R = vector_scale(n_dot_l, &R);
                 R = vector_sub(&R, &L);
                 // D это -V, где V это вектор, направленный из камеры к объекту (т.е. по сути это направление луча)

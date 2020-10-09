@@ -1,6 +1,6 @@
 #include "rtv1.h"
 
-t_point vector_add(t_point *v1, t_point *v2)
+t_point vector_add(const t_point *v1, const t_point *v2)
 {
     t_point res;
 

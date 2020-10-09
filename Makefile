@@ -40,7 +40,7 @@ $(LIBRARY):
 
 $(NAME_LINUX): $(LIBRARY) $(OBJ)
 		@gcc $(OBJ) $(LIBRARY) -o $(NAME_LINUX) $(LINUX_FLAGS) -I $(HEADER)
-
+		@make clean
 clean:
 	@rm -f $(OBJ)
 	@make -C libft clean

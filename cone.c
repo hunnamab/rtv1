@@ -16,7 +16,7 @@ t_object *new_cone(t_point position, float specular, t_color color)
     return(new_object);
 }
 
-int intersect_ray_cone(t_ray *r, t_object *object, t_color *reflected_color, t_light **light, int light_nmb)
+int intersect_ray_cone(t_ray *r, t_object *object, t_point *normal, float *t)
 {
     float a;
     float b;
@@ -29,7 +29,6 @@ int intersect_ray_cone(t_ray *r, t_object *object, t_color *reflected_color, t_l
     t_point buf;
     t_cone *cone;
     t_point intersection_point;
-    t_point normal;
 
     cone = (t_cone *)object->data;
     float radius = 1;
@@ -53,19 +52,20 @@ int intersect_ray_cone(t_ray *r, t_object *object, t_color *reflected_color, t_l
         else
             buf = vector_scale(t0, &r->dir);
         intersection_point = vector_add(&r->start, &buf);
-        normal.x = intersection_point.x - cone->position.x;
-        normal.y = 0;
-        normal.z = intersection_point.z - cone->position.z;
-        float n = sqrt((normal.x * normal.x) + (normal.z * normal.z));
-        normal.x /= n;
-        normal.z /= n;
-        normal.x = normal.x * (height / radius);
-        normal.y = radius / height;
-        normal.z = normal.z * (height / radius);
-        //normalize_vector(&normal);
-        //if (vector_dot(&r->dir, &normal) > 0.0001)
-		//    normal = vector_scale(-1, &normal);
-        *(t_color *)reflected_color = reflection_color(&intersection_point, &normal, &r->dir, object, light, light_nmb);
+        normal->x = intersection_point.x - cone->position.x;
+        normal->y = 0;
+        normal->z = intersection_point.z - cone->position.z;
+        float n = sqrt((normal->x * normal->x) + (normal->z * normal->z));
+        normal->x /= n;
+        normal->z /= n;
+        normal->x = normal->x * (height / radius);
+        normal->y = radius / height;
+        normal->z = normal->z * (height / radius);
+        *t = t0 < t1 ? t0 : t1;
+        //normal->ze_vector(&normal->;
+        //if (vector_dot(&r->dir, &normal-> > 0.0001)
+		//    normal->= vector_scale(-1, &normal->;
+        /* *(t_color *)reflected_color = reflection_color(&intersection_point, &normal-> &r->dir, object, light, light_nmb); */
         return (1);
     }
     return (0);

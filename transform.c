@@ -20,6 +20,8 @@ float **get_translate_matrix(float *move)
     t_matrix[0][3] = move[0];
     t_matrix[1][3] = move[1];
     t_matrix[2][3] = move[2];
+  /*   printf("t_matrix\n");
+    print_matrix(t_matrix, 4, 4); */
     return(t_matrix);
 }
 
@@ -32,6 +34,8 @@ float **get_scale_matrix(float *scale)
     s_matrix[1][1] = scale[1];
     s_matrix[2][2] = scale[2];
     s_matrix[3][3] = 1;
+   /*  printf("s_matrix\n");
+    print_matrix(s_matrix, 4, 4); */
     return(s_matrix);
 }
 
@@ -56,6 +60,8 @@ float **get_rotation_matrix(float *angle)
     rotation_matrix[1][2] = -cosf(z) * sinf(y);
     rotation_matrix[2][2] = cosf(y);
     rotation_matrix[3][3] = 1;
+   /*  printf("r_matrix\n");
+    print_matrix(rotation_matrix, 4, 4); */
     return(rotation_matrix);
 }
 
@@ -98,5 +104,7 @@ float     **get_transform_matrix(float *angle, float *move, float *scale)
     result = matr_mul(t_matrix, result_matrix, 4, 4, 4, 4);
     matr_free(result_matrix, 4);
     matr_free(t_matrix, 4);
+    /* printf("result_matrix\n");
+    print_matrix(result, 4, 4); */
     return (result);
 }

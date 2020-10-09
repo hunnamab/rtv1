@@ -9,6 +9,7 @@ t_object *new_triangle(t_point *vertex, double specular, t_color color)
     new_triangle = malloc(sizeof(t_triangle));
     new_triangle->vertex = malloc(sizeof(t_point) * 3);
     new_triangle->vertex = vertex;
+    new_triangle->normal = vector_cross(&new_triangle->vertex[0], &new_triangle->vertex[1]);
     new_object->specular = specular;
     new_object->color = color;
     new_object->data = (void *)new_triangle;
@@ -17,7 +18,7 @@ t_object *new_triangle(t_point *vertex, double specular, t_color color)
     return(new_object);
 }
 
-int intersect_ray_triangle(t_ray *r, t_object *object, t_color *reflected_color, t_light **light, int light_nmb)
+int intersect_ray_triangle(t_ray *r, t_object *object, t_point *normal, float *t)
 {
     t_triangle *triangle;
     t_point edge1;
@@ -29,9 +30,7 @@ int intersect_ray_triangle(t_ray *r, t_object *object, t_color *reflected_color,
     t_point qvec;
     float u;
     float v;
-    float t;
     t_point intersection_point;
-    t_point normal;
     t_point buf;
 
     triangle = (t_triangle *)object->data;
@@ -50,10 +49,12 @@ int intersect_ray_triangle(t_ray *r, t_object *object, t_color *reflected_color,
     v = vector_dot(&r->dir, &qvec) * inv_det;
     if (v < 0 || u + v > 1)
         return (0);
-    t = vector_dot(&edge2, &qvec) * inv_det;
-    buf = vector_scale(t, &r->dir);
-    intersection_point = vector_add(&r->start, &buf);
-    normal = vector_cross(&triangle->vertex[0], &triangle->vertex[1]);
-    *(t_color *)reflected_color = reflection_color(&intersection_point, &normal, &r->dir, object, light, light_nmb);
+    *t = vector_dot(&edge2, &qvec) * inv_det;
+    buf = vector_scale(*t, &r->dir);
+/*     intersection_point = vector_add(&r->start, &buf); */
+    normal->x = triangle->normal.x;
+    normal->y = triangle->normal.y;
+    normal->z = triangle->normal.z;
+   /*  *(t_color *)reflected_color = reflection_color(&intersection_point, &normal, &r->dir, object, light, light_nmb); */
     return (1);
 }

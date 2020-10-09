@@ -1,7 +1,21 @@
 sphere {
+    center: 0, 0, 30
+    radius: 2
+    color: 255, 0, 0, 255
+    specular: 100
+}
+
+sphere {
     center: 0, 0, 150
-    radius: 30
-    color: 10, 150, 200, 255
+    radius: 50
+    color: 0, 255, 0, 255
+    specular: 100
+}
+
+sphere {
+    center: 0, 0, 100
+    radius: 10
+    color: 0, 0, 255, 255
     specular: 100
 }
 

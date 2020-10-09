@@ -17,7 +17,7 @@ t_object *new_cylinder(t_point position, float radius, float specular, t_color c
     return(new_object);
 }
 
-int intersect_ray_cylinder(t_ray *r, t_object *object, t_color *reflected_color, t_light **light, int light_nmb)
+int intersect_ray_cylinder(t_ray *r, t_object *object, t_point *normal, float *t)
 {
     float a;
     float b;
@@ -30,7 +30,6 @@ int intersect_ray_cylinder(t_ray *r, t_object *object, t_color *reflected_color,
     t_point buf;
     t_cylinder *cylinder;
     t_point intersection_point;
-    t_point normal;
 
     cylinder = (t_cylinder *)object->data;
     a = r->dir.x * r->dir.x + r->dir.z * r->dir.z;
@@ -51,12 +50,13 @@ int intersect_ray_cylinder(t_ray *r, t_object *object, t_color *reflected_color,
         else
             buf = vector_scale(t0, &r->dir);
         intersection_point = vector_add(&r->start, &buf);
-        normal = vector_sub(&cylinder->position, &intersection_point);
-        normal.y = 0;
+        *normal = vector_sub(&cylinder->position, &intersection_point);
+        normal->y = 0;
         normalize_vector(&normal);
         if (vector_dot(&r->dir, &normal) > 0.0001)
-		    normal = vector_scale(-1, &normal);
-        *(t_color *)reflected_color = reflection_color(&intersection_point, &normal, &r->dir, object, light, light_nmb);
+		    *normal = vector_scale(-1, normal);
+        *t = t1 < t0 ? t1 : t0; 
+        /* *(t_color *)reflected_color = reflection_color(&intersection_point, &normal, &r->dir, object, light, light_nmb); */
         return (1);
     }
     return (0);
