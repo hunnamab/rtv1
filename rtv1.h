@@ -81,6 +81,11 @@ typedef	struct		s_triangle
 	t_point			normal;
 }					t_triangle;
 
+typedef struct		s_camera
+{
+	t_point			position;
+}					t_camera;
+
 typedef	struct		s_object3d
 {
 	void			*data;
@@ -111,6 +116,7 @@ t_point     vector_sub_by_scalar(t_point *vector, float scalar);
 void  		normalize_vector(t_point *v1);
 // utils.c
 t_point		get_point(float x, float y, float z);
+t_point     *get_viewport_coords(t_camera *camera);
 // sphere.c
 int intersect_ray_sphere(t_ray *r, t_object *object, t_point *normal, float *t);
 t_object	*new_sphere(t_point center, float radius, float specular, t_color color);
