@@ -25,10 +25,9 @@ t_point     *get_viewport_coords(t_camera *camera)
     {
         while(x < WID)
         {
-            view_port_point[i].y = -(y - (float)HEI / 2) * (1 / (float)HEI) + camera->pos.y;
-            view_port_point[i].x = (x - (float)WID / 2) * (((float)WID / (float)HEI)/ (float)WID) +  camera->pos.x;
-            view_port_point[i].z = camera->pos.z + 1;
-            i++;
+            viewport[y * WID + x].y = -(y - (float)HEI / 2) * (1 / (float)HEI) + camera->position.y;
+            viewport[y * WID + x].x = (x - (float)WID / 2) * (((float)WID / (float)HEI)/ (float)WID) +  camera->position.x;
+            viewport[y * WID + x].z = camera->position.z + 1;
             x++;
         }
         x = 0;

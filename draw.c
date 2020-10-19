@@ -20,7 +20,7 @@ void draw_objects(t_sdl *sdl, t_object **objs, int obj_nmb, t_light **light, int
     t_point *viewport;
     t_camera camera;
 
-    camera.pos = get_point(-10, 25, -20);
+    camera.position = get_point(-10, 25, -20);
     p = 0;
     color = malloc(sizeof(t_color));
     normal = malloc(sizeof(t_point));
@@ -33,15 +33,15 @@ void draw_objects(t_sdl *sdl, t_object **objs, int obj_nmb, t_light **light, int
     t_buf = 0;
     intersection_point = get_point(0,0,0);
     viewport = get_viewport_coords(&camera);
-    r.start.x = camera.pos.x;
-    r.start.y = camera.pos.y;
-    r.start.z = camera.pos.z;
+    r.start.x = camera.position.x;
+    r.start.y = camera.position.y;
+    r.start.z = camera.position.z;
     buf_i = 0;
     while (y < HEI)
     {
         while (x < WID)
         {
-            r.dir = vector_sub(&view_port[y * HEI + x], &r.start);
+            r.dir = vector_sub(&viewport[y * WID + x], &r.start);
             transform(&r.dir, transform_matrix, coord_matrix, 1);
             while(i < obj_nmb)
             {
