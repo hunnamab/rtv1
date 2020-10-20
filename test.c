@@ -91,22 +91,7 @@ t_point  vector_cross(t_point *v1, t_point *v2)
 
 int main()
 {
-    t_ray r;
-    float x;
-    float y;
-    t_point view_port_point;
-    r.start.y = 0;
-    r.start.z = 0;
-    r.start.x = 0;
-    y = 0;
-    x = 0;
-    view_port_point.z = 1;
-    printf("HEI = %d WID = %d\n", HEI, WID);
-    view_port_point.y = -(y - (float)HEI / 2) * (1 / ((float)HEI / 2));
-    view_port_point.x = (x - (float)WID / 2) * (1 / ((float)WID / 2));
-    printf("view_port_point.x == %f, view_port_point.y == %f\n", view_port_point.x, view_port_point.y);
-    r.dir = vector_sub(&r.start, &view_port_point);
-    printf("view_port_point.x == %f, view_port_point.y == %f\n", view_port_point.x, view_port_point.y);
-    printf("dir.x == %f, dir.y == %f, dir.z = %f\n", r.dir.x, r.dir.y, r.dir.z);
+    char *test;
+    
     return(0);
 }

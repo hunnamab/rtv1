@@ -7,9 +7,17 @@ int main(int args, char **argv)
     t_object    **buf;
     t_object    **objs;
     t_light     **light;
+    t_ray       *rays;
+    t_point     *viewport;
     int         obj_nmb;
     int         light_nmb;
+    t_point     *intersection_buffer;
+    t_point     *normal_buffer;
+    t_camera    camera;
+    t_color     *color_buf;
 
+    normal_buffer = malloc(sizeof(t_point) * (WID * HEI));
+    color_buf = malloc(sizeof(t_color) * (WID * HEI));
     if (args != 2)
     {
         ft_putstr("usage: ./rtv1 [scene_file]\n");
@@ -38,10 +46,15 @@ int main(int args, char **argv)
     SDL_Init(SDL_INIT_EVERYTHING);
     SDL_CreateWindowAndRenderer(WID, HEI, 0, &sdl.win, &sdl.renderer);
     SDL_RenderClear(sdl.renderer);
-    draw_objects(&sdl, objs, obj_nmb, light, light_nmb); //draw.c
+    camera.position = get_point(-10, 25, -20);
+    viewport = get_viewport(&camera);
+    rays = get_rays_arr(&camera, viewport);
+    intersection_buffer = get_buffers(objs, obj_nmb, rays, normal_buffer, color_buf);
+    //draw_objects(&sdl, objs, obj_nmb, light, light_nmb, rays); //draw.c
+    new_draw(normal_buffer, color_buf, intersection_buffer, rays, &sdl, light, light_nmb);
     while (1)
     {
-        if (SDL_PollEvent(&sdl.event))
+       if (SDL_PollEvent(&sdl.event))
         {
             if (SDL_QUIT == sdl.event.type || SDLK_ESCAPE == sdl.event.key.keysym.sym)
                 break ;

@@ -100,10 +100,12 @@ t_object	**read_scene(int fd, int *obj_nmb, int *light_nmb);
 // settings.c
 void 		sphere_settings(t_sphere *s, t_ray *r);
 // draw.c
-void 		draw_objects(t_sdl *sdl, t_object **objs, int obj_nmb, t_light **light, int light_nmb);
+void 		draw_objects(t_sdl *sdl, t_object **objs, int obj_nmb, t_light **light, int light_nmb, t_ray *r);
+void    	new_draw(t_point *normal_buf, t_color *color_buf, t_point *intersection_buf, t_ray *r, t_sdl *sdl, t_light **light, int light_nmb);
 // light.c
 t_color     reflection_color(t_point *P, t_color *normal, t_point *V, t_object *o, t_light **light, int light_nmb);
 t_light     *new_light(t_point position, t_point direction, const char *type);
+t_color     reflection_color_new(t_point *P, t_color *normal, t_point *V, t_color *start_color, t_light **light, int light_nmb);
 // vector.c
 t_point 	vector_add(const t_point *v1, const t_point *v2);
 t_point 	vector_scale(float c, t_point *v);
@@ -116,7 +118,11 @@ t_point     vector_sub_by_scalar(t_point *vector, float scalar);
 void  		normalize_vector(t_point *v1);
 // utils.c
 t_point		get_point(float x, float y, float z);
-t_point     *get_viewport_coords(t_camera *camera);
+t_point     *get_viewport(t_camera *camera);
+void        copy_point(t_point *dst, t_point *src);
+void        copy_color(t_color *dst, t_color *src);
+t_color     set_color(uint8_t red, uint8_t green, uint8_t blue, uint8_t alpha);
+t_color     set_color_zero(t_color *color);
 // sphere.c
 int intersect_ray_sphere(t_ray *r, t_object *object, t_point *normal, float *t);
 t_object	*new_sphere(t_point center, float radius, float specular, t_color color);
@@ -148,5 +154,8 @@ void		transform(t_point *point, float **matrix, float *coord_matrix, int point_n
 // get_structures.c
 t_object 	**get_objects_structures(int obj_nmb, t_object **buf);
 t_light 	**get_light_structures(int light_nmb, t_object **buf);
+//buffers.c
+t_ray 		*get_rays_arr(t_camera *camera, t_point *viewport);
+t_point     *get_buffers(t_object **obj, int obj_nmb, t_ray *r, t_point *normal_buffer, t_color *color_buf);
 
 #endif

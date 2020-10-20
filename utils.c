@@ -9,15 +9,45 @@ t_point     get_point(float x, float y, float z)
     result.z = z;
     return (result);
 }
+t_color     set_color_zero(t_color *color)
+{
+    color->red = 0;
+    color->green = 0;
+    color->blue = 0;
+    color->alpha = 0;
+}
 
-t_point     *get_viewport_coords(t_camera *camera)
+t_color     set_color(uint8_t red, uint8_t green, uint8_t blue, uint8_t alpha)
+{
+    t_color color;
+
+    color.red = red;
+    color.blue = blue;
+    color.green = green;
+    color.alpha = alpha;
+    return(color);
+}
+void        copy_point(t_point *dst, t_point *src)
+{
+    dst->x = src->x;
+    dst->y = src->y;
+    dst->z = src->z;
+}
+
+void        copy_color(t_color *dst, t_color *src)
+{
+    dst->red = src->red;
+    dst->blue = src->blue;
+    dst->green = src->green;
+    dst->alpha = src->alpha;
+}
+
+t_point     *get_viewport(t_camera *camera)
 {
     int x;
     int y;
     t_point *viewport;
-    int i;
 
-    i = 0;
     viewport = malloc(sizeof(t_point) * (WID * HEI));
     x = 0;
     y = 0;
