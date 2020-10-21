@@ -1,5 +1,5 @@
 #include "rtv1.h"
-#include <unistd.h>
+
 t_ray *get_rays_arr(t_camera *camera, t_point *viewport)
 {
     int x;
@@ -25,7 +25,7 @@ t_ray *get_rays_arr(t_camera *camera, t_point *viewport)
     return(rays);
 }
 
-t_point     *get_buffers(t_object **obj, int obj_nmb, t_ray *r, t_point *normal_buffer, t_color *color_buf)
+void     get_buffers(t_scene *scene)
 {
     int x;
     int y;
@@ -36,9 +36,7 @@ t_point     *get_buffers(t_object **obj, int obj_nmb, t_ray *r, t_point *normal_
     int buf_i;
     t_point *normal;
     t_point *normal_buf;
-    t_point *intersection_buffer;
 
-    intersection_buffer = malloc(sizeof(t_point) * (WID * HEI) + 1);
     normal = malloc(sizeof(t_point));
     normal_buf = malloc(sizeof(t_point));
     t = 0;
@@ -54,9 +52,9 @@ t_point     *get_buffers(t_object **obj, int obj_nmb, t_ray *r, t_point *normal_
     {
         while (x < WID)
         {
-            while(i < obj_nmb)
+            while(i < scene->obj_nmb)
             {
-                is_intersect = obj[i]->intersect(&r[y * WID + x], obj[i], normal, &t);
+                is_intersect = scene->objs[i]->intersect(&scene->ray_buf[y * WID + x], scene->objs[i], normal, &t);
                 if (is_intersect)
                     break;
                 i++;
@@ -64,9 +62,9 @@ t_point     *get_buffers(t_object **obj, int obj_nmb, t_ray *r, t_point *normal_
             buf_i = i;
             t_buf = t;
             copy_point(normal_buf, normal);
-            while(i < obj_nmb)
+            while(i < scene->obj_nmb)
             {
-                is_intersect = obj[i]->intersect(&r[y * WID + x], obj[i], normal, &t);
+                is_intersect = scene->objs[i]->intersect(&scene->ray_buf[y * WID + x], scene->objs[i], normal, &t);
                 if (t < t_buf)
                 {
                     copy_point(normal_buf, normal);
@@ -77,16 +75,18 @@ t_point     *get_buffers(t_object **obj, int obj_nmb, t_ray *r, t_point *normal_
             }
             if (t_buf)
             {
-                copy_point(&normal_buffer[y * WID + x], normal_buf);
-                intersection_buffer[y * WID + x] = vector_scale(t_buf, &r[y * WID + x].dir);
-                intersection_buffer[y * WID + x] = vector_add(&r[y * WID + x].start, &intersection_buffer[y * WID + x]);
-                copy_color(&color_buf[y * WID + x], &obj[buf_i]->color);
+                copy_point(&scene->normal_buf[y * WID + x], normal_buf);
+                scene->intersection_buf[y * WID + x] = vector_scale(t_buf, &scene->ray_buf[y * WID + x].dir);
+                scene->intersection_buf[y * WID + x] = vector_add(&scene->ray_buf[y * WID + x].start, &scene->intersection_buf[y * WID + x]);
+                copy_color(&scene->material_buf[y * WID + x].color, &scene->objs[buf_i]->color);
+                scene->material_buf[y * WID + x].specular = scene->objs[buf_i]->specular;
             }
             else
             {
-                normal_buffer[y * WID + x] = get_point(0,0,0);
-                intersection_buffer[y * WID + x] = get_point(0,0,0);
-                set_color_zero(&color_buf[y * WID + x]);
+                scene->normal_buf[y * WID + x] = get_point(0,0,0);
+                scene->intersection_buf[y * WID + x] = get_point(0,0,0);
+                set_color_zero(&scene->material_buf[y * WID + x].color);
+                scene->material_buf[y * WID + x].specular = -1;
             }
             x++;
             t = 0;
@@ -96,5 +96,5 @@ t_point     *get_buffers(t_object **obj, int obj_nmb, t_ray *r, t_point *normal_
         x = 0;
         y++;
     }
-    return(intersection_buffer);
+    i = 0;
 }

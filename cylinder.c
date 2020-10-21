@@ -56,7 +56,6 @@ int intersect_ray_cylinder(t_ray *r, t_object *object, t_point *normal, float *t
         if (vector_dot(&r->dir, &normal) > 0.0001)
 		    *normal = vector_scale(-1, normal);
         *t = t1 < t0 ? t1 : t0; 
-        /* *(t_color *)reflected_color = reflection_color(&intersection_point, &normal, &r->dir, object, light, light_nmb); */
         return (1);
     }
     return (0);
