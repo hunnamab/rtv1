@@ -18,5 +18,10 @@ light {
 }
 
 light {
+    type: point
+    position: 0, 2, 85
+}
+
+light {
     type: ambient
 }

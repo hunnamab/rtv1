@@ -29,6 +29,7 @@ int main(int args, char **argv)
     SDL_RenderClear(sdl.renderer);
     init_scene(scene);
     draw_scene(&sdl, scene);
+    //draw_normal_buf(&sdl, scene);
     while (1)
     {
        if (SDL_PollEvent(&sdl.event))

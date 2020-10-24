@@ -19,12 +19,11 @@ t_object *new_plane(t_point point, t_point normal, float specular, t_color color
     return(new_object);
 }
 
-int intersect_ray_plane(t_ray *r, t_object *object, t_point *normal, float *t)
+float intersect_ray_plane(t_ray *r, t_object *object, t_point *normal)
 {
     float k1;
     float k2;
     t_plane *plane;
-/*     t_point intersection_point; */
 
     plane = (t_plane *)object->data;
     if ((vector_dot(&r->dir, &plane->normal)) == 0)
@@ -33,13 +32,5 @@ int intersect_ray_plane(t_ray *r, t_object *object, t_point *normal, float *t)
     k2 = vector_dot(&r->dir, &plane->normal);
     if (k1 == 0 || (k1 < 0 && k2 < 0) || (k1 > 0 && k2 > 0))
         return(0);
-    *t = -k1 / k2;
-/*     intersection_point = vector_scale(t, &r->dir); */
-    if (vector_dot(&r->dir, &plane->normal) > 0.0001)
-        plane->normal = vector_scale(-1, &plane->normal);
-    normal->x = plane->normal.x;
-    normal->y = plane->normal.y;
-    normal->z = plane->normal.z;
-    /* *(t_color *)reflected_color = reflection_color(&intersection_point, &plane->normal, &r->dir, object, light, light_nmb); */
-    return (1);
+    return (-k1 / k2);
 }

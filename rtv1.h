@@ -97,7 +97,7 @@ typedef	struct		s_object3d
 	const char		*tag;
 	t_color			color;
 	float			specular;
-	int		(*intersect)(t_ray *, struct s_object3d *, t_point *, float *t);
+	float			(*intersect)(t_ray *, struct s_object3d *);
 }					t_object;
 
 typedef	struct 		s_scene
@@ -112,6 +112,8 @@ typedef	struct 		s_scene
 	int 			light_nmb;
 	t_camera		camera;
 	t_point			*viewport;
+	int				*index_buf;
+	float 			*depth_buf;
 }					t_scene;
 
 // scenes_reader.c
@@ -120,6 +122,7 @@ t_object	**read_scene(int fd, int *obj_nmb, int *light_nmb);
 void 		sphere_settings(t_sphere *s, t_ray *r);
 // draw.c
 void    	draw_scene(t_sdl *sdl, t_scene *scene);
+void    	draw_normal_buf(t_sdl *sdl, t_scene *scene);
 // light.c
 t_color     reflection_color(t_scene *scene, int index);
 t_light     *new_light(t_point position, t_point direction, const char *type);
@@ -141,13 +144,13 @@ void        copy_color(t_color *dst, t_color *src);
 t_color     set_color(uint8_t red, uint8_t green, uint8_t blue, uint8_t alpha);
 t_color     set_color_zero(t_color *color);
 // sphere.c
-int 		intersect_ray_sphere(t_ray *r, t_object *object, t_point *normal, float *t);
+float 		intersect_ray_sphere(t_ray *r, t_object *object);
 t_object	*new_sphere(t_point center, float radius, float specular, t_color color);
 // triangle.c
-int 		intersect_ray_triangle(t_ray *r, t_object *object, t_point *normal, float *t);
+float 		intersect_ray_triangle(t_ray *r, t_object *object);
 t_object 	*new_triangle(t_point *vertex, double specular, t_color color);
 // plane.c
-int 		intersect_ray_plane(t_ray *r, t_object *object, t_point *normal, float *t);
+float 		intersect_ray_plane(t_ray *r, t_object *object, t_point *normal);
 t_object 	*new_plane(t_point point, t_point normal, float specular, t_color color);
 // cylinder.c
 int 		intersect_ray_cylinder(t_ray *r, t_object *object, t_point *normal, float *t);
@@ -174,5 +177,9 @@ t_light 	**get_light_structures(int light_nmb, t_object **buf);
 //buffers.c
 t_ray 		*get_rays_arr(t_camera *camera, t_point *viewport);
 void     	get_buffers(t_scene *scene);
+void    	get_normal_buf(t_scene *scene);
+void    	get_intersection_buf(t_scene *scene);
+void     	get_closest_points(t_scene *scene);
+void    	get_material_buf(t_scene *scene);
 
 #endif

@@ -62,10 +62,6 @@ int intersect_ray_cone(t_ray *r, t_object *object, t_point *normal, float *t)
         normal->y = radius / height;
         normal->z = normal->z * (height / radius);
         *t = t0 < t1 ? t0 : t1;
-        //normal->ze_vector(&normal->;
-        //if (vector_dot(&r->dir, &normal-> > 0.0001)
-		//    normal->= vector_scale(-1, &normal->;
-        /* *(t_color *)reflected_color = reflection_color(&intersection_point, &normal-> &r->dir, object, light, light_nmb); */
         return (1);
     }
     return (0);

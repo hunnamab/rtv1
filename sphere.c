@@ -17,7 +17,7 @@ t_object *new_sphere(t_point center, float radius, float specular, t_color color
     return(new_object);
 }
 
-int intersect_ray_sphere(t_ray *r, t_object *object, t_point *normal, float *t)
+float intersect_ray_sphere(t_ray *r, t_object *object)
 {
     float a;
     float b;
@@ -27,8 +27,6 @@ int intersect_ray_sphere(t_ray *r, t_object *object, t_point *normal, float *t)
     float t0;
     float t1;
     t_point dist;
-    t_point intersection_point;
-    t_point buf;
     t_sphere *s;
  
     s = (t_sphere *)object->data;
@@ -44,15 +42,7 @@ int intersect_ray_sphere(t_ray *r, t_object *object, t_point *normal, float *t)
         sqrt_discr = sqrt(discr);
         t0 = (-b + sqrt_discr) / (2 * a);
         t1 = (-b - sqrt_discr) / (2 * a);
-        if (t0 > t1)
-            buf = vector_scale(t1, &r->dir);
-        else
-            buf = vector_scale(t0, &r->dir);
-        intersection_point = vector_add(&r->start, &buf);
-        *t = t1 < t0 ? t1 : t0;
-        normal[0] = vector_sub(&intersection_point, &s->center);
-        normal[0] = vector_div_by_scalar(normal, vector_length(normal));
-        return(1);
+        return(t1 > t0 ? t0 : t1);
     }
     return (0);
 }
