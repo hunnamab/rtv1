@@ -9,112 +9,11 @@
 # include <stdint.h>
 # include "libft.h"
 # include <unistd.h>
-# include <stdint.h>
 # include "matrix_lib/matrix.h"
+# include "types.h"
 
 # define WID 1280
 # define HEI 720
-
-typedef struct 		s_sdl
-{
-	SDL_Window		*win;
-	SDL_Renderer	*renderer;
-	SDL_Event		event;
-}                	t_sdl;
-
-typedef struct		s_point
-{
-	float			x;
-	float			y;
-	float			z;
-}					t_point;
-
-typedef struct		s_ray
-{
-	t_point			start;
-	t_point			dir;
-}					t_ray;
-
-typedef	struct 		s_color
-{
-	uint8_t			red;
-	uint8_t			green;
-	uint8_t			blue;
-	uint8_t			alpha;
-}					t_color;
-
-typedef	struct		s_light
-{
-	float			intensity;
-	t_point			position;
-	t_point			direction;
-	const char 		*type;
-}					t_light;
-
-typedef	struct 		s_sphere
-{
-	t_point			center;
-	float			radius;
-}					t_sphere;
-
-typedef struct		s_plane
-{
-	t_point			normal;
-	t_point			point;
-	float			d;
-}					t_plane;
-
-typedef	struct 		s_cylinder
-{
-	t_point			position;
-	float			radius;
-}					t_cylinder;
-
-typedef	struct 		s_cone
-{
-	t_point			position;
-}					t_cone;
-
-typedef	struct		s_triangle
-{
-	t_point			*vertex;
-	t_point			normal;
-}					t_triangle;
-
-typedef struct		s_camera
-{
-	t_point			position;
-}					t_camera;
-typedef	struct 		s_material
-{
-	t_color			color;
-	float			specular;
-}					t_material;
-
-typedef	struct		s_object3d
-{
-	void			*data;
-	const char		*tag;
-	t_color			color;
-	float			specular;
-	float			(*intersect)(t_ray *, struct s_object3d *);
-}					t_object;
-
-typedef	struct 		s_scene
-{
-	t_object 		**objs;
-	int 			obj_nmb;
-	t_point			*normal_buf;
-	t_material 		*material_buf;
-	t_point 		*intersection_buf;
-	t_ray 			*ray_buf;
-	t_light 		**light;
-	int 			light_nmb;
-	t_camera		camera;
-	t_point			*viewport;
-	int				*index_buf;
-	float 			*depth_buf;
-}					t_scene;
 
 // scenes_reader.c
 t_object	**read_scene(int fd, int *obj_nmb, int *light_nmb);
@@ -153,10 +52,10 @@ t_object 	*new_triangle(t_point *vertex, double specular, t_color color);
 float 		intersect_ray_plane(t_ray *r, t_object *object, t_point *normal);
 t_object 	*new_plane(t_point point, t_point normal, float specular, t_color color);
 // cylinder.c
-int 		intersect_ray_cylinder(t_ray *r, t_object *object, t_point *normal, float *t);
+float       intersect_ray_cylinder(t_ray *r, t_object *object);
 t_object	*new_cylinder(t_point position, float radius, float specular, t_color color);
 // cone.c
-int 		intersect_ray_cone(t_ray *r, t_object *object, t_point *normal, float *t);
+float       intersect_ray_cone(t_ray *r, t_object *object);
 t_object	*new_cone(t_point position, float specular, t_color color);
 // ftoi.c
 float   	ftoi(char *str);
@@ -181,5 +80,11 @@ void    	get_normal_buf(t_scene *scene);
 void    	get_intersection_buf(t_scene *scene);
 void     	get_closest_points(t_scene *scene);
 void    	get_material_buf(t_scene *scene);
+//normal.c
+void        get_sphere_normal(t_scene *scene, int index, int obj_num);
+void        get_plane_normal(t_scene *scene, int index, int obj_num);
+void        get_triangle_normal(t_scene *scene, int index, int obj_num);
+void        get_cone_normal(t_scene *scene, int index, int obj_num);
+void        get_cylinder_normal(t_scene *scene, int index, int obj_num);
 
 #endif

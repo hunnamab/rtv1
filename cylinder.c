@@ -14,10 +14,11 @@ t_object *new_cylinder(t_point position, float radius, float specular, t_color c
     new_object->data = (void *)new_cylinder;
     new_object->tag = "cylinder";
     new_object->intersect = &intersect_ray_cylinder;
+    new_object->get_normal = &get_cylinder_normal;
     return(new_object);
 }
 
-int intersect_ray_cylinder(t_ray *r, t_object *object, t_point *normal, float *t)
+float intersect_ray_cylinder(t_ray *r, t_object *object)
 {
     float a;
     float b;
@@ -27,9 +28,7 @@ int intersect_ray_cylinder(t_ray *r, t_object *object, t_point *normal, float *t
     float t0;
     float t1;
     t_point dist;
-    t_point buf;
     t_cylinder *cylinder;
-    t_point intersection_point;
 
     cylinder = (t_cylinder *)object->data;
     a = r->dir.x * r->dir.x + r->dir.z * r->dir.z;
@@ -45,18 +44,7 @@ int intersect_ray_cylinder(t_ray *r, t_object *object, t_point *normal, float *t
         sqrt_discr = sqrt(discr);
         t0 = (-b + sqrt_discr) / (a);
         t1 = (-b - sqrt_discr) / (a);
-        if (t0 > t1)
-            buf = vector_scale(t1, &r->dir);
-        else
-            buf = vector_scale(t0, &r->dir);
-        intersection_point = vector_add(&r->start, &buf);
-        *normal = vector_sub(&cylinder->position, &intersection_point);
-        normal->y = 0;
-        normalize_vector(&normal);
-        if (vector_dot(&r->dir, &normal) > 0.0001)
-		    *normal = vector_scale(-1, normal);
-        *t = t1 < t0 ? t1 : t0; 
-        return (1);
+        return (t1 < t0 ? t1 : t0);
     }
     return (0);
 }

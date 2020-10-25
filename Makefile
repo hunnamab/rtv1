@@ -4,7 +4,7 @@ LIB_FLAGS = -Wall -Wextra
 MAC_FLAGS = -I SDL2.framework/Headers -F ./ -framework SDL2
 LINUX_FLAGS = -lSDL2 -lm
 LIBRARY = ./libft/libft.a
-HEADER = rtv1.h
+HEADER = rtv1.h types.h
 SRC = main.c sphere.c settings.c vector.c utils.c \
 	light.c triangle.c scenes_reader.c draw.c ftoi.c \
 	objects_parameters.c plane.c cylinder.c cone.c get_structures.c \
@@ -16,7 +16,7 @@ SRC = main.c sphere.c settings.c vector.c utils.c \
 	./matrix_lib/matr_swap_rows.c ./matrix_lib/matr_to_line.c \
 	./matrix_lib/matr_trace.c ./matrix_lib/matr_transpose.c \
 	./matrix_lib/print_matrix.c transform.c ./matrix_lib/matrix_identity.c \
-	buffers.c scene.c
+	buffers.c scene.c normal.c
 OBJ = $(SRC:.c=.o)
 
 all: $(NAME)

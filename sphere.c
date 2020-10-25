@@ -14,6 +14,7 @@ t_object *new_sphere(t_point center, float radius, float specular, t_color color
     new_object->data = (void *)new_sphere;
     new_object->tag = "sphere";
     new_object->intersect = &intersect_ray_sphere;
+    new_object->get_normal = &get_sphere_normal;
     return(new_object);
 }
 

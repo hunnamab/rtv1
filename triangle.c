@@ -20,6 +20,7 @@ t_object *new_triangle(t_point *vertex, double specular, t_color color)
     new_object->data = (void *)new_triangle;
     new_object->tag = "triangle";
     new_object->intersect = &intersect_ray_triangle;
+    new_object->get_normal = &get_triangle_normal;
     return(new_object);
 }
 

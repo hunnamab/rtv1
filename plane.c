@@ -15,6 +15,7 @@ t_object *new_plane(t_point point, t_point normal, float specular, t_color color
     new_object->data = (void *)new_plane;
     new_object->tag = "plane";
     new_object->intersect = &intersect_ray_plane;
+    new_object->get_normal = &get_plane_normal;
     new_plane->d = -new_plane->normal.x * new_plane->point.x - new_plane->normal.y * new_plane->point.y - new_plane->normal.z * new_plane->point.z;
     return(new_object);
 }

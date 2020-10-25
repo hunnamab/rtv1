@@ -103,9 +103,7 @@ void    get_normal_buf(t_scene *scene)
     int y;
     int i;
     int j;
-    t_sphere *s;
-    t_plane  *p;
-    t_triangle *tri;
+
     j = 0;
     x = 0;
     y = 0;
@@ -117,41 +115,13 @@ void    get_normal_buf(t_scene *scene)
             if (scene->index_buf[i] != -1)
             {
                 j = scene->index_buf[i];
-                if (ft_strequ(scene->objs[j]->tag, "sphere"))
-                {
-                    s = (t_sphere *)scene->objs[j]->data;
-                    scene->normal_buf[i] = vector_sub(&scene->intersection_buf[i], &s->center);
-                    scene->normal_buf[i] = vector_div_by_scalar(&scene->normal_buf[i], vector_length(&scene->normal_buf[i]));
-                }
-                if(ft_strequ(scene->objs[j]->tag, "plane"))
-                {
-                    p = (t_plane *)scene->objs[j]->data;
-                    copy_point(&scene->normal_buf[i], &p->normal);
-                    if (vector_dot(&scene->ray_buf[i].dir, &scene->normal_buf[i]) > 0.0001)
-                        scene->normal_buf[i] = vector_scale(-1, &scene->normal_buf[i]);
-                }
-                if(ft_strequ(scene->objs[j]->tag, "triangle"))
-                {
-                    tri = (t_triangle *)scene->objs[j]->data;
-                    copy_point(&scene->normal_buf[i], &tri->normal);
-                    if (vector_dot(&scene->ray_buf[i].dir, &scene->normal_buf[i]) > 0.0001)
-                        scene->normal_buf[i] = vector_scale(-1, &scene->normal_buf[i]);
-                }
+                scene->objs[j]->get_normal(scene, i, j);
             }
             x++;
         }
         x = 0;
         y++;
     }
-   /*   i = 0;
-    while(i < HEI * WID)
-    {
-        if (scene->depth_buf[i])
-        {
-            printf("normal_buf[i] == %f  %f  %f\n", scene->normal_buf[i].x,scene->normal_buf[i].y, scene->normal_buf[i].z);
-        }
-        i++;
-    } */
 }
 
 void    get_material_buf(t_scene *scene)
