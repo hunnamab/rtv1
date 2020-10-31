@@ -25,6 +25,9 @@ void    	draw_normal_buf(t_sdl *sdl, t_scene *scene);
 // light.c
 t_color     reflection_color(t_scene *scene, int index);
 t_light     *new_light(t_point position, t_point direction, const char *type);
+t_point     get_light_vec(t_scene *scene, int index, float *i, int j);
+float       get_specular(t_scene *scene, int index, int j, t_point *L);
+int         in_shadow(t_scene *scene, int index, t_point *L);
 // vector.c
 t_point 	vector_add(const t_point *v1, const t_point *v2);
 t_point 	vector_scale(float c, t_point *v);
@@ -35,13 +38,16 @@ float   	vector_length(t_point *vector);
 t_point     vector_div_by_scalar(t_point *vector, float scalar);
 t_point     vector_sub_by_scalar(t_point *vector, float scalar);
 void  		normalize_vector(t_point *v1);
+t_point     vector_add_scalar(const t_point *v1, const float scalar);
 // utils.c
 t_point		get_point(float x, float y, float z);
 t_point     *get_viewport(t_camera *camera);
 void        copy_point(t_point *dst, t_point *src);
+//color.c
 void        copy_color(t_color *dst, t_color *src);
 t_color     set_color(uint8_t red, uint8_t green, uint8_t blue, uint8_t alpha);
-t_color     set_color_zero(t_color *color);
+void        set_color_zero(t_color *color);
+t_color     color_mul_by_scalar(t_color *color, float scalar);
 // sphere.c
 float 		intersect_ray_sphere(t_ray *r, t_object *object);
 t_object	*new_sphere(t_point center, float radius, float specular, t_color color);

@@ -85,7 +85,12 @@ t_point  vector_cross(t_point *v1, t_point *v2)
     return(result);
 }
 
-/* int     vectorequal(t_point *v1, t_point *v2)
+t_point vector_add_scalar(const t_point *v1, const float scalar)
 {
+    t_point res;
 
-} */
+    res.x = v1->x + scalar;
+    res.y = v1->y + scalar;
+    res.z = v1->z + scalar;
+    return (res);
+}

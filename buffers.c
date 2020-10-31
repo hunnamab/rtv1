@@ -5,6 +5,7 @@ t_ray *get_rays_arr(t_camera *camera, t_point *viewport)
     int x;
     int y;
     t_ray *rays;
+    int j;
 
     rays = malloc(sizeof(t_ray) * (WID * HEI));
     x = 0;
@@ -13,10 +14,11 @@ t_ray *get_rays_arr(t_camera *camera, t_point *viewport)
     {
         while(x < WID)
         {
-            rays[y * WID + x].start.x = camera->position.x;
-            rays[y * WID + x].start.y = camera->position.y;
-            rays[y * WID + x].start.x = camera->position.z;
-            rays[y * WID + x].dir = vector_sub(&viewport[y * WID + x], &camera->position);
+            j = y * WID + x;
+            rays[j].start.x = camera->position.x;
+            rays[j].start.y = camera->position.y;
+            rays[j].start.z = camera->position.z;
+            rays[j].dir = vector_sub(&viewport[j], &camera->position);
             x++;
         }
         x = 0;
@@ -61,7 +63,7 @@ void     get_closest_points(t_scene *scene)
                 }
                 i++;
             }
-            if (scene->depth_buf[j] == 0)
+            if (scene->depth_buf[j] < 1)
                 scene->index_buf[j] = -1;
             x++;
             i = 0;
@@ -142,7 +144,7 @@ void    get_material_buf(t_scene *scene)
             if (scene->index_buf[i] != -1)
             {
                 j = scene->index_buf[i];
-                copy_color(&scene->material_buf[i], &scene->objs[j]->color);
+                copy_color(&scene->material_buf[i].color, &scene->objs[j]->color);
                 scene->material_buf[i].specular = scene->objs[j]->specular;
             }
             else
