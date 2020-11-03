@@ -18,6 +18,19 @@ t_object *new_cylinder(t_point position, float radius, float specular, t_color c
     return(new_object);
 }
 
+void    get_cylinder_normal(t_scene *scene, int index, int obj_num)
+{
+    t_cylinder *cylinder;
+    t_point *normal;
+
+    normal = &scene->normal_buf[index];
+    cylinder = (t_cylinder *)scene->objs[obj_num]->data;
+    *normal = vector_sub(&scene->intersection_buf[index], &cylinder->position);
+    normal->y = 0;
+    normalize_vector(&normal);
+    scene->normal_buf[index] = vector_div_by_scalar(&scene->normal_buf[index], vector_length(&scene->normal_buf[index]));
+}
+
 float intersect_ray_cylinder(t_ray *r, t_object *object)
 {
     float a;

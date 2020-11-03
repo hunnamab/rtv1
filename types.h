@@ -1,7 +1,7 @@
 #ifndef TYPES_H
 # define TYPES_H
 # include <stdint.h>
-# include <SDL2/SDL.h> 
+//# include <SDL2/SDL.h> 
 typedef struct 		s_sdl
 {
 	SDL_Window		*win;

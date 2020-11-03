@@ -2,7 +2,7 @@
 
 void     init_scene(t_scene *scene)
 {
-    scene->camera.position = get_point(0, 1, -2);
+    scene->camera.position = get_point(0, -3, -4);
     scene->viewport = get_viewport(&scene->camera);
     scene->ray_buf = get_rays_arr(&scene->camera, scene->viewport);
     scene->normal_buf = malloc(sizeof(t_point) * WID * HEI);

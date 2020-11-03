@@ -24,6 +24,16 @@ t_object *new_triangle(t_point *vertex, double specular, t_color color)
     return(new_object);
 }
 
+void    get_triangle_normal(t_scene *scene, int index, int obj_num)
+{
+    t_triangle *t;
+
+    t = (t_triangle *)scene->objs[obj_num]->data;
+    copy_point(&scene->normal_buf[index], &t->normal);
+    if (vector_dot(&scene->ray_buf[index].dir, &scene->normal_buf[index]) > 0.0001)
+        scene->normal_buf[index] = vector_scale(-1, &scene->normal_buf[index]);
+}
+
 float intersect_ray_triangle(t_ray *r, t_object *object)
 {
     t_triangle *triangle;

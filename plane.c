@@ -20,6 +20,16 @@ t_object *new_plane(t_point point, t_point normal, float specular, t_color color
     return(new_object);
 }
 
+void    get_plane_normal(t_scene *scene, int index, int obj_num)
+{
+    t_plane *p;
+
+    p = (t_plane *)scene->objs[obj_num]->data;
+    copy_point(&scene->normal_buf[index], &p->normal);
+    if (vector_dot(&scene->ray_buf[index].dir, &scene->normal_buf[index]) > 0.0001)
+        scene->normal_buf[index] = vector_scale(-1, &scene->normal_buf[index]);
+}
+
 float intersect_ray_plane(t_ray *r, t_object *object, t_point *normal)
 {
     float k1;

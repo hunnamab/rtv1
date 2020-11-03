@@ -18,6 +18,30 @@ t_object *new_sphere(t_point center, float radius, float specular, t_color color
     return(new_object);
 }
 
+void    get_sphere_normal(t_scene *scene, int index, int obj_num)
+{
+    t_sphere *s;
+
+
+    s = (t_sphere *)scene->objs[obj_num]->data;
+    scene->normal_buf[index] = vector_sub(&scene->intersection_buf[index], &s->center);
+    scene->normal_buf[index] = vector_div_by_scalar(&scene->normal_buf[index], vector_length(&scene->normal_buf[index]));
+    if (vector_dot(&scene->ray_buf[index].dir, &scene->normal_buf[index]) > 0.0001)
+        scene->normal_buf[index] = vector_scale(-1, &scene->normal_buf[index]);
+}
+
+float   get_result(float t1, float t0)
+{
+    float result;
+
+    result = 0;
+    if (t1 < t0 && t1 > 0)
+        result = t1;
+    if (t0 < t1 && t0 > 0)
+        result = t0;
+    return(result);
+}
+
 float intersect_ray_sphere(t_ray *r, t_object *object)
 {
     float a;
@@ -27,6 +51,7 @@ float intersect_ray_sphere(t_ray *r, t_object *object)
     float sqrt_discr;
     float t0;
     float t1;
+    float res;
     t_point dist;
     t_sphere *s;
  
@@ -43,7 +68,7 @@ float intersect_ray_sphere(t_ray *r, t_object *object)
         sqrt_discr = sqrt(discr);
         t0 = (-b + sqrt_discr) / (2 * a);
         t1 = (-b - sqrt_discr) / (2 * a);
-        return(t1 > t0 ? t0 : t1);
+        return(get_result(t1, t0));
     }
     return (0);
 }

@@ -19,6 +19,13 @@ sphere {
     specular: 100
 }
 
+sphere {
+    center: 0, -5001, 0
+    radius: 5000
+    color: 255, 0, 255, 255
+    specular: 100
+}
+
 light {
     type: point
     position: 0, 0, 0

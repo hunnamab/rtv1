@@ -1,8 +1,8 @@
 #ifndef RTV1_H
 # define RTV1_H
 
-//# include "SDL2.framework/Headers/SDL.h" //for macOS
-# include <SDL2/SDL.h> //for linux
+# include "SDL2.framework/Headers/SDL.h" //for macOS
+//# include <SDL2/SDL.h> //for linux
 # include <stdio.h>
 # include <math.h>
 # include <fcntl.h>
@@ -12,8 +12,8 @@
 # include "matrix_lib/matrix.h"
 # include "types.h"
 
-# define WID 1280
-# define HEI 720
+# define WID 1920
+# define HEI 1024
 
 // scenes_reader.c
 t_object	**read_scene(int fd, int *obj_nmb, int *light_nmb);
