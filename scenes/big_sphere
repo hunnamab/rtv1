@@ -1,0 +1,15 @@
+sphere {
+    center: 0, 0, 0
+    radius: 300
+    color: 255, 0, 0, 255
+    specular: 100
+}
+
+light {
+    type: point
+    position: 100, 10, -20
+}
+
+light {
+    type: ambient
+}

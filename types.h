@@ -72,6 +72,7 @@ typedef struct		s_camera
 {
 	t_point			position;
 }					t_camera;
+
 typedef	struct 		s_material
 {
 	t_color			color;

@@ -51,7 +51,7 @@ int         in_shadow(t_scene *scene, int index, t_point *L)
             t = buf;
         i++;
     }
-    if (t < 1 && t > 0.001)
+    if (t < 1 && t > 0.0001)
         return(1);
     return(0);
 }

@@ -38,8 +38,6 @@ float intersect_ray_cylinder(t_ray *r, t_object *object)
     float c;
     float discr;
     float sqrt_discr;
-    float t0;
-    float t1;
     t_point dist;
     t_cylinder *cylinder;
 
@@ -50,14 +48,10 @@ float intersect_ray_cylinder(t_ray *r, t_object *object)
     b = r->dir.x * dist.x + r->dir.z * dist.z;
     c = dist.x * dist.x + dist.z * dist.z - cylinder->radius * cylinder->radius;
     discr = b * b - a * c;
-    if (discr < 0)
-        return (0);
-    else
+    if (discr >= 0)
     {
         sqrt_discr = sqrt(discr);
-        t0 = (-b + sqrt_discr) / (a);
-        t1 = (-b - sqrt_discr) / (a);
-        return (t1 < t0 ? t1 : t0);
+        return (choose_t((-b + sqrt_discr) / a, (-b - sqrt_discr) / a));
     }
     return (0);
 }

@@ -65,9 +65,7 @@ float intersect_ray_cone(t_ray *r, t_object *object)
     else
     {
         sqrt_discr = sqrt(discr);
-        t0 = (-b + sqrt_discr) / (2 * a);
-        t1 = (-b - sqrt_discr) / (2 * a);
-        return (t1 > t0 ? t0 : t1);
+        return (choose_t((-b + sqrt_discr) / (2 * a), (-b - sqrt_discr) / (2 * a)));
     }
     return (0);
 }

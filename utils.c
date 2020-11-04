@@ -17,6 +17,34 @@ void        copy_point(t_point *dst, t_point *src)
     dst->z = src->z;
 }
 
+double   choose_t(double t0, double t1)
+{
+    double result;
+
+    result = 0;
+    if ((t1 < t0 && t1 > 0) || (t0 < 0 && t1 > 0))
+        result = t1;
+    if ((t0 < t1 && t0 > 0) || (t1 < 0 && t0 > 0))
+        result = t0;
+    if(t0 == t1 && t0 > 0)
+        result = t0;
+    return(result);
+}
+
+/* float   choose_t(float t0, float t1)
+{
+    float result;
+
+    result = 0;
+    if ((t1 < t0 && t1 > 0))
+        result = t1;
+    if ((t0 < t1 && t0 > 0))
+        result = t0;
+    if(t0 == t1 && t0 > 0)
+        result = t0;
+    return(result);
+} */
+
 t_point     *get_viewport(t_camera *camera)
 {
     int x;

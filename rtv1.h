@@ -43,6 +43,7 @@ t_point     vector_add_scalar(const t_point *v1, const float scalar);
 t_point		get_point(float x, float y, float z);
 t_point     *get_viewport(t_camera *camera);
 void        copy_point(t_point *dst, t_point *src);
+float       choose_t(float t0, float t1);
 //color.c
 void        copy_color(t_color *dst, t_color *src);
 t_color     set_color(uint8_t red, uint8_t green, uint8_t blue, uint8_t alpha);
@@ -75,7 +76,7 @@ t_object 	*get_light(char **description);
 // translate.c
 float		**get_transform_matrix(float *angle, float *move, float *scale);
 float		*get_three_floats(float x, float y, float z);
-void		transform(t_point *point, float **matrix, float *coord_matrix, int point_nmb);
+void		transform(t_point *point, float **matrix, int point_nmb);
 // get_structures.c
 t_object 	**get_objects_structures(int obj_nmb, t_object **buf);
 t_light 	**get_light_structures(int light_nmb, t_object **buf);
