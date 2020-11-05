@@ -44,7 +44,6 @@ t_point		get_point(double x, double y, double z);
 t_point     *get_viewport(t_camera *camera);
 void        copy_point(t_point *dst, t_point *src);
 double       choose_t(double t0, double t1);
-void        clear_scene(t_scene *scene);
 //color.c
 void        copy_color(t_color *dst, t_color *src);
 t_color     set_color(uint8_t red, uint8_t green, uint8_t blue, uint8_t alpha);
@@ -78,6 +77,12 @@ t_object 	*get_light(char **description);
 double		**get_transform_matrix(double *angle, double *move, double *scale);
 double		*get_three_doubles(double x, double y, double z);
 void		transform(t_point *point, double **matrix, int point_nmb);
+//transform_matrix.c
+double	    **get_translate_matrix(double *move);
+double	    **get_scale_matrix(double *scale);
+double	    **rotate_x(double x);
+double	    **rotate_z(double z);
+double	    **rotate_y(double y);
 // get_structures.c
 t_object 	**get_objects_structures(int obj_nmb, t_object **buf);
 t_light 	**get_light_structures(int light_nmb, t_object **buf);
@@ -94,5 +99,8 @@ void        get_plane_normal(t_scene *scene, int index, int obj_num);
 void        get_triangle_normal(t_scene *scene, int index, int obj_num);
 void        get_cone_normal(t_scene *scene, int index, int obj_num);
 void        get_cylinder_normal(t_scene *scene, int index, int obj_num);
+//scene.c
+void        init_scene(t_scene *scene);
+void        clear_scene(t_scene *scene);
 
 #endif

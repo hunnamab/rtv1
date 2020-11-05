@@ -45,10 +45,6 @@ double intersect_ray_cone(t_ray *r, t_object *object)
     double a;
     double b;
     double c;
-    double discr;
-    double sqrt_discr;
-    double t0;
-    double t1;
     t_point dist;
     t_cone *cone;
 
@@ -59,13 +55,11 @@ double intersect_ray_cone(t_ray *r, t_object *object)
     dist.y = (double)2 - r->start.y + cone->position.y;
     b = 2 * dist.x * r->dir.x + 2 * dist.z * r->dir.z + (2 * tan * dist.y * r->dir.y);
     c = dist.x * dist.x + dist.z * dist.z - (tan * (dist.y * dist.y));
-    discr = b * b - 4 * a * c;
-    if (discr < 0)
-        return (0);
-    else
+    c = b * b - 4 * a * c;
+    if (c >= 0)
     {
-        sqrt_discr = sqrt(discr);
-        return (choose_t((-b + sqrt_discr) / (2 * a), (-b - sqrt_discr) / (2 * a)));
+        c = sqrt(c);
+        return (choose_t((-b + c) / (2 * a), (-b - c) / (2 * a)));
     }
     return (0);
 }

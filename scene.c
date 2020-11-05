@@ -24,7 +24,7 @@ void    clear_scene(t_scene *scene)
 void     init_scene(t_scene *scene)
 {
     double **matrix;
-    scene->camera.position = get_point(0, 2, -12);
+    scene->camera.position = get_point(0, 2, -40);
     scene->viewport = get_viewport(&scene->camera);
     scene->ray_buf = get_rays_arr(&scene->camera, scene->viewport);
     scene->normal_buf = malloc(sizeof(t_point) * WID * HEI);
@@ -32,7 +32,7 @@ void     init_scene(t_scene *scene)
     scene->intersection_buf = malloc(sizeof(t_point) * WID * HEI);
     scene->index_buf = malloc(sizeof(int) * WID * HEI);
     scene->depth_buf = malloc(sizeof(double) * WID * HEI);
-    matrix = get_transform_matrix(get_three_doubles(0,-0.5,0),get_three_doubles(0,0,0),get_three_doubles(1,1,1));
+    matrix = get_transform_matrix(get_three_doubles(0,0,0),get_three_doubles(0,0,0),get_three_doubles(1,1,1));
     int x = 0;
     while(x < WID * HEI)
     {

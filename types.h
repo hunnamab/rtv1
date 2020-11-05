@@ -87,7 +87,7 @@ typedef	struct		s_object3d
 	const char		*tag;
 	t_color			color;
 	double			specular;
-    double           (*get_normal)(struct s_scene *, int , int);
+    double          (*get_normal)(struct s_scene *, int , int);
 	double			(*intersect)(t_ray *, struct s_object3d *);
 }					t_object;
 

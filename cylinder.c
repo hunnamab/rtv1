@@ -35,8 +35,6 @@ double intersect_ray_cylinder(t_ray *r, t_object *object)
     double a;
     double b;
     double c;
-    double discr;
-    double sqrt_discr;
     t_point dist;
     t_cylinder *cylinder;
 
@@ -46,11 +44,11 @@ double intersect_ray_cylinder(t_ray *r, t_object *object)
     dist.z = r->start.z - cylinder->position.z;
     b = r->dir.x * dist.x + r->dir.z * dist.z;
     c = dist.x * dist.x + dist.z * dist.z - cylinder->radius * cylinder->radius;
-    discr = b * b - a * c;
-    if (discr >= 0)
+    c = b * b - a * c;
+    if (c >= 0)
     {
-        sqrt_discr = sqrt(discr);
-        return (choose_t((-b + sqrt_discr) / a, (-b - sqrt_discr) / a));
+        c = sqrt(c);
+        return (choose_t((-b + c) / a, (-b - c) / a));
     }
     return (0);
 }
