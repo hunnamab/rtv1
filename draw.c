@@ -28,6 +28,7 @@ void    	draw_scene(t_sdl *sdl, t_scene *scene)
         x = 0;
         y++;
     }
+    free(color);
     SDL_RenderPresent(sdl->renderer);
 }
 

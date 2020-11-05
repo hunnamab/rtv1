@@ -17,7 +17,7 @@ void        copy_point(t_point *dst, t_point *src)
     dst->z = src->z;
 }
 
- double   choose_t(double t0, double t1)
+double   choose_t(double t0, double t1)
 {
     double result;
 

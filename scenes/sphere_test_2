@@ -18,6 +18,14 @@ cone {
     specular: 0.3
 }
 
+triangle {
+    vertex: -7, 0, 5
+    vertex: -7, 5, 7
+    vertex: -5, 3, 5
+    color: 210, 205, 10, 255
+    specular: 50
+}
+
 sphere {
     center: -2, 0, 4
     radius: 1
@@ -36,6 +44,20 @@ sphere {
     center: -3, 2, 3
     radius: 1
     color: 255, 0, 255, 255
+    specular: 10
+}
+
+sphere {
+    center: -3, 4, 3
+    radius: 1
+    color: 37, 97, 76, 255
+    specular: 10
+}
+
+sphere {
+    center: -3, 6, 3
+    radius: 1
+    color: 126, 32, 189, 255
     specular: 10
 }
 

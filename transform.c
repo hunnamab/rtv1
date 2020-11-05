@@ -142,7 +142,7 @@ void    transform(t_point *point, double **matrix, int point_nmb)
 
 double     **get_transform_matrix(double *angle, double *move, double *scale)
 {
-    double **t_matrix; 
+    double **t_matrix;
     double **s_matrix;
     double **rotation_matrix;
     double **result_matrix;
@@ -157,5 +157,8 @@ double     **get_transform_matrix(double *angle, double *move, double *scale)
     result = matr_mul(t_matrix, result_matrix, 4, 4, 4, 4);
     matr_free(result_matrix, 4);
     matr_free(t_matrix, 4);
+    free(angle);
+    free(move);
+    free(scale);
     return (result);
 }

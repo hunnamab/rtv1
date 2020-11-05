@@ -38,6 +38,7 @@ int main(int args, char **argv)
                 break ;
         }
     }
+    clear_scene(scene);
     SDL_DestroyRenderer(sdl.renderer);
     SDL_DestroyWindow(sdl.win);
     SDL_Quit();

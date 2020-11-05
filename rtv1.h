@@ -44,6 +44,7 @@ t_point		get_point(double x, double y, double z);
 t_point     *get_viewport(t_camera *camera);
 void        copy_point(t_point *dst, t_point *src);
 double       choose_t(double t0, double t1);
+void        clear_scene(t_scene *scene);
 //color.c
 void        copy_color(t_color *dst, t_color *src);
 t_color     set_color(uint8_t red, uint8_t green, uint8_t blue, uint8_t alpha);
