@@ -1,6 +1,6 @@
 #include "matrix.h"
 
-void    matr_copy(float **srcMatrix, float **dstMatrix, int numRows, int numCols)
+void    matr_copy(double **srcMatrix, double **dstMatrix, int numRows, int numCols)
 {
     int i;
     int j;

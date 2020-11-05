@@ -1,15 +1,15 @@
 #include "matrix.h"
 
-float **create_matrix(int numRows, int numCols)
+double **create_matrix(int numRows, int numCols)
 {
     int j = 0;
     int i = 0;
-    float **matrix;
+    double **matrix;
 
-    matrix = (float **)malloc(sizeof(float *) * numRows);
+    matrix = (double **)malloc(sizeof(double *) * numRows);
     while(i < numRows)
     {
-        matrix[i] = (float *)malloc(sizeof(float) * numCols);
+        matrix[i] = (double *)malloc(sizeof(double) * numCols);
         while (j < numCols)
         {
             matrix[i][j] = 0.0;

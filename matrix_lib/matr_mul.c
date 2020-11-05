@@ -1,10 +1,8 @@
 #include "matrix.h"
 
-#include "matrix.h"
-
-float  get_sum(float **matrix1, float **matrix2, int n, int i, int j)
+double  get_sum(double **matrix1, double **matrix2, int n, int i, int j)
 {
-    float  sum;
+    double  sum;
     int k;
 
     k = 0;
@@ -17,12 +15,12 @@ float  get_sum(float **matrix1, float **matrix2, int n, int i, int j)
     return(sum);
 }
 
-void    matr_mul_void(float *matrix1, float **matrix2)
+void    matr_mul_void(double *matrix1, double **matrix2)
 {
     int i;
     int j;
-    float buf;
-    float m_buf[4];
+    double buf;
+    double m_buf[4];
 
     i = -1;
     while (i++ < 4)
@@ -44,9 +42,9 @@ void    matr_mul_void(float *matrix1, float **matrix2)
     }
 }
 
-float    **matr_mul(float **matrix1, float **matrix2, int numRows1, int numCols1, int numRows2, int numCols2)
+double    **matr_mul(double **matrix1, double **matrix2, int numRows1, int numCols1, int numRows2, int numCols2)
 {
-    float **result;
+    double **result;
     int resultRows;
     int resultCols;
     int i;

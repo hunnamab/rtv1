@@ -1,11 +1,11 @@
 #include "rtv1.h"
 
-float   ftoi(char *str)
+double   ftoi(char *str)
 {
     size_t	i;
-	float	n;
-	float	sign;
-    float   buf;
+	double	n;
+	double	sign;
+    double   buf;
     
     buf = 1;
     sign = str[0] == '-' ? -1 : 1;

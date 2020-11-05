@@ -1,6 +1,6 @@
 #include "matrix.h"
 
-void    matr_add_matr(float **matrix1, float **matrix2, int numRows, int numCols)
+void    matr_add_matr(double **matrix1, double **matrix2, int numRows, int numCols)
 {
     int i;
     int j;

@@ -10,7 +10,7 @@ t_point vector_add(const t_point *v1, const t_point *v2)
     return (res);
 }
 
-t_point vector_scale(float c, t_point *v)
+t_point vector_scale(double c, t_point *v)
 {
     t_point res;
 
@@ -30,12 +30,12 @@ t_point vector_sub(t_point *v1, t_point *v2)
     return (res);
 }
 
-float vector_dot(t_point *v1, t_point *v2)
+double vector_dot(t_point *v1, t_point *v2)
 {
     return (v1->x * v2->x + v1->y * v2->y + v1->z * v2->z);
 }
 
-t_point     vector_sub_by_scalar(t_point *vector, float scalar)
+t_point     vector_sub_by_scalar(t_point *vector, double scalar)
 {
     t_point result;
 
@@ -45,7 +45,7 @@ t_point     vector_sub_by_scalar(t_point *vector, float scalar)
     return(result);
 }
 
-t_point     vector_div_by_scalar(t_point *vector, float scalar)
+t_point     vector_div_by_scalar(t_point *vector, double scalar)
 {
     t_point result;
 
@@ -55,15 +55,15 @@ t_point     vector_div_by_scalar(t_point *vector, float scalar)
     return(result);
 }
 
-float   vector_length(t_point *vector)
+double   vector_length(t_point *vector)
 {
-    float dot = vector_dot(vector, vector);
+    double dot = vector_dot(vector, vector);
     return (sqrt(dot));
 }
 
 void  normalize_vector(t_point *v1)
 {
-    float q;
+    double q;
 
     q = sqrt(v1->x * v1->x + v1->y * v1->y + v1->z + v1->z);
     if (q != 0)
@@ -85,7 +85,7 @@ t_point  vector_cross(t_point *v1, t_point *v2)
     return(result);
 }
 
-t_point vector_add_scalar(const t_point *v1, const float scalar)
+t_point vector_add_scalar(const t_point *v1, const double scalar)
 {
     t_point res;
 

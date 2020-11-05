@@ -1,19 +1,19 @@
 #include "rtv1.h"
 
-float   *get_three_floats(float x, float y, float z)
+double   *get_three_doubles(double x, double y, double z)
 {
-    float   *angles;
+    double   *angles;
 
-    angles = malloc(sizeof(float) * 3);
+    angles = malloc(sizeof(double) * 3);
     angles[0] = x;
     angles[1] = y;
     angles[2] = z;
     return(angles);
 }
 
-float **get_translate_matrix(float *move)
+double **get_translate_matrix(double *move)
 {
-    float **t_matrix;
+    double **t_matrix;
 
     t_matrix = create_matrix(4, 4);
     matrix_identity(t_matrix, 4);
@@ -23,9 +23,9 @@ float **get_translate_matrix(float *move)
     return(t_matrix);
 }
 
-float **get_scale_matrix(float *scale)
+double **get_scale_matrix(double *scale)
 {
-    float **s_matrix;
+    double **s_matrix;
     
     s_matrix = create_matrix(4, 4);
     s_matrix[0][0] = scale[0];
@@ -35,9 +35,9 @@ float **get_scale_matrix(float *scale)
     return(s_matrix);
 }
 
-float **rotate_x(float x)
+double **rotate_x(double x)
 {
-    float **matrix;
+    double **matrix;
 
     matrix = create_matrix(4,4);
     matrix[0][0] = 1;
@@ -50,9 +50,9 @@ float **rotate_x(float x)
     return(matrix);
 }
 
-float **rotate_z(float z)
+double **rotate_z(double z)
 {
-    float **matrix;
+    double **matrix;
 
     matrix = create_matrix(4,4);
     matrix[0][0] = cosf(z);
@@ -64,9 +64,9 @@ float **rotate_z(float z)
     return(matrix);
 }
 
-float **rotate_y(float y)
+double **rotate_y(double y)
 {
-    float **matrix;
+    double **matrix;
 
     matrix = create_matrix(4,4);
     matrix[0][0] = cosf(y);
@@ -78,12 +78,12 @@ float **rotate_y(float y)
     return(matrix);
 }
 
-float **get_rotation_matrix_euler(float *angle)
+double **get_rotation_matrix_euler(double *angle)
 {
-    float **rotation_matrix;
-    float x;
-    float y;
-    float z;
+    double **rotation_matrix;
+    double x;
+    double y;
+    double z;
 
     x = angle[0];
     y = angle[1];
@@ -102,11 +102,11 @@ float **get_rotation_matrix_euler(float *angle)
     return(rotation_matrix);
 }
 
-float **get_rotation_matrix(float *angle)
+double **get_rotation_matrix(double *angle)
 {
-    float **rotation_matrix;
-    float **rotation_buf;
-    float **rotation_buf_second;
+    double **rotation_matrix;
+    double **rotation_buf;
+    double **rotation_buf_second;
 
     rotation_buf = rotate_z(angle[2]);
     rotation_buf_second = rotate_y(angle[1]);
@@ -120,10 +120,10 @@ float **get_rotation_matrix(float *angle)
     return(rotation_buf_second);
 }
 
-void    transform(t_point *point, float **matrix, int point_nmb)
+void    transform(t_point *point, double **matrix, int point_nmb)
 {
     int i;
-    float coord_matrix[4];
+    double coord_matrix[4];
 
     i = 0;
     while(i < point_nmb)
@@ -140,13 +140,13 @@ void    transform(t_point *point, float **matrix, int point_nmb)
     }
 }
 
-float     **get_transform_matrix(float *angle, float *move, float *scale)
+double     **get_transform_matrix(double *angle, double *move, double *scale)
 {
-    float **t_matrix; 
-    float **s_matrix;
-    float **rotation_matrix;
-    float **result_matrix;
-    float **result;
+    double **t_matrix; 
+    double **s_matrix;
+    double **rotation_matrix;
+    double **result_matrix;
+    double **result;
 
     t_matrix = get_translate_matrix(move);
     s_matrix = get_scale_matrix(scale);

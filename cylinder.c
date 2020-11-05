@@ -1,6 +1,6 @@
 #include "rtv1.h"
 
-t_object *new_cylinder(t_point position, float radius, float specular, t_color color)
+t_object *new_cylinder(t_point position, double radius, double specular, t_color color)
 {
     t_cylinder *new_cylinder;
     t_object *new_object;
@@ -31,13 +31,13 @@ void    get_cylinder_normal(t_scene *scene, int index, int obj_num)
     scene->normal_buf[index] = vector_div_by_scalar(&scene->normal_buf[index], vector_length(&scene->normal_buf[index]));
 }
 
-float intersect_ray_cylinder(t_ray *r, t_object *object)
+double intersect_ray_cylinder(t_ray *r, t_object *object)
 {
-    float a;
-    float b;
-    float c;
-    float discr;
-    float sqrt_discr;
+    double a;
+    double b;
+    double c;
+    double discr;
+    double sqrt_discr;
     t_point dist;
     t_cylinder *cylinder;
 

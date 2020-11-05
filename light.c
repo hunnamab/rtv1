@@ -15,7 +15,7 @@ t_light     *new_light(t_point position, t_point direction, const char *type)
     return(new_light);
 }
 
-t_point     get_light_vec(t_scene *scene, int index, float *i, int j)
+t_point     get_light_vec(t_scene *scene, int index, double *i, int j)
 {
     t_point light_vec;
 
@@ -31,38 +31,33 @@ int         in_shadow(t_scene *scene, int index, t_point *L)
 {
     t_ray ray;
     int i;
-    float t;
-    float buf;
+    double t;
+    double buf;
 
     i = 0;
     ray.start = scene->intersection_buf[index];
     ray.dir = *L;
     buf = 0;
-    while (i < scene->obj_nmb && buf == 0)
-    {
-        buf = scene->objs[i]->intersect(&ray, scene->objs[i]);
-        i++;
-    }
-    t = buf;
+    t = 2;
     while (i < scene->obj_nmb)
     {
         buf = scene->objs[i]->intersect(&ray, scene->objs[i]);
-        if (t > buf && buf > 0)
+        if (t > buf && buf > 0.00001)
             t = buf;
         i++;
     }
-    if (t < 1 && t > 0.0001)
+    if (t < 1 && t > 0.00001)
         return(1);
     return(0);
 }
 
-float       get_specular(t_scene *scene, int index, int j, t_point *L)
+double       get_specular(t_scene *scene, int index, int j, t_point *L)
 {
-    float   r_dot_v;
+    double   r_dot_v;
     t_point R;
     t_point D;
-    float   i;
-    float   n_dot_l;
+    double   i;
+    double   n_dot_l;
 
     i = 0;
     n_dot_l = vector_dot(&scene->normal_buf[index], L);
@@ -80,10 +75,10 @@ float       get_specular(t_scene *scene, int index, int j, t_point *L)
 
 t_color     reflection_color(t_scene *scene, int index)
 {
-    float i;
+    double i;
     t_color result_color;
     t_point L;
-    float n_dot_l;
+    double n_dot_l;
     int j;
 
     j = 0;

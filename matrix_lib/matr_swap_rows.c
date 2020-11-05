@@ -1,12 +1,12 @@
 #include "matrix.h"
 
-void     matr_swap_rows(float **matr, int numRows, int numCols, int row1, int row2)
+void     matr_swap_rows(double **matr, int numRows, int numCols, int row1, int row2)
 {
-    float *buf;
+    double *buf;
     int i;
 
     i = 0;
-    buf = (float *)malloc(sizeof(float) * numCols);
+    buf = (double *)malloc(sizeof(double) * numCols);
     while (i < numCols)
     {
         buf[i] = matr[row2][i];

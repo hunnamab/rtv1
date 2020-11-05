@@ -1,6 +1,6 @@
 #include "rtv1.h"
 
-t_object *new_cone(t_point position, float specular, t_color color)
+t_object *new_cone(t_point position, double specular, t_color color)
 {
     t_cone *new_cone;
     t_object *new_object;
@@ -20,10 +20,10 @@ t_object *new_cone(t_point position, float specular, t_color color)
 void    get_cone_normal(t_scene *scene, int index, int obj_num)
 {
     t_cone *cone;
-    float   n;
+    double   n;
     t_point *normal;
-    float radius;
-    float height;
+    double radius;
+    double height;
 
     radius = 1;
     height = 2;
@@ -40,23 +40,23 @@ void    get_cone_normal(t_scene *scene, int index, int obj_num)
     normal->z = normal->z * (height / radius);
 }
 
-float intersect_ray_cone(t_ray *r, t_object *object)
+double intersect_ray_cone(t_ray *r, t_object *object)
 {
-    float a;
-    float b;
-    float c;
-    float discr;
-    float sqrt_discr;
-    float t0;
-    float t1;
+    double a;
+    double b;
+    double c;
+    double discr;
+    double sqrt_discr;
+    double t0;
+    double t1;
     t_point dist;
     t_cone *cone;
 
     cone = (t_cone *)object->data;
-    float tan = ((float)1 / (float)2) * ((float)1 / (float)2);
+    double tan = ((double)1 / (double)2) * ((double)1 / (double)2);
     a = r->dir.x * r->dir.x + r->dir.z * r->dir.z - (tan * (r->dir.y * r->dir.y));
     dist = vector_sub(&r->start, &cone->position);
-    dist.y = (float)2 - r->start.y + cone->position.y;
+    dist.y = (double)2 - r->start.y + cone->position.y;
     b = 2 * dist.x * r->dir.x + 2 * dist.z * r->dir.z + (2 * tan * dist.y * r->dir.y);
     c = dist.x * dist.x + dist.z * dist.z - (tan * (dist.y * dist.y));
     discr = b * b - 4 * a * c;

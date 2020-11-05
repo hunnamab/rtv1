@@ -1,6 +1,6 @@
 #include "matrix.h"
 
-void    print_matrix(float **matrix, int numRows, int numCols)
+void    print_matrix(double **matrix, int numRows, int numCols)
 {
     int j = 0;
     int i = 0;

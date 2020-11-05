@@ -1,6 +1,6 @@
 #include "matrix.h"
 
-void    matr_free(float **matrix, int numRows)
+void    matr_free(double **matrix, int numRows)
 {
     int i;
 

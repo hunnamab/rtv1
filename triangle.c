@@ -34,18 +34,18 @@ void    get_triangle_normal(t_scene *scene, int index, int obj_num)
         scene->normal_buf[index] = vector_scale(-1, &scene->normal_buf[index]);
 }
 
-float intersect_ray_triangle(t_ray *r, t_object *object)
+double intersect_ray_triangle(t_ray *r, t_object *object)
 {
     t_triangle *triangle;
     t_point edge1;
     t_point edge2;
     t_point pvec;
-    float det;
-    float inv_det;
+    double det;
+    double inv_det;
     t_point tvec;
     t_point qvec;
-    float u;
-    float v;
+    double u;
+    double v;
 
     triangle = (t_triangle *)object->data;
     edge1 = vector_sub(&triangle->vertex[1], &triangle->vertex[0]);

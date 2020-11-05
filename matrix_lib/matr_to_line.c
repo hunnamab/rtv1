@@ -1,6 +1,6 @@
 #include "matrix.h"
 
-int         *matr_to_line(float **matrix, int numRows, int numCols)
+int         *matr_to_line(double **matrix, int numRows, int numCols)
 {
     int *line;
     int i;

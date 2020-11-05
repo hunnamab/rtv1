@@ -50,8 +50,8 @@ t_object *get_sphere(char **description)
 {
     t_object *sphere;
     t_point center;
-    float radius;
-    float specular;
+    double radius;
+    double specular;
     t_color color;
 
     sphere = malloc(sizeof(t_object));
@@ -67,8 +67,8 @@ t_object *get_cylinder(char **description)
 {
     t_object *cylinder;
     t_point position;
-    float radius;
-    float specular;
+    double radius;
+    double specular;
     t_color color;
 
     cylinder = malloc(sizeof(t_object));
@@ -84,7 +84,7 @@ t_object *get_cone(char **description)
 {
     t_object *cone;
     t_point position;
-    float specular;
+    double specular;
     t_color color;
 
     cone = malloc(sizeof(t_object));
@@ -99,7 +99,7 @@ t_object *get_triangle(char **description)
 {
     t_object *triangle;
     t_point *vertex;
-    float specular;
+    double specular;
     t_color color;
 
     triangle = malloc(sizeof(t_object));
@@ -118,7 +118,7 @@ t_object *get_plane(char **description)
     t_object *plane;
     t_point point;
     t_point normal;
-    float specular;
+    double specular;
     t_color color;
 
     plane = malloc(sizeof(t_object));

@@ -1,6 +1,6 @@
 #include "rtv1.h"
 
-t_object *new_sphere(t_point center, float radius, float specular, t_color color)
+t_object *new_sphere(t_point center, double radius, double specular, t_color color)
 {
     t_sphere *new_sphere;
     t_object *new_object;
@@ -30,12 +30,12 @@ void    get_sphere_normal(t_scene *scene, int index, int obj_num)
         scene->normal_buf[index] = vector_scale(-1, &scene->normal_buf[index]);
 }
 
-float intersect_ray_sphere(t_ray *r, t_object *object)
+double intersect_ray_sphere(t_ray *r, t_object *object)
 {
-    float a;
-    float b;
-    float c;
-    float discr;
+    double a;
+    double b;
+    double c;
+    double discr;
     t_point dist;
     t_sphere *s;
  

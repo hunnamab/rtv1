@@ -1,6 +1,6 @@
 #include "matrix.h"
 
-void    matrix_identity(float **matrix, int numrows)
+void    matrix_identity(double **matrix, int numrows)
 {
     int i;
 

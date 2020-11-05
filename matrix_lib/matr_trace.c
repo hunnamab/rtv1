@@ -1,9 +1,9 @@
 #include "matrix.h"
 
-float      matr_trace(float **matrix, int numRows, int numCols)
+double      matr_trace(double **matrix, int numRows, int numCols)
 {
     int i;
-    float result;
+    double result;
 
     i = 0;
     result = 0;

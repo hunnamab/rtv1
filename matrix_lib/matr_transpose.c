@@ -1,10 +1,10 @@
 #include "matrix.h"
 
-float  **matr_transpose(float **matr, int numRows, int numCols)
+double  **matr_transpose(double **matr, int numRows, int numCols)
 {
     int newRows;
     int newCols;
-    float  **trans_matrix;
+    double  **trans_matrix;
     int i;
     int j;
 

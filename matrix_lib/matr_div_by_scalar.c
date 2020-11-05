@@ -1,6 +1,6 @@
 #include "matrix.h"
 
-void    matr_div_by_scalar(float **matrix, int numRows, int numCols, int scalar)
+void    matr_div_by_scalar(double **matrix, int numRows, int numCols, int scalar)
 {
     int i;
     int j;

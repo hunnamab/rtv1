@@ -1,6 +1,6 @@
 #include "matrix.h"
 
-void    matr_sub_scalar(float **matrix, int numRows, int numCols, int scalar)
+void    matr_sub_scalar(double **matrix, int numRows, int numCols, int scalar)
 {
     int i;
     int j;

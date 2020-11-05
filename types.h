@@ -11,9 +11,9 @@ typedef struct 		s_sdl
 
 typedef struct		s_point
 {
-	float			x;
-	float			y;
-	float			z;
+	double			x;
+	double			y;
+	double			z;
 }					t_point;
 
 typedef struct		s_ray
@@ -32,7 +32,7 @@ typedef	struct 		s_color
 
 typedef	struct		s_light
 {
-	float			intensity;
+	double			intensity;
 	t_point			position;
 	t_point			direction;
 	const char 		*type;
@@ -41,20 +41,20 @@ typedef	struct		s_light
 typedef	struct 		s_sphere
 {
 	t_point			center;
-	float			radius;
+	double			radius;
 }					t_sphere;
 
 typedef struct		s_plane
 {
 	t_point			normal;
 	t_point			point;
-	float			d;
+	double			d;
 }					t_plane;
 
 typedef	struct 		s_cylinder
 {
 	t_point			position;
-	float			radius;
+	double			radius;
 }					t_cylinder;
 
 typedef	struct 		s_cone
@@ -76,7 +76,7 @@ typedef struct		s_camera
 typedef	struct 		s_material
 {
 	t_color			color;
-	float			specular;
+	double			specular;
 }					t_material;
 
 typedef	struct		s_object3d
@@ -84,9 +84,9 @@ typedef	struct		s_object3d
 	void			*data;
 	const char		*tag;
 	t_color			color;
-	float			specular;
-    float           (*get_normal)(struct s_scene *, int , int);
-	float			(*intersect)(t_ray *, struct s_object3d *);
+	double			specular;
+    double           (*get_normal)(struct s_scene *, int , int);
+	double			(*intersect)(t_ray *, struct s_object3d *);
 }					t_object;
 
 typedef	struct 		s_scene
@@ -102,7 +102,7 @@ typedef	struct 		s_scene
 	t_camera		camera;
 	t_point			*viewport;
 	int				*index_buf;
-	float 			*depth_buf;
+	double 			*depth_buf;
 }					t_scene;
 
 #endif

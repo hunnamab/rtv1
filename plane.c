@@ -1,6 +1,6 @@
 #include "rtv1.h"
 
-t_object *new_plane(t_point point, t_point normal, float specular, t_color color)
+t_object *new_plane(t_point point, t_point normal, double specular, t_color color)
 {
     t_plane *new_plane;
     t_object *new_object;
@@ -30,10 +30,10 @@ void    get_plane_normal(t_scene *scene, int index, int obj_num)
         scene->normal_buf[index] = vector_scale(-1, &scene->normal_buf[index]);
 }
 
-float intersect_ray_plane(t_ray *r, t_object *object, t_point *normal)
+double intersect_ray_plane(t_ray *r, t_object *object, t_point *normal)
 {
-    float k1;
-    float k2;
+    double k1;
+    double k2;
     t_plane *plane;
 
     plane = (t_plane *)object->data;

@@ -2,7 +2,7 @@
 
 void     init_scene(t_scene *scene)
 {
-    float **matrix;
+    double **matrix;
     scene->camera.position = get_point(0, 10, -40);
     scene->viewport = get_viewport(&scene->camera);
     scene->ray_buf = get_rays_arr(&scene->camera, scene->viewport);
@@ -10,8 +10,8 @@ void     init_scene(t_scene *scene)
     scene->material_buf = malloc(sizeof(t_material) * WID * HEI);
     scene->intersection_buf = malloc(sizeof(t_point) * WID * HEI);
     scene->index_buf = malloc(sizeof(int) * WID * HEI);
-    scene->depth_buf = malloc(sizeof(float) * WID * HEI);
-    matrix = get_transform_matrix(get_three_floats(0,0,0),get_three_floats(0,0,0),get_three_floats(1,1,1));
+    scene->depth_buf = malloc(sizeof(double) * WID * HEI);
+     matrix = get_transform_matrix(get_three_doubles(0,0,0.3),get_three_doubles(0,0,0),get_three_doubles(1,1,1));
     int x = 0;
     while(x < WID * HEI)
     {
