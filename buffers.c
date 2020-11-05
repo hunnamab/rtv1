@@ -97,12 +97,6 @@ void    get_intersection_buf(t_scene *scene)
         x = 0;
         y++;
     }
-    /* x = 0;
-    while(x < 100)
-    {
-        printf("x %f y %f  z %f\n", scene->intersection_buf[(HEI / 2) * WID + WID / 2 + x].x, scene->intersection_buf[(HEI / 2) * WID + WID / 2 + x].y, scene->intersection_buf[(HEI / 2) * WID + WID / 2 + x].z);
-        x++;
-    } */
 }
 
 void    get_normal_buf(t_scene *scene)

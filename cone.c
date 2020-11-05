@@ -6,7 +6,7 @@ t_object *new_cone(t_point position, double specular, t_color color)
     t_object *new_object;
     
     new_object = malloc(sizeof(t_object));
-    new_cone = malloc(sizeof(t_triangle));
+    new_cone = malloc(sizeof(t_cone));
     new_cone->position = position;
     new_object->specular = specular;
     new_object->color = color;

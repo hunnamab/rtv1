@@ -54,12 +54,14 @@ typedef struct		s_plane
 typedef	struct 		s_cylinder
 {
 	t_point			position;
+	t_point			vec;
 	double			radius;
 }					t_cylinder;
 
 typedef	struct 		s_cone
 {
 	t_point			position;
+	t_point			vec;
 }					t_cone;
 
 typedef	struct		s_triangle

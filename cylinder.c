@@ -6,7 +6,7 @@ t_object *new_cylinder(t_point position, double radius, double specular, t_color
     t_object *new_object;
     
     new_object = malloc(sizeof(t_object));
-    new_cylinder = malloc(sizeof(t_triangle));
+    new_cylinder = malloc(sizeof(t_cylinder));
     new_cylinder->position = position;
     new_cylinder->radius = radius;
     new_object->specular = specular;
@@ -27,7 +27,6 @@ void    get_cylinder_normal(t_scene *scene, int index, int obj_num)
     cylinder = (t_cylinder *)scene->objs[obj_num]->data;
     *normal = vector_sub(&scene->intersection_buf[index], &cylinder->position);
     normal->y = 0;
-    normalize_vector(&normal);
     scene->normal_buf[index] = vector_div_by_scalar(&scene->normal_buf[index], vector_length(&scene->normal_buf[index]));
 }
 

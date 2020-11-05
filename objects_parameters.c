@@ -54,7 +54,6 @@ t_object *get_sphere(char **description)
     double specular;
     t_color color;
 
-    sphere = malloc(sizeof(t_object));
     center = get_points(description[0]);
     radius = ftoi(get_coordinates(description[1]));
     color = get_color(description[2]);
@@ -71,7 +70,6 @@ t_object *get_cylinder(char **description)
     double specular;
     t_color color;
 
-    cylinder = malloc(sizeof(t_object));
     position = get_points(description[0]);
     radius = ftoi(get_coordinates(description[1]));
     color = get_color(description[2]);
@@ -87,7 +85,6 @@ t_object *get_cone(char **description)
     double specular;
     t_color color;
 
-    cone = malloc(sizeof(t_object));
     position = get_points(description[0]);
     color = get_color(description[1]);
     specular = ftoi(get_coordinates(description[2]));
@@ -102,7 +99,6 @@ t_object *get_triangle(char **description)
     double specular;
     t_color color;
 
-    triangle = malloc(sizeof(t_object));
     vertex = malloc(sizeof(t_point) * 3);
     vertex[0] = get_points(description[0]);
     vertex[1] = get_points(description[1]);
@@ -121,7 +117,6 @@ t_object *get_plane(char **description)
     double specular;
     t_color color;
 
-    plane = malloc(sizeof(t_object));
     point = get_points(description[0]);
     normal = get_points(description[1]);
     color = get_color(description[2]);
