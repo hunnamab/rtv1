@@ -87,7 +87,7 @@ double	    **rotate_y(double y);
 t_object 	**get_objects_structures(int obj_nmb, t_object **buf);
 t_light 	**get_light_structures(int light_nmb, t_object **buf);
 //buffers.c
-t_ray 		*get_rays_arr(t_camera *camera, t_point *viewport);
+void        get_rays_arr(t_scene *scene);
 void     	get_buffers(t_scene *scene);
 void    	get_normal_buf(t_scene *scene);
 void    	get_intersection_buf(t_scene *scene);
@@ -102,5 +102,11 @@ void        get_cylinder_normal(t_scene *scene, int index, int obj_num);
 //scene.c
 void        init_scene(t_scene *scene);
 void        clear_scene(t_scene *scene);
+//keyboard.c
+void        camera_left(t_scene *scene);
+int         keyboard(t_sdl *sdl, t_scene *scene);
+void        camera_up(t_scene *scene);
+void        camera_right(t_scene *scene);
+void        camera_down(t_scene *scene);
 
 #endif

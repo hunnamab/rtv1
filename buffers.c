@@ -1,13 +1,11 @@
 #include "rtv1.h"
 
-t_ray *get_rays_arr(t_camera *camera, t_point *viewport)
+void	get_rays_arr(t_scene *scene)
 {
     int x;
     int y;
-    t_ray *rays;
     int j;
 
-    rays = malloc(sizeof(t_ray) * (WID * HEI));
     x = 0;
     y = 0;
     while(y < HEI)
@@ -15,16 +13,15 @@ t_ray *get_rays_arr(t_camera *camera, t_point *viewport)
         while(x < WID)
         {
             j = y * WID + x;
-            rays[j].start.x = camera->position.x;
-            rays[j].start.y = camera->position.y;
-            rays[j].start.z = camera->position.z;
-            rays[j].dir = vector_sub(&viewport[j], &camera->position);
+            scene->ray_buf[j].start.x = scene->camera.position.x;
+            scene->ray_buf[j].start.y = scene->camera.position.y;
+            scene->ray_buf[j].start.z = scene->camera.position.z;
+            scene->ray_buf[j].dir = vector_sub(&scene->viewport[j], &scene->camera.position);
             x++;
         }
         x = 0;
         y++;
     }
-    return(rays);
 }
 
 void     get_closest_points(t_scene *scene)

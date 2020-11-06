@@ -6,7 +6,9 @@ int main(int args, char **argv)
     t_sdl       sdl;
     t_object    **buf;
     t_scene     *scene;
+    int         k;
 
+    k = 1;
     scene = malloc(sizeof(t_scene));
     if (args != 2)
     {
@@ -30,13 +32,9 @@ int main(int args, char **argv)
     init_scene(scene);
     draw_scene(&sdl, scene);
     //draw_normal_buf(&sdl, scene);
-    while (1)
+    while (k)
     {
-       if (SDL_PollEvent(&sdl.event))
-        {
-            if (SDL_QUIT == sdl.event.type || SDLK_ESCAPE == sdl.event.key.keysym.sym)
-                break ;
-        }
+        k = keyboard(&sdl, scene);
     }
     clear_scene(scene);
     SDL_DestroyRenderer(sdl.renderer);
