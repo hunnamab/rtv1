@@ -6,7 +6,7 @@
 /*   By: hunnamab <hunnamab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/07 15:38:51 by hunnamab          #+#    #+#             */
-/*   Updated: 2020/11/07 19:36:42 by hunnamab         ###   ########.fr       */
+/*   Updated: 2020/11/07 22:33:34 by hunnamab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ t_light		**get_light_structures(int light_nmb, t_object **buf)
 	j = 0;
 	while (j < light_nmb)
 	{
-		if (ft_strcmp(buf[i]->tag, "light"))
+		if (!(ft_strequ(buf[i]->tag, "light")))
 			i++;
 		else
 		{
@@ -47,7 +47,7 @@ t_object	**get_objects_structures(int obj_nmb, t_object **buf)
 	j = 0;
 	while (j < obj_nmb)
 	{
-		if (!ft_strcmp(buf[i]->tag, "light"))
+		if ((ft_strequ(buf[i]->tag, "light")))
 			i++;
 		else
 		{

@@ -6,7 +6,7 @@
 /*   By: hunnamab <hunnamab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/07 15:39:43 by hunnamab          #+#    #+#             */
-/*   Updated: 2020/11/07 19:38:53 by hunnamab         ###   ########.fr       */
+/*   Updated: 2020/11/07 22:41:42 by hunnamab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,11 @@ t_object	**get_objects(char *buf, t_scene *scene)
 		i++;
 	}
 	// создаем массив структур для объектов
-	objs = malloc(sizeof(t_object *) * scene->obj_nmb);
+	if (!(objs = malloc(sizeof(t_object *) * scene->obj_nmb)))
+	{
+		printf("cannot allocate memory for objs\n");
+		return (NULL);
+	}
 	i = 0;
 	n = 0;
 	start = 0;
@@ -118,7 +122,7 @@ t_object	**get_objects(char *buf, t_scene *scene)
 			if (ft_strcmp(obj_name, "camera") != 0)
 				n++;
 			// освобождаем строки
-			free(obj_name);
+			ft_memdel(&obj_name);
 			ft_memdel_double(obj_desc);
 			// переходим к описанию следующего объекта
 			while (buf[i] != '}')
@@ -136,7 +140,8 @@ t_object	**read_scene(int fd, t_scene *scene)
 	int		ret;
 	char	buf[64000];
 
-	while ((ret = read(fd, buf, 64000)) > 0)
-		buf[ret] = '\0';
+	ret = read(fd, buf, 64000);
+	buf[ret] = '\0';
+	printf("ret %d\n", ret);
 	return (get_objects(buf, scene));
 }
