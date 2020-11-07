@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   triangle.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pmetron <pmetron@student.42.fr>            +#+  +:+       +#+        */
+/*   By: hunnamab <hunnamab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/05 21:42:26 by pmetron           #+#    #+#             */
-/*   Updated: 2020/11/05 22:13:40 by pmetron          ###   ########.fr       */
+/*   Updated: 2020/11/07 16:47:29 by hunnamab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,9 @@ t_object	*new_triangle(t_point *vertex, double specular, t_color color)
 	new_object = malloc(sizeof(t_object));
 	new_triangle = malloc(sizeof(t_triangle));
 	new_triangle->vertex = malloc(sizeof(t_point) * 3);
-	new_triangle->vertex = vertex;
+	new_triangle->vertex[0] = vertex[0];
+	new_triangle->vertex[1] = vertex[1];
+	new_triangle->vertex[2] = vertex[2];
 	edge1 = vector_sub(&new_triangle->vertex[0], &new_triangle->vertex[1]);
 	edge2 = vector_sub(&new_triangle->vertex[1], &new_triangle->vertex[2]);
 	new_triangle->normal = vector_cross(&edge1, &edge2);

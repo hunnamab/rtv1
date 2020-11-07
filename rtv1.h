@@ -6,7 +6,7 @@
 /*   By: hunnamab <hunnamab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/07 15:39:34 by hunnamab          #+#    #+#             */
-/*   Updated: 2020/11/07 15:39:36 by hunnamab         ###   ########.fr       */
+/*   Updated: 2020/11/07 16:02:50 by hunnamab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@
 # define HEI 640
 
 // scenes_reader.c
-t_object	**read_scene(int fd, int *obj_nmb, int *light_nmb);
+t_object	**read_scene(int fd, t_scene *scene);
 // settings.c
 void 		sphere_settings(t_sphere *s, t_ray *r);
 // draw.c

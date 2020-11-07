@@ -1,41 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ftoi.c                                             :+:      :+:    :+:   */
+/*   ft_memdel_double.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hunnamab <hunnamab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/11/07 14:34:00 by pmetron           #+#    #+#             */
-/*   Updated: 2020/11/07 17:04:57 by hunnamab         ###   ########.fr       */
+/*   Created: 2020/11/07 17:08:51 by hunnamab          #+#    #+#             */
+/*   Updated: 2020/11/07 17:18:15 by hunnamab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "rtv1.h"
+#include "libft.h"
 
-double	ftoi(char *str)
+void	ft_memdel_double(void **p)
 {
-	size_t	i;
-	double	n;
-	double	sign;
-	double	buf;
+	int i;
 
-	n = 0;
-	buf = 1;
-	sign = str[0] == '-' ? -1 : 1;
-	i = sign == 1 ? 0 : 1;
-	while (str[i] != '\0' && str[i] != '.')
+	i = 0;
+	while (p[i])
 	{
-		n *= 10;
-		n += (str[i] - '0');
+		if (p[i])
+			free(p[i]);
 		i++;
 	}
-	str[i] != '\0' ? i += 1 : 0;
-	while (str[i] != '\0')
-	{
-		n += (str[i] - '0') / (10 * buf);
-		buf *= 10;
-		i++;
-	}
-	ft_memdel(&str);
-	return (n * sign);
+	free(p);
 }

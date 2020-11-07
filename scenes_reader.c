@@ -6,13 +6,13 @@
 /*   By: hunnamab <hunnamab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/07 15:39:43 by hunnamab          #+#    #+#             */
-/*   Updated: 2020/11/07 15:49:05 by hunnamab         ###   ########.fr       */
+/*   Updated: 2020/11/07 17:10:48 by hunnamab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rtv1.h"
 
-t_object	*get_parameters(char *name, char **description, int *light_nmb)
+t_object	*get_parameters(char *name, char **description, t_scene *scene)
 {
 	t_object *obj;
 
@@ -45,12 +45,13 @@ t_object	*get_parameters(char *name, char **description, int *light_nmb)
 	{
 		printf("light\n");
 		obj = get_light(description);
-		*(int *)light_nmb += 1;
+		scene->light_nmb += 1;
 	}
-	/* else if (!ft_strcmp(name, "camera"))
-	{
-		printf("camera\n");
-	} */
+	// else if (!ft_strcmp(name, "camera"))
+	// {
+	// 	printf("camera\n");
+		
+	// }
 	else
 		return (NULL);
 	return (obj);
@@ -72,68 +73,67 @@ char		**get_description(char *scene, int i)
 	}
 	descr_buf = ft_strsub(scene, start, len);
 	description = ft_strsplit(descr_buf, '\n');
+	ft_memdel(&descr_buf);
 	return (description);
 }
 
-t_object	**get_objects(char *scene, int *obj_nmb, int *light_nmb)
+t_object	**get_objects(char *buf, t_scene *scene)
 {
 	t_object	**objs;
 	char		*obj_name;
 	char		**obj_desc;
-	int			nmb;
 	int			start;
 	int			n;
 	int			i;
 	int			len;
 
 	i = 0;
-	*(int *)light_nmb = 0;
-	len = ft_strlen(scene);
-	nmb = 0;
+	scene->light_nmb = 0;
+	len = ft_strlen(buf);
 	// выясняем кол-во объектов сцены
 	while (i < len)
 	{
-		if (scene[i] == '{')
-			nmb++;
+		if (buf[i] == '{')
+			scene->obj_nmb++;
 		i++;
 	}
 	// создаем массив структур для объектов
-	objs = malloc(sizeof(t_object *) * nmb);
+	objs = malloc(sizeof(t_object *) * scene->obj_nmb);
 	i = 0;
 	n = 0;
 	start = 0;
 	while (i < len)
 	{
-		if (scene[i + 1] == '{' && n < nmb)
+		if (buf[i + 1] == '{' && n < scene->obj_nmb)
 		{
 			// записываем название объекта
-			obj_name = ft_strsub(scene, start, (i - start));
+			obj_name = ft_strsub(buf, start, (i - start));
 			// записываем описание объекта
-			obj_desc = get_description(scene, i + 3);
+			obj_desc = get_description(buf, i + 3);
 			// создаем объект и получаем его характеристики
-			objs[n] = get_parameters(obj_name, obj_desc, light_nmb);
+			objs[n] = get_parameters(obj_name, obj_desc, scene);
 			// освобождаем строки
 			free(obj_name);
-			//free(obj_desc);
+			ft_memdel_double(obj_desc);
 			// плюсуем индекс массива
 			n++;
 			// переходим к описанию следующего объекта
-			while (scene[i] != '}')
+			while (buf[i] != '}')
 				i++;
 			start = i + 3;
 		}
 		i++;
 	}
-	*(int *)obj_nmb = nmb - *(int *)light_nmb;
+	scene->obj_nmb -= scene->light_nmb;
 	return (objs);
 }
 
-t_object	**read_scene(int fd, int *obj_nmb, int *light_nmb)
+t_object	**read_scene(int fd, t_scene *scene)
 {
 	int		ret;
 	char	buf[64000];
 
 	while ((ret = read(fd, buf, 64000)) > 0)
 		buf[ret] = '\0';
-	return (get_objects(buf, obj_nmb, light_nmb));
+	return (get_objects(buf, scene));
 }

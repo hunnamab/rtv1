@@ -6,7 +6,7 @@
 /*   By: hunnamab <hunnamab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/07 15:39:22 by hunnamab          #+#    #+#             */
-/*   Updated: 2020/11/07 15:54:41 by hunnamab         ###   ########.fr       */
+/*   Updated: 2020/11/07 17:19:47 by hunnamab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,10 +34,12 @@ t_color		get_color(char *description)
 
 	coord_buf = get_coordinates(description);
 	coordinates = ft_strsplit(coord_buf, ',');
+	free(coord_buf);
 	color.red = ft_atoi(coordinates[0]);
 	color.green = ft_atoi(coordinates[1]);
 	color.blue = ft_atoi(coordinates[2]);
 	color.alpha = ft_atoi(coordinates[3]);
+	ft_memdel_double(coordinates);
 	return (color);
 }
 
@@ -49,12 +51,14 @@ t_point		get_points(char *description)
 
 	coord_buf = get_coordinates(description);
 	coordinates = ft_strsplit(coord_buf, ',');
+	free(coord_buf);
 	points.x = ftoi(ft_strtrim(coordinates[0]));
 	printf("x = %f\n", points.x);
 	points.y = ftoi(ft_strtrim(coordinates[1]));
 	printf("y = %f\n", points.y);
 	points.z = ftoi(ft_strtrim(coordinates[2]));
 	printf("z = %f\n", points.z);
+	ft_memdel_double(coordinates);
 	return (points);
 }
 
@@ -101,7 +105,7 @@ t_object	*get_cone(char **description)
 	t_color		color;
 
 	position = get_points(description[0]);
-	vec = get_points(description[2]);
+	vec = get_points(description[1]);
 	color = get_color(description[2]);
 	specular = ftoi(get_coordinates(description[3]));
 	cone = new_cone(position, vec, specular, color);
@@ -111,11 +115,10 @@ t_object	*get_cone(char **description)
 t_object	*get_triangle(char **description)
 {
 	t_object	*triangle;
-	t_point		*vertex;
+	t_point		vertex[3];
 	double		specular;
 	t_color		color;
 
-	vertex = malloc(sizeof(t_point) * 3);
 	vertex[0] = get_points(description[0]);
 	vertex[1] = get_points(description[1]);
 	vertex[2] = get_points(description[2]);
@@ -178,5 +181,6 @@ t_object	*get_light(char **description)
 		direction = get_points(description[1]);
 	light->data = (void *)new_light(position, direction, (const char *)type);
 	light->tag = ft_strdup("light");
+	free(type);
 	return (light);
 }

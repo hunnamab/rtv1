@@ -4,12 +4,3 @@ cone {
     color: 200, 50, 60, 255
     specular: 100
 }
-
-light {
-    type: point
-    position: 100, 10, -20
-}
-
-light {
-    type: ambient
-}

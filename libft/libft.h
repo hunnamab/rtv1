@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pmetron <pmetron@student.42.fr>            +#+  +:+       +#+        */
+/*   By: hunnamab <hunnamab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/08 15:30:38 by pmetron           #+#    #+#             */
-/*   Updated: 2020/08/07 18:30:11 by pmetron          ###   ########.fr       */
+/*   Updated: 2020/11/07 17:10:20 by hunnamab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,5 +88,5 @@ int				is_odd(long long int num);
 long long int	ft_pow(long long int num, long long int pow);
 int				get_last_digit(long long int num, int precision);
 char			*ft_strcpy_alloc(char *dst, char *src);
-
+void	        ft_memdel_double(void **p);
 #endif

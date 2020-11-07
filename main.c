@@ -6,7 +6,7 @@
 /*   By: hunnamab <hunnamab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/07 15:39:02 by hunnamab          #+#    #+#             */
-/*   Updated: 2020/11/07 15:42:32 by hunnamab         ###   ########.fr       */
+/*   Updated: 2020/11/07 16:02:29 by hunnamab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int main(int args, char **argv)
 	else
 	{
 		fd = open(argv[1], O_RDONLY);
-		buf = read_scene(fd, &scene->obj_nmb, &scene->light_nmb); // scene_reader.c
+		buf = read_scene(fd, scene); // scene_reader.c
 		close(fd);
 		printf("obj_nmb = %d\n", scene->obj_nmb);
 		printf("light_nmb = %d\n", scene->light_nmb);
