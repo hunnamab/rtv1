@@ -2,13 +2,13 @@
 
 void    matr_free(double **matrix, int numRows)
 {
-    int i;
+	int i;
 
-    i = 0;
-    while (i < numRows)
-    {
-        free(matrix[i]);
-        i++;
-    }
-    free(matrix);
+	i = 0;
+	while (i < numRows)
+	{
+		free(matrix[i]);
+		i++;
+	}
+	free(matrix);
 }

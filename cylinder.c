@@ -3,24 +3,25 @@
 /*                                                        :::      ::::::::   */
 /*   cylinder.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pmetron <pmetron@student.42.fr>            +#+  +:+       +#+        */
+/*   By: hunnamab <hunnamab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/07 15:11:46 by pmetron           #+#    #+#             */
-/*   Updated: 2020/11/07 15:13:35 by pmetron          ###   ########.fr       */
+/*   Updated: 2020/11/07 15:43:23 by hunnamab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rtv1.h"
 
-t_object	*new_cylinder(t_point position, double radius, double specular, t_color color)
+t_object	*new_cylinder(t_point position, t_point vec, double radius, double specular, t_color color)
 {
-	t_cylinder *new_cylinder;
-	t_object *new_object;
-	
+	t_cylinder	*new_cylinder;
+	t_object	*new_object;
+
 	new_object = malloc(sizeof(t_object));
 	new_cylinder = malloc(sizeof(t_cylinder));
 	new_cylinder->position = position;
 	new_cylinder->radius = radius;
+	new_cylinder->vec = vec;
 	new_object->specular = specular;
 	new_object->color = color;
 	new_object->data = (void *)new_cylinder;
@@ -32,8 +33,8 @@ t_object	*new_cylinder(t_point position, double radius, double specular, t_color
 
 void		get_cylinder_normal(t_scene *scene, int index, int obj_num)
 {
-	t_cylinder *cylinder;
-	t_point *normal;
+	t_cylinder	*cylinder;
+	t_point		*normal;
 
 	normal = &scene->normal_buf[index];
 	cylinder = (t_cylinder *)scene->objs[obj_num]->data;
@@ -45,11 +46,11 @@ void		get_cylinder_normal(t_scene *scene, int index, int obj_num)
 
 double		intersect_ray_cylinder(t_ray *r, t_object *object)
 {
-	double a;
-	double b;
-	double c;
-	t_point dist;
-	t_cylinder *cylinder;
+	double		a;
+	double		b;
+	double		c;
+	t_point		dist;
+	t_cylinder	*cylinder;
 
 	cylinder = (t_cylinder *)object->data;
 	a = r->dir.x * r->dir.x + r->dir.z * r->dir.z;

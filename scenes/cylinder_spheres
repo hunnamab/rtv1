@@ -1,6 +1,7 @@
 cylinder {
     position: 20, 0, 100
     radius: 20
+    vector: 0, 1, 0
     color: 170, 10, 98, 255
     specular: 60
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pmetron <pmetron@student.42.fr>            +#+  +:+       +#+        */
+/*   By: hunnamab <hunnamab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/07 14:34:50 by pmetron           #+#    #+#             */
-/*   Updated: 2020/11/07 14:42:23 by pmetron          ###   ########.fr       */
+/*   Updated: 2020/11/07 15:43:55 by hunnamab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,8 @@ void	draw_scene(t_sdl *sdl, t_scene *scene)
 
 void	draw_normal_buf(t_sdl *sdl, t_scene *scene)
 {
-	int xyi[3];
-	t_color color;
+	int		xyi[3];
+	t_color	color;
 
 	xyi[0] = -1;
 	xyi[1] = -1;
@@ -52,7 +52,7 @@ void	draw_normal_buf(t_sdl *sdl, t_scene *scene)
 		while (++xyi[0] < WID)
 		{
 			xyi[2] = xyi[1] * WID + xyi[0];
-			if(scene->index_buf[xyi[2]] != -1)
+			if (scene->index_buf[xyi[2]] != -1)
 			{
 				color.red = (scene->normal_buf[xyi[2]].x * 0.5 + 0.5) * 100;
 				color.green = (scene->normal_buf[xyi[2]].y * 0.5 + 0.5) * 100;

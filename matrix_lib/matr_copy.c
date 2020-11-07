@@ -2,19 +2,19 @@
 
 void    matr_copy(double **srcMatrix, double **dstMatrix, int numRows, int numCols)
 {
-    int i;
-    int j;
+	int i;
+	int j;
 
-    i = 0;
-    j = 0;
-    while (i < numRows)
-    {
-        while (j < numCols)
-        {
-            dstMatrix[i][j] = srcMatrix[i][j];
-            j++;
-        }
-        j = 0;
-        i++;
-    }
+	i = 0;
+	j = 0;
+	while (i < numRows)
+	{
+		while (j < numCols)
+		{
+			dstMatrix[i][j] = srcMatrix[i][j];
+			j++;
+		}
+		j = 0;
+		i++;
+	}
 }

@@ -2,12 +2,12 @@
 
 void    matrix_identity(double **matrix, int numrows)
 {
-    int i;
+	int i;
 
-    i = 0;
-    while(i < numrows)
-    {
-        matrix[i][i] = 1;
-        i++;
-    }
+	i = 0;
+	while(i < numrows)
+	{
+		matrix[i][i] = 1;
+		i++;
+	}
 }

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   rtv1.h                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: hunnamab <hunnamab@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/11/07 15:39:34 by hunnamab          #+#    #+#             */
+/*   Updated: 2020/11/07 15:39:36 by hunnamab         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef RTV1_H
 # define RTV1_H
 
@@ -59,11 +71,11 @@ t_object 	*new_triangle(t_point *vertex, double specular, t_color color);
 double 		intersect_ray_plane(t_ray *r, t_object *object, t_point *normal);
 t_object 	*new_plane(t_point point, t_point normal, double specular, t_color color);
 // cylinder.c
-double       intersect_ray_cylinder(t_ray *r, t_object *object);
-t_object	*new_cylinder(t_point position, double radius, double specular, t_color color);
+double      intersect_ray_cylinder(t_ray *r, t_object *object);
+t_object	*new_cylinder(t_point position, t_point vec, double radius, double specular, t_color color);
 // cone.c
-double       intersect_ray_cone(t_ray *r, t_object *object);
-t_object	*new_cone(t_point position, double specular, t_color color);
+double      intersect_ray_cone(t_ray *r, t_object *object);
+t_object    *new_cone(t_point position, t_point vec, double specular, t_color color);
 // ftoi.c
 double   	ftoi(char *str);
 // objects_parameters.c

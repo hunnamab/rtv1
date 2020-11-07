@@ -1,7 +1,20 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   types.h                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: hunnamab <hunnamab@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/11/07 15:39:58 by hunnamab          #+#    #+#             */
+/*   Updated: 2020/11/07 15:40:12 by hunnamab         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef TYPES_H
 # define TYPES_H
 # include <stdint.h>
-//# include <SDL2/SDL.h> 
+//# include <SDL2/SDL.h>
+
 typedef struct 		s_sdl
 {
 	SDL_Window		*win;
