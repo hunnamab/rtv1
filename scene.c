@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   scene.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hunnamab <hunnamab@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pmetron <pmetron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/07 14:21:11 by pmetron           #+#    #+#             */
-/*   Updated: 2020/11/07 20:00:05 by hunnamab         ###   ########.fr       */
+/*   Updated: 2020/11/07 22:15:28 by pmetron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,13 @@ void	clear_scene(t_scene *scene)
 		scene->objs[i]->clear_obj(scene->objs[i]);
 		i++;
 	}
+	i = 0;
+	while(i < scene->light_nmb)
+	{
+		free(scene->light[i]);
+		i++;
+	}
+	free(scene->light);
 	free(scene->objs);
 }
 

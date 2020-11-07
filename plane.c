@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   plane.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hunnamab <hunnamab@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pmetron <pmetron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/07 14:22:24 by pmetron           #+#    #+#             */
-/*   Updated: 2020/11/07 21:14:35 by hunnamab         ###   ########.fr       */
+/*   Updated: 2020/11/07 22:14:25 by pmetron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ t_object	*new_plane(t_point point, t_point normal, double specular, t_color colo
 	new_object->intersect = &intersect_ray_plane;
 	new_object->get_normal = &get_plane_normal;
 	new_plane->d = -new_plane->normal.x * new_plane->point.x - new_plane->normal.y * new_plane->point.y - new_plane->normal.z * new_plane->point.z;
+	new_object->clear_obj = &clear_default;
 	return (new_object);
 }
 
