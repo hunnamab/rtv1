@@ -1,6 +1,6 @@
 #include "matrix.h"
 
-double  **matr_transpose(double **matr, int numRows, int numCols)
+double  **matr_transpose(double **matr)
 {
     int newRows;
     int newCols;
@@ -8,8 +8,8 @@ double  **matr_transpose(double **matr, int numRows, int numCols)
     int i;
     int j;
 
-    newRows = numCols;
-    newCols = numRows;
+    newRows = 4;
+    newCols = 4;
     trans_matrix = create_matrix(newRows, newCols);
     i = 0;
     j = 0;

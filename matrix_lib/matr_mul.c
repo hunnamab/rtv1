@@ -42,7 +42,7 @@ void    matr_mul_void(double *matrix1, double **matrix2)
     }
 }
 
-double    **matr_mul(double **matrix1, double **matrix2, int numRows1, int numCols1, int numRows2, int numCols2)
+double    **matr_mul(double **matrix1, double **matrix2)
 {
     double **result;
     int resultRows;
@@ -52,19 +52,14 @@ double    **matr_mul(double **matrix1, double **matrix2, int numRows1, int numCo
 
     i = 0;
     j = 0;
-    if (numCols1 != numRows2)
+    resultRows = 4;
+    resultCols = 4; 
+    result = create_matrix(4, 4);
+    while (i < 4)
     {
-        printf("number of cols 1 != number of rows 2");
-        return(NULL);
-    }
-    resultRows = numRows1;
-    resultCols = numCols2; 
-    result = create_matrix(resultRows, resultCols);
-    while (i < resultRows)
-    {
-        while (j < resultCols)
+        while (j < 4)
         {
-            result[i][j] = get_sum(matrix1, matrix2, numCols1, i, j);
+            result[i][j] = get_sum(matrix1, matrix2, 4, i, j);
             j++;
         }
         j = 0;

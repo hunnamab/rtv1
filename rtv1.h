@@ -12,8 +12,8 @@
 # include "matrix_lib/matrix.h"
 # include "types.h"
 
-# define WID 1920
-# define HEI 1024
+# define WID 640
+# define HEI 640
 
 // scenes_reader.c
 t_object	**read_scene(int fd, int *obj_nmb, int *light_nmb);

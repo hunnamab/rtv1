@@ -12,8 +12,7 @@ SRC = main.c sphere.c vector.c utils.c \
 	./matrix_lib/matr_copy.c ./matrix_lib/matr_div_by_scalar.c \
 	./matrix_lib/matr_free.c ./matrix_lib/matr_mul_by_scalar.c \
 	./matrix_lib/matr_mul.c ./matrix_lib/matr_resize.c ./matrix_lib/matr_sub_matr.c \
-	./matrix_lib/matr_sub_scalar.c ./matrix_lib/matr_swap_cols.c \
-	./matrix_lib/matr_swap_rows.c ./matrix_lib/matr_to_line.c \
+	./matrix_lib/matr_sub_scalar.c ./matrix_lib/matr_to_line.c \
 	./matrix_lib/matr_trace.c ./matrix_lib/matr_transpose.c \
 	./matrix_lib/print_matrix.c transform.c ./matrix_lib/matrix_identity.c \
 	buffers.c scene.c color.c vector_second.c transform_matrix.c \

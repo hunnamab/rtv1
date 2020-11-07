@@ -6,7 +6,7 @@
 /*   By: pmetron <pmetron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/05 22:17:09 by pmetron           #+#    #+#             */
-/*   Updated: 2020/11/05 22:18:43 by pmetron          ###   ########.fr       */
+/*   Updated: 2020/11/07 14:18:02 by pmetron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,11 +55,11 @@ double	**get_rotation_matrix(double *angle)
 
 	rotation_buf = rotate_z(angle[2]);
 	rotation_buf_second = rotate_y(angle[1]);
-	rotation_matrix = matr_mul(rotation_buf, rotation_buf_second, 4, 4, 4, 4);
+	rotation_matrix = matr_mul(rotation_buf, rotation_buf_second);
 	matr_free(rotation_buf, 4);
 	matr_free(rotation_buf_second, 4);
 	rotation_buf = rotate_x(angle[0]);
-	rotation_buf_second = matr_mul(rotation_matrix, rotation_buf, 4, 4, 4, 4);
+	rotation_buf_second = matr_mul(rotation_matrix, rotation_buf);
 	matr_free(rotation_buf, 4);
 	matr_free(rotation_matrix, 4);
 	return (rotation_buf_second);
@@ -96,10 +96,10 @@ double	**get_transform_matrix(double *angle, double *move, double *scale)
 	t_matrix = get_translate_matrix(move);
 	s_matrix = get_scale_matrix(scale);
 	rotation_matrix = get_rotation_matrix(angle);
-	result_matrix = matr_mul(s_matrix, rotation_matrix, 4, 4, 4, 4);
+	result_matrix = matr_mul(s_matrix, rotation_matrix);
 	matr_free(rotation_matrix, 4);
 	matr_free(s_matrix, 4);
-	result = matr_mul(t_matrix, result_matrix, 4, 4, 4, 4);
+	result = matr_mul(t_matrix, result_matrix);
 	matr_free(result_matrix, 4);
 	matr_free(t_matrix, 4);
 	free(angle);

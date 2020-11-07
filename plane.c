@@ -1,47 +1,59 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   plane.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: pmetron <pmetron@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/11/07 14:22:24 by pmetron           #+#    #+#             */
+/*   Updated: 2020/11/07 14:22:51 by pmetron          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "rtv1.h"
 
-t_object *new_plane(t_point point, t_point normal, double specular, t_color color)
+t_object	*new_plane(t_point point, t_point normal, double specular, t_color color)
 {
-    t_plane *new_plane;
-    t_object *new_object;
-    
-    new_object = malloc(sizeof(t_object));
-    new_plane = malloc(sizeof(t_plane));
-    new_plane->normal = normal;
-    normalize_vector(&new_plane->normal);
-    new_plane->point = point;
-    new_object->specular = specular;
-    new_object->color = color;
-    new_object->data = (void *)new_plane;
-    new_object->tag = "plane";
-    new_object->intersect = &intersect_ray_plane;
-    new_object->get_normal = &get_plane_normal;
-    new_plane->d = -new_plane->normal.x * new_plane->point.x - new_plane->normal.y * new_plane->point.y - new_plane->normal.z * new_plane->point.z;
-    return(new_object);
+	t_plane		*new_plane;
+	t_object	*new_object;
+	
+	new_object = malloc(sizeof(t_object));
+	new_plane = malloc(sizeof(t_plane));
+	new_plane->normal = normal;
+	normalize_vector(&new_plane->normal);
+	new_plane->point = point;
+	new_object->specular = specular;
+	new_object->color = color;
+	new_object->data = (void *)new_plane;
+	new_object->tag = "plane";
+	new_object->intersect = &intersect_ray_plane;
+	new_object->get_normal = &get_plane_normal;
+	new_plane->d = -new_plane->normal.x * new_plane->point.x - new_plane->normal.y * new_plane->point.y - new_plane->normal.z * new_plane->point.z;
+	return(new_object);
 }
 
-void    get_plane_normal(t_scene *scene, int index, int obj_num)
+void		get_plane_normal(t_scene *scene, int index, int obj_num)
 {
-    t_plane *p;
+	t_plane *p;
 
-    p = (t_plane *)scene->objs[obj_num]->data;
-    copy_point(&scene->normal_buf[index], &p->normal);
-    if (vector_dot(&scene->ray_buf[index].dir, &scene->normal_buf[index]) > 0.0001)
-        scene->normal_buf[index] = vector_scale(-1, &scene->normal_buf[index]);
+	p = (t_plane *)scene->objs[obj_num]->data;
+	copy_point(&scene->normal_buf[index], &p->normal);
+	if (vector_dot(&scene->ray_buf[index].dir, &scene->normal_buf[index]) > 0.0001)
+		scene->normal_buf[index] = vector_scale(-1, &scene->normal_buf[index]);
 }
 
-double intersect_ray_plane(t_ray *r, t_object *object, t_point *normal)
+double		intersect_ray_plane(t_ray *r, t_object *object, t_point *normal)
 {
-    double k1;
-    double k2;
-    t_plane *plane;
+	double	k1;
+	double	k2;
+	t_plane	*plane;
 
-    plane = (t_plane *)object->data;
-    if ((vector_dot(&r->dir, &plane->normal)) == 0)
-        return(0);
-    k1 = vector_dot(&r->start, &plane->normal) + plane->d;
-    k2 = vector_dot(&r->dir, &plane->normal);
-    if (k1 == 0 || (k1 < 0 && k2 < 0) || (k1 > 0 && k2 > 0))
-        return(0);
-    return (-k1 / k2);
+	plane = (t_plane *)object->data;
+	if ((vector_dot(&r->dir, &plane->normal)) == 0)
+		return(0);
+	k1 = vector_dot(&r->start, &plane->normal) + plane->d;
+	k2 = vector_dot(&r->dir, &plane->normal);
+	if (k1 == 0 || (k1 < 0 && k2 < 0) || (k1 > 0 && k2 > 0))
+		return(0);
+	return (-k1 / k2);
 }

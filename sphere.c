@@ -6,7 +6,7 @@
 /*   By: pmetron <pmetron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/05 22:45:20 by pmetron           #+#    #+#             */
-/*   Updated: 2020/11/05 22:46:44 by pmetron          ###   ########.fr       */
+/*   Updated: 2020/11/07 14:20:30 by pmetron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,9 +38,10 @@ void		get_sphere_normal(t_scene *scene, int index, int obj_num)
 	s = (t_sphere *)scene->objs[obj_num]->data;
 	scene->normal_buf[index] = \
 	vector_sub(&scene->intersection_buf[index], &s->center);
-	scene->normal_buf[index] = vector_div_by_scalar\
-	(&scene->normal_buf[index], vector_length(&scene->normal_buf[index]));
-	if (vector_dot(&scene->ray_buf[index].dir, &scene->normal_buf[index]) > 0.0001)
+	scene->normal_buf[index] = vector_div_by_scalar(&scene->normal_buf[index], \
+	vector_length(&scene->normal_buf[index]));
+	if (vector_dot(&scene->ray_buf[index].dir, \
+	&scene->normal_buf[index]) > 0.0001)
 		scene->normal_buf[index] = vector_scale(-1, &scene->normal_buf[index]);
 }
 
@@ -51,7 +52,7 @@ double		intersect_ray_sphere(t_ray *r, t_object *object)
 	double		c;
 	t_point		dist;
 	t_sphere	*s;
- 
+
 	s = (t_sphere *)object->data;
 	a = vector_dot(&r->dir, &r->dir);
 	dist = vector_sub(&r->start, &s->center);
