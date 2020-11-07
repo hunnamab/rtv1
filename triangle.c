@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   triangle.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hunnamab <hunnamab@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pmetron <pmetron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/05 21:42:26 by pmetron           #+#    #+#             */
-/*   Updated: 2020/11/07 16:47:29 by hunnamab         ###   ########.fr       */
+/*   Updated: 2020/11/07 18:58:53 by pmetron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,18 @@ t_object	*new_triangle(t_point *vertex, double specular, t_color color)
 	new_object->tag = "triangle";
 	new_object->intersect = &intersect_ray_triangle;
 	new_object->get_normal = &get_triangle_normal;
+	new_object->clear_obj = &clear_triangle;
 	return (new_object);
+}
+
+void		clear_triangle(t_object *obj)
+{
+	t_triangle *t;
+
+	t = (t_triangle *)obj->data;
+	free(t->vertex);
+	free(obj->data);
+	free(obj);
 }
 
 void		get_triangle_normal(t_scene *scene, int index, int obj_num)

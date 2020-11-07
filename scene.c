@@ -6,7 +6,7 @@
 /*   By: pmetron <pmetron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/07 14:21:11 by pmetron           #+#    #+#             */
-/*   Updated: 2020/11/07 14:22:07 by pmetron          ###   ########.fr       */
+/*   Updated: 2020/11/07 19:23:21 by pmetron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	clear_scene(t_scene *scene)
 	free(scene->depth_buf);
 	while (i < scene->obj_nmb)
 	{
-		free(scene->objs[i]);
+		scene->objs[i]->clear_obj(scene->objs[i]);
 		i++;
 	}
 	free(scene->objs);

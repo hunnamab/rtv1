@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rtv1.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hunnamab <hunnamab@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pmetron <pmetron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/07 15:39:34 by hunnamab          #+#    #+#             */
-/*   Updated: 2020/11/07 16:02:50 by hunnamab         ###   ########.fr       */
+/*   Updated: 2020/11/07 19:20:31 by pmetron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,8 @@ t_point     vector_add_scalar(const t_point *v1, const double scalar);
 t_point		get_point(double x, double y, double z);
 t_point     *get_viewport(t_camera *camera);
 void        copy_point(t_point *dst, t_point *src);
-double       choose_t(double t0, double t1);
+double      choose_t(double t0, double t1);
+void		clear_default(t_object *obj);
 //color.c
 void        copy_color(t_color *dst, t_color *src);
 t_color     set_color(uint8_t red, uint8_t green, uint8_t blue, uint8_t alpha);
@@ -67,6 +68,7 @@ t_object	*new_sphere(t_point center, double radius, double specular, t_color col
 // triangle.c
 double 		intersect_ray_triangle(t_ray *r, t_object *object);
 t_object 	*new_triangle(t_point *vertex, double specular, t_color color);
+void		clear_triangle(t_object *obj);
 // plane.c
 double 		intersect_ray_plane(t_ray *r, t_object *object, t_point *normal);
 t_object 	*new_plane(t_point point, t_point normal, double specular, t_color color);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cone.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hunnamab <hunnamab@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pmetron <pmetron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/07 15:38:39 by hunnamab          #+#    #+#             */
-/*   Updated: 2020/11/07 15:45:29 by hunnamab         ###   ########.fr       */
+/*   Updated: 2020/11/07 18:59:30 by pmetron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ t_object	*new_cone(t_point position, t_point vec, double specular, t_color color
 	new_object->tag = "cone";
 	new_object->intersect = &intersect_ray_cone;
 	new_object->get_normal = &get_cone_normal;
+	new_object->clear_obj = &clear_default;
 	return(new_object);
 }
 

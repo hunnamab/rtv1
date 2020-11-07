@@ -6,7 +6,7 @@
 /*   By: pmetron <pmetron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/05 22:45:20 by pmetron           #+#    #+#             */
-/*   Updated: 2020/11/07 14:20:30 by pmetron          ###   ########.fr       */
+/*   Updated: 2020/11/07 18:59:09 by pmetron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ double specular, t_color color)
 	new_object->tag = "sphere";
 	new_object->intersect = &intersect_ray_sphere;
 	new_object->get_normal = &get_sphere_normal;
+	new_object->clear_obj = &clear_default;
 	return (new_object);
 }
 

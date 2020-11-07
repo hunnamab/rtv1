@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cylinder.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hunnamab <hunnamab@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pmetron <pmetron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/07 15:11:46 by pmetron           #+#    #+#             */
-/*   Updated: 2020/11/07 15:43:23 by hunnamab         ###   ########.fr       */
+/*   Updated: 2020/11/07 18:59:23 by pmetron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ t_object	*new_cylinder(t_point position, t_point vec, double radius, double spec
 	new_object->tag = "cylinder";
 	new_object->intersect = &intersect_ray_cylinder;
 	new_object->get_normal = &get_cylinder_normal;
+	new_object->clear_obj = &clear_default;
 	return (new_object);
 }
 

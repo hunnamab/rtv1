@@ -6,11 +6,17 @@
 /*   By: pmetron <pmetron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/05 21:37:58 by pmetron           #+#    #+#             */
-/*   Updated: 2020/11/05 21:38:40 by pmetron          ###   ########.fr       */
+/*   Updated: 2020/11/07 19:19:44 by pmetron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rtv1.h"
+
+void		clear_default(t_object *obj)
+{
+	free(obj->data);
+	free(obj);
+}
 
 t_point		get_point(double x, double y, double z)
 {

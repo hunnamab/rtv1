@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   types.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hunnamab <hunnamab@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pmetron <pmetron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/07 15:39:58 by hunnamab          #+#    #+#             */
-/*   Updated: 2020/11/07 15:58:02 by hunnamab         ###   ########.fr       */
+/*   Updated: 2020/11/07 18:51:37 by pmetron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,6 +103,7 @@ typedef	struct		s_object3d
 	double			specular;
     double          (*get_normal)(struct s_scene *, int , int);
 	double			(*intersect)(t_ray *, struct s_object3d *);
+	void			(*clear_obj)(struct s_object3d *);
 }					t_object;
 
 typedef	struct 		s_scene
