@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   types.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pmetron <pmetron@student.42.fr>            +#+  +:+       +#+        */
+/*   By: hunnamab <hunnamab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/07 15:39:58 by hunnamab          #+#    #+#             */
-/*   Updated: 2020/11/07 18:51:37 by pmetron          ###   ########.fr       */
+/*   Updated: 2020/11/07 19:27:40 by hunnamab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ typedef	struct		s_triangle
 typedef struct		s_camera
 {
 	t_point			position;
-	double			rotation;
+	double			rotation[3];
 }					t_camera;
 
 typedef	struct 		s_material

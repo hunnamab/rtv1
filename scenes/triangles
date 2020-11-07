@@ -6,6 +6,11 @@ triangle {
     specular: 50
 }
 
+camera {
+    position: 0, 2, -40
+    rotation: 0, 0, 0
+}
+
 triangle {
     vertex: 25, -15, 80
     vertex: 60, -40, 80

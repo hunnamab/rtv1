@@ -6,7 +6,7 @@
 /*   By: hunnamab <hunnamab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/07 15:39:43 by hunnamab          #+#    #+#             */
-/*   Updated: 2020/11/07 17:10:48 by hunnamab         ###   ########.fr       */
+/*   Updated: 2020/11/07 19:38:53 by hunnamab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,11 +47,13 @@ t_object	*get_parameters(char *name, char **description, t_scene *scene)
 		obj = get_light(description);
 		scene->light_nmb += 1;
 	}
-	// else if (!ft_strcmp(name, "camera"))
-	// {
-	// 	printf("camera\n");
-		
-	// }
+	else if (!ft_strcmp(name, "camera"))
+	{
+		printf("camera\n");
+		scene->camera = get_camera(description);
+		scene->obj_nmb--;
+		return (NULL);
+	}
 	else
 		return (NULL);
 	return (obj);
@@ -112,11 +114,12 @@ t_object	**get_objects(char *buf, t_scene *scene)
 			obj_desc = get_description(buf, i + 3);
 			// создаем объект и получаем его характеристики
 			objs[n] = get_parameters(obj_name, obj_desc, scene);
+			// плюсуем индекс массива, если объект не камера
+			if (ft_strcmp(obj_name, "camera") != 0)
+				n++;
 			// освобождаем строки
 			free(obj_name);
 			ft_memdel_double(obj_desc);
-			// плюсуем индекс массива
-			n++;
 			// переходим к описанию следующего объекта
 			while (buf[i] != '}')
 				i++;

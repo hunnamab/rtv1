@@ -6,7 +6,7 @@
 /*   By: hunnamab <hunnamab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/07 15:39:22 by hunnamab          #+#    #+#             */
-/*   Updated: 2020/11/07 17:19:47 by hunnamab         ###   ########.fr       */
+/*   Updated: 2020/11/07 19:12:27 by hunnamab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -183,4 +183,18 @@ t_object	*get_light(char **description)
 	light->tag = ft_strdup("light");
 	free(type);
 	return (light);
+}
+
+t_camera	get_camera(char **description)
+{
+	t_camera	camera;
+	t_point		buf;
+
+	//camera = malloc(sizeof(t_camera));
+	camera.position = get_points(description[0]);
+	buf = get_points(description[1]);
+	camera.rotation[0] = buf.x;
+	camera.rotation[1] = buf.y;
+	camera.rotation[2] = buf.z;
+	return (camera);
 }

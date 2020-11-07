@@ -6,7 +6,7 @@
 /*   By: hunnamab <hunnamab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/07 15:38:51 by hunnamab          #+#    #+#             */
-/*   Updated: 2020/11/07 15:41:46 by hunnamab         ###   ########.fr       */
+/*   Updated: 2020/11/07 19:36:42 by hunnamab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,8 +54,8 @@ t_object	**get_objects_structures(int obj_nmb, t_object **buf)
 			objs[j] = buf[i];
 			printf("object tag = %s\n", objs[j]->tag);
 			i++;
-			j++;
-		}
+	 		j++;
+	 	}
 	}
 	return (objs);
 }

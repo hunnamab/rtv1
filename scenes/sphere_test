@@ -61,3 +61,8 @@ light {
     type: point
     position: -30, 10, 0
 }
+
+camera {
+    position: 0, 2, -40
+    rotation: 0, 0, 0
+}

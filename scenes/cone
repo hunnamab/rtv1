@@ -4,3 +4,17 @@ cone {
     color: 200, 50, 60, 255
     specular: 100
 }
+
+camera {
+    position: 0, 2, -40
+    rotation: 0, 0, 0
+}
+
+light {
+    type: point
+    position: 100, 10, -20
+}
+
+light {
+    type: ambient
+}

@@ -48,6 +48,11 @@ sphere {
     specular: 10
 }
 
+camera {
+    position: 0, 2, -40
+    rotation: 0, 0, 0
+}
+
 sphere {
     center: -3, 4, 3
     radius: 1

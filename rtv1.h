@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rtv1.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pmetron <pmetron@student.42.fr>            +#+  +:+       +#+        */
+/*   By: hunnamab <hunnamab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/07 15:39:34 by hunnamab          #+#    #+#             */
-/*   Updated: 2020/11/07 19:20:31 by pmetron          ###   ########.fr       */
+/*   Updated: 2020/11/07 19:27:32 by hunnamab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,7 @@ t_object 	*get_plane(char **description);
 t_object 	*get_cylinder(char **description);
 t_object 	*get_cone(char **description);
 t_object 	*get_light(char **description);
+t_camera	get_camera(char **description);
 // translate.c
 double		**get_transform_matrix(double *angle, double *move, double *scale);
 double		*get_three_doubles(double x, double y, double z);

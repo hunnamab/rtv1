@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   scene.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pmetron <pmetron@student.42.fr>            +#+  +:+       +#+        */
+/*   By: hunnamab <hunnamab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/07 14:21:11 by pmetron           #+#    #+#             */
-/*   Updated: 2020/11/07 19:23:21 by pmetron          ###   ########.fr       */
+/*   Updated: 2020/11/07 19:27:48 by hunnamab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,6 @@ void	init_scene(t_scene *scene)
 	int		x;
 
 	x = 0;
-	scene->camera.position = get_point(0, 2, -40);
 	scene->viewport = get_viewport(&scene->camera);
 	scene->ray_buf = malloc(sizeof(t_ray) * (WID * HEI));
 	get_rays_arr(scene);
