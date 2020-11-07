@@ -6,7 +6,7 @@
 /*   By: hunnamab <hunnamab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/07 15:39:22 by hunnamab          #+#    #+#             */
-/*   Updated: 2020/11/07 19:58:48 by hunnamab         ###   ########.fr       */
+/*   Updated: 2020/11/07 21:09:25 by hunnamab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,12 +69,18 @@ t_object	*get_sphere(char **description)
 	double		radius;
 	double		specular;
 	t_color		color;
+	t_point		buf;
+	double		rotation[3];
 
 	center = get_points(description[0]);
 	radius = ftoi(get_coordinates(description[1]));
-	color = get_color(description[2]);
-	specular = ftoi(get_coordinates(description[3]));
-	sphere = new_sphere(center, radius, specular, color);
+	buf = get_points(description[2]);
+	rotation[0] = buf.x;
+	rotation[1] = buf.y;
+	rotation[2] = buf.z;
+	color = get_color(description[3]);
+	specular = ftoi(get_coordinates(description[4]));
+	sphere = new_sphere(center, radius, specular, color, rotation);
 	return (sphere);
 }
 
@@ -86,13 +92,19 @@ t_object	*get_cylinder(char **description)
 	double		radius;
 	double		specular;
 	t_color		color;
+	t_point		buf;
+	double		rotation[3];
 
 	position = get_points(description[0]);
 	radius = ftoi(get_coordinates(description[1]));
 	vec = get_points(description[2]);
-	color = get_color(description[3]);
-	specular = ftoi(get_coordinates(description[4]));
-	cylinder = new_cylinder(position, vec, radius, specular, color);
+	buf = get_points(description[3]);
+	rotation[0] = buf.x;
+	rotation[1] = buf.y;
+	rotation[2] = buf.z;
+	color = get_color(description[4]);
+	specular = ftoi(get_coordinates(description[5]));
+	cylinder = new_cylinder(position, vec, radius, specular, color, rotation);
 	return (cylinder);
 }
 
@@ -103,12 +115,18 @@ t_object	*get_cone(char **description)
 	t_point		vec;
 	double		specular;
 	t_color		color;
+	t_point		buf;
+	double		rotation[3];
 
 	position = get_points(description[0]);
 	vec = get_points(description[1]);
-	color = get_color(description[2]);
-	specular = ftoi(get_coordinates(description[3]));
-	cone = new_cone(position, vec, specular, color);
+	buf = get_points(description[2]);
+	rotation[0] = buf.x;
+	rotation[1] = buf.y;
+	rotation[2] = buf.z;
+	color = get_color(description[3]);
+	specular = ftoi(get_coordinates(description[4]));
+	cone = new_cone(position, vec, specular, color, rotation);
 	return (cone);
 }
 
@@ -118,13 +136,19 @@ t_object	*get_triangle(char **description)
 	t_point		vertex[3];
 	double		specular;
 	t_color		color;
+	t_point		buf;
+	double		rotation[3];
 
 	vertex[0] = get_points(description[0]);
 	vertex[1] = get_points(description[1]);
 	vertex[2] = get_points(description[2]);
-	color = get_color(description[3]);
-	specular = ftoi(get_coordinates(description[4]));
-	triangle = new_triangle(vertex, specular, color);
+	buf = get_points(description[3]);
+	rotation[0] = buf.x;
+	rotation[1] = buf.y;
+	rotation[2] = buf.z;
+	color = get_color(description[4]);
+	specular = ftoi(get_coordinates(description[5]));
+	triangle = new_triangle(vertex, specular, color, rotation);
 	return (triangle);
 }
 
@@ -133,14 +157,20 @@ t_object	*get_plane(char **description)
 	t_object	*plane;
 	t_point		point;
 	t_point		normal;
+	t_point		buf;
 	double		specular;
 	t_color		color;
+	double		rotation[3];
 
 	point = get_points(description[0]);
 	normal = get_points(description[1]);
-	color = get_color(description[2]);
-	specular = ftoi(get_coordinates(description[3]));
-	plane = new_plane(point, normal, specular, color);
+	buf = get_points(description[2]);
+	rotation[0] = buf.x;
+	rotation[1] = buf.y;
+	rotation[2] = buf.z;
+	color = get_color(description[3]);
+	specular = ftoi(get_coordinates(description[4]));
+	plane = new_plane(point, normal, specular, color, rotation);
 	return (plane);
 }
 

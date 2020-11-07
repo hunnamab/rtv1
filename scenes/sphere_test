@@ -1,6 +1,7 @@
 sphere {
     center: 20, 0, 40
     radius: 10
+    rotation: 0, 0, 0
     color: 255, 0, 0, 255
     specular: 100
 }
@@ -8,6 +9,7 @@ sphere {
 sphere {
     center: 0, -10, 30
     radius: 10
+    rotation: 0, 0, 0
     color: 0, 255, 0, 255
     specular: 100
 }
@@ -15,6 +17,7 @@ sphere {
 cone {
     position: 30, 0, 50
     vector: 0, 1, 0
+    rotation: 0, 0, 0
     color: 79, 50, 180, 255
     specular: 0.3
 }
@@ -22,6 +25,7 @@ cone {
 sphere {
     center: -20, 0, 40
     radius: 10
+    rotation: 0, 0, 0
     color: 0, 0, 255, 255
     specular: 100
 }
@@ -29,6 +33,7 @@ sphere {
 sphere {
     center: -30, 20, 30
     radius: 10
+    rotation: 0, 0, 0
     color: 255, 0, 255, 255
     specular: 10
 }
@@ -36,6 +41,7 @@ sphere {
 cylinder {
     position: -30, 15, 30
     radius: 5
+    rotation: 0, 0, 0
     vector: 0, 1, 0
     color: 65, 20, 98, 255
     specular: 60
@@ -44,6 +50,7 @@ cylinder {
 plane {
     point: 0, -10, 0
     normal: 0, 10, 0
+    rotation: 0, 0, 0
     color: 123, 133, 156, 255
     specular: 50
 }

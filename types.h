@@ -6,7 +6,7 @@
 /*   By: hunnamab <hunnamab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/07 15:39:58 by hunnamab          #+#    #+#             */
-/*   Updated: 2020/11/07 19:27:40 by hunnamab         ###   ########.fr       */
+/*   Updated: 2020/11/07 20:19:40 by hunnamab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,6 +99,7 @@ typedef	struct		s_object3d
 {
 	void			*data;
 	const char		*tag;
+	double			rotation[3];
 	t_color			color;
 	double			specular;
     double          (*get_normal)(struct s_scene *, int , int);

@@ -7,6 +7,7 @@ cylinder {
     position: 20, 0, 100
     radius: 20
     vector: 0, 1, 0
+    rotation: 0, 0, 0
     color: 170, 10, 98, 255
     specular: 60
 }
@@ -14,6 +15,7 @@ cylinder {
 sphere {
     center: -70, -20, 100
     radius: 20
+    rotation: 0, 0, 0
     color: 100, 150, 4, 255
     specular: 50
 }
@@ -21,6 +23,7 @@ sphere {
 sphere {
     center: -50, 35, 120
     radius: 10
+    rotation: 0, 0, 0
     color: 25, 45, 170, 255
     specular: 100
 }

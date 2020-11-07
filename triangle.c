@@ -3,21 +3,22 @@
 /*                                                        :::      ::::::::   */
 /*   triangle.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pmetron <pmetron@student.42.fr>            +#+  +:+       +#+        */
+/*   By: hunnamab <hunnamab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/05 21:42:26 by pmetron           #+#    #+#             */
-/*   Updated: 2020/11/07 18:58:53 by pmetron          ###   ########.fr       */
+/*   Updated: 2020/11/07 21:06:35 by hunnamab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rtv1.h"
 
-t_object	*new_triangle(t_point *vertex, double specular, t_color color)
+t_object	*new_triangle(t_point *vertex, double specular, t_color color, double *rotation)
 {
 	t_triangle	*new_triangle;
 	t_object	*new_object;
 	t_point		edge1;
 	t_point		edge2;
+	double 		**matrix;
 
 	new_object = malloc(sizeof(t_object));
 	new_triangle = malloc(sizeof(t_triangle));
@@ -25,6 +26,12 @@ t_object	*new_triangle(t_point *vertex, double specular, t_color color)
 	new_triangle->vertex[0] = vertex[0];
 	new_triangle->vertex[1] = vertex[1];
 	new_triangle->vertex[2] = vertex[2];
+	new_object->rotation[0] = rotation[0];
+	new_object->rotation[1] = rotation[1];
+	new_object->rotation[2] = rotation[2];
+	matrix = get_rotation_matrix(new_object->rotation);
+	transform(new_triangle->vertex, matrix, 3);
+	matr_free(matrix, 4);
 	edge1 = vector_sub(&new_triangle->vertex[0], &new_triangle->vertex[1]);
 	edge2 = vector_sub(&new_triangle->vertex[1], &new_triangle->vertex[2]);
 	new_triangle->normal = vector_cross(&edge1, &edge2);

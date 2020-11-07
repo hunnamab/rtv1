@@ -1,6 +1,7 @@
 plane {
-    point: 0, 1, 0
-    normal: 1, 1, 0
+    point: 0, -1, 0
+    normal: 0, 1, 0
+    rotation: 0, 0, 0
     color: 123, 133, 156, 255
     specular: 50
 }
@@ -15,6 +16,6 @@ light {
 }
 
 camera {
-    position: 0, 2, -40
+    position: 0, 5, -40
     rotation: 0, 0, 0
 }

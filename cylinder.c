@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   cylinder.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pmetron <pmetron@student.42.fr>            +#+  +:+       +#+        */
+/*   By: hunnamab <hunnamab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/07 15:11:46 by pmetron           #+#    #+#             */
-/*   Updated: 2020/11/07 18:59:23 by pmetron          ###   ########.fr       */
+/*   Updated: 2020/11/07 20:26:54 by hunnamab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rtv1.h"
 
-t_object	*new_cylinder(t_point position, t_point vec, double radius, double specular, t_color color)
+t_object	*new_cylinder(t_point position, t_point vec, double radius, double specular, t_color color, double *rotation)
 {
 	t_cylinder	*new_cylinder;
 	t_object	*new_object;
@@ -23,6 +23,9 @@ t_object	*new_cylinder(t_point position, t_point vec, double radius, double spec
 	new_cylinder->radius = radius;
 	new_cylinder->vec = vec;
 	new_object->specular = specular;
+	new_object->rotation[0] = rotation[0];
+	new_object->rotation[1] = rotation[1];
+	new_object->rotation[2] = rotation[2];
 	new_object->color = color;
 	new_object->data = (void *)new_cylinder;
 	new_object->tag = "cylinder";

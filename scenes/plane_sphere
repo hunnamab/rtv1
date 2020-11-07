@@ -1,6 +1,7 @@
 sphere {
     center: 0, 0, 120
     radius: 30
+    rotation: 0, 0, 0
     color: 100, 50, 200, 255
     specular: 60
 }
@@ -8,6 +9,7 @@ sphere {
 plane {
     point: 0, 1, 0
     normal: 0, 1, 0
+    rotation: 0, 0, 0
     color: 123, 33, 56, 255
     specular: -1
 }

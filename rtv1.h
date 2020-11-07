@@ -6,7 +6,7 @@
 /*   By: hunnamab <hunnamab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/07 15:39:34 by hunnamab          #+#    #+#             */
-/*   Updated: 2020/11/07 19:49:44 by hunnamab         ###   ########.fr       */
+/*   Updated: 2020/11/07 20:27:46 by hunnamab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,20 +64,20 @@ void        set_color_zero(t_color *color);
 t_color     color_mul_by_scalar(t_color *color, double scalar);
 // sphere.c
 double 		intersect_ray_sphere(t_ray *r, t_object *object);
-t_object	*new_sphere(t_point center, double radius, double specular, t_color color);
+t_object	*new_sphere(t_point center, double radius, double specular, t_color color, double *rotation);
 // triangle.c
 double 		intersect_ray_triangle(t_ray *r, t_object *object);
-t_object 	*new_triangle(t_point *vertex, double specular, t_color color);
+t_object 	*new_triangle(t_point *vertex, double specular, t_color color, double *rotation);
 void		clear_triangle(t_object *obj);
 // plane.c
 double 		intersect_ray_plane(t_ray *r, t_object *object, t_point *normal);
-t_object 	*new_plane(t_point point, t_point normal, double specular, t_color color);
+t_object	*new_plane(t_point point, t_point normal, double specular, t_color color, double *rotation);
 // cylinder.c
 double      intersect_ray_cylinder(t_ray *r, t_object *object);
-t_object	*new_cylinder(t_point position, t_point vec, double radius, double specular, t_color color);
+t_object	*new_cylinder(t_point position, t_point vec, double radius, double specular, t_color color, double *rotation);
 // cone.c
 double      intersect_ray_cone(t_ray *r, t_object *object);
-t_object    *new_cone(t_point position, t_point vec, double specular, t_color color);
+t_object    *new_cone(t_point position, t_point vec, double specular, t_color color, double *rotation);
 // ftoi.c
 double   	ftoi(char *str);
 // objects_parameters.c

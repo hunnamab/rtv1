@@ -1,6 +1,7 @@
 sphere {
     center: 0, 0, 0
     radius: 300
+    rotation: 0, 0, 0
     color: 150, 0, 60, 255
     specular: 60
 }
@@ -8,6 +9,7 @@ sphere {
 sphere {
     center: 0, 0, 1
     radius: 1
+    rotation: 0, 0, 0
     color: 100, 50, 200, 255
     specular: 60
 }

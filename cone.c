@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   cone.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pmetron <pmetron@student.42.fr>            +#+  +:+       +#+        */
+/*   By: hunnamab <hunnamab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/07 15:38:39 by hunnamab          #+#    #+#             */
-/*   Updated: 2020/11/07 18:59:30 by pmetron          ###   ########.fr       */
+/*   Updated: 2020/11/07 20:27:09 by hunnamab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rtv1.h"
 
-t_object	*new_cone(t_point position, t_point vec, double specular, t_color color)
+t_object	*new_cone(t_point position, t_point vec, double specular, t_color color, double *rotation)
 {
 	t_cone		*new_cone;
 	t_object	*new_object;
@@ -21,6 +21,9 @@ t_object	*new_cone(t_point position, t_point vec, double specular, t_color color
 	new_cone = malloc(sizeof(t_cone));
 	new_cone->position = position;
 	new_cone->vec = vec;
+	new_object->rotation[0] = rotation[0];
+	new_object->rotation[1] = rotation[1];
+	new_object->rotation[2] = rotation[2];
 	new_object->specular = specular;
 	new_object->color = color;
 	new_object->data = (void *)new_cone;
