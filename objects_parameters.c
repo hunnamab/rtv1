@@ -6,7 +6,7 @@
 /*   By: hunnamab <hunnamab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/07 15:39:22 by hunnamab          #+#    #+#             */
-/*   Updated: 2020/11/07 19:12:27 by hunnamab         ###   ########.fr       */
+/*   Updated: 2020/11/07 19:58:48 by hunnamab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -189,6 +189,7 @@ t_camera	get_camera(char **description)
 {
 	t_camera	camera;
 	t_point		buf;
+	double		**matrix;
 
 	//camera = malloc(sizeof(t_camera));
 	camera.position = get_points(description[0]);

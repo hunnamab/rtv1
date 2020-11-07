@@ -6,7 +6,7 @@
 /*   By: hunnamab <hunnamab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/07 14:21:11 by pmetron           #+#    #+#             */
-/*   Updated: 2020/11/07 19:27:48 by hunnamab         ###   ########.fr       */
+/*   Updated: 2020/11/07 20:00:05 by hunnamab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,8 +55,7 @@ void	init_scene(t_scene *scene)
 	scene->intersection_buf = malloc(sizeof(t_point) * WID * HEI);
 	scene->index_buf = malloc(sizeof(int) * WID * HEI);
 	scene->depth_buf = malloc(sizeof(double) * WID * HEI);
-	matrix = get_transform_matrix(get_three_doubles(0, 0, 0), \
-	get_three_doubles(0, 0, 0), get_three_doubles(1, 1, 1));
+	matrix = get_rotation_matrix(&scene->camera.rotation);
 	while (x < WID * HEI)
 	{
 		transform(&scene->ray_buf[x].dir, matrix, 1);

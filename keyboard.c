@@ -6,7 +6,7 @@
 /*   By: hunnamab <hunnamab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/06 13:38:13 by pmetron           #+#    #+#             */
-/*   Updated: 2020/11/07 15:47:21 by hunnamab         ###   ########.fr       */
+/*   Updated: 2020/11/07 19:46:48 by hunnamab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	camera_left(t_scene *scene)
 
 	x = 0;
 	matrix = rotate_y(-0.1);
-	while(x < WID * HEI)
+	while (x < WID * HEI)
 	{
 		transform(&scene->ray_buf[x].dir, matrix, 1);
 		x++;
@@ -28,7 +28,7 @@ void	camera_left(t_scene *scene)
 	get_intersection_buf(scene);
 	get_normal_buf(scene);
 	get_material_buf(scene);
-	free(matrix);  
+	free(matrix);
 }
 
 void	camera_right(t_scene *scene)
@@ -38,7 +38,7 @@ void	camera_right(t_scene *scene)
 
 	x = 0;
 	matrix = rotate_y(0.1);
-	while(x < WID * HEI)
+	while (x < WID * HEI)
 	{
 		transform(&scene->ray_buf[x].dir, matrix, 1);
 		x++;
@@ -47,7 +47,7 @@ void	camera_right(t_scene *scene)
 	get_intersection_buf(scene);
 	get_normal_buf(scene);
 	get_material_buf(scene);
-	free(matrix);  
+	free(matrix);
 }
 
 void	camera_down(t_scene *scene)
