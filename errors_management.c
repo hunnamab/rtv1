@@ -13,7 +13,7 @@ void output_description()
 void output_error(int tag)
 {
     if (tag == 0)
-        ft_putstr("Error: no objects in the scene file\n");
+        ft_putstr("Error: no objects in the scene file or invalid file\n");
     else if (tag == 1)
         ft_putstr("Error: no light sources in the scene file\n");
     else if (tag == 2)
@@ -26,4 +26,5 @@ void output_error(int tag)
         ft_putstr("Error: invalid object's parameters\n");
     else if (tag == 6)
         ft_putstr("Error: invalid file structure\nCheck brackets, spaces, etc.\n");
+    exit (0);
 }

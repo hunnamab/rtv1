@@ -17,7 +17,7 @@ sphere {
 }
 
 light {
-    type:
+    type: point
     position: 100, 10, -20
 }
 

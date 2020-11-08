@@ -19,26 +19,17 @@ char		*get_coordinates(char *description)
 	int		len;
 
 	if (!description)
-	{
 		output_error(5);
-		exit (0);
-	}
 	i = 0;
 	len = ft_strlen(description);
 	while (!(ft_isdigit(description[i])) && description[i] != '-')
 	{
 		if (description[i + 1] == '\0')
-		{
 			output_error(5);
-			exit (0);
-		}
 		i++;
 	}
 	if (!(coordinates = ft_strsub(description, i, len - i)))
-	{
 		output_error(5);
-		exit (0);
-	}
 	return (coordinates);
 }
 
@@ -49,22 +40,13 @@ t_color		get_color(char *description)
 	t_color	color;
 
 	if (!description)
-	{
 		output_error(5);
-		exit (0);
-	}
 	coord_buf = get_coordinates(description);
 	if (!(coordinates = ft_strsplit(coord_buf, ',')))
-	{
 		output_error(5);
-		exit (0);
-	}
 	free(coord_buf);
 	if (!coordinates[0] || !coordinates[1] || !coordinates[2] || !coordinates[3])
-	{
 		output_error(5);
-		exit (0);
-	}
 	color.red = ft_atoi(coordinates[0]);
 	color.green = ft_atoi(coordinates[1]);
 	color.blue = ft_atoi(coordinates[2]);
@@ -80,23 +62,14 @@ t_point		get_points(char *description)
 	t_point	points;
 
 	if (!description)
-	{
 		output_error(5);
-		exit (0);
-	}
 	printf("description in get_points = |%s|\n", description);
 	coord_buf = get_coordinates(description);
 	if (!(coordinates = ft_strsplit(coord_buf, ',')))
-	{
 		output_error(5);
-		exit (0);
-	}
 	free(coord_buf);
 	if (!coordinates[0] || !coordinates[1] || !coordinates[2])
-	{
 		output_error(5);
-		exit (0);
-	}
 	points.x = ftoi(ft_strtrim(coordinates[0]));
 	printf("x = %f\n", points.x);
 	points.y = ftoi(ft_strtrim(coordinates[1]));
@@ -228,9 +201,11 @@ char		*get_light_type(char *description)
 	int		i;
 	int		len;
 
+	if (!description)
+		output_error(5);
 	i = 0;
 	len = ft_strlen(description);
-	while (description[i] != ':')
+	while (description[i] != ':' && description != '\0')
 		i++;
 	i++;
 	type = ft_strsub(description, i, len - i);
@@ -258,10 +233,7 @@ t_object	*get_light(char **description)
 	else if (ft_strequ(type, "directional"))
 		direction = get_points(description[1]);
 	else if (!(ft_strequ(type, "ambient")))
-	{
 		output_error(5);
-		exit (0);
-	}
 	light->data = (void *)new_light(position, direction, (const char *)type);
 	light->tag = ft_strdup("light");
 	free(type);

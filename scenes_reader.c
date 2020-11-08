@@ -58,10 +58,7 @@ t_object	*get_parameters(char *name, char **description, t_scene *scene)
 		scene->light_nmb += 1;
 	}
 	else
-	{
 		output_error(4);
-		exit (0);
-	}
 	return (obj);
 }
 
@@ -82,18 +79,15 @@ char		**get_description(char *scene, int i)
 	if (scene[i] != '\n')
 	{
 		output_error(6);
-		exit (0);
+		//exit (0);
 	}
 	if (!(descr_buf = ft_strsub(scene, start, len)))
 	{
 		output_error(6);
-		exit (0);
+		//exit (0);
 	}
 	if (!(description = ft_strsplit(descr_buf, '\n')))
-	{
 		output_error(6);
-		exit (0);
-	}
 	ft_memdel(&descr_buf);
 	return (description);
 }
@@ -115,10 +109,7 @@ t_object	**get_objects(char *buf, t_scene *scene, int len)
 	scene->light_nmb = 0;
 	scene->obj_nmb = 0;
 	if (!brackets(buf))
-	{
 		output_error(6);
-		exit (0);
-	}
 	// выясняем кол-во объектов сцены
 	while (i < len && buf[i])
 	{
@@ -127,10 +118,7 @@ t_object	**get_objects(char *buf, t_scene *scene, int len)
 		i++;
 	}
 	if (scene->obj_nmb == 0)
-	{
 		output_error(0);
-		exit (0);
-	}
 	// создаем массив структур для объектов
 	objs = protected_malloc(sizeof(t_object *), scene->obj_nmb);
 	i = 0;
@@ -140,10 +128,7 @@ t_object	**get_objects(char *buf, t_scene *scene, int len)
 		{
 			// записываем название объекта
 			if (!(obj_name = ft_strsub(buf, start, (i - start))))
-			{
 				output_error(6);
-				exit (0);
-			}
 			// записываем описание объекта
 			obj_desc = get_description(buf, i + 3);
 			if (!(ft_strequ(obj_name, "camera")))
@@ -166,21 +151,12 @@ t_object	**get_objects(char *buf, t_scene *scene, int len)
 		i++;
 	}
 	if (scene->light_nmb == 0)
-	{
 		output_error(1);
-		exit (0);
-	}
 	if (camera != 1)
-	{
 		output_error(2);
-		exit (0);
-	}
 	scene->obj_nmb -= scene->light_nmb;
 	if (scene->obj_nmb == 0)
-	{
 		output_error(0);
-		exit (0);
-	}
 	free(buf);
 	return (objs);
 }
@@ -193,10 +169,7 @@ t_object	**read_scene(int fd, t_scene *scene)
 	buf = protected_malloc(sizeof(char), 256000);
 	ret = read(fd, buf, 64000);
 	if (ret == 0)
-	{
 		output_error(3);
-		exit (0);
-	}
 	buf[ret] = '\0';
 	printf("ret %d\n", ret);
 	return (get_objects(buf, scene, ret));
