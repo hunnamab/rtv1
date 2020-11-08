@@ -12,11 +12,14 @@
 
 #include "rtv1.h"
 
-void		add_camera(t_scene *scene, char **description)
+void		add_camera(t_scene *scene, char **description, int *camera)
 {
+	int nmb = 0;
 	printf("camera\n");
 	scene->camera = get_camera(description);
 	scene->obj_nmb--;
+	nmb = *camera + 1;
+	*camera = nmb;
 }
 
 t_object	*get_parameters(char *name, char **description, t_scene *scene)
@@ -55,7 +58,10 @@ t_object	*get_parameters(char *name, char **description, t_scene *scene)
 		scene->light_nmb += 1;
 	}
 	else
-		return (NULL);
+	{
+		output_error(4);
+		exit (0);
+	}
 	return (obj);
 }
 
@@ -73,8 +79,21 @@ char		**get_description(char *scene, int i)
 		i++;
 		len++;
 	}
-	descr_buf = ft_strsub(scene, start, len);
-	description = ft_strsplit(descr_buf, '\n');
+	if (scene[i] != '\n')
+	{
+		output_error(6);
+		exit (0);
+	}
+	if (!(descr_buf = ft_strsub(scene, start, len)))
+	{
+		output_error(6);
+		exit (0);
+	}
+	if (!(description = ft_strsplit(descr_buf, '\n')))
+	{
+		output_error(6);
+		exit (0);
+	}
 	ft_memdel(&descr_buf);
 	return (description);
 }
@@ -87,10 +106,12 @@ t_object	**get_objects(char *buf, t_scene *scene, int len)
 	int			start;
 	int			n;
 	int			i;
+	int			camera;
 
 	i = 0;
 	n = 0;
 	start = 0;
+	camera = 0;
 	scene->light_nmb = 0;
 	scene->obj_nmb = 0;
 	if (!brackets(buf))
@@ -118,7 +139,11 @@ t_object	**get_objects(char *buf, t_scene *scene, int len)
 		if (buf[i + 1] == '{' && n < scene->obj_nmb)
 		{
 			// записываем название объекта
-			obj_name = ft_strsub(buf, start, (i - start));
+			if (!(obj_name = ft_strsub(buf, start, (i - start))))
+			{
+				output_error(6);
+				exit (0);
+			}
 			// записываем описание объекта
 			obj_desc = get_description(buf, i + 3);
 			if (!(ft_strequ(obj_name, "camera")))
@@ -129,7 +154,7 @@ t_object	**get_objects(char *buf, t_scene *scene, int len)
 				n++;
 			}
 			else if ((ft_strequ(obj_name, "camera")))
-				add_camera(scene, obj_desc);
+				add_camera(scene, obj_desc, &camera);
 			// освобождаем строки
 			ft_memdel(&obj_name);
 			ft_memdel_double(obj_desc);
@@ -139,6 +164,16 @@ t_object	**get_objects(char *buf, t_scene *scene, int len)
 			start = i + 3;
 		}
 		i++;
+	}
+	if (scene->light_nmb == 0)
+	{
+		output_error(1);
+		exit (0);
+	}
+	if (camera != 1)
+	{
+		output_error(2);
+		exit (0);
 	}
 	scene->obj_nmb -= scene->light_nmb;
 	if (scene->obj_nmb == 0)

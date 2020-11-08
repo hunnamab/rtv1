@@ -3,6 +3,14 @@ light {
     position: 100, 10, -20
 }
 
+sphere {
+    center: 0, 0, 0
+    radius: 300
+    rotation: 0, 0, 0
+    color: 255, 0, 0, 255
+    specular: 100
+}
+
 light {
     type: ambient
 }}

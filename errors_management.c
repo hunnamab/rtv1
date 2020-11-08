@@ -17,7 +17,7 @@ void output_error(int tag)
     else if (tag == 1)
         ft_putstr("Error: no light sources in the scene file\n");
     else if (tag == 2)
-        ft_putstr("Error: no camera in the scene file\n");
+        ft_putstr("Error: no camera in the scene file or too many cameras\n");
     else if (tag == 3)
         ft_putstr("Error: the scene file is empty\n");
     else if (tag == 4)
@@ -25,5 +25,5 @@ void output_error(int tag)
     else if (tag == 5)
         ft_putstr("Error: invalid object's parameters\n");
     else if (tag == 6)
-        ft_putstr("Error: invalid file structure\n");
+        ft_putstr("Error: invalid file structure\nCheck brackets, spaces, etc.\n");
 }
