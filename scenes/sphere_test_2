@@ -17,7 +17,7 @@ sphere {
 cone {
     position: 3, 0, 5
     vector: 0, 1, 0
-    angle: 30
+    angle: 0.3
     rotation: 0, 0, 0
     color: 79, 50, 180, 255
     specular: 0.3

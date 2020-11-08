@@ -6,7 +6,7 @@
 /*   By: hunnamab <hunnamab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/07 15:38:39 by hunnamab          #+#    #+#             */
-/*   Updated: 2020/11/08 17:55:13 by hunnamab         ###   ########.fr       */
+/*   Updated: 2020/11/08 18:13:59 by hunnamab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,24 +38,23 @@ t_object	*new_cone(t_point position, t_point vec, double specular, t_color color
 void		get_cone_normal(t_scene *scene, int index, int obj_num)
 {
 	t_cone	*cone;
-	double	n;
+	double	m;
 	t_point	*normal;
-	double	radius;
-	double	height;
+	t_point buf;
 
-	radius = 1;
-	height = 2;
 	normal = &scene->normal_buf[index];
 	cone = (t_cone *)scene->objs[obj_num]->data;
-	normal->x = scene->intersection_buf[index].x - cone->position.x;
-	normal->y = 0;
-	normal->z = scene->intersection_buf[index].z - cone->position.z;
-	n = sqrt((normal->x * normal->x) + (normal->z * normal->z));
-	normal->x /= n;
-	normal->z /= n;
-	normal->x = normal->x * (height / radius);
-	normal->y = radius / height;
-	normal->z = normal->z * (height / radius);
+	buf = vector_sub(&scene->ray_buf[index].start, &cone->position);
+	m = vector_dot(&scene->ray_buf[index].dir, &cone->vec) * scene->depth_buf[index] \
+		+ vector_dot(&buf, &cone->vec);
+	buf = vector_scale(m, &cone->vec);
+	*normal = vector_scale((1 + cone->angle * cone->angle), &buf);
+	buf = vector_sub(&scene->intersection_buf[index], &cone->position);
+	*normal = vector_sub(&buf, normal);
+	scene->normal_buf[index] = vector_div_by_scalar(&scene->normal_buf[index], \
+								vector_length(&scene->normal_buf[index]));
+	if (vector_dot(&scene->ray_buf[index].dir, normal) > 0.0001)
+		*normal = vector_scale(-1, normal);
 }
 
 double		intersect_ray_cone(t_ray *r, t_object *object)
@@ -69,19 +68,16 @@ double		intersect_ray_cone(t_ray *r, t_object *object)
 	cone = (t_cone *)object->data;
 	dist = vector_sub(&r->start, &cone->position);
 	a = vector_dot(&r->dir, &cone->vec);
-	
-	
-	// double tan = ((double)1 / (double)2) * ((double)1 / (double)2);
-	// a = r->dir.x * r->dir.x + r->dir.z * r->dir.z - (tan * (r->dir.y * r->dir.y));
-	// dist = vector_sub(&r->start, &cone->position);
-	// dist.y = (double)2 - r->start.y + cone->position.y;
-	// b = 2 * dist.x * r->dir.x + 2 * dist.z * r->dir.z + (2 * tan * dist.y * r->dir.y);
-	// c = dist.x * dist.x + dist.z * dist.z - (tan * (dist.y * dist.y));
-	// c = b * b - 4 * a * c;
-	// if (c >= 0)
-	// {
-	// 	c = sqrt(c);
-	// 	return (choose_t((-b + c) / (2 * a), (-b - c) / (2 * a)));
-	// }
+	a = vector_dot(&r->dir, &r->dir) - (1 + cone->angle * cone->angle) * a * a;
+	b = 2 * (vector_dot(&r->dir, &dist) - (1 + cone->angle * cone->angle) * \
+		vector_dot(&r->dir, &cone->vec) * vector_dot(&dist, &cone->vec));
+	c = vector_dot(&dist, &cone->vec);
+	c = vector_dot(&dist, &dist) - (1 + cone->angle * cone->angle) * c * c;
+	c = b * b - 4 * a * c;
+	if (c >= 0)
+	{
+		c = sqrt(c);
+		return (choose_t((-b + c) / (2 * a), (-b - c) / (2 * a)));
+	}
 	return (0);
 }

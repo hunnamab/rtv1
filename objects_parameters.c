@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   objects_parameters.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pmetron <pmetron@student.42.fr>            +#+  +:+       +#+        */
+/*   By: hunnamab <hunnamab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/07 15:39:22 by hunnamab          #+#    #+#             */
-/*   Updated: 2020/11/08 18:08:18 by pmetron          ###   ########.fr       */
+/*   Updated: 2020/11/08 18:15:43 by hunnamab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,6 +122,7 @@ t_object	*get_cone(char **description)
 	position = get_points(description[0]);
 	vec = get_points(description[1]);
 	angle = ftoi(get_coordinates(description[2]));
+	printf("angle = %f\n", angle);
 	buf = get_points(description[3]);
 	rotation[0] = buf.x;
 	rotation[1] = buf.y;
