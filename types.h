@@ -6,7 +6,7 @@
 /*   By: hunnamab <hunnamab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/07 15:39:58 by hunnamab          #+#    #+#             */
-/*   Updated: 2020/11/07 22:20:12 by hunnamab         ###   ########.fr       */
+/*   Updated: 2020/11/08 16:10:52 by hunnamab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,7 +121,7 @@ typedef	struct 		s_scene
 	t_point			*viewport;
 	int				*index_buf;
 	double 			*depth_buf;
-	int				mode; // 0 - default, 1 - normal
+	int				mode; // 0 - default, 1 - normal, 2 - depth, 3 - flat_light
 }					t_scene;
 
 #endif

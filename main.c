@@ -6,7 +6,7 @@
 /*   By: hunnamab <hunnamab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/07 15:39:02 by hunnamab          #+#    #+#             */
-/*   Updated: 2020/11/07 22:37:24 by hunnamab         ###   ########.fr       */
+/*   Updated: 2020/11/08 16:14:27 by hunnamab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,14 +18,20 @@ void check_mode(int as, char **av, int *mode)
 	 	*mode = 0;
 	else if (as == 3 && (ft_strequ(av[2], "normal")))
 	 	*mode = 1;
+	else if (as == 3 && (ft_strequ(av[2], "depth")))
+		*mode = 2;
+	else if (as == 3 && (ft_strequ(av[2], "flat_light")))
+		*mode = 3;
 }
 
 void output_description()
 {
 	ft_putstr("usage: ./rtv1 [scene_file] [mode]\n\n");
-	ft_putstr("mode is an optional argument, it should be [default] or [normal]\n");
-	ft_putstr("\tdefault or no argument after scene file's name means the program draws the usual scene\n");
-	ft_putstr("\tnormal means the program draws a normal map of scene's objects\n");
+	ft_putstr("mode is an optional argument, it should be [default], [normal], [depth] or [flat_light]\n");
+	ft_putstr("\t1. default or no argument after scene file's name means the program draws the usual scene\n");
+	ft_putstr("\t2. normal means the program draws a normal map of scene's objects\n");
+	ft_putstr("\t3. depth mode draws a depth map of the scene's objects\n");
+	ft_putstr("\t4. flat_light can draw a scene with no shadows or shiny effect from light sources\n");
 }
 
 int main(int args, char **argv)
