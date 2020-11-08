@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   types.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hunnamab <hunnamab@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pmetron <pmetron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/07 15:39:58 by hunnamab          #+#    #+#             */
-/*   Updated: 2020/11/08 16:10:52 by hunnamab         ###   ########.fr       */
+/*   Updated: 2020/11/08 17:36:04 by pmetron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,6 +122,9 @@ typedef	struct 		s_scene
 	int				*index_buf;
 	double 			*depth_buf;
 	int				mode; // 0 - default, 1 - normal, 2 - depth, 3 - flat_light
+	void			(*init[4])(struct s_scene *);
+	void			(*draw[4])(t_sdl *, struct s_scene *);
+	void			(*clean[4])(struct s_scene *);
 }					t_scene;
 
 #endif

@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: hunnamab <hunnamab@student.42.fr>          +#+  +:+       +#+         #
+#    By: pmetron <pmetron@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/11/07 15:39:13 by hunnamab          #+#    #+#              #
-#    Updated: 2020/11/07 15:39:16 by hunnamab         ###   ########.fr        #
+#    Updated: 2020/11/08 17:37:11 by pmetron          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,7 +28,7 @@ SRC = main.c sphere.c vector.c utils.c \
 	./matrix_lib/matr_trace.c ./matrix_lib/matr_transpose.c \
 	./matrix_lib/print_matrix.c transform.c ./matrix_lib/matrix_identity.c \
 	buffers.c scene.c color.c vector_second.c transform_matrix.c \
-	keyboard.c
+	keyboard.c scene_clean.c
 OBJ = $(SRC:.c=.o)
 
 all: $(NAME)

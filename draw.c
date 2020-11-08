@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hunnamab <hunnamab@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pmetron <pmetron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/07 14:34:50 by pmetron           #+#    #+#             */
-/*   Updated: 2020/11/07 15:43:55 by hunnamab         ###   ########.fr       */
+/*   Updated: 2020/11/08 17:02:40 by pmetron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,79 @@ void	draw_scene(t_sdl *sdl, t_scene *scene)
 	SDL_RenderPresent(sdl->renderer);
 }
 
+void	init_deepth(t_scene *scene)
+{
+	double	**matrix;
+	int		x;
+
+	x = 0;
+	scene->viewport = get_viewport(&scene->camera);
+	scene->ray_buf = malloc(sizeof(t_ray) * (WID * HEI));
+	get_rays_arr(scene);
+	scene->depth_buf = malloc(sizeof(double) * WID * HEI);
+	scene->index_buf = malloc(sizeof(int) * WID * HEI);
+	matrix = get_rotation_matrix(&scene->camera.rotation);
+	while (x < WID * HEI)
+	{
+		transform(&scene->ray_buf[x].dir, matrix, 1);
+		x++;
+	}
+	matr_free(matrix, 4);
+	get_closest_points(scene);
+}
+
+void	init_default(t_scene *scene)
+{
+	double	**matrix;
+	int		x;
+
+	x = 0;
+	scene->viewport = get_viewport(&scene->camera);
+	scene->ray_buf = malloc(sizeof(t_ray) * (WID * HEI));
+	get_rays_arr(scene);
+	scene->normal_buf = malloc(sizeof(t_point) * WID * HEI);
+	scene->material_buf = malloc(sizeof(t_material) * WID * HEI);
+	scene->intersection_buf = malloc(sizeof(t_point) * WID * HEI);
+	scene->index_buf = malloc(sizeof(int) * WID * HEI);
+	scene->depth_buf = malloc(sizeof(double) * WID * HEI);
+	matrix = get_rotation_matrix(&scene->camera.rotation);
+	while (x < WID * HEI)
+	{
+		transform(&scene->ray_buf[x].dir, matrix, 1);
+		x++;
+	}
+	matr_free(matrix, 4);
+	get_closest_points(scene);
+	get_intersection_buf(scene);
+	get_normal_buf(scene);
+	get_material_buf(scene);
+}
+
+void	init_raycast(t_scene *scene)
+{
+	double	**matrix;
+	int		x;
+
+	x = 0;
+	scene->viewport = get_viewport(&scene->camera);
+	scene->ray_buf = malloc(sizeof(t_ray) * (WID * HEI));
+	get_rays_arr(scene);
+	scene->depth_buf = malloc(sizeof(double) * WID * HEI);
+	scene->material_buf = malloc(sizeof(t_material) * WID * HEI);
+	scene->index_buf = malloc(sizeof(int) * WID * HEI);
+	scene->intersection_buf = malloc(sizeof(t_point) * WID * HEI);
+	matrix = get_rotation_matrix(&scene->camera.rotation);
+	while (x < WID * HEI)
+	{
+		transform(&scene->ray_buf[x].dir, matrix, 1);
+		x++;
+	}
+	matr_free(matrix, 4);
+	get_closest_points(scene);
+	get_intersection_buf(scene);
+	get_material_buf(scene);
+}
+
 void	draw_normal_buf(t_sdl *sdl, t_scene *scene)
 {
 	int		xyi[3];
@@ -65,6 +138,63 @@ void	draw_normal_buf(t_sdl *sdl, t_scene *scene)
 			SDL_RenderDrawPoint(sdl->renderer, xyi[0], xyi[1]);
 		}
 		xyi[0] = -1;
+	}
+	SDL_RenderPresent(sdl->renderer);
+}
+
+void	draw_deepth_buf(t_sdl *sdl, t_scene *scene)
+{
+	int		xyi[3];
+	t_color	color;
+
+	xyi[0] = -1;
+	xyi[1] = -1;
+	while (++xyi[1] < HEI)
+	{
+		while (++xyi[0] < WID)
+		{
+			xyi[2] = xyi[1] * WID + xyi[0];
+			if (scene->index_buf[xyi[2]] != -1)
+			{
+				color.red = (scene->depth_buf[xyi[2]]);
+				color.green = (scene->depth_buf[xyi[2]]);
+				color.blue = (scene->depth_buf[xyi[2]]);
+			}
+			else
+				set_color_zero(&color);
+			SDL_SetRenderDrawColor(sdl->renderer, \
+			color.red, color.green, color.blue, 255);
+			SDL_RenderDrawPoint(sdl->renderer, xyi[0], xyi[1]);
+		}
+		xyi[0] = -1;
+	}
+	SDL_RenderPresent(sdl->renderer);
+}
+
+void	draw_raycast(t_sdl *sdl, t_scene *scene)
+{
+	int		x;
+	int		y;
+	t_color	color;
+	int		i;
+
+	x = -1;
+	y = -1;
+	i = 0;
+	while (++y < HEI)
+	{
+		while (++x < WID)
+		{
+			i = y * WID + x;
+			if (scene->index_buf[i] != -1)
+				color = scene->material_buf[i].color;
+			else
+				set_color_zero(&color);
+			SDL_SetRenderDrawColor(sdl->renderer, \
+			color.red, color.green, color.blue, 255);
+			SDL_RenderDrawPoint(sdl->renderer, x, y);
+		}
+		x = -1;
 	}
 	SDL_RenderPresent(sdl->renderer);
 }

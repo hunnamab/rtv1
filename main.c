@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hunnamab <hunnamab@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pmetron <pmetron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/07 15:39:02 by hunnamab          #+#    #+#             */
-/*   Updated: 2020/11/08 16:14:27 by hunnamab         ###   ########.fr       */
+/*   Updated: 2020/11/08 17:35:27 by pmetron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void check_mode(int as, char **av, int *mode)
 	 	*mode = 1;
 	else if (as == 3 && (ft_strequ(av[2], "depth")))
 		*mode = 2;
-	else if (as == 3 && (ft_strequ(av[2], "flat_light")))
+	else if (as == 3 && (ft_strequ(av[2], "raycast")))
 		*mode = 3;
 }
 
@@ -31,7 +31,7 @@ void output_description()
 	ft_putstr("\t1. default or no argument after scene file's name means the program draws the usual scene\n");
 	ft_putstr("\t2. normal means the program draws a normal map of scene's objects\n");
 	ft_putstr("\t3. depth mode draws a depth map of the scene's objects\n");
-	ft_putstr("\t4. flat_light can draw a scene with no shadows or shiny effect from light sources\n");
+	ft_putstr("\t4. raycast can draw a scene with no shadows or shiny effect from light sources\n");
 }
 
 int main(int args, char **argv)
@@ -65,10 +65,10 @@ int main(int args, char **argv)
 	SDL_CreateWindowAndRenderer(WID, HEI, 0, &sdl.win, &sdl.renderer);
 	SDL_RenderClear(sdl.renderer);
 	init_scene(scene);
-	(scene->mode == 0) ? draw_scene(&sdl, scene) : draw_normal_buf(&sdl, scene);
-	while (k)
+	scene->draw[scene->mode](&sdl, scene);
+ 	while (k)
 		k = keyboard(&sdl, scene);
-	clear_scene(scene);
+	scene->clean[scene->mode](scene);
 	SDL_DestroyRenderer(sdl.renderer);
 	SDL_DestroyWindow(sdl.win);
 	SDL_Quit();

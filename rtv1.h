@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rtv1.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hunnamab <hunnamab@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pmetron <pmetron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/07 15:39:34 by hunnamab          #+#    #+#             */
-/*   Updated: 2020/11/07 20:27:46 by hunnamab         ###   ########.fr       */
+/*   Updated: 2020/11/08 17:35:41 by pmetron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,8 @@ void 		sphere_settings(t_sphere *s, t_ray *r);
 // draw.c
 void    	draw_scene(t_sdl *sdl, t_scene *scene);
 void    	draw_normal_buf(t_sdl *sdl, t_scene *scene);
+void	    draw_deepth_buf(t_sdl *sdl, t_scene *scene);
+void	    draw_raycast(t_sdl *sdl, t_scene *scene);
 // light.c
 t_color     reflection_color(t_scene *scene, int index);
 t_light     *new_light(t_point position, t_point direction, const char *type);
@@ -117,12 +119,18 @@ void        get_cone_normal(t_scene *scene, int index, int obj_num);
 void        get_cylinder_normal(t_scene *scene, int index, int obj_num);
 //scene.c
 void        init_scene(t_scene *scene);
-void        clear_scene(t_scene *scene);
+void	    init_raycast(t_scene *scene);
+void	    init_default(t_scene *scene);
+void	    init_deepth(t_scene *scene);
 //keyboard.c
 void        camera_left(t_scene *scene);
 int         keyboard(t_sdl *sdl, t_scene *scene);
 void        camera_up(t_scene *scene);
 void        camera_right(t_scene *scene);
 void        camera_down(t_scene *scene);
+//scene_clear.c
+void	    clean_scene_default(t_scene *scene);
+void	    clean_scene_deepth(t_scene *scene);
+void	    clean_scene_raycast(t_scene *scene);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: pmetron <pmetron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/08 17:44:53 by pmetron           #+#    #+#             */
-/*   Updated: 2019/09/14 19:48:56 by pmetron          ###   ########.fr       */
+/*   Updated: 2020/11/08 17:22:22 by pmetron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,12 @@
 
 void	ft_memdel(void **ap)
 {
-	if (*ap != NULL)
+	if (ap)
 	{
-		free(*ap);
-		*ap = NULL;
+		if (*ap != NULL)
+		{
+			free(*ap);
+			*ap = NULL;
+		}
 	}
 }
