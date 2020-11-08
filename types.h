@@ -121,7 +121,7 @@ typedef	struct 		s_scene
 	t_point			*viewport;
 	int				*index_buf;
 	double 			*depth_buf;
-	int				mode;
+	int				mode; // 0 - default, 1 - normal
 }					t_scene;
 
 #endif

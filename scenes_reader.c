@@ -12,6 +12,13 @@
 
 #include "rtv1.h"
 
+void		add_camera(t_scene *scene, char **description)
+{
+	printf("camera\n");
+	scene->camera = get_camera(description);
+	scene->obj_nmb--;
+}
+
 t_object	*get_parameters(char *name, char **description, t_scene *scene)
 {
 	t_object *obj;
@@ -46,13 +53,6 @@ t_object	*get_parameters(char *name, char **description, t_scene *scene)
 		printf("light\n");
 		obj = get_light(description);
 		scene->light_nmb += 1;
-	}
-	else if (!ft_strcmp(name, "camera"))
-	{
-		printf("camera\n");
-		scene->camera = get_camera(description);
-		scene->obj_nmb--;
-		return (NULL);
 	}
 	else
 		return (NULL);
@@ -116,11 +116,15 @@ t_object	**get_objects(char *buf, t_scene *scene)
 			obj_name = ft_strsub(buf, start, (i - start));
 			// записываем описание объекта
 			obj_desc = get_description(buf, i + 3);
-			// создаем объект и получаем его характеристики
-			objs[n] = get_parameters(obj_name, obj_desc, scene);
-			// плюсуем индекс массива, если объект не камера
-			if (ft_strcmp(obj_name, "camera") != 0)
+			if (!(ft_strequ(obj_name, "camera")))
+			{
+				// создаем объект и получаем его характеристики
+				objs[n] = get_parameters(obj_name, obj_desc, scene);
+				// плюсуем индекс массива, если объект не камера
 				n++;
+			}
+			else if ((ft_strequ(obj_name, "camera")))
+				add_camera(scene, obj_desc);
 			// освобождаем строки
 			ft_memdel(&obj_name);
 			ft_memdel_double(obj_desc);

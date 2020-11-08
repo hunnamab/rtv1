@@ -12,6 +12,22 @@
 
 #include "rtv1.h"
 
+void check_mode(int as, char **av, int *mode)
+{
+	if (as == 2 || (as == 3 && (ft_strequ(av[2], "default"))))
+	 	*mode = 0;
+	else if (as == 3 && (ft_strequ(av[2], "normal")))
+	 	*mode = 1;
+}
+
+void output_description()
+{
+	ft_putstr("usage: ./rtv1 [scene_file] [mode]\n\n");
+	ft_putstr("mode is an optional argument, it should be [default] or [normal]\n");
+	ft_putstr("\tdefault or no argument after scene file's name means the program draws the usual scene\n");
+	ft_putstr("\tnormal means the program draws a normal map of scene's objects\n");
+}
+
 int main(int args, char **argv)
 {
 	int			fd;
@@ -24,10 +40,7 @@ int main(int args, char **argv)
 	scene = malloc(sizeof(t_scene));
 	if (args < 2 || args > 3)
 	{
-		ft_putstr("usage: ./rtv1 [scene_file] [mode]\n\n");
-		ft_putstr("mode is an optional argument, it should be [default] or [normal]\n");
-		ft_putstr("\tdefault or no argument after scene file's name means the program draws the usual scene\n");
-		ft_putstr("\tnormal means the program draws a normal map of scene's objects\n");
+		output_description();
 		return (0);
 	}
 	else
@@ -39,20 +52,16 @@ int main(int args, char **argv)
 		printf("light_nmb = %d\n", scene->light_nmb);
 		scene->objs = get_objects_structures(scene->obj_nmb, buf); // get_structures.c
 		scene->light = get_light_structures(scene->light_nmb, buf); // get_structures.c
-		return (0);
+		//return (0);
 	}
+	check_mode(args, argv, &scene->mode);
 	SDL_Init(SDL_INIT_EVERYTHING);
 	SDL_CreateWindowAndRenderer(WID, HEI, 0, &sdl.win, &sdl.renderer);
 	SDL_RenderClear(sdl.renderer);
 	init_scene(scene);
-	if (args == 2 || (args == 3 && (ft_strcmp(argv[2], "default") == 0)))
-	 	draw_scene(&sdl, scene);
-	else if (args == 3 && (ft_strequ(argv[2], "normal")))
-	 	draw_normal_buf(&sdl, scene);
+	(scene->mode == 0) ? draw_scene(&sdl, scene) : draw_normal_buf(&sdl, scene);
 	while (k)
-	{
 		k = keyboard(&sdl, scene);
-	}
 	clear_scene(scene);
 	SDL_DestroyRenderer(sdl.renderer);
 	SDL_DestroyWindow(sdl.win);
