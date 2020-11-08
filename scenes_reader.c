@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   scenes_reader.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pmetron <pmetron@student.42.fr>            +#+  +:+       +#+        */
+/*   By: hunnamab <hunnamab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/07 15:39:43 by hunnamab          #+#    #+#             */
-/*   Updated: 2020/11/08 18:10:51 by pmetron          ###   ########.fr       */
+/*   Updated: 2020/11/08 20:43:53 by hunnamab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,20 +89,30 @@ t_object	**get_objects(char *buf, t_scene *scene, int len)
 	int			i;
 
 	i = 0;
+	n = 0;
+	start = 0;
 	scene->light_nmb = 0;
-	// выясняем кол-во объектов сцены
 	scene->obj_nmb = 0;
+	if (!brackets(buf))
+	{
+		output_error(6);
+		exit (0);
+	}
+	// выясняем кол-во объектов сцены
 	while (i < len && buf[i])
 	{
 		if (buf[i] == '{')
 			scene->obj_nmb++;
 		i++;
 	}
+	if (scene->obj_nmb == 0)
+	{
+		output_error(0);
+		exit (0);
+	}
 	// создаем массив структур для объектов
 	objs = protected_malloc(sizeof(t_object *), scene->obj_nmb);
 	i = 0;
-	n = 0;
-	start = 0;
 	while (i < len)
 	{
 		if (buf[i + 1] == '{' && n < scene->obj_nmb)
@@ -131,6 +141,11 @@ t_object	**get_objects(char *buf, t_scene *scene, int len)
 		i++;
 	}
 	scene->obj_nmb -= scene->light_nmb;
+	if (scene->obj_nmb == 0)
+	{
+		output_error(0);
+		exit (0);
+	}
 	free(buf);
 	return (objs);
 }
@@ -142,6 +157,11 @@ t_object	**read_scene(int fd, t_scene *scene)
 
 	buf = protected_malloc(sizeof(char), 256000);
 	ret = read(fd, buf, 64000);
+	if (ret == 0)
+	{
+		output_error(3);
+		exit (0);
+	}
 	buf[ret] = '\0';
 	printf("ret %d\n", ret);
 	return (get_objects(buf, scene, ret));

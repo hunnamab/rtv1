@@ -6,7 +6,7 @@
 #    By: hunnamab <hunnamab@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/09/06 17:43:09 by pmetron           #+#    #+#              #
-#    Updated: 2020/11/07 17:10:32 by hunnamab         ###   ########.fr        #
+#    Updated: 2020/11/08 20:32:25 by hunnamab         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,7 +27,7 @@ SRC = ft_atoi.c ft_bzero.c ft_isalnum.c ft_isalpha.c ft_isascii.c \
 		get_double_arr.c ft_bzero_int.c ft_strnew_int.c ft_strnew_double.c \
 		itoa_u_ll.c itoa_oct_ll.c \
 		itoa_bin.c is_even.c is_odd.c ft_pow.c get_last_digit.c \
-		ft_strcpy_alloc.c ft_memdel_double.c
+		ft_strcpy_alloc.c ft_memdel_double.c ft_brackets.c
 
 OBJ = $(subst .c,.o,$(SRC))
 

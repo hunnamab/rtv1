@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rtv1.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pmetron <pmetron@student.42.fr>            +#+  +:+       +#+        */
+/*   By: hunnamab <hunnamab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/07 15:39:34 by hunnamab          #+#    #+#             */
-/*   Updated: 2020/11/08 18:00:00 by pmetron          ###   ########.fr       */
+/*   Updated: 2020/11/08 20:16:55 by hunnamab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ void        copy_point(t_point *dst, t_point *src);
 double      choose_t(double t0, double t1);
 void		clear_default(t_object *obj);
 void		*protected_malloc(unsigned int size, unsigned int nmb);
-//color.c
+// color.c
 void        copy_color(t_color *dst, t_color *src);
 t_color     set_color(uint8_t red, uint8_t green, uint8_t blue, uint8_t alpha);
 void        set_color_zero(t_color *color);
@@ -108,33 +108,36 @@ double	    **rotate_y(double y);
 // get_structures.c
 t_object 	**get_objects_structures(int obj_nmb, t_object **buf);
 t_light 	**get_light_structures(int light_nmb, t_object **buf);
-//buffers.c
+// buffers.c
 void        get_rays_arr(t_scene *scene);
 void     	get_buffers(t_scene *scene);
 void    	get_normal_buf(t_scene *scene);
 void    	get_intersection_buf(t_scene *scene);
 void     	get_closest_points(t_scene *scene);
 void    	get_material_buf(t_scene *scene);
-//normal.c
+// normal.c
 void        get_sphere_normal(t_scene *scene, int index, int obj_num);
 void        get_plane_normal(t_scene *scene, int index, int obj_num);
 void        get_triangle_normal(t_scene *scene, int index, int obj_num);
 void        get_cone_normal(t_scene *scene, int index, int obj_num);
 void        get_cylinder_normal(t_scene *scene, int index, int obj_num);
-//scene.c
+// scene.c
 void        init_scene(t_scene *scene);
 void	    init_raycast(t_scene *scene);
 void	    init_default(t_scene *scene);
 void	    init_deepth(t_scene *scene);
-//keyboard.c
+// keyboard.c
 void        camera_left(t_scene *scene);
 int         keyboard(t_sdl *sdl, t_scene *scene);
 void        camera_up(t_scene *scene);
 void        camera_right(t_scene *scene);
 void        camera_down(t_scene *scene);
-//scene_clear.c
+// scene_clear.c
 void	    clean_scene_default(t_scene *scene);
 void	    clean_scene_deepth(t_scene *scene);
 void	    clean_scene_raycast(t_scene *scene);
+// errors_management.c
+void        output_description();
+void        output_error(int tag);
 
 #endif
