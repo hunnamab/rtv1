@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   vector.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pmetron <pmetron@student.42.fr>            +#+  +:+       +#+        */
+/*   By: hunnamab <hunnamab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/05 21:39:04 by pmetron           #+#    #+#             */
-/*   Updated: 2020/11/05 21:40:26 by pmetron          ###   ########.fr       */
+/*   Updated: 2020/11/08 17:51:26 by hunnamab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,15 +32,8 @@ double		vector_length(t_point *vector)
 
 void		normalize_vector(t_point *v1)
 {
-	double q;
-
-	q = sqrt(v1->x * v1->x + v1->y * v1->y + v1->z + v1->z);
-	if (q != 0)
-	{
-		v1->x /= q;
-		v1->y /= q;
-		v1->z /= q;
-	}
+	vector_div_by_scalar(&v1[0], \
+	vector_length(&v1[0]));
 }
 
 t_point		vector_cross(t_point *v1, t_point *v2)

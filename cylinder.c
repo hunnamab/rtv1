@@ -6,7 +6,7 @@
 /*   By: hunnamab <hunnamab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/07 15:11:46 by pmetron           #+#    #+#             */
-/*   Updated: 2020/11/07 20:26:54 by hunnamab         ###   ########.fr       */
+/*   Updated: 2020/11/08 17:52:11 by hunnamab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,13 +39,26 @@ void		get_cylinder_normal(t_scene *scene, int index, int obj_num)
 {
 	t_cylinder	*cylinder;
 	t_point		*normal;
+	double		m;
+	t_point		p;
+	t_point		buf;
+	t_point		buf2;
 
 	normal = &scene->normal_buf[index];
 	cylinder = (t_cylinder *)scene->objs[obj_num]->data;
-	*normal = vector_sub(&scene->intersection_buf[index], &cylinder->position);
-	normal->y = 0;
+	
+	buf = vector_sub(&scene->ray_buf[index].start, &cylinder->position);
+	m = vector_dot(&scene->ray_buf[index].dir, &cylinder->vec) * \
+		scene->depth_buf[index] + vector_dot(&buf, &cylinder->vec);
+	buf = vector_scale(scene->depth_buf[index], &scene->ray_buf[index].dir);
+	p = vector_add(&scene->ray_buf[index].start, &buf);
+	buf = vector_sub(&p, &cylinder->position);
+	buf2 = vector_scale(m, &cylinder->vec);
+	*normal = vector_sub(&buf, &buf2);
 	scene->normal_buf[index] = vector_div_by_scalar(&scene->normal_buf[index], \
-	vector_length(&scene->normal_buf[index]));
+								vector_length(&scene->normal_buf[index]));
+	if (vector_dot(&scene->ray_buf[index].dir, normal) > 0.0001)
+		*normal = vector_scale(-1, normal);
 }
 
 double		intersect_ray_cylinder(t_ray *r, t_object *object)
@@ -57,16 +70,18 @@ double		intersect_ray_cylinder(t_ray *r, t_object *object)
 	t_cylinder	*cylinder;
 
 	cylinder = (t_cylinder *)object->data;
-	a = r->dir.x * r->dir.x + r->dir.z * r->dir.z;
-	dist.x = r->start.x - cylinder->position.x;
-	dist.z = r->start.z - cylinder->position.z;
-	b = r->dir.x * dist.x + r->dir.z * dist.z;
-	c = dist.x * dist.x + dist.z * dist.z - cylinder->radius * cylinder->radius;
-	c = b * b - a * c;
+	dist = vector_sub(&r->start, &cylinder->position);
+	a = vector_dot(&r->dir, &cylinder->vec);
+	a = vector_dot(&r->dir, &r->dir) - a * a;
+	b = 2 * (vector_dot(&r->dir, &dist) - vector_dot(&r->dir, &cylinder->vec) * \
+		vector_dot(&dist, &cylinder->vec));
+	c = vector_dot(&dist, &cylinder->vec);
+	c = vector_dot(&dist, &dist) - c * c - cylinder->radius * cylinder->radius;
+	c = b * b - 4 * a * c;
 	if (c >= 0)
 	{
 		c = sqrt(c);
-		return (choose_t((-b + c) / a, (-b - c) / a));
+		return (choose_t((-b + c) / (2 * a), (-b - c) / (2 * a)));
 	}
 	return (0);
 }

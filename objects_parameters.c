@@ -6,7 +6,7 @@
 /*   By: hunnamab <hunnamab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/07 15:39:22 by hunnamab          #+#    #+#             */
-/*   Updated: 2020/11/07 21:09:25 by hunnamab         ###   ########.fr       */
+/*   Updated: 2020/11/08 17:56:50 by hunnamab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,16 +117,18 @@ t_object	*get_cone(char **description)
 	t_color		color;
 	t_point		buf;
 	double		rotation[3];
+	double		angle;
 
 	position = get_points(description[0]);
 	vec = get_points(description[1]);
-	buf = get_points(description[2]);
+	angle = ftoi(get_coordinates(description[2]));
+	buf = get_points(description[3]);
 	rotation[0] = buf.x;
 	rotation[1] = buf.y;
 	rotation[2] = buf.z;
-	color = get_color(description[3]);
-	specular = ftoi(get_coordinates(description[4]));
-	cone = new_cone(position, vec, specular, color, rotation);
+	color = get_color(description[4]);
+	specular = ftoi(get_coordinates(description[5]));
+	cone = new_cone(position, vec, specular, color, rotation, angle);
 	return (cone);
 }
 

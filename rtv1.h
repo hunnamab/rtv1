@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rtv1.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pmetron <pmetron@student.42.fr>            +#+  +:+       +#+        */
+/*   By: hunnamab <hunnamab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/07 15:39:34 by hunnamab          #+#    #+#             */
-/*   Updated: 2020/11/08 17:35:41 by pmetron          ###   ########.fr       */
+/*   Updated: 2020/11/08 17:55:34 by hunnamab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ double      intersect_ray_cylinder(t_ray *r, t_object *object);
 t_object	*new_cylinder(t_point position, t_point vec, double radius, double specular, t_color color, double *rotation);
 // cone.c
 double      intersect_ray_cone(t_ray *r, t_object *object);
-t_object    *new_cone(t_point position, t_point vec, double specular, t_color color, double *rotation);
+t_object	*new_cone(t_point position, t_point vec, double specular, t_color color, double *rotation, double angle);
 // ftoi.c
 double   	ftoi(char *str);
 // objects_parameters.c

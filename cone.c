@@ -6,13 +6,13 @@
 /*   By: hunnamab <hunnamab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/07 15:38:39 by hunnamab          #+#    #+#             */
-/*   Updated: 2020/11/07 20:27:09 by hunnamab         ###   ########.fr       */
+/*   Updated: 2020/11/08 17:55:13 by hunnamab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rtv1.h"
 
-t_object	*new_cone(t_point position, t_point vec, double specular, t_color color, double *rotation)
+t_object	*new_cone(t_point position, t_point vec, double specular, t_color color, double *rotation, double angle)
 {
 	t_cone		*new_cone;
 	t_object	*new_object;
@@ -21,6 +21,7 @@ t_object	*new_cone(t_point position, t_point vec, double specular, t_color color
 	new_cone = malloc(sizeof(t_cone));
 	new_cone->position = position;
 	new_cone->vec = vec;
+	new_cone->angle = angle;
 	new_object->rotation[0] = rotation[0];
 	new_object->rotation[1] = rotation[1];
 	new_object->rotation[2] = rotation[2];
@@ -66,17 +67,21 @@ double		intersect_ray_cone(t_ray *r, t_object *object)
 	t_cone	*cone;
 
 	cone = (t_cone *)object->data;
-	double tan = ((double)1 / (double)2) * ((double)1 / (double)2);
-	a = r->dir.x * r->dir.x + r->dir.z * r->dir.z - (tan * (r->dir.y * r->dir.y));
 	dist = vector_sub(&r->start, &cone->position);
-	dist.y = (double)2 - r->start.y + cone->position.y;
-	b = 2 * dist.x * r->dir.x + 2 * dist.z * r->dir.z + (2 * tan * dist.y * r->dir.y);
-	c = dist.x * dist.x + dist.z * dist.z - (tan * (dist.y * dist.y));
-	c = b * b - 4 * a * c;
-	if (c >= 0)
-	{
-		c = sqrt(c);
-		return (choose_t((-b + c) / (2 * a), (-b - c) / (2 * a)));
-	}
+	a = vector_dot(&r->dir, &cone->vec);
+	
+	
+	// double tan = ((double)1 / (double)2) * ((double)1 / (double)2);
+	// a = r->dir.x * r->dir.x + r->dir.z * r->dir.z - (tan * (r->dir.y * r->dir.y));
+	// dist = vector_sub(&r->start, &cone->position);
+	// dist.y = (double)2 - r->start.y + cone->position.y;
+	// b = 2 * dist.x * r->dir.x + 2 * dist.z * r->dir.z + (2 * tan * dist.y * r->dir.y);
+	// c = dist.x * dist.x + dist.z * dist.z - (tan * (dist.y * dist.y));
+	// c = b * b - 4 * a * c;
+	// if (c >= 0)
+	// {
+	// 	c = sqrt(c);
+	// 	return (choose_t((-b + c) / (2 * a), (-b - c) / (2 * a)));
+	// }
 	return (0);
 }
