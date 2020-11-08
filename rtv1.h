@@ -24,6 +24,9 @@
 # include "matrix_lib/matrix.h"
 # include "types.h"
 
+# define ABS(x)		(x) > 0 ? (x) : -(x)
+# define DROUND(d)	ABS(d) < 0.00001 ? 0 : (d)
+
 # define WID 640
 # define HEI 640
 

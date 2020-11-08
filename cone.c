@@ -16,6 +16,7 @@ t_object	*new_cone(t_point position, t_point vec, double specular, t_color color
 {
 	t_cone		*new_cone;
 	t_object	*new_object;
+	double		**matrix;
 
 	new_object = malloc(sizeof(t_object));
 	new_cone = malloc(sizeof(t_cone));
@@ -25,6 +26,9 @@ t_object	*new_cone(t_point position, t_point vec, double specular, t_color color
 	new_object->rotation[0] = rotation[0];
 	new_object->rotation[1] = rotation[1];
 	new_object->rotation[2] = rotation[2];
+	matrix = get_rotation_matrix(new_object->rotation);
+	transform(&new_cone->vec, matrix, 1);
+	matr_free(matrix, 4);
 	new_object->specular = specular;
 	new_object->color = color;
 	new_object->data = (void *)new_cone;
@@ -74,6 +78,7 @@ double		intersect_ray_cone(t_ray *r, t_object *object)
 	c = vector_dot(&dist, &cone->vec);
 	c = vector_dot(&dist, &dist) - (1 + cone->angle * cone->angle) * c * c;
 	c = b * b - 4 * a * c;
+	c = DROUND(c);
 	if (c >= 0)
 	{
 		c = sqrt(c);

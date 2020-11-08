@@ -16,6 +16,7 @@ t_object	*new_cylinder(t_point position, t_point vec, double radius, double spec
 {
 	t_cylinder	*new_cylinder;
 	t_object	*new_object;
+	double		**matrix;
 
 	new_object = protected_malloc(sizeof(t_object), 1);
 	new_cylinder = protected_malloc(sizeof(t_cylinder), 1);
@@ -26,6 +27,9 @@ t_object	*new_cylinder(t_point position, t_point vec, double radius, double spec
 	new_object->rotation[0] = rotation[0];
 	new_object->rotation[1] = rotation[1];
 	new_object->rotation[2] = rotation[2];
+	matrix = get_rotation_matrix(new_object->rotation);
+	transform(&new_cylinder->vec, matrix, 1);
+	matr_free(matrix, 4);
 	new_object->color = color;
 	new_object->data = (void *)new_cylinder;
 	new_object->tag = "cylinder";

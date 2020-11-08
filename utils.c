@@ -56,7 +56,7 @@ double		choose_t(double t0, double t1)
 		result = t1;
 	if ((t0 < t1 && t0 > 0) || (t1 < 0 && t0 >= 0))
 		result = t0;
-	if (t0 == t1 && t0 > 0)
+	if (t0 == t1 && t0 >= 0)
 		result = t0;
 	return (result);
 }

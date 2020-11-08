@@ -79,7 +79,7 @@ char		**get_description(char *scene, int i)
 	return (description);
 }
 
-t_object	**get_objects(char *buf, t_scene *scene)
+t_object	**get_objects(char *buf, t_scene *scene, int len)
 {
 	t_object	**objs;
 	char		*obj_name;
@@ -87,13 +87,12 @@ t_object	**get_objects(char *buf, t_scene *scene)
 	int			start;
 	int			n;
 	int			i;
-	int			len;
 
 	i = 0;
 	scene->light_nmb = 0;
-	len = ft_strlen(buf);
 	// выясняем кол-во объектов сцены
-	while (i < len)
+	scene->obj_nmb = 0;
+	while (i < len && buf[i])
 	{
 		if (buf[i] == '{')
 			scene->obj_nmb++;
@@ -132,16 +131,18 @@ t_object	**get_objects(char *buf, t_scene *scene)
 		i++;
 	}
 	scene->obj_nmb -= scene->light_nmb;
+	free(buf);
 	return (objs);
 }
 
 t_object	**read_scene(int fd, t_scene *scene)
 {
 	int		ret;
-	char	buf[64000];
+	char	*buf;
 
+	buf = protected_malloc(sizeof(char), 256000);
 	ret = read(fd, buf, 64000);
 	buf[ret] = '\0';
 	printf("ret %d\n", ret);
-	return (get_objects(buf, scene));
+	return (get_objects(buf, scene, ret));
 }

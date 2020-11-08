@@ -42,7 +42,7 @@ t_object	**get_objects_structures(int obj_nmb, t_object **buf)
 	int			j;
 	t_object	**objs;
 
-	objs = protected_malloc(sizeof(t_object *) , obj_nmb);
+	objs = protected_malloc(sizeof(t_object *), obj_nmb);
 	i = 0;
 	j = 0;
 	while (j < obj_nmb)
