@@ -6,11 +6,23 @@
 /*   By: pmetron <pmetron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/05 21:37:58 by pmetron           #+#    #+#             */
-/*   Updated: 2020/11/07 19:19:44 by pmetron          ###   ########.fr       */
+/*   Updated: 2020/11/08 18:07:27 by pmetron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rtv1.h"
+
+void		*protected_malloc(unsigned int size, unsigned int nmb)
+{
+	void *result;
+
+	if (!(result = malloc(size * nmb)))
+	{
+		ft_putstr("Malloc error, memory was nor allocated");
+		exit(0);
+	}
+	return(result);
+}
 
 void		clear_default(t_object *obj)
 {
@@ -57,7 +69,7 @@ t_point		*get_viewport(t_camera *camera)
 	double	k;
 
 	k = (double)WID / (double)HEI;
-	viewport = malloc(sizeof(t_point) * (WID * HEI));
+	viewport = protected_malloc(sizeof(t_point), (WID * HEI));
 	x = 0;
 	y = 0;
 	while (y < HEI)

@@ -6,7 +6,7 @@
 /*   By: pmetron <pmetron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/07 14:22:24 by pmetron           #+#    #+#             */
-/*   Updated: 2020/11/07 22:14:25 by pmetron          ###   ########.fr       */
+/*   Updated: 2020/11/08 18:06:10 by pmetron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,8 @@ t_object	*new_plane(t_point point, t_point normal, double specular, t_color colo
 	t_object	*new_object;
 	double		**matrix;
 
-	new_object = malloc(sizeof(t_object));
-	new_plane = malloc(sizeof(t_plane));
+	new_object = protected_malloc(sizeof(t_object), 1);
+	new_plane = protected_malloc(sizeof(t_plane), 1);
 	new_plane->normal = normal;
 	normalize_vector(&new_plane->normal);
 	new_plane->point = point;

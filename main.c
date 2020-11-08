@@ -6,7 +6,7 @@
 /*   By: pmetron <pmetron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/07 15:39:02 by hunnamab          #+#    #+#             */
-/*   Updated: 2020/11/08 17:35:27 by pmetron          ###   ########.fr       */
+/*   Updated: 2020/11/08 18:00:49 by pmetron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ int main(int args, char **argv)
 	int			k;
 
 	k = 1;
-	scene = malloc(sizeof(t_scene));
+	scene = (t_scene *)protected_malloc(sizeof(t_scene), 1);
 	if (args < 2 || args > 3)
 	{
 		output_description();

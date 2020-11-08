@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   scenes_reader.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hunnamab <hunnamab@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pmetron <pmetron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/07 15:39:43 by hunnamab          #+#    #+#             */
-/*   Updated: 2020/11/07 22:41:42 by hunnamab         ###   ########.fr       */
+/*   Updated: 2020/11/08 18:10:51 by pmetron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,11 +100,7 @@ t_object	**get_objects(char *buf, t_scene *scene)
 		i++;
 	}
 	// создаем массив структур для объектов
-	if (!(objs = malloc(sizeof(t_object *) * scene->obj_nmb)))
-	{
-		printf("cannot allocate memory for objs\n");
-		return (NULL);
-	}
+	objs = protected_malloc(sizeof(t_object *), scene->obj_nmb);
 	i = 0;
 	n = 0;
 	start = 0;

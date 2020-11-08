@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_structures.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hunnamab <hunnamab@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pmetron <pmetron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/07 15:38:51 by hunnamab          #+#    #+#             */
-/*   Updated: 2020/11/07 22:33:34 by hunnamab         ###   ########.fr       */
+/*   Updated: 2020/11/08 18:03:19 by pmetron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ t_light		**get_light_structures(int light_nmb, t_object **buf)
 	int		j;
 	t_light	**light;
 
-	light = malloc(sizeof(t_light *) * light_nmb);
+	light = protected_malloc(sizeof(t_light *), light_nmb);
 	i = 0;
 	j = 0;
 	while (j < light_nmb)
@@ -42,7 +42,7 @@ t_object	**get_objects_structures(int obj_nmb, t_object **buf)
 	int			j;
 	t_object	**objs;
 
-	objs = malloc(sizeof(t_object *) * obj_nmb);
+	objs = protected_malloc(sizeof(t_object *) , obj_nmb);
 	i = 0;
 	j = 0;
 	while (j < obj_nmb)

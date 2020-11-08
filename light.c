@@ -6,7 +6,7 @@
 /*   By: pmetron <pmetron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/07 14:23:24 by pmetron           #+#    #+#             */
-/*   Updated: 2020/11/07 14:32:38 by pmetron          ###   ########.fr       */
+/*   Updated: 2020/11/08 18:05:35 by pmetron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ t_light		*new_light(t_point position, t_point direction, const char *type)
 {
 	t_light *new_light;
 
-	new_light = malloc(sizeof(t_light));
+	new_light = protected_malloc(sizeof(t_light), 1);
 	new_light->type = ft_strcpy_alloc(new_light->type, type);
 	if (ft_strequ(new_light->type, "point"))
 		new_light->intensity = 0.2;

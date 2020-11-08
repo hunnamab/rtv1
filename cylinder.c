@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cylinder.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hunnamab <hunnamab@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pmetron <pmetron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/07 15:11:46 by pmetron           #+#    #+#             */
-/*   Updated: 2020/11/08 17:52:11 by hunnamab         ###   ########.fr       */
+/*   Updated: 2020/11/08 18:05:10 by pmetron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@ t_object	*new_cylinder(t_point position, t_point vec, double radius, double spec
 	t_cylinder	*new_cylinder;
 	t_object	*new_object;
 
-	new_object = malloc(sizeof(t_object));
-	new_cylinder = malloc(sizeof(t_cylinder));
+	new_object = protected_malloc(sizeof(t_object), 1);
+	new_cylinder = protected_malloc(sizeof(t_cylinder), 1);
 	new_cylinder->position = position;
 	new_cylinder->radius = radius;
 	new_cylinder->vec = vec;

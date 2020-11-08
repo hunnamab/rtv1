@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   objects_parameters.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hunnamab <hunnamab@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pmetron <pmetron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/07 15:39:22 by hunnamab          #+#    #+#             */
-/*   Updated: 2020/11/08 17:56:50 by hunnamab         ###   ########.fr       */
+/*   Updated: 2020/11/08 18:08:18 by pmetron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -198,7 +198,7 @@ t_object	*get_light(char **description)
 	t_point		direction;
 	char		*type;
 
-	light = malloc(sizeof(t_object));
+	light = protected_malloc(sizeof(t_object), 1);
 	type = get_light_type(description[0]);
 	printf("light type = |%s|\n", type);
 	position.x = 0.0;
@@ -223,7 +223,6 @@ t_camera	get_camera(char **description)
 	t_point		buf;
 	double		**matrix;
 
-	//camera = malloc(sizeof(t_camera));
 	camera.position = get_points(description[0]);
 	buf = get_points(description[1]);
 	camera.rotation[0] = buf.x;
