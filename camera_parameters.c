@@ -24,15 +24,3 @@ t_camera	get_camera(char **description)
 	camera.rotation[2] = buf.z;
 	return (camera);
 }
-
-void		add_camera(t_scene *scene, char **description, int *camera)
-{
-	int nmb;
-
-	nmb = 0;
-	printf("camera\n");
-	scene->camera = get_camera(description);
-	scene->obj_nmb--;
-	nmb = *camera + 1;
-	*camera = nmb;
-}

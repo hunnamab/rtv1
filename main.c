@@ -28,7 +28,6 @@ int		main(int args, char **argv)
 {
 	int			fd;
 	t_sdl		sdl;
-	t_object	**buf;
 	t_scene		*scene;
 	int			k;
 
@@ -42,12 +41,12 @@ int		main(int args, char **argv)
 	else
 	{
 		fd = open(argv[1], O_RDONLY);
-		buf = read_scene(fd, scene); // scene_reader.c
+		read_scene(fd, scene); // scene_reader.c
 		close(fd);
 		printf("obj_nmb = %d\n", scene->obj_nmb);
 		printf("light_nmb = %d\n", scene->light_nmb);
-		scene->objs = get_objects_structures(scene->obj_nmb, buf); // get_structures.c
-		scene->light = get_light_structures(scene->light_nmb, buf); // get_structures.c
+		//scene->objs = get_objects_structures(scene->obj_nmb, buf); // get_structures.c
+		//scene->light = get_light_structures(scene->light_nmb, buf); // get_structures.c
 		//return (0);
 	}
 	check_mode(args, argv, &scene->mode);

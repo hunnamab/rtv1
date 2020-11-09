@@ -30,7 +30,7 @@
 # define HEI 640
 
 // scenes_reader.c
-t_object	**read_scene(int fd, t_scene *scene);
+void		read_scene(int fd, t_scene *scene);
 // settings.c
 void		sphere_settings(t_sphere *s, t_ray *r);
 // draw.c
@@ -97,9 +97,8 @@ t_object	*get_plane(char **description);
 t_object	*get_cylinder(char **description);
 t_object	*get_cone(char **description);
 // light_parameters.c
-t_object	*get_light(char **description);
+t_light		*get_light(char **description);
 // camera_parameters.c
-void		add_camera(t_scene *scene, char **description, int *camera);
 t_camera	get_camera(char **description);
 // parameters_utils.c
 char		*get_coordinates(char *description);

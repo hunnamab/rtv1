@@ -23,7 +23,7 @@ char		*get_light_type(char *description)
 		output_error(5);
 	i = 0;
 	len = ft_strlen(description);
-	while (description[i] != ':' && description != '\0')
+	while (description[i] != ':' && description[i] != '\0')
 		i++;
 	i++;
 	type = ft_strsub(description, i, len - i);
@@ -32,14 +32,14 @@ char		*get_light_type(char *description)
 	return (buf);
 }
 
-t_object	*get_light(char **description)
+t_light		*get_light(char **description)
 {
-	t_object	*light;
+	t_light		*light;
 	t_point		position;
 	t_point		direction;
 	char		*type;
 
-	light = protected_malloc(sizeof(t_object), 1);
+	light = NULL;
 	type = get_light_type(description[0]);
 	printf("light type = |%s|\n", type);
 	position.x = 0.0;
@@ -54,8 +54,7 @@ t_object	*get_light(char **description)
 		direction = get_points(description[1]);
 	else if (!(ft_strequ(type, "ambient")))
 		output_error(5);
-	light->data = (void *)new_light(position, direction, (const char *)type);
-	light->tag = ft_strdup("light");
+	light = new_light(position, direction, type);
 	free(type);
 	return (light);
 }

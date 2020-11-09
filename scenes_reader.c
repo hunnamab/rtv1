@@ -42,12 +42,6 @@ t_object	*get_parameters(char *name, char **description, t_scene *scene)
 		printf("cone\n");
 		obj = get_cone(description);
 	}
-	else if (ft_strequ(name, "light"))
-	{
-		printf("light\n");
-		obj = get_light(description);
-		scene->light_nmb += 1;
-	}
 	else
 		output_error(4);
 	return (obj);
@@ -95,46 +89,91 @@ int			count_objects(int len, char *buf)
 	return (obj_nmb);
 }
 
-t_object	**get_objects(char *buf, t_scene *scene, int len)
+void	split_objects(int len, int *obj_nmb, int *light_nmb, char *buf)
 {
-	t_object	**objs;
+	char	*obj_name;
+	int		obj;
+	int		light;
+	int		i;
+	int		start;
+	int		camera;
+
+	i = 0;
+	obj = *obj_nmb;
+	light = 0;
+	start = 0;
+	camera = 0;
+	while (i < len)
+	{
+		if (buf[i + 1] == '{' && obj > 0)
+		{
+			if (!(obj_name = ft_strsub(buf, start, (i - start))))
+				output_error(6);
+			if (ft_strequ(obj_name, "light"))
+				light++;
+			if (ft_strequ(obj_name, "camera"))
+				camera++;
+			ft_memdel(&obj_name);
+			while (buf[i] != '}')
+				i++;
+			start = i + 3;
+			obj--;
+		}
+		i++;
+	}
+	obj = *obj_nmb;
+	obj = obj - light - camera;
+	if (obj < 1 || light < 1 || camera != 1)
+		output_error(0);
+	*obj_nmb = obj;
+	*light_nmb = light;
+}
+
+void	get_objects(char *buf, t_scene *scene, int len)
+{
 	char		*obj_name;
 	char		**obj_desc;
 	int			start;
 	int			n;
+	int			m;
 	int			i;
-	int			camera;
 
 	i = 0;
 	n = 0;
+	m = 0;
 	start = 0;
-	camera = 0;
 	scene->light_nmb = 0;
 	scene->obj_nmb = 0;
 	if (!brackets(buf))
 		output_error(6);
 	// выясняем кол-во объектов сцены
 	scene->obj_nmb = count_objects(len, buf);
+	split_objects(len, &scene->obj_nmb, &scene->light_nmb, buf); //printf("objs = %d\nlight = %d\n", scene->obj_nmb, scene->light_nmb);
 	// создаем массив структур для объектов
-	objs = protected_malloc(sizeof(t_object *), scene->obj_nmb);
+	scene->objs = protected_malloc(sizeof(t_object *), scene->obj_nmb);
+	scene->light = protected_malloc(sizeof(t_light *), scene->light_nmb);
 	while (i < len)
 	{
-		if (buf[i + 1] == '{' && n < scene->obj_nmb)
+		if (buf[i + 1] == '{')
 		{
 			// записываем название объекта
-			if (!(obj_name = ft_strsub(buf, start, (i - start))))
-				output_error(6);
+			obj_name = ft_strsub(buf, start, (i - start));
 			// записываем описание объекта
 			obj_desc = get_description(buf, i + 3);
-			if (!(ft_strequ(obj_name, "camera")))
+			if (!(ft_strequ(obj_name, "camera")) && !(ft_strequ(obj_name, "light")))
 			{
 				// создаем объект и получаем его характеристики
-				objs[n] = get_parameters(obj_name, obj_desc, scene);
+				scene->objs[n] = get_parameters(obj_name, obj_desc, scene);
 				// плюсуем индекс массива, если объект не камера
 				n++;
 			}
 			else if ((ft_strequ(obj_name, "camera")))
-				add_camera(scene, obj_desc, &camera);
+				scene->camera = get_camera(obj_desc);
+			else if ((ft_strequ(obj_name, "light")))
+			{
+				scene->light[m] = get_light(obj_desc);
+				m++;
+			}
 			// освобождаем строки
 			ft_memdel(&obj_name);
 			ft_memdel_double(obj_desc);
@@ -145,18 +184,10 @@ t_object	**get_objects(char *buf, t_scene *scene, int len)
 		}
 		i++;
 	}
-	if (scene->light_nmb == 0)
-		output_error(1);
-	if (camera != 1)
-		output_error(2);
-	scene->obj_nmb -= scene->light_nmb;
-	if (scene->obj_nmb == 0)
-		output_error(0);
 	ft_memdel(&buf);
-	return (objs);
 }
 
-t_object	**read_scene(int fd, t_scene *scene)
+void	read_scene(int fd, t_scene *scene)
 {
 	int		ret;
 	char	*buf;
@@ -167,5 +198,5 @@ t_object	**read_scene(int fd, t_scene *scene)
 		output_error(3);
 	buf[ret] = '\0';
 	printf("ret %d\n", ret);
-	return (get_objects(buf, scene, ret));
+	get_objects(buf, scene, ret);
 }
