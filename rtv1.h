@@ -41,7 +41,7 @@ void		draw_deepth_buf(t_sdl *sdl, t_scene *scene);
 void		draw_raycast(t_sdl *sdl, t_scene *scene);
 // light.c
 t_color		reflection_color(t_scene *scene, int index);
-t_light		*new_light(t_point position, t_point direction, const char *type);
+t_light		*new_light(t_point position, t_point direction, const char *type, double intensity);
 t_point		get_light_vec(t_scene *scene, int index, double *i, int j);
 double		get_specular(t_scene *scene, int index, int j, t_point *l);
 int			in_shadow(t_scene *scene, int index, t_point l, t_point l_pos);

@@ -97,10 +97,12 @@ plane {
 light {
     type: point
     position: -3, 1, 0
+    intensity: 0.4
 }
 
 light {
     type: point
     position: 3, 1, 0
+    intensity: 0.4
 }
 

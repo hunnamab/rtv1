@@ -16,8 +16,10 @@ camera {
 light {
     type: point
     position: 100, 10, -20
+    intensity: 0.4
 }
 
 light {
     type: ambient
+    intensity: 0.2
 }

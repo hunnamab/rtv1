@@ -99,14 +99,17 @@ cone {
 
 light {
     type: ambient
+    intensity: 0.2
 }
 
 light {
     type: point
     position: 10, 10, -30
+    intensity: 0.4
 }
 
 light {
     type: point
     position: -200, 0, -50
+    intensity: 0.4
 }

@@ -1,6 +1,7 @@
 light {
     type: point
     position: 100, 10, -20
+    intensity: 0.4
 }
 sphere {
     center: 0, 0, 0
@@ -11,6 +12,7 @@ sphere {
 }
 light {
     type: ambient
+    intensity: 0.2
 }
 camera {
     position: 0, 2, -1000

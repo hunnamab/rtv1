@@ -37,6 +37,7 @@ t_light		*get_light(char **description)
 	t_light		*light;
 	t_point		position;
 	t_point		direction;
+	double		intensity;
 	char		*type;
 
 	light = NULL;
@@ -49,12 +50,20 @@ t_light		*get_light(char **description)
 	direction.y = 0.0;
 	direction.z = 0.0;
 	if (ft_strequ(type, "point"))
+	{
 		position = get_points(description[1]);
+		intensity = ftoi(get_coordinates(description[2]));
+	}
 	else if (ft_strequ(type, "directional"))
+	{
 		direction = get_points(description[1]);
-	else if (!(ft_strequ(type, "ambient")))
+		intensity = ftoi(get_coordinates(description[2]));
+	}
+	else if (ft_strequ(type, "ambient"))
+		intensity = ftoi(get_coordinates(description[1]));
+	else
 		output_error(5);
-	light = new_light(position, direction, type);
+	light = new_light(position, direction, type, intensity);
 	free(type);
 	return (light);
 }

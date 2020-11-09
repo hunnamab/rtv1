@@ -43,16 +43,19 @@ triangle {
 
 light {
     type: ambient
+    intensity: 0.2
 }
 
 light {
     type: point
     position: 100, 10, -20
+    intensity: 0.4
 }
 
 light {
     type: directional
     direction: 20, 20, 100
+    intensity: 0.4
 }
 
 camera {

@@ -12,16 +12,13 @@
 
 #include "rtv1.h"
 
-t_light		*new_light(t_point position, t_point direction, const char *type)
+t_light		*new_light(t_point position, t_point direction, const char *type, double intensity)
 {
 	t_light *new_light;
 
 	new_light = protected_malloc(sizeof(t_light), 1);
 	new_light->type = ft_strcpy_alloc(new_light->type, type);
-	if (ft_strequ(new_light->type, "point"))
-		new_light->intensity = 0.6;
-	else
-		new_light->intensity = 0.2;
+	new_light->intensity = intensity;
 	new_light->position = position;
 	new_light->direction = direction;
 	return (new_light);

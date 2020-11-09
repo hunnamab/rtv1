@@ -9,10 +9,12 @@ sphere {
 light {
     type: point
     position: 10, 10, -10
+    intensity: 0.8
 }
 
 light {
     type: ambient
+    intensity: 0.2
 }
 
 camera {
