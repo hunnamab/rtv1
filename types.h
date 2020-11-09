@@ -6,21 +6,20 @@
 /*   By: hunnamab <hunnamab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/07 15:39:58 by hunnamab          #+#    #+#             */
-/*   Updated: 2020/11/08 17:54:50 by hunnamab         ###   ########.fr       */
+/*   Updated: 2020/11/09 12:46:13 by hunnamab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef TYPES_H
 # define TYPES_H
 # include <stdint.h>
-//# include <SDL2/SDL.h>
 
-typedef struct 		s_sdl
+typedef struct		s_sdl
 {
 	SDL_Window		*win;
 	SDL_Renderer	*renderer;
 	SDL_Event		event;
-}                	t_sdl;
+}					t_sdl;
 
 typedef struct		s_point
 {
@@ -35,7 +34,7 @@ typedef struct		s_ray
 	t_point			dir;
 }					t_ray;
 
-typedef	struct 		s_color
+typedef	struct		s_color
 {
 	uint8_t			red;
 	uint8_t			green;
@@ -48,10 +47,10 @@ typedef	struct		s_light
 	double			intensity;
 	t_point			position;
 	t_point			direction;
-	const char 		*type;
+	const char		*type;
 }					t_light;
 
-typedef	struct 		s_sphere
+typedef	struct		s_sphere
 {
 	t_point			center;
 	double			radius;
@@ -64,14 +63,14 @@ typedef struct		s_plane
 	double			d;
 }					t_plane;
 
-typedef	struct 		s_cylinder
+typedef	struct		s_cylinder
 {
 	t_point			position;
 	t_point			vec;
 	double			radius;
 }					t_cylinder;
 
-typedef	struct 		s_cone
+typedef	struct		s_cone
 {
 	t_point			position;
 	t_point			vec;
@@ -90,7 +89,7 @@ typedef struct		s_camera
 	double			rotation[3];
 }					t_camera;
 
-typedef	struct 		s_material
+typedef	struct		s_material
 {
 	t_color			color;
 	double			specular;
@@ -103,25 +102,25 @@ typedef	struct		s_object3d
 	double			rotation[3];
 	t_color			color;
 	double			specular;
-    double          (*get_normal)(struct s_scene *, int , int);
+	double			(*get_normal)(struct s_scene *, int, int);
 	double			(*intersect)(t_ray *, struct s_object3d *);
 	void			(*clear_obj)(struct s_object3d *);
 }					t_object;
 
-typedef	struct 		s_scene
+typedef	struct		s_scene
 {
-	t_object 		**objs;
-	int 			obj_nmb;
+	t_object		**objs;
+	int				obj_nmb;
 	t_point			*normal_buf;
-	t_material 		*material_buf;
-	t_point 		*intersection_buf;
-	t_ray 			*ray_buf;
-	t_light 		**light;
-	int 			light_nmb;
+	t_material		*material_buf;
+	t_point			*intersection_buf;
+	t_ray			*ray_buf;
+	t_light			**light;
+	int				light_nmb;
 	t_camera		camera;
 	t_point			*viewport;
 	int				*index_buf;
-	double 			*depth_buf;
+	double			*depth_buf;
 	int				mode; // 0 - default, 1 - normal, 2 - depth, 3 - flat_light
 	void			(*init[4])(struct s_scene *);
 	void			(*draw[4])(t_sdl *, struct s_scene *);

@@ -6,23 +6,11 @@
 /*   By: hunnamab <hunnamab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/07 15:39:43 by hunnamab          #+#    #+#             */
-/*   Updated: 2020/11/09 12:18:53 by hunnamab         ###   ########.fr       */
+/*   Updated: 2020/11/09 12:34:53 by hunnamab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rtv1.h"
-
-void		add_camera(t_scene *scene, char **description, int *camera)
-{
-	int nmb;
-
-	nmb = 0;
-	printf("camera\n");
-	scene->camera = get_camera(description);
-	scene->obj_nmb--;
-	nmb = *camera + 1;
-	*camera = nmb;
-}
 
 t_object	*get_parameters(char *name, char **description, t_scene *scene)
 {
@@ -88,6 +76,24 @@ char		**get_description(char *scene, int i)
 	return (description);
 }
 
+int			count_objects(int len, char *buf)
+{
+	int i;
+	int obj_nmb;
+
+	i = 0;
+	obj_nmb = 0;
+	while (i < len && buf[i])
+	{
+		if (buf[i] == '{')
+			obj_nmb++;
+		i++;
+	}
+	if (obj_nmb == 0)
+		output_error(0);
+	return (obj_nmb);
+}
+
 t_object	**get_objects(char *buf, t_scene *scene, int len)
 {
 	t_object	**objs;
@@ -103,21 +109,12 @@ t_object	**get_objects(char *buf, t_scene *scene, int len)
 	start = 0;
 	camera = 0;
 	scene->light_nmb = 0;
-	scene->obj_nmb = 0;
 	if (!brackets(buf))
 		output_error(6);
 	// выясняем кол-во объектов сцены
-	while (i < len && buf[i])
-	{
-		if (buf[i] == '{')
-			scene->obj_nmb++;
-		i++;
-	}
-	if (scene->obj_nmb == 0)
-		output_error(0);
+	scene->obj_nmb = count_objects(len, buf);
 	// создаем массив структур для объектов
 	objs = protected_malloc(sizeof(t_object *), scene->obj_nmb);
-	i = 0;
 	while (i < len)
 	{
 		if (buf[i + 1] == '{' && n < scene->obj_nmb)

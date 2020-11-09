@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pmetron <pmetron@student.42.fr>            +#+  +:+       +#+        */
+/*   By: hunnamab <hunnamab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/05 21:37:58 by pmetron           #+#    #+#             */
-/*   Updated: 2020/11/08 18:07:27 by pmetron          ###   ########.fr       */
+/*   Updated: 2020/11/09 12:46:52 by hunnamab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,10 @@ void		*protected_malloc(unsigned int size, unsigned int nmb)
 
 	if (!(result = malloc(size * nmb)))
 	{
-		ft_putstr("Malloc error, memory was nor allocated");
+		ft_putstr("Malloc error, memory was nor allocated\n");
 		exit(0);
 	}
-	return(result);
+	return (result);
 }
 
 void		clear_default(t_object *obj)

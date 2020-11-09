@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   triangle.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pmetron <pmetron@student.42.fr>            +#+  +:+       +#+        */
+/*   By: hunnamab <hunnamab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/05 21:42:26 by pmetron           #+#    #+#             */
-/*   Updated: 2020/11/08 18:07:12 by pmetron          ###   ########.fr       */
+/*   Updated: 2020/11/09 12:43:24 by hunnamab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ t_object	*new_triangle(t_point *vertex, double specular, t_color color, double *
 	t_object	*new_object;
 	t_point		edge1;
 	t_point		edge2;
-	double 		**matrix;
+	double		**matrix;
 
 	new_object = protected_malloc(sizeof(t_object), 1);
 	new_triangle = protected_malloc(sizeof(t_triangle), 1);

@@ -6,7 +6,7 @@
 /*   By: hunnamab <hunnamab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/09 12:00:26 by hunnamab          #+#    #+#             */
-/*   Updated: 2020/11/09 12:00:47 by hunnamab         ###   ########.fr       */
+/*   Updated: 2020/11/09 12:34:17 by hunnamab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,4 +23,16 @@ t_camera	get_camera(char **description)
 	camera.rotation[1] = buf.y;
 	camera.rotation[2] = buf.z;
 	return (camera);
+}
+
+void		add_camera(t_scene *scene, char **description, int *camera)
+{
+	int nmb;
+
+	nmb = 0;
+	printf("camera\n");
+	scene->camera = get_camera(description);
+	scene->obj_nmb--;
+	nmb = *camera + 1;
+	*camera = nmb;
 }

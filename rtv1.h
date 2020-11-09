@@ -6,7 +6,7 @@
 /*   By: hunnamab <hunnamab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/07 15:39:34 by hunnamab          #+#    #+#             */
-/*   Updated: 2020/11/09 12:12:41 by hunnamab         ###   ########.fr       */
+/*   Updated: 2020/11/09 12:34:46 by hunnamab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,6 +99,7 @@ t_object	*get_cone(char **description);
 // light_parameters.c
 t_object	*get_light(char **description);
 // camera_parameters.c
+void		add_camera(t_scene *scene, char **description, int *camera);
 t_camera	get_camera(char **description);
 // parameters_utils.c
 char		*get_coordinates(char *description);

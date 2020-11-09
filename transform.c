@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   transform.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pmetron <pmetron@student.42.fr>            +#+  +:+       +#+        */
+/*   By: hunnamab <hunnamab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/05 22:17:09 by pmetron           #+#    #+#             */
-/*   Updated: 2020/11/08 18:06:55 by pmetron          ###   ########.fr       */
+/*   Updated: 2020/11/09 12:42:41 by hunnamab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ double	*get_three_doubles(double x, double y, double z)
 {
 	double	*angles;
 
-	angles = protected_malloc(sizeof(double) , 3);
+	angles = protected_malloc(sizeof(double), 3);
 	angles[0] = x;
 	angles[1] = y;
 	angles[2] = z;
