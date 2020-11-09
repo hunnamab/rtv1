@@ -6,7 +6,7 @@
 /*   By: hunnamab <hunnamab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/07 15:38:39 by hunnamab          #+#    #+#             */
-/*   Updated: 2020/11/08 18:13:59 by hunnamab         ###   ########.fr       */
+/*   Updated: 2020/11/09 11:20:04 by hunnamab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ t_object	*new_cone(t_point position, t_point vec, double specular, t_color color
 	new_object->intersect = &intersect_ray_cone;
 	new_object->get_normal = &get_cone_normal;
 	new_object->clear_obj = &clear_default;
-	return(new_object);
+	return (new_object);
 }
 
 void		get_cone_normal(t_scene *scene, int index, int obj_num)
@@ -49,8 +49,8 @@ void		get_cone_normal(t_scene *scene, int index, int obj_num)
 	normal = &scene->normal_buf[index];
 	cone = (t_cone *)scene->objs[obj_num]->data;
 	buf = vector_sub(&scene->ray_buf[index].start, &cone->position);
-	m = vector_dot(&scene->ray_buf[index].dir, &cone->vec) * scene->depth_buf[index] \
-		+ vector_dot(&buf, &cone->vec);
+	m = vector_dot(&scene->ray_buf[index].dir, &cone->vec) * \
+					scene->depth_buf[index] + vector_dot(&buf, &cone->vec);
 	buf = vector_scale(m, &cone->vec);
 	*normal = vector_scale((1 + cone->angle * cone->angle), &buf);
 	buf = vector_sub(&scene->intersection_buf[index], &cone->position);

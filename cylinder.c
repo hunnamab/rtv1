@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cylinder.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pmetron <pmetron@student.42.fr>            +#+  +:+       +#+        */
+/*   By: hunnamab <hunnamab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/07 15:11:46 by pmetron           #+#    #+#             */
-/*   Updated: 2020/11/08 18:05:10 by pmetron          ###   ########.fr       */
+/*   Updated: 2020/11/09 11:22:06 by hunnamab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,6 @@ void		get_cylinder_normal(t_scene *scene, int index, int obj_num)
 
 	normal = &scene->normal_buf[index];
 	cylinder = (t_cylinder *)scene->objs[obj_num]->data;
-	
 	buf = vector_sub(&scene->ray_buf[index].start, &cylinder->position);
 	m = vector_dot(&scene->ray_buf[index].dir, &cylinder->vec) * \
 		scene->depth_buf[index] + vector_dot(&buf, &cylinder->vec);
@@ -77,8 +76,9 @@ double		intersect_ray_cylinder(t_ray *r, t_object *object)
 	dist = vector_sub(&r->start, &cylinder->position);
 	a = vector_dot(&r->dir, &cylinder->vec);
 	a = vector_dot(&r->dir, &r->dir) - a * a;
-	b = 2 * (vector_dot(&r->dir, &dist) - vector_dot(&r->dir, &cylinder->vec) * \
-		vector_dot(&dist, &cylinder->vec));
+	b = 2 * (vector_dot(&r->dir, &dist) - \
+				vector_dot(&r->dir, &cylinder->vec) * \
+				vector_dot(&dist, &cylinder->vec));
 	c = vector_dot(&dist, &cylinder->vec);
 	c = vector_dot(&dist, &dist) - c * c - cylinder->radius * cylinder->radius;
 	c = b * b - 4 * a * c;
