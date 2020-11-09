@@ -2,7 +2,7 @@ cylinder {
     position: 0, 0, 100
     radius: 30
     vector: 0, 1, 0
-    rotation: 0, 0, 0.2
+    rotation: 1.57, 0, 0
     color: 170, 100, 98, 255
     specular: 60
 }

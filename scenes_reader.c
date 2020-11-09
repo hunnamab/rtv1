@@ -6,7 +6,7 @@
 /*   By: hunnamab <hunnamab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/07 15:39:43 by hunnamab          #+#    #+#             */
-/*   Updated: 2020/11/09 13:05:50 by hunnamab         ###   ########.fr       */
+/*   Updated: 2020/11/09 16:28:24 by hunnamab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,6 +110,7 @@ t_object	**get_objects(char *buf, t_scene *scene, int len)
 	start = 0;
 	camera = 0;
 	scene->light_nmb = 0;
+	scene->obj_nmb = 0;
 	if (!brackets(buf))
 		output_error(6);
 	// выясняем кол-во объектов сцены
@@ -151,7 +152,7 @@ t_object	**get_objects(char *buf, t_scene *scene, int len)
 	scene->obj_nmb -= scene->light_nmb;
 	if (scene->obj_nmb == 0)
 		output_error(0);
-	free(buf);
+	ft_memdel(&buf);
 	return (objs);
 }
 
@@ -162,7 +163,7 @@ t_object	**read_scene(int fd, t_scene *scene)
 
 	buf = protected_malloc(sizeof(char), 256000);
 	ret = read(fd, buf, 64000);
-	if (ret == 0)
+	if (ret < 0)
 		output_error(3);
 	buf[ret] = '\0';
 	printf("ret %d\n", ret);

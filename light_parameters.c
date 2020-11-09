@@ -6,7 +6,7 @@
 /*   By: hunnamab <hunnamab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/09 11:58:35 by hunnamab          #+#    #+#             */
-/*   Updated: 2020/11/09 12:03:34 by hunnamab         ###   ########.fr       */
+/*   Updated: 2020/11/09 16:22:19 by hunnamab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 char		*get_light_type(char *description)
 {
 	char	*type;
+	char	*buf;
 	int		i;
 	int		len;
 
@@ -26,7 +27,9 @@ char		*get_light_type(char *description)
 		i++;
 	i++;
 	type = ft_strsub(description, i, len - i);
-	return (ft_strtrim(type));
+	buf = ft_strtrim(type);
+	free(type);
+	return (buf);
 }
 
 t_object	*get_light(char **description)

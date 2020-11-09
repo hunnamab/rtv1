@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   light.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pmetron <pmetron@student.42.fr>            +#+  +:+       +#+        */
+/*   By: hunnamab <hunnamab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/07 14:23:24 by pmetron           #+#    #+#             */
-/*   Updated: 2020/11/09 15:24:24 by pmetron          ###   ########.fr       */
+/*   Updated: 2020/11/09 15:28:30 by hunnamab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,7 +114,7 @@ t_color		reflection_color(t_scene *scene, int index)
 		{
 			l = get_light_vec(scene, index, &i, j);
 			lb = vector_div_by_scalar(&l, vector_length(&l));
-			n_dot_l = vector_dot(&scene->normal_buf[index], &lb);
+			n_dot_l = vector_dot(&scene->normal_buf[index], &l);
 			if (!(in_shadow(scene, index, lb, scene->light[j]->position)) && n_dot_l > 0)
 			{
 				if (scene->material_buf[index].specular != -1)
