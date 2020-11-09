@@ -2,16 +2,19 @@ light {
     type: point
     position: 100, 10, -20
 }
-sphere {
+
+sphere cone {
     center: 0, 0, 0
     radius: 300
     rotation: 0, 0, 0
     color: 255, 0, 0, 255
     specular: 100
 }
+
 light {
     type: ambient
 }
+
 camera {
     position: 0, 2, -1000
     rotation: 0, 0, 0

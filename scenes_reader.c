@@ -6,7 +6,7 @@
 /*   By: hunnamab <hunnamab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/07 15:39:43 by hunnamab          #+#    #+#             */
-/*   Updated: 2020/11/09 12:34:53 by hunnamab         ###   ########.fr       */
+/*   Updated: 2020/11/09 13:05:50 by hunnamab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ t_object	*get_parameters(char *name, char **description, t_scene *scene)
 {
 	t_object *obj;
 
+	obj = NULL;
 	if (ft_strequ(name, "sphere"))
 	{
 		printf("sphere\n");
