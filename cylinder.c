@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cylinder.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hunnamab <hunnamab@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pmetron <pmetron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/07 15:11:46 by pmetron           #+#    #+#             */
-/*   Updated: 2020/11/09 11:22:06 by hunnamab         ###   ########.fr       */
+/*   Updated: 2020/11/09 13:11:37 by pmetron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,15 +53,15 @@ void		get_cylinder_normal(t_scene *scene, int index, int obj_num)
 	buf = vector_sub(&scene->ray_buf[index].start, &cylinder->position);
 	m = vector_dot(&scene->ray_buf[index].dir, &cylinder->vec) * \
 		scene->depth_buf[index] + vector_dot(&buf, &cylinder->vec);
-	buf = vector_scale(scene->depth_buf[index], &scene->ray_buf[index].dir);
+	buf = vector_scale(&scene->ray_buf[index].dir, scene->depth_buf[index]);
 	p = vector_add(&scene->ray_buf[index].start, &buf);
 	buf = vector_sub(&p, &cylinder->position);
-	buf2 = vector_scale(m, &cylinder->vec);
+	buf2 = vector_scale(&cylinder->vec, m);
 	*normal = vector_sub(&buf, &buf2);
 	scene->normal_buf[index] = vector_div_by_scalar(&scene->normal_buf[index], \
 								vector_length(&scene->normal_buf[index]));
 	if (vector_dot(&scene->ray_buf[index].dir, normal) > 0.0001)
-		*normal = vector_scale(-1, normal);
+		*normal = vector_scale(normal, -1);
 }
 
 double		intersect_ray_cylinder(t_ray *r, t_object *object)

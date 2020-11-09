@@ -18,9 +18,9 @@ cone {
     position: 3, 0, 5
     vector: 0, 1, 0
     angle: 0.3
-    rotation: 1.57, 0, 0
+    rotation: 0, 0, 0
     color: 79, 50, 180, 255
-    specular: 0.3
+    specular: 100
 }
 
 triangle {
@@ -57,7 +57,7 @@ sphere {
 }
 
 camera {
-    position: 0, 2, -40
+    position: 2, 2, -20
     rotation: 0, 0, 0
 }
 
@@ -90,12 +90,13 @@ plane {
     point: 0, -1, 0
     normal: 0, 1, 0
     rotation: 0, 0, 0
-    color: 123, 133, 156, 255
+    color: 255, 255, 255, 255
     specular: 50
 }
 
 light {
-    type: ambient
+    type: point
+    position: -3, 1, 0
 }
 
 light {
@@ -103,7 +104,3 @@ light {
     position: 3, 1, 0
 }
 
-light {
-    type: point
-    position: -3, 1, 0
-}

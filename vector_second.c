@@ -6,7 +6,7 @@
 /*   By: pmetron <pmetron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/05 21:41:08 by pmetron           #+#    #+#             */
-/*   Updated: 2020/11/05 21:41:14 by pmetron          ###   ########.fr       */
+/*   Updated: 2020/11/09 13:07:38 by pmetron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ t_point		vector_add(const t_point *v1, const t_point *v2)
 	return (res);
 }
 
-t_point		vector_scale(double c, t_point *v)
+t_point		vector_scale(t_point *v, double c)
 {
 	t_point res;
 

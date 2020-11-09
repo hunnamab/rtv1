@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   triangle.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hunnamab <hunnamab@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pmetron <pmetron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/05 21:42:26 by pmetron           #+#    #+#             */
-/*   Updated: 2020/11/09 12:43:24 by hunnamab         ###   ########.fr       */
+/*   Updated: 2020/11/09 15:22:06 by pmetron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ void		get_triangle_normal(t_scene *scene, int index, int obj_num)
 	copy_point(&scene->normal_buf[index], &t->normal);
 	if (vector_dot(&scene->ray_buf[index].dir, \
 	&scene->normal_buf[index]) > 0.0001)
-		scene->normal_buf[index] = vector_scale(-1, &scene->normal_buf[index]);
+		scene->normal_buf[index] = vector_scale(&scene->normal_buf[index], -1);
 }
 
 double		intersect_ray_triangle(t_ray *r, t_object *object)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   plane.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hunnamab <hunnamab@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pmetron <pmetron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/07 14:22:24 by pmetron           #+#    #+#             */
-/*   Updated: 2020/11/09 12:05:31 by hunnamab         ###   ########.fr       */
+/*   Updated: 2020/11/09 13:09:34 by pmetron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ void		get_plane_normal(t_scene *scene, int index, int obj_num)
 	copy_point(&scene->normal_buf[index], &p->normal);
 	if (vector_dot(&scene->ray_buf[index].dir, \
 		&scene->normal_buf[index]) > 0.0001)
-		scene->normal_buf[index] = vector_scale(-1, &scene->normal_buf[index]);
+		scene->normal_buf[index] = vector_scale(&scene->normal_buf[index], -1);
 }
 
 double		intersect_ray_plane(t_ray *r, t_object *object, t_point *normal)

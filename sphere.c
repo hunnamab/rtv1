@@ -6,7 +6,7 @@
 /*   By: pmetron <pmetron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/05 22:45:20 by pmetron           #+#    #+#             */
-/*   Updated: 2020/11/08 18:06:42 by pmetron          ###   ########.fr       */
+/*   Updated: 2020/11/09 13:09:48 by pmetron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ void		get_sphere_normal(t_scene *scene, int index, int obj_num)
 	vector_length(&scene->normal_buf[index]));
 	if (vector_dot(&scene->ray_buf[index].dir, \
 	&scene->normal_buf[index]) > 0.0001)
-		scene->normal_buf[index] = vector_scale(-1, &scene->normal_buf[index]);
+		scene->normal_buf[index] = vector_scale(&scene->normal_buf[index], -1);
 }
 
 double		intersect_ray_sphere(t_ray *r, t_object *object)

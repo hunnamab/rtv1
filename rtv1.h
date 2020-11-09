@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rtv1.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hunnamab <hunnamab@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pmetron <pmetron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/07 15:39:34 by hunnamab          #+#    #+#             */
-/*   Updated: 2020/11/09 12:34:46 by hunnamab         ###   ########.fr       */
+/*   Updated: 2020/11/09 15:21:40 by pmetron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,11 +42,11 @@ void		draw_raycast(t_sdl *sdl, t_scene *scene);
 t_color		reflection_color(t_scene *scene, int index);
 t_light		*new_light(t_point position, t_point direction, const char *type);
 t_point		get_light_vec(t_scene *scene, int index, double *i, int j);
-double		get_specular(t_scene *scene, int index, int j, t_point *L);
-int			in_shadow(t_scene *scene, int index, t_point *L);
+double		get_specular(t_scene *scene, int index, int j, t_point *l);
+int			in_shadow(t_scene *scene, int index, t_point l, t_point l_pos);
 // vector.c
 t_point		vector_add(const t_point *v1, const t_point *v2);
-t_point		vector_scale(double c, t_point *v);
+t_point		vector_scale(t_point *v, double c);
 t_point		vector_sub(t_point *v1, t_point *v2);
 double		vector_dot(t_point *v1, t_point *v2);
 t_point		vector_cross(t_point *v1, t_point *v2);

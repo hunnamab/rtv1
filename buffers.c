@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   buffers.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hunnamab <hunnamab@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pmetron <pmetron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/07 15:38:29 by hunnamab          #+#    #+#             */
-/*   Updated: 2020/11/09 11:17:50 by hunnamab         ###   ########.fr       */
+/*   Updated: 2020/11/09 13:12:39 by pmetron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,8 +101,8 @@ void	get_intersection_buf(t_scene *scene)
 			i = y * WID + x;
 			if (scene->index_buf[i] != -1)
 			{
-				scene->intersection_buf[i] = vector_scale(scene->depth_buf[i], \
-														&scene->ray_buf[i].dir);
+				scene->intersection_buf[i] = vector_scale(&scene->ray_buf[i].dir, \
+				scene->depth_buf[i]);
 				scene->intersection_buf[i] = \
 									vector_add(&scene->intersection_buf[i], \
 												&scene->ray_buf[i].start);

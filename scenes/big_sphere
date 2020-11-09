@@ -1,6 +1,6 @@
 sphere {
     center: 0, 0, 0
-    radius: 300
+    radius: 10
     rotation: 0, 0, 0
     color: 255, 0, 0, 255
     specular: 100
@@ -16,6 +16,6 @@ light {
 }
 
 camera {
-    position: 0, 2, -1000
+    position: 0, 0, 0
     rotation: 0, 0, 0
 }

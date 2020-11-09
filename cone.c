@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cone.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hunnamab <hunnamab@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pmetron <pmetron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/07 15:38:39 by hunnamab          #+#    #+#             */
-/*   Updated: 2020/11/09 11:20:04 by hunnamab         ###   ########.fr       */
+/*   Updated: 2020/11/09 13:12:07 by pmetron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,14 +51,14 @@ void		get_cone_normal(t_scene *scene, int index, int obj_num)
 	buf = vector_sub(&scene->ray_buf[index].start, &cone->position);
 	m = vector_dot(&scene->ray_buf[index].dir, &cone->vec) * \
 					scene->depth_buf[index] + vector_dot(&buf, &cone->vec);
-	buf = vector_scale(m, &cone->vec);
-	*normal = vector_scale((1 + cone->angle * cone->angle), &buf);
+	buf = vector_scale(&cone->vec, m);
+	*normal = vector_scale(&buf, (1 + cone->angle * cone->angle));
 	buf = vector_sub(&scene->intersection_buf[index], &cone->position);
 	*normal = vector_sub(&buf, normal);
 	scene->normal_buf[index] = vector_div_by_scalar(&scene->normal_buf[index], \
 								vector_length(&scene->normal_buf[index]));
 	if (vector_dot(&scene->ray_buf[index].dir, normal) > 0.0001)
-		*normal = vector_scale(-1, normal);
+		*normal = vector_scale(normal, -1);
 }
 
 double		intersect_ray_cone(t_ray *r, t_object *object)
