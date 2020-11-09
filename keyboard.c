@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   keyboard.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pmetron <pmetron@student.42.fr>            +#+  +:+       +#+        */
+/*   By: hunnamab <hunnamab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/06 13:38:13 by pmetron           #+#    #+#             */
-/*   Updated: 2020/11/08 17:15:12 by pmetron          ###   ########.fr       */
+/*   Updated: 2020/11/09 11:55:13 by hunnamab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ int		keyboard(t_sdl *sdl, t_scene *scene)
 	if (SDL_PollEvent(&sdl->event))
 	{
 		if (SDL_QUIT == sdl->event.type || SDLK_ESCAPE == sdl->event.key.keysym.sym)
-			return(0);
+			return (0);
 		if (SDLK_LEFT == sdl->event.key.keysym.sym)
 		{
 			SDL_RenderClear(sdl->renderer);

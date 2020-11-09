@@ -6,25 +6,25 @@
 /*   By: hunnamab <hunnamab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/07 15:39:02 by hunnamab          #+#    #+#             */
-/*   Updated: 2020/11/08 20:10:31 by hunnamab         ###   ########.fr       */
+/*   Updated: 2020/11/09 11:57:07 by hunnamab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rtv1.h"
 
-void check_mode(int as, char **av, int *mode)
+void	check_mode(int as, char **av, int *mode)
 {
 	if (as == 2 || (as == 3 && (ft_strequ(av[2], "default"))))
-	 	*mode = 0;
+		*mode = 0;
 	else if (as == 3 && (ft_strequ(av[2], "normal")))
-	 	*mode = 1;
+		*mode = 1;
 	else if (as == 3 && (ft_strequ(av[2], "depth")))
 		*mode = 2;
 	else if (as == 3 && (ft_strequ(av[2], "raycast")))
 		*mode = 3;
 }
 
-int main(int args, char **argv)
+int		main(int args, char **argv)
 {
 	int			fd;
 	t_sdl		sdl;
@@ -56,7 +56,7 @@ int main(int args, char **argv)
 	SDL_RenderClear(sdl.renderer);
 	init_scene(scene);
 	scene->draw[scene->mode](&sdl, scene);
- 	while (k)
+	while (k)
 		k = keyboard(&sdl, scene);
 	scene->clean[scene->mode](scene);
 	SDL_DestroyRenderer(sdl.renderer);

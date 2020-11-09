@@ -6,7 +6,7 @@
 /*   By: hunnamab <hunnamab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/07 15:39:43 by hunnamab          #+#    #+#             */
-/*   Updated: 2020/11/08 20:43:53 by hunnamab         ###   ########.fr       */
+/*   Updated: 2020/11/09 12:18:53 by hunnamab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,9 @@
 
 void		add_camera(t_scene *scene, char **description, int *camera)
 {
-	int nmb = 0;
+	int nmb;
+
+	nmb = 0;
 	printf("camera\n");
 	scene->camera = get_camera(description);
 	scene->obj_nmb--;
@@ -26,32 +28,32 @@ t_object	*get_parameters(char *name, char **description, t_scene *scene)
 {
 	t_object *obj;
 
-	if (!ft_strcmp(name, "sphere"))
+	if (ft_strequ(name, "sphere"))
 	{
 		printf("sphere\n");
 		obj = get_sphere(description); // objects_parameters.c
 	}
-	else if (!ft_strcmp(name, "triangle"))
+	else if (ft_strequ(name, "triangle"))
 	{
 		printf("triangle\n");
 		obj = get_triangle(description);
 	}
-	else if (!ft_strcmp(name, "plane"))
+	else if (ft_strequ(name, "plane"))
 	{
 		printf("plane\n");
 		obj = get_plane(description);
 	}
-	else if (!ft_strcmp(name, "cylinder"))
+	else if (ft_strequ(name, "cylinder"))
 	{
 		printf("cylinder\n");
 		obj = get_cylinder(description);
 	}
-	else if (!ft_strcmp(name, "cone"))
+	else if (ft_strequ(name, "cone"))
 	{
 		printf("cone\n");
 		obj = get_cone(description);
 	}
-	else if (!ft_strcmp(name, "light"))
+	else if (ft_strequ(name, "light"))
 	{
 		printf("light\n");
 		obj = get_light(description);
@@ -77,15 +79,9 @@ char		**get_description(char *scene, int i)
 		len++;
 	}
 	if (scene[i] != '\n')
-	{
 		output_error(6);
-		//exit (0);
-	}
 	if (!(descr_buf = ft_strsub(scene, start, len)))
-	{
 		output_error(6);
-		//exit (0);
-	}
 	if (!(description = ft_strsplit(descr_buf, '\n')))
 		output_error(6);
 	ft_memdel(&descr_buf);

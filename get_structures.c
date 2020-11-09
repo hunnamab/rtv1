@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_structures.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pmetron <pmetron@student.42.fr>            +#+  +:+       +#+        */
+/*   By: hunnamab <hunnamab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/07 15:38:51 by hunnamab          #+#    #+#             */
-/*   Updated: 2020/11/08 18:03:19 by pmetron          ###   ########.fr       */
+/*   Updated: 2020/11/09 11:54:42 by hunnamab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,8 +54,8 @@ t_object	**get_objects_structures(int obj_nmb, t_object **buf)
 			objs[j] = buf[i];
 			printf("object tag = %s\n", objs[j]->tag);
 			i++;
-	 		j++;
-	 	}
+			j++;
+		}
 	}
 	return (objs);
 }
