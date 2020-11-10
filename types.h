@@ -124,7 +124,7 @@ typedef	struct		s_scene
 	int				mode; // 0 - default, 1 - normal, 2 - depth, 3 - flat_light
 	void			(*init[4])(struct s_scene *);
 	void			(*draw[4])(t_sdl *, struct s_scene *);
-	void			(*clean[4])(struct s_scene *);
+	void			(*refresh[4])(struct s_scene *);
 }					t_scene;
 
 #endif

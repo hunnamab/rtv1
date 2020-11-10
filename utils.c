@@ -24,12 +24,6 @@ void		*protected_malloc(unsigned int size, unsigned int nmb)
 	return (result);
 }
 
-void		clear_default(t_object *obj)
-{
-	free(obj->data);
-	free(obj);
-}
-
 t_point		get_point(double x, double y, double z)
 {
 	t_point result;

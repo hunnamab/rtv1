@@ -107,6 +107,8 @@ void	get_intersection_buf(t_scene *scene)
 									vector_add(&scene->intersection_buf[i], \
 												&scene->ray_buf[i].start);
 			}
+			else
+				scene->intersection_buf[i] = get_point(0, 0, 0);
 			x++;
 		}
 		x = 0;
@@ -134,6 +136,8 @@ void	get_normal_buf(t_scene *scene)
 				j = scene->index_buf[i];
 				scene->objs[j]->get_normal(scene, i, j);
 			}
+			else
+				scene->normal_buf[j] = get_point(0, 0, 0);
 			x++;
 		}
 		x = 0;

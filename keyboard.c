@@ -15,25 +15,25 @@
 void	camera_left(t_scene *scene)
 {
 	scene->camera.rotation[1] -= 0.1;
-	scene->init[scene->mode](scene);
+	refresh_scene(scene);
 }
 
 void	camera_right(t_scene *scene)
 {
 	scene->camera.rotation[1] += 0.1;
-	scene->init[scene->mode](scene);
+	refresh_scene(scene);
 }
 
 void	camera_down(t_scene *scene)
 {
 	scene->camera.rotation[0] += 0.1;
-	scene->init[scene->mode](scene);
+	refresh_scene(scene);
 }
 
 void	camera_up(t_scene *scene)
 {
 	scene->camera.rotation[0] -= 0.1;
-	scene->init[scene->mode](scene);
+	refresh_scene(scene);
 }
 
 int		keyboard(t_sdl *sdl, t_scene *scene)

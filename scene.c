@@ -85,6 +85,27 @@ void	init_raycast(t_scene *scene)
 	get_material_buf(scene);
 }
 
+void	refresh_scene(t_scene *scene)
+{
+	double	**matrix;
+	int		x;
+
+	x = 0;
+	scene->viewport != NULL ? get_viewport(&scene->camera) : NULL;
+	scene->ray_buf != NULL ? get_rays_arr(scene) : NULL;
+	matrix = get_rotation_matrix(&scene->camera.rotation);
+	while (x < WID * HEI)
+	{
+		transform(&scene->ray_buf[x].dir, matrix, 1);
+		x++;
+	}
+	matr_free(matrix, 4);
+	scene->depth_buf != NULL ? get_closest_points(scene) : NULL;
+	scene->intersection_buf != NULL ? get_intersection_buf(scene) : NULL;
+	scene->normal_buf != NULL ? get_normal_buf(scene) : NULL;
+	scene->material_buf != NULL ? get_material_buf(scene) : NULL;
+}
+
 void	init_scene(t_scene *scene)
 {
 	scene->init[0] = &init_default;
@@ -95,9 +116,12 @@ void	init_scene(t_scene *scene)
 	scene->draw[1] = &draw_normal_buf;
 	scene->draw[2] = &draw_deepth_buf;
 	scene->draw[3] = &draw_raycast;
-	scene->clean[0] = &clean_scene_default;
-	scene->clean[1] = &clean_scene_default;
-	scene->clean[2] = &clean_scene_deepth;
-	scene->clean[3] = &clean_scene_raycast;
+	scene->normal_buf = NULL;
+	scene->material_buf = NULL;
+	scene->intersection_buf = NULL;
+	scene->ray_buf = NULL;
+	scene->viewport = NULL;
+	scene->index_buf = NULL;
+	scene->depth_buf = NULL;
 	scene->init[scene->mode](scene);
 }

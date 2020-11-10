@@ -28,6 +28,7 @@ t_light		**get_light_structures(int light_nmb, t_object **buf)
 		else
 		{
 			light[j] = (t_light *)buf[i]->data;
+			free(buf[i]);
 			printf("light type = %s\n", light[j]->type);
 			i++;
 			j++;

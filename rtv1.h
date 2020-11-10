@@ -13,7 +13,8 @@
 #ifndef RTV1_H
 # define RTV1_H
 
-# include "SDL2.framework/Headers/SDL.h" //for macOS
+//# include "SDL2.framework/Headers/SDL.h" //for macOS
+#include <SDL2/SDL.h>
 # include <stdio.h>
 # include <math.h>
 # include <fcntl.h>
@@ -136,6 +137,7 @@ void		init_scene(t_scene *scene);
 void		init_raycast(t_scene *scene);
 void		init_default(t_scene *scene);
 void		init_deepth(t_scene *scene);
+void		refresh_scene(t_scene *scene);
 // keyboard.c
 void		camera_left(t_scene *scene);
 int			keyboard(t_sdl *sdl, t_scene *scene);
@@ -143,9 +145,7 @@ void		camera_up(t_scene *scene);
 void		camera_right(t_scene *scene);
 void		camera_down(t_scene *scene);
 // scene_clear.c
-void		clean_scene_default(t_scene *scene);
-void		clean_scene_deepth(t_scene *scene);
-void		clean_scene_raycast(t_scene *scene);
+void		clean_scene(t_scene *scene);
 // errors_management.c
 void		output_description();
 void		output_error(int tag);

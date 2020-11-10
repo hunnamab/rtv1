@@ -57,7 +57,7 @@ int		main(int args, char **argv)
 	scene->draw[scene->mode](&sdl, scene);
 	while (k)
 		k = keyboard(&sdl, scene);
-	scene->clean[scene->mode](scene);
+	clean_scene(scene);
 	SDL_DestroyRenderer(sdl.renderer);
 	SDL_DestroyWindow(sdl.win);
 	SDL_Quit();
