@@ -6,7 +6,7 @@
 /*   By: pmetron <pmetron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/07 15:38:29 by hunnamab          #+#    #+#             */
-/*   Updated: 2020/11/09 13:12:39 by pmetron          ###   ########.fr       */
+/*   Updated: 2020/11/10 17:28:32 by pmetron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,19 +37,18 @@ void	get_rays_arr(t_scene *scene)
 	}
 }
 
-void	get_closest_points(t_scene *scene)
+void	get_closest_points(t_scene *scene, double t)
 {
-	double	t;
 	int		ixyj[4];
 
-	ixyj[0] = -1;
-	t = 0;
-	ixyj[1] = -1;
 	ixyj[2] = -1;
 	while (++ixyj[2] < HEI)
 	{
+		ixyj[1] = -1;
 		while (++ixyj[1] < WID)
 		{
+			t = 0;
+			ixyj[0] = -1;
 			ixyj[3] = ixyj[2] * WID + ixyj[1];
 			scene->index_buf[ixyj[3]] = -1;
 			scene->depth_buf[ixyj[3]] = 100000000;
@@ -63,10 +62,7 @@ void	get_closest_points(t_scene *scene)
 					scene->index_buf[ixyj[3]] = ixyj[0];
 				}
 			}
-			ixyj[0] = -1;
-			t = 0;
 		}
-		ixyj[1] = -1;
 	}
 }
 
@@ -85,11 +81,10 @@ void	get_intersection_buf(t_scene *scene)
 			i = y * WID + x;
 			if (scene->index_buf[i] != -1)
 			{
-				scene->intersection_buf[i] = vector_scale(&scene->ray_buf[i].dir, \
-				scene->depth_buf[i]);
-				scene->intersection_buf[i] = \
-									vector_add(&scene->intersection_buf[i], \
-												&scene->ray_buf[i].start);
+				scene->intersection_buf[i] = vector_scale(\
+				&scene->ray_buf[i].dir, scene->depth_buf[i]);
+				scene->intersection_buf[i] = vector_add(\
+				&scene->intersection_buf[i], &scene->ray_buf[i].start);
 			}
 			else
 				scene->intersection_buf[i] = get_point(0, 0, 0);
@@ -134,22 +129,20 @@ void	get_material_buf(t_scene *scene)
 	int x;
 	int y;
 	int i;
-	int j;
 
-	j = 0;
-	x = -1;
 	y = -1;
 	while (++y < HEI)
 	{
+		x = -1;
 		while (++x < WID)
 		{
 			i = y * WID + x;
 			if (scene->index_buf[i] != -1)
 			{
-				j = scene->index_buf[i];
 				copy_color(&scene->material_buf[i].color, \
-							&scene->objs[j]->color);
-				scene->material_buf[i].specular = scene->objs[j]->specular;
+							&scene->objs[scene->index_buf[i]]->color);
+				scene->material_buf[i].specular = \
+				scene->objs[scene->index_buf[i]]->specular;
 			}
 			else
 			{
@@ -157,6 +150,5 @@ void	get_material_buf(t_scene *scene)
 				scene->material_buf[i].specular = -1;
 			}
 		}
-		x = -1;
 	}
 }

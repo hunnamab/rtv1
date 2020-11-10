@@ -3,14 +3,24 @@
 /*                                                        :::      ::::::::   */
 /*   triangle.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hunnamab <hunnamab@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pmetron <pmetron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/05 21:42:26 by pmetron           #+#    #+#             */
-/*   Updated: 2020/11/10 15:39:35 by hunnamab         ###   ########.fr       */
+/*   Updated: 2020/11/10 17:36:19 by pmetron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rtv1.h"
+
+static void	init_norme(double *r, t_point *v, double *rt, t_point *vt)
+{
+	rt[0] = r[0];
+	rt[1] = r[1];
+	rt[2] = r[2];
+	vt[0] = v[0];
+	vt[1] = v[1];
+	vt[2] = v[2];
+}
 
 t_object	*new_triangle(t_point *vertex, double specular, t_color color, \
 							double *rotation)
@@ -24,12 +34,7 @@ t_object	*new_triangle(t_point *vertex, double specular, t_color color, \
 	new_object = protected_malloc(sizeof(t_object), 1);
 	new_triangle = protected_malloc(sizeof(t_triangle), 1);
 	new_triangle->vertex = protected_malloc(sizeof(t_point), 3);
-	new_triangle->vertex[0] = vertex[0];
-	new_triangle->vertex[1] = vertex[1];
-	new_triangle->vertex[2] = vertex[2];
-	new_object->rotation[0] = rotation[0];
-	new_object->rotation[1] = rotation[1];
-	new_object->rotation[2] = rotation[2];
+	init_norme(rotation, vertex, new_object->rotation, new_triangle->vertex);
 	matrix = get_rotation_matrix(new_object->rotation);
 	transform(new_triangle->vertex, matrix, 3);
 	matr_free(matrix, 4);

@@ -6,7 +6,7 @@
 /*   By: pmetron <pmetron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/07 14:34:50 by pmetron           #+#    #+#             */
-/*   Updated: 2020/11/10 14:41:54 by pmetron          ###   ########.fr       */
+/*   Updated: 2020/11/10 18:18:53 by pmetron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,10 +45,10 @@ void	draw_normal_buf(t_sdl *sdl, t_scene *scene)
 	int		xyi[3];
 	t_color	color;
 
-	xyi[0] = -1;
 	xyi[1] = -1;
 	while (++xyi[1] < HEI)
 	{
+		xyi[0] = -1;
 		while (++xyi[0] < WID)
 		{
 			xyi[2] = xyi[1] * WID + xyi[0];
@@ -64,7 +64,6 @@ void	draw_normal_buf(t_sdl *sdl, t_scene *scene)
 			color.red, color.green, color.blue, 255);
 			SDL_RenderDrawPoint(sdl->renderer, xyi[0], xyi[1]);
 		}
-		xyi[0] = -1;
 	}
 	SDL_RenderPresent(sdl->renderer);
 }
@@ -74,18 +73,19 @@ void	draw_deepth_buf(t_sdl *sdl, t_scene *scene)
 	int		xyi[3];
 	t_color	color;
 
-	xyi[0] = -1;
 	xyi[1] = -1;
 	while (++xyi[1] < HEI)
 	{
+		xyi[0] = -1;
 		while (++xyi[0] < WID)
 		{
 			xyi[2] = xyi[1] * WID + xyi[0];
 			if (scene->index_buf[xyi[2]] != -1)
 			{
-				color.red = scene->depth_buf[xyi[2]] > 255 ? 255 : scene->depth_buf[xyi[2]];
-				color.green = scene->depth_buf[xyi[2]] > 255 ? 255 : scene->depth_buf[xyi[2]];
-				color.blue = scene->depth_buf[xyi[2]] > 255 ? 255 : scene->depth_buf[xyi[2]];
+				color.red = scene->depth_buf[xyi[2]] > 255 ? \
+				255 : scene->depth_buf[xyi[2]];
+				color.green = color.red;
+				color.blue = color.red;
 			}
 			else
 				set_color_zero(&color);
@@ -93,7 +93,6 @@ void	draw_deepth_buf(t_sdl *sdl, t_scene *scene)
 			color.red, color.green, color.blue, 255);
 			SDL_RenderDrawPoint(sdl->renderer, xyi[0], xyi[1]);
 		}
-		xyi[0] = -1;
 	}
 	SDL_RenderPresent(sdl->renderer);
 }

@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: hunnamab <hunnamab@student.42.fr>          +#+  +:+       +#+         #
+#    By: pmetron <pmetron@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/11/07 15:39:13 by hunnamab          #+#    #+#              #
-#    Updated: 2020/11/10 14:46:03 by hunnamab         ###   ########.fr        #
+#    Updated: 2020/11/10 18:00:01 by pmetron          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,10 +23,10 @@ SRC = main.c sphere.c vector.c utils.c \
 	./matrix_lib/matr_add_matr.c ./matrix_lib/create_matrix.c \
 	./matrix_lib/matr_copy.c ./matrix_lib/matr_div_by_scalar.c \
 	./matrix_lib/matr_free.c ./matrix_lib/matr_mul_by_scalar.c \
-	./matrix_lib/matr_mul.c ./matrix_lib/matr_resize.c ./matrix_lib/matr_sub_matr.c \
+	./matrix_lib/matr_mul.c  ./matrix_lib/matr_sub_matr.c \
 	./matrix_lib/matr_sub_scalar.c ./matrix_lib/matr_to_line.c \
 	./matrix_lib/matr_trace.c ./matrix_lib/matr_transpose.c \
-	./matrix_lib/print_matrix.c transform.c ./matrix_lib/matrix_identity.c \
+	transform.c ./matrix_lib/matrix_identity.c \
 	buffers.c scene.c color.c vector_second.c transform_matrix.c \
 	keyboard.c clean.c errors_management.c light_parameters.c \
 	parameters_utils.c camera_parameters.c define_object.c \

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hunnamab <hunnamab@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pmetron <pmetron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/07 15:39:02 by hunnamab          #+#    #+#             */
-/*   Updated: 2020/11/10 13:49:24 by hunnamab         ###   ########.fr       */
+/*   Updated: 2020/11/10 18:21:59 by pmetron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,9 +43,6 @@ int		main(int args, char **argv)
 		fd = open(argv[1], O_RDONLY);
 		read_scene(fd, scene); // scene_reader.c
 		close(fd);
-		printf("obj_nmb = %d\n", scene->obj_nmb);
-		printf("light_nmb = %d\n", scene->light_nmb);
-		//return (0);
 	}
 	check_mode(args, argv, &scene->mode);
 	SDL_Init(SDL_INIT_EVERYTHING);

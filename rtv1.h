@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rtv1.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hunnamab <hunnamab@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pmetron <pmetron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/07 15:39:34 by hunnamab          #+#    #+#             */
-/*   Updated: 2020/11/10 15:36:46 by hunnamab         ###   ########.fr       */
+/*   Updated: 2020/11/10 17:24:57 by pmetron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,8 @@
 # define ABS(x)		(x) > 0 ? (x) : -(x)
 # define DROUND(d)	ABS(d) < 0.00001 ? 0 : (d)
 
-# define WID 640
-# define HEI 640
+# define WID 1280
+# define HEI 720
 
 // scenes_reader.c
 void		read_scene(int fd, t_scene *scene);
@@ -130,7 +130,7 @@ void		get_rays_arr(t_scene *scene);
 void		get_buffers(t_scene *scene);
 void		get_normal_buf(t_scene *scene);
 void		get_intersection_buf(t_scene *scene);
-void		get_closest_points(t_scene *scene);
+void		get_closest_points(t_scene *scene, double t);
 void		get_material_buf(t_scene *scene);
 // normal.c
 void		get_sphere_normal(t_scene *scene, int index, int obj_num);
