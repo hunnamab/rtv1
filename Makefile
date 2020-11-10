@@ -6,7 +6,7 @@
 #    By: hunnamab <hunnamab@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/11/07 15:39:13 by hunnamab          #+#    #+#              #
-#    Updated: 2020/11/09 12:32:13 by hunnamab         ###   ########.fr        #
+#    Updated: 2020/11/10 13:56:23 by hunnamab         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,7 +19,7 @@ LIBRARY = ./libft/libft.a
 HEADER = rtv1.h
 SRC = main.c sphere.c vector.c utils.c \
 	light.c triangle.c scenes_reader.c draw.c ftoi.c \
-	objects_parameters.c plane.c cylinder.c cone.c get_structures.c \
+	objects_parameters.c plane.c cylinder.c cone.c \
 	./matrix_lib/matr_add_matr.c ./matrix_lib/create_matrix.c \
 	./matrix_lib/matr_copy.c ./matrix_lib/matr_div_by_scalar.c \
 	./matrix_lib/matr_free.c ./matrix_lib/matr_mul_by_scalar.c \
@@ -29,7 +29,7 @@ SRC = main.c sphere.c vector.c utils.c \
 	./matrix_lib/print_matrix.c transform.c ./matrix_lib/matrix_identity.c \
 	buffers.c scene.c color.c vector_second.c transform_matrix.c \
 	keyboard.c clean.c errors_management.c light_parameters.c \
-	parameters_utils.c camera_parameters.c
+	parameters_utils.c camera_parameters.c define_object.c
 OBJ = $(SRC:.c=.o)
 
 all: $(NAME)

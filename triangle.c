@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   triangle.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pmetron <pmetron@student.42.fr>            +#+  +:+       +#+        */
+/*   By: hunnamab <hunnamab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/05 21:42:26 by pmetron           #+#    #+#             */
-/*   Updated: 2020/11/09 15:22:06 by pmetron          ###   ########.fr       */
+/*   Updated: 2020/11/10 13:51:35 by hunnamab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,6 +92,6 @@ double		intersect_ray_triangle(t_ray *r, t_object *object)
 	if (uv[1] < 0 || uv[0] + uv[1] > 1)
 		return (0);
 	if ((vector_dot(&edge[1], &vec[2]) * det) > 0)
-		return(vector_dot(&edge[1], &vec[2]) * det);
+		return (vector_dot(&edge[1], &vec[2]) * det);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: hunnamab <hunnamab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/07 15:39:02 by hunnamab          #+#    #+#             */
-/*   Updated: 2020/11/09 16:29:02 by hunnamab         ###   ########.fr       */
+/*   Updated: 2020/11/10 13:49:24 by hunnamab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,6 @@ int		main(int args, char **argv)
 		close(fd);
 		printf("obj_nmb = %d\n", scene->obj_nmb);
 		printf("light_nmb = %d\n", scene->light_nmb);
-		//scene->objs = get_objects_structures(scene->obj_nmb, buf); // get_structures.c
-		//scene->light = get_light_structures(scene->light_nmb, buf); // get_structures.c
 		//return (0);
 	}
 	check_mode(args, argv, &scene->mode);

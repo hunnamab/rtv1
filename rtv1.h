@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rtv1.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pmetron <pmetron@student.42.fr>            +#+  +:+       +#+        */
+/*   By: hunnamab <hunnamab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/07 15:39:34 by hunnamab          #+#    #+#             */
-/*   Updated: 2020/11/10 13:45:28 by pmetron          ###   ########.fr       */
+/*   Updated: 2020/11/10 13:55:03 by hunnamab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,8 @@
 
 // scenes_reader.c
 void		read_scene(int fd, t_scene *scene);
+// define_object.c
+t_object	*get_parameters(char *name, char **description);
 // settings.c
 void		sphere_settings(t_sphere *s, t_ray *r);
 // draw.c
