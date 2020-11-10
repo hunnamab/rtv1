@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   light_parameters.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hunnamab <hunnamab@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pmetron <pmetron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/09 11:58:35 by hunnamab          #+#    #+#             */
-/*   Updated: 2020/11/09 16:22:19 by hunnamab         ###   ########.fr       */
+/*   Updated: 2020/11/10 12:58:23 by pmetron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ t_light		*get_light(char **description)
 	char		*type;
 
 	light = NULL;
+	intensity = 0.0;
 	type = get_light_type(description[0]);
 	printf("light type = |%s|\n", type);
 	position.x = 0.0;

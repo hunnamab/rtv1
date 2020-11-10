@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hunnamab <hunnamab@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pmetron <pmetron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/05 21:37:58 by pmetron           #+#    #+#             */
-/*   Updated: 2020/11/09 12:46:52 by hunnamab         ###   ########.fr       */
+/*   Updated: 2020/11/10 13:17:56 by pmetron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,30 +55,27 @@ double		choose_t(double t0, double t1)
 	return (result);
 }
 
-t_point		*get_viewport(t_camera *camera)
+void		get_viewport(t_scene *scene)
 {
 	int		x;
 	int		y;
-	t_point	*viewport;
 	double	k;
 
 	k = (double)WID / (double)HEI;
-	viewport = protected_malloc(sizeof(t_point), (WID * HEI));
 	x = 0;
 	y = 0;
 	while (y < HEI)
 	{
 		while (x < WID)
 		{
-			viewport[y * WID + x].y = -(y - (double)HEI / 2) *\
-			(1 / (double)HEI) + camera->position.y;
-			viewport[y * WID + x].x = (x - (double)WID / 2) *\
-			(k / (double)WID) + camera->position.x;
-			viewport[y * WID + x].z = camera->position.z + 1;
+			scene->viewport[y * WID + x].y = -(y - (double)HEI / 2) *\
+			(1 / (double)HEI) + scene->camera.position.y;
+			scene->viewport[y * WID + x].x = (x - (double)WID / 2) *\
+			(k / (double)WID) + scene->camera.position.x;
+			scene->viewport[y * WID + x].z = scene->camera.position.z + 1;
 			x++;
 		}
 		x = 0;
 		y++;
 	}
-	return (viewport);
 }

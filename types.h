@@ -3,16 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   types.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hunnamab <hunnamab@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pmetron <pmetron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/07 15:39:58 by hunnamab          #+#    #+#             */
-/*   Updated: 2020/11/09 12:46:13 by hunnamab         ###   ########.fr       */
+/*   Updated: 2020/11/10 13:08:39 by pmetron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef TYPES_H
 # define TYPES_H
 # include <stdint.h>
+
+typedef	struct		s_scene t_scene;
 
 typedef struct		s_sdl
 {
@@ -107,7 +109,7 @@ typedef	struct		s_object3d
 	void			(*clear_obj)(struct s_object3d *);
 }					t_object;
 
-typedef	struct		s_scene
+struct		s_scene
 {
 	t_object		**objs;
 	int				obj_nmb;
@@ -124,6 +126,6 @@ typedef	struct		s_scene
 	int				mode; // 0 - default, 1 - normal, 2 - depth, 3 - flat_light
 	void			(*init[4])(struct s_scene *);
 	void			(*draw[4])(t_sdl *, struct s_scene *);
-}					t_scene;
+};
 
 #endif

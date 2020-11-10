@@ -6,15 +6,15 @@
 /*   By: pmetron <pmetron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/07 15:39:34 by hunnamab          #+#    #+#             */
-/*   Updated: 2020/11/09 15:21:40 by pmetron          ###   ########.fr       */
+/*   Updated: 2020/11/10 13:18:38 by pmetron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef RTV1_H
 # define RTV1_H
 
-//# include "SDL2.framework/Headers/SDL.h" //for macOS
-#include <SDL2/SDL.h>
+# include "SDL2.framework/Headers/SDL.h" //for macOS
+//#include <SDL2/SDL.h>
 # include <stdio.h>
 # include <math.h>
 # include <fcntl.h>
@@ -58,7 +58,7 @@ void		normalize_vector(t_point *v1);
 t_point		vector_add_scalar(const t_point *v1, const double scalar);
 // utils.c
 t_point		get_point(double x, double y, double z);
-t_point		*get_viewport(t_camera *camera);
+void		get_viewport(t_scene *scene);
 void		copy_point(t_point *dst, t_point *src);
 double		choose_t(double t0, double t1);
 void		clear_default(t_object *obj);

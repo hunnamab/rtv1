@@ -6,7 +6,7 @@
 /*   By: pmetron <pmetron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/07 14:21:11 by pmetron           #+#    #+#             */
-/*   Updated: 2020/11/08 18:10:22 by pmetron          ###   ########.fr       */
+/*   Updated: 2020/11/10 13:20:24 by pmetron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,8 @@ void	init_deepth(t_scene *scene)
 	int		x;
 
 	x = -1;
-	scene->viewport = get_viewport(&scene->camera);
+	scene->viewport = protected_malloc(sizeof(t_point), (WID * HEI));
+	get_viewport(scene);
 	scene->ray_buf = protected_malloc(sizeof(t_ray), (WID * HEI));
 	get_rays_arr(scene);
 	scene->depth_buf = protected_malloc(sizeof(double), WID * HEI);
@@ -36,7 +37,8 @@ void	init_default(t_scene *scene)
 	int		x;
 
 	x = -1;
-	scene->viewport = get_viewport(&scene->camera);
+	scene->viewport = protected_malloc(sizeof(t_point), (WID * HEI));
+	get_viewport(scene);
 	scene->ray_buf = protected_malloc(sizeof(t_ray), (WID * HEI));
 	get_rays_arr(scene);
 	scene->normal_buf = protected_malloc(sizeof(t_point), WID * HEI);
@@ -60,7 +62,8 @@ void	init_raycast(t_scene *scene)
 	int		x;
 
 	x = -1;
-	scene->viewport = get_viewport(&scene->camera);
+	scene->viewport = protected_malloc(sizeof(t_point), (WID * HEI));
+	get_viewport(scene);
 	scene->ray_buf = protected_malloc(sizeof(t_ray), (WID * HEI));
 	get_rays_arr(scene);
 	scene->depth_buf = protected_malloc(sizeof(double), WID * HEI);
@@ -82,7 +85,7 @@ void	refresh_scene(t_scene *scene)
 	int		x;
 
 	x = -1;
-	scene->viewport != NULL ? get_viewport(&scene->camera) : NULL;
+	scene->viewport != NULL ? get_viewport(scene) : NULL;
 	scene->ray_buf != NULL ? get_rays_arr(scene) : NULL;
 	matrix = get_rotation_matrix(&scene->camera.rotation);
 	while (++x < WID * HEI)
