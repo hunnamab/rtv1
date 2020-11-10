@@ -40,30 +40,15 @@ int		keyboard(t_sdl *sdl, t_scene *scene)
 {
 	if (SDL_PollEvent(&sdl->event))
 	{
-		if (SDL_QUIT == sdl->event.type || SDLK_ESCAPE == sdl->event.key.keysym.sym)
+		if (SDL_QUIT == sdl->event.type || (SDLK_ESCAPE == sdl->event.key.keysym.sym && sdl->event.type == SDL_KEYDOWN))
 			return (0);
-		if (SDLK_LEFT == sdl->event.key.keysym.sym)
+		else if (sdl->event.type == SDL_KEYDOWN)
 		{
 			SDL_RenderClear(sdl->renderer);
-			camera_left(scene);
-			scene->draw[scene->mode](sdl, scene);
-		}
-		if (SDLK_UP == sdl->event.key.keysym.sym)
-		{
-			SDL_RenderClear(sdl->renderer);
-			camera_up(scene);
-			scene->draw[scene->mode](sdl, scene);
-		}
-		if (SDLK_DOWN == sdl->event.key.keysym.sym)
-		{
-			SDL_RenderClear(sdl->renderer);
-			camera_down(scene);
-			scene->draw[scene->mode](sdl, scene);
-		}
-		if (SDLK_RIGHT == sdl->event.key.keysym.sym)
-		{
-			SDL_RenderClear(sdl->renderer);
-			camera_right(scene);
+			SDLK_RIGHT == sdl->event.key.keysym.sym ? camera_right(scene) : 0;
+			SDLK_LEFT == sdl->event.key.keysym.sym ? camera_left(scene) : 0;
+			SDLK_UP == sdl->event.key.keysym.sym ? camera_up(scene) : 0;
+			SDLK_DOWN == sdl->event.key.keysym.sym ? camera_down(scene) : 0;
 			scene->draw[scene->mode](sdl, scene);
 		}
 	}

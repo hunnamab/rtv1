@@ -91,5 +91,7 @@ double		intersect_ray_triangle(t_ray *r, t_object *object)
 	uv[1] = vector_dot(&r->dir, &vec[2]) * det;
 	if (uv[1] < 0 || uv[0] + uv[1] > 1)
 		return (0);
-	return (vector_dot(&edge[1], &vec[2]) * det);
+	if ((vector_dot(&edge[1], &vec[2]) * det) > 0)
+		return(vector_dot(&edge[1], &vec[2]) * det);
+	return (0);
 }
