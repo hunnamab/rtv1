@@ -6,7 +6,7 @@
 /*   By: hunnamab <hunnamab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/08 15:30:38 by pmetron           #+#    #+#             */
-/*   Updated: 2020/11/08 20:32:41 by hunnamab         ###   ########.fr       */
+/*   Updated: 2020/11/10 13:38:41 by hunnamab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +88,7 @@ int				is_odd(long long int num);
 long long int	ft_pow(long long int num, long long int pow);
 int				get_last_digit(long long int num, int precision);
 char			*ft_strcpy_alloc(char *dst, char *src);
-void	        ft_memdel_double(void **p);
-int		        brackets(char *str);
+void			ft_memdel_double(void **p);
+int				brackets(char *str);
+
 #endif
