@@ -3,16 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   plane.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pmetron <pmetron@student.42.fr>            +#+  +:+       +#+        */
+/*   By: hunnamab <hunnamab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/07 14:22:24 by pmetron           #+#    #+#             */
-/*   Updated: 2020/11/10 13:40:13 by pmetron          ###   ########.fr       */
+/*   Updated: 2020/11/10 15:21:33 by hunnamab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rtv1.h"
 
-t_object	*new_plane(t_point point, t_point normal, double specular, t_color color, double *rotation)
+t_object	*new_plane(t_point *poi_nor, double specular, t_color color, \
+						double *rotation)
 {
 	t_plane		*new_plane;
 	t_object	*new_object;
@@ -20,9 +21,9 @@ t_object	*new_plane(t_point point, t_point normal, double specular, t_color colo
 
 	new_object = protected_malloc(sizeof(t_object), 1);
 	new_plane = protected_malloc(sizeof(t_plane), 1);
-	new_plane->normal = normal;
+	new_plane->normal = poi_nor[1];
 	normalize_vector(&new_plane->normal);
-	new_plane->point = point;
+	new_plane->point = poi_nor[0];
 	new_object->rotation[0] = rotation[0];
 	new_object->rotation[1] = rotation[1];
 	new_object->rotation[2] = rotation[2];

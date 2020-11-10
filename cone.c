@@ -3,16 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   cone.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pmetron <pmetron@student.42.fr>            +#+  +:+       +#+        */
+/*   By: hunnamab <hunnamab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/07 15:38:39 by hunnamab          #+#    #+#             */
-/*   Updated: 2020/11/09 13:12:07 by pmetron          ###   ########.fr       */
+/*   Updated: 2020/11/10 15:14:07 by hunnamab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rtv1.h"
 
-t_object	*new_cone(t_point position, t_point vec, double specular, t_color color, double *rotation, double angle)
+t_object	*new_cone(t_point *pos_vec, double *ang_spec, t_color color, \
+						double *rotation)
 {
 	t_cone		*new_cone;
 	t_object	*new_object;
@@ -20,16 +21,16 @@ t_object	*new_cone(t_point position, t_point vec, double specular, t_color color
 
 	new_object = malloc(sizeof(t_object));
 	new_cone = malloc(sizeof(t_cone));
-	new_cone->position = position;
-	new_cone->vec = vec;
-	new_cone->angle = angle;
+	new_cone->position = pos_vec[0];
+	new_cone->vec = pos_vec[1];
+	new_cone->angle = ang_spec[0];
 	new_object->rotation[0] = rotation[0];
 	new_object->rotation[1] = rotation[1];
 	new_object->rotation[2] = rotation[2];
 	matrix = get_rotation_matrix(new_object->rotation);
 	transform(&new_cone->vec, matrix, 1);
 	matr_free(matrix, 4);
-	new_object->specular = specular;
+	new_object->specular = ang_spec[1];
 	new_object->color = color;
 	new_object->data = (void *)new_cone;
 	new_object->tag = "cone";

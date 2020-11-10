@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   light_parameters.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pmetron <pmetron@student.42.fr>            +#+  +:+       +#+        */
+/*   By: hunnamab <hunnamab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/09 11:58:35 by hunnamab          #+#    #+#             */
-/*   Updated: 2020/11/10 12:58:23 by pmetron          ###   ########.fr       */
+/*   Updated: 2020/11/10 15:38:22 by hunnamab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,39 +32,42 @@ char		*get_light_type(char *description)
 	return (buf);
 }
 
+static void	init_norme(t_point *pos_dir, double *intensity)
+{
+	*intensity = 0.0;
+	pos_dir[0].x = 0.0;
+	pos_dir[0].y = 0.0;
+	pos_dir[0].z = 0.0;
+	pos_dir[1].x = 0.0;
+	pos_dir[1].y = 0.0;
+	pos_dir[1].z = 0.0;
+}
+
 t_light		*get_light(char **description)
 {
 	t_light		*light;
-	t_point		position;
-	t_point		direction;
+	t_point		pos_dir[2];
 	double		intensity;
 	char		*type;
 
 	light = NULL;
-	intensity = 0.0;
-	type = get_light_type(description[0]);
-	printf("light type = |%s|\n", type);
-	position.x = 0.0;
-	position.y = 0.0;
-	position.z = 0.0;
-	direction.x = 0.0;
-	direction.y = 0.0;
-	direction.z = 0.0;
+	type = get_light_type(description[0]); // printf("light type = |%s|\n", type);
+	init_norme(pos_dir, &intensity);
 	if (ft_strequ(type, "point"))
 	{
-		position = get_points(description[1]);
+		pos_dir[0] = get_points(description[1]);
 		intensity = ftoi(get_coordinates(description[2]));
 	}
 	else if (ft_strequ(type, "directional"))
 	{
-		direction = get_points(description[1]);
+		pos_dir[1] = get_points(description[1]);
 		intensity = ftoi(get_coordinates(description[2]));
 	}
 	else if (ft_strequ(type, "ambient"))
 		intensity = ftoi(get_coordinates(description[1]));
 	else
 		output_error(5);
-	light = new_light(position, direction, type, intensity);
+	light = new_light(pos_dir, type, intensity);
 	free(type);
 	return (light);
 }

@@ -6,7 +6,7 @@
 /*   By: hunnamab <hunnamab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/07 15:39:34 by hunnamab          #+#    #+#             */
-/*   Updated: 2020/11/10 13:55:03 by hunnamab         ###   ########.fr       */
+/*   Updated: 2020/11/10 15:36:46 by hunnamab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,10 @@
 
 // scenes_reader.c
 void		read_scene(int fd, t_scene *scene);
+// scenes_reader.c
+void		split_objects(int len, t_scene *scene, char *buf);
+int			count_objects(int len, char *buf);
+char		**get_description(char *scene, int i);
 // define_object.c
 t_object	*get_parameters(char *name, char **description);
 // settings.c
@@ -43,7 +47,7 @@ void		draw_deepth_buf(t_sdl *sdl, t_scene *scene);
 void		draw_raycast(t_sdl *sdl, t_scene *scene);
 // light.c
 t_color		reflection_color(t_scene *scene, int index);
-t_light		*new_light(t_point position, t_point direction, const char *type, double intensity);
+t_light		*new_light(t_point *pos_dir, const char *type, double intensity);
 t_point		get_light_vec(t_scene *scene, int index, int j);
 double		get_specular(t_scene *scene, int index, int j, t_point *l);
 int			in_shadow(t_scene *scene, int index, t_point l);
@@ -72,8 +76,8 @@ void		set_color_zero(t_color *color);
 t_color		color_mul_by_scalar(t_color *color, double scalar);
 // sphere.c
 double		intersect_ray_sphere(t_ray *r, t_object *object);
-t_object	*new_sphere(t_point center, double radius, double specular, \
-							t_color color, double *rotation);
+t_object	*new_sphere(t_point center, double *rad_spec, t_color color, \
+							double *rotation);
 // triangle.c
 double		intersect_ray_triangle(t_ray *r, t_object *object);
 t_object	*new_triangle(t_point *vertex, double specular, t_color color, \
@@ -81,21 +85,21 @@ t_object	*new_triangle(t_point *vertex, double specular, t_color color, \
 void		clear_triangle(t_object *obj);
 // plane.c
 double		intersect_ray_plane(t_ray *r, t_object *object);
-t_object	*new_plane(t_point point, t_point normal, double specular, \
-						t_color color, double *rotation);
+t_object	*new_plane(t_point *poi_nor, double specular, t_color color, \
+						double *rotation);
 // cylinder.c
 double		intersect_ray_cylinder(t_ray *r, t_object *object);
-t_object	*new_cylinder(t_point position, t_point vec, double radius, \
-							double specular, t_color color, double *rotation);
+t_object	*new_cylinder(t_point *pos_vec, double *rad_spec, t_color color, \
+							double *rotation);
 // cone.c
 double		intersect_ray_cone(t_ray *r, t_object *object);
-t_object	*new_cone(t_point position, t_point vec, double specular, \
-						t_color color, double *rotation, double angle);
+t_object	*new_cone(t_point *pos_vec, double *ang_spec, t_color color, \
+						double *rotation);
 // ftoi.c
 double		ftoi(char *str);
 // objects_parameters.c
 t_object	*get_sphere(char **description);
-t_object	*get_triangle(char **description);
+t_object	*get_triangle(char **description, double specular);
 t_object	*get_plane(char **description);
 t_object	*get_cylinder(char **description);
 t_object	*get_cone(char **description);

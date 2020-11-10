@@ -3,24 +3,24 @@
 /*                                                        :::      ::::::::   */
 /*   light.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pmetron <pmetron@student.42.fr>            +#+  +:+       +#+        */
+/*   By: hunnamab <hunnamab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/07 14:23:24 by pmetron           #+#    #+#             */
-/*   Updated: 2020/11/10 13:45:47 by pmetron          ###   ########.fr       */
+/*   Updated: 2020/11/10 15:36:28 by hunnamab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rtv1.h"
 
-t_light		*new_light(t_point position, t_point direction, const char *type, double intensity)
+t_light		*new_light(t_point *pos_dir, const char *type, double intensity)
 {
 	t_light *new_light;
 
 	new_light = protected_malloc(sizeof(t_light), 1);
 	new_light->type = ft_strcpy_alloc(new_light->type, type);
 	new_light->intensity = intensity;
-	new_light->position = position;
-	new_light->direction = direction;
+	new_light->position = pos_dir[0];
+	new_light->direction = pos_dir[1];
 	return (new_light);
 }
 
@@ -42,8 +42,8 @@ int			in_shadow(t_scene *scene, int index, t_point l)
 	t_ray	ray;
 	int		i;
 	double	t;
+
 	i = 0;
-	
 	ray.dir = l;
 	ray.start = vector_scale(&ray.dir, 0.0001);
 	ray.start = vector_add(&ray.start, &scene->intersection_buf[index]);
@@ -51,7 +51,7 @@ int			in_shadow(t_scene *scene, int index, t_point l)
 	{
 		t = scene->objs[i]->intersect(&ray, scene->objs[i]);
 		if (t < 1 && t > 0.0001)
-			break;
+			break ;
 		i++;
 	}
 	if (t < 1 && t > 0.0001)
@@ -64,7 +64,7 @@ double		get_specular(t_scene *scene, int index, int j, t_point *l)
 	double		nri[3];
 	t_point		r;
 	t_point		d;
-	t_point 	lb;
+	t_point		lb;
 
 	lb = vector_div_by_scalar(l, vector_length(l));
 	nri[2] = 0;
@@ -89,7 +89,7 @@ t_color		reflection_color(t_scene *scene, int index)
 	t_point	l;
 	double	n_dot_l;
 	int		j;
-	
+
 	j = -1;
 	i = 0;
 	while (++j < scene->light_nmb)

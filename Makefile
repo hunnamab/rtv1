@@ -6,7 +6,7 @@
 #    By: hunnamab <hunnamab@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/11/07 15:39:13 by hunnamab          #+#    #+#              #
-#    Updated: 2020/11/10 13:56:23 by hunnamab         ###   ########.fr        #
+#    Updated: 2020/11/10 14:46:03 by hunnamab         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,7 +29,8 @@ SRC = main.c sphere.c vector.c utils.c \
 	./matrix_lib/print_matrix.c transform.c ./matrix_lib/matrix_identity.c \
 	buffers.c scene.c color.c vector_second.c transform_matrix.c \
 	keyboard.c clean.c errors_management.c light_parameters.c \
-	parameters_utils.c camera_parameters.c define_object.c
+	parameters_utils.c camera_parameters.c define_object.c \
+	scenes_reader_util.c
 OBJ = $(SRC:.c=.o)
 
 all: $(NAME)

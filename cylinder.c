@@ -3,16 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   cylinder.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pmetron <pmetron@student.42.fr>            +#+  +:+       +#+        */
+/*   By: hunnamab <hunnamab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/07 15:11:46 by pmetron           #+#    #+#             */
-/*   Updated: 2020/11/09 13:11:37 by pmetron          ###   ########.fr       */
+/*   Updated: 2020/11/10 15:42:27 by hunnamab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rtv1.h"
 
-t_object	*new_cylinder(t_point position, t_point vec, double radius, double specular, t_color color, double *rotation)
+t_object	*new_cylinder(t_point *pos_vec, double *rad_spec, t_color color, \
+							double *rotation)
 {
 	t_cylinder	*new_cylinder;
 	t_object	*new_object;
@@ -20,10 +21,10 @@ t_object	*new_cylinder(t_point position, t_point vec, double radius, double spec
 
 	new_object = protected_malloc(sizeof(t_object), 1);
 	new_cylinder = protected_malloc(sizeof(t_cylinder), 1);
-	new_cylinder->position = position;
-	new_cylinder->radius = radius;
-	new_cylinder->vec = vec;
-	new_object->specular = specular;
+	new_cylinder->position = pos_vec[0];
+	new_cylinder->radius = rad_spec[0];
+	new_cylinder->vec = pos_vec[1];
+	new_object->specular = rad_spec[1];
 	new_object->rotation[0] = rotation[0];
 	new_object->rotation[1] = rotation[1];
 	new_object->rotation[2] = rotation[2];
@@ -45,19 +46,18 @@ void		get_cylinder_normal(t_scene *scene, int index, int obj_num)
 	t_point		*normal;
 	double		m;
 	t_point		p;
-	t_point		buf;
-	t_point		buf2;
+	t_point		buf[2];
 
 	normal = &scene->normal_buf[index];
 	cylinder = (t_cylinder *)scene->objs[obj_num]->data;
-	buf = vector_sub(&scene->ray_buf[index].start, &cylinder->position);
+	buf[0] = vector_sub(&scene->ray_buf[index].start, &cylinder->position);
 	m = vector_dot(&scene->ray_buf[index].dir, &cylinder->vec) * \
-		scene->depth_buf[index] + vector_dot(&buf, &cylinder->vec);
-	buf = vector_scale(&scene->ray_buf[index].dir, scene->depth_buf[index]);
-	p = vector_add(&scene->ray_buf[index].start, &buf);
-	buf = vector_sub(&p, &cylinder->position);
-	buf2 = vector_scale(&cylinder->vec, m);
-	*normal = vector_sub(&buf, &buf2);
+		scene->depth_buf[index] + vector_dot(&buf[0], &cylinder->vec);
+	buf[0] = vector_scale(&scene->ray_buf[index].dir, scene->depth_buf[index]);
+	p = vector_add(&scene->ray_buf[index].start, &buf[0]);
+	buf[0] = vector_sub(&p, &cylinder->position);
+	buf[1] = vector_scale(&cylinder->vec, m);
+	*normal = vector_sub(&buf[0], &buf[1]);
 	scene->normal_buf[index] = vector_div_by_scalar(&scene->normal_buf[index], \
 								vector_length(&scene->normal_buf[index]));
 	if (vector_dot(&scene->ray_buf[index].dir, normal) > 0.0001)

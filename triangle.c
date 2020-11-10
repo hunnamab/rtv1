@@ -6,13 +6,14 @@
 /*   By: hunnamab <hunnamab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/05 21:42:26 by pmetron           #+#    #+#             */
-/*   Updated: 2020/11/10 13:51:35 by hunnamab         ###   ########.fr       */
+/*   Updated: 2020/11/10 15:39:35 by hunnamab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rtv1.h"
 
-t_object	*new_triangle(t_point *vertex, double specular, t_color color, double *rotation)
+t_object	*new_triangle(t_point *vertex, double specular, t_color color, \
+							double *rotation)
 {
 	t_triangle	*new_triangle;
 	t_object	*new_object;

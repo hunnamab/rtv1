@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   sphere.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pmetron <pmetron@student.42.fr>            +#+  +:+       +#+        */
+/*   By: hunnamab <hunnamab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/05 22:45:20 by pmetron           #+#    #+#             */
-/*   Updated: 2020/11/09 13:09:48 by pmetron          ###   ########.fr       */
+/*   Updated: 2020/11/10 15:03:07 by hunnamab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rtv1.h"
 
-t_object	*new_sphere(t_point center, double radius,\
-						double specular, t_color color, double *rotation)
+t_object	*new_sphere(t_point center, double *rad_spec, t_color color, \
+						double *rotation)
 {
 	t_sphere *new_sphere;
 	t_object *new_object;
@@ -21,11 +21,11 @@ t_object	*new_sphere(t_point center, double radius,\
 	new_object = protected_malloc(sizeof(t_object), 1);
 	new_sphere = protected_malloc(sizeof(t_sphere), 1);
 	new_sphere->center = center;
-	new_sphere->radius = radius;
+	new_sphere->radius = rad_spec[0];
 	new_object->rotation[0] = rotation[0];
 	new_object->rotation[1] = rotation[1];
 	new_object->rotation[2] = rotation[2];
-	new_object->specular = specular;
+	new_object->specular = rad_spec[1];
 	new_object->color = color;
 	new_object->data = (void *)new_sphere;
 	new_object->tag = "sphere";
