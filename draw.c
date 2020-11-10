@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hunnamab <hunnamab@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pmetron <pmetron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/07 14:34:50 by pmetron           #+#    #+#             */
-/*   Updated: 2020/11/09 11:22:29 by hunnamab         ###   ########.fr       */
+/*   Updated: 2020/11/10 14:41:54 by pmetron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,9 +83,9 @@ void	draw_deepth_buf(t_sdl *sdl, t_scene *scene)
 			xyi[2] = xyi[1] * WID + xyi[0];
 			if (scene->index_buf[xyi[2]] != -1)
 			{
-				color.red = (scene->depth_buf[xyi[2]]);
-				color.green = (scene->depth_buf[xyi[2]]);
-				color.blue = (scene->depth_buf[xyi[2]]);
+				color.red = scene->depth_buf[xyi[2]] > 255 ? 255 : scene->depth_buf[xyi[2]];
+				color.green = scene->depth_buf[xyi[2]] > 255 ? 255 : scene->depth_buf[xyi[2]];
+				color.blue = scene->depth_buf[xyi[2]] > 255 ? 255 : scene->depth_buf[xyi[2]];
 			}
 			else
 				set_color_zero(&color);
