@@ -57,7 +57,7 @@ sphere {
 }
 
 camera {
-    position: 2, 2, -20
+    position: 2, 2, -40
     rotation: 0, 0, 0
 }
 
@@ -96,7 +96,7 @@ plane {
 
 light {
     type: point
-    position: -3, 1, 0
+    position: -40, 1, 0
     intensity: 0.3
 }
 
@@ -106,3 +106,7 @@ light {
     intensity: 0.6
 }
 
+light {
+    type: ambient
+    intensity: 0.2
+}

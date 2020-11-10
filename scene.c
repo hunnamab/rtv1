@@ -17,18 +17,15 @@ void	init_deepth(t_scene *scene)
 	double	**matrix;
 	int		x;
 
-	x = 0;
+	x = -1;
 	scene->viewport = get_viewport(&scene->camera);
 	scene->ray_buf = protected_malloc(sizeof(t_ray), (WID * HEI));
 	get_rays_arr(scene);
 	scene->depth_buf = protected_malloc(sizeof(double), WID * HEI);
 	scene->index_buf = protected_malloc(sizeof(int), WID * HEI);
 	matrix = get_rotation_matrix(&scene->camera.rotation);
-	while (x < WID * HEI)
-	{
+	while (++x < WID * HEI)
 		transform(&scene->ray_buf[x].dir, matrix, 1);
-		x++;
-	}
 	matr_free(matrix, 4);
 	get_closest_points(scene);
 }
@@ -38,7 +35,7 @@ void	init_default(t_scene *scene)
 	double	**matrix;
 	int		x;
 
-	x = 0;
+	x = -1;
 	scene->viewport = get_viewport(&scene->camera);
 	scene->ray_buf = protected_malloc(sizeof(t_ray), (WID * HEI));
 	get_rays_arr(scene);
@@ -48,11 +45,8 @@ void	init_default(t_scene *scene)
 	scene->index_buf = protected_malloc(sizeof(int), WID * HEI);
 	scene->depth_buf = protected_malloc(sizeof(double), WID * HEI);
 	matrix = get_rotation_matrix(&scene->camera.rotation);
-	while (x < WID * HEI)
-	{
+	while (++x < WID * HEI)
 		transform(&scene->ray_buf[x].dir, matrix, 1);
-		x++;
-	}
 	matr_free(matrix, 4);
 	get_closest_points(scene);
 	get_intersection_buf(scene);
@@ -65,7 +59,7 @@ void	init_raycast(t_scene *scene)
 	double	**matrix;
 	int		x;
 
-	x = 0;
+	x = -1;
 	scene->viewport = get_viewport(&scene->camera);
 	scene->ray_buf = protected_malloc(sizeof(t_ray), (WID * HEI));
 	get_rays_arr(scene);
@@ -74,11 +68,8 @@ void	init_raycast(t_scene *scene)
 	scene->index_buf = protected_malloc(sizeof(int), WID * HEI);
 	scene->intersection_buf = protected_malloc(sizeof(t_point), WID * HEI);
 	matrix = get_rotation_matrix(&scene->camera.rotation);
-	while (x < WID * HEI)
-	{
+	while (++x < WID * HEI)
 		transform(&scene->ray_buf[x].dir, matrix, 1);
-		x++;
-	}
 	matr_free(matrix, 4);
 	get_closest_points(scene);
 	get_intersection_buf(scene);
@@ -90,15 +81,12 @@ void	refresh_scene(t_scene *scene)
 	double	**matrix;
 	int		x;
 
-	x = 0;
+	x = -1;
 	scene->viewport != NULL ? get_viewport(&scene->camera) : NULL;
 	scene->ray_buf != NULL ? get_rays_arr(scene) : NULL;
 	matrix = get_rotation_matrix(&scene->camera.rotation);
-	while (x < WID * HEI)
-	{
+	while (++x < WID * HEI)
 		transform(&scene->ray_buf[x].dir, matrix, 1);
-		x++;
-	}
 	matr_free(matrix, 4);
 	scene->depth_buf != NULL ? get_closest_points(scene) : NULL;
 	scene->intersection_buf != NULL ? get_intersection_buf(scene) : NULL;

@@ -39,50 +39,34 @@ void	get_rays_arr(t_scene *scene)
 
 void	get_closest_points(t_scene *scene)
 {
-	int		x;
-	int		y;
 	double	t;
-	int		i;
-	int		j;
+	int		ixyj[4];
 
-	i = 0;
+	ixyj[0] = -1;
 	t = 0;
-	x = 0;
-	y = 0;
-	while (y < HEI)
+	ixyj[1] = -1;
+	ixyj[2] = -1;
+	while (++ixyj[2] < HEI)
 	{
-		while (x < WID)
+		while (++ixyj[1] < WID)
 		{
-			j = y * WID + x;
-			while (i < scene->obj_nmb)
+			ixyj[3] = ixyj[2] * WID + ixyj[1];
+			scene->index_buf[ixyj[3]] = -1;
+			scene->depth_buf[ixyj[3]] = 100000000;
+			while (++ixyj[0] < scene->obj_nmb)
 			{
-				t = scene->objs[i]->intersect(&scene->ray_buf[j], \
-												scene->objs[i]);
-				if (t)
-					break ;
-				i++;
-			}
-			scene->index_buf[j] = i;
-			scene->depth_buf[j] = t;
-			while (i < scene->obj_nmb)
-			{
-				t = scene->objs[i]->intersect(&scene->ray_buf[j], \
-												scene->objs[i]);
-				if (t < scene->depth_buf[j] && t != 0)
+				t = scene->objs[ixyj[0]]->intersect(&scene->ray_buf[ixyj[3]], \
+												scene->objs[ixyj[0]]);
+				if (t < scene->depth_buf[ixyj[3]] && t != 0)
 				{
-					scene->depth_buf[j] = t;
-					scene->index_buf[j] = i;
+					scene->depth_buf[ixyj[3]] = t;
+					scene->index_buf[ixyj[3]] = ixyj[0];
 				}
-				i++;
 			}
-			if (scene->depth_buf[j] < 1)
-				scene->index_buf[j] = -1;
-			x++;
-			i = 0;
+			ixyj[0] = -1;
 			t = 0;
 		}
-		x = 0;
-		y++;
+		ixyj[1] = -1;
 	}
 }
 
@@ -153,11 +137,11 @@ void	get_material_buf(t_scene *scene)
 	int j;
 
 	j = 0;
-	x = 0;
-	y = 0;
-	while (y < HEI)
+	x = -1;
+	y = -1;
+	while (++y < HEI)
 	{
-		while (x < WID)
+		while (++x < WID)
 		{
 			i = y * WID + x;
 			if (scene->index_buf[i] != -1)
@@ -172,9 +156,7 @@ void	get_material_buf(t_scene *scene)
 				set_color_zero(&scene->material_buf[i].color);
 				scene->material_buf[i].specular = -1;
 			}
-			x++;
 		}
-		x = 0;
-		y++;
+		x = -1;
 	}
 }

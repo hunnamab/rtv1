@@ -83,6 +83,14 @@ sphere {
     specular: 30
 }
 
+sphere {
+    center: 0, 0, 0
+    radius: 300
+    rotation: 0, 0, 0
+    color: 160, 77, 44, 255
+    specular: 30
+}
+
 camera {
     position: 0, 5, -30
     rotation: 0, 0.2, 0

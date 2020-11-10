@@ -42,55 +42,45 @@ int			in_shadow(t_scene *scene, int index, t_point l, t_point l_pos)
 	t_ray	ray;
 	int		i;
 	double	t;
-	double	buf;
-	double dist;
-	t_point buf2;
 	i = 0;
 	
 	ray.dir = l;
-	ray.start = scene->intersection_buf[index];
-	buf2 = vector_scale(&ray.dir, 0.0001);
-	ray.start = vector_add(&ray.start, &buf2);
-	buf2 = vector_sub(&l_pos, &ray.start);
-	dist = vector_length(&buf2);
-	buf = 0;
-	t = dist;
+	ray.start = vector_scale(&ray.dir, 0.0001);
+	ray.start = vector_add(&ray.start, &scene->intersection_buf[index]);
 	while (i < scene->obj_nmb)
 	{
-		buf = scene->objs[i]->intersect(&ray, scene->objs[i]);
-		if (t > buf && buf > 0.0001)
-			t = buf;
+		t = scene->objs[i]->intersect(&ray, scene->objs[i]);
+		if (t < 1 && t > 0.0001)
+			break;
 		i++;
 	}
-	if (t < dist && t > 0.0001)
+	if (t < 1 && t > 0.0001)
 		return (1);
 	return (0);
 }
 
 double		get_specular(t_scene *scene, int index, int j, t_point *l)
 {
-	double		r_dot_v;
+	double		nri[3];
 	t_point		r;
 	t_point		d;
-	double		i;
-	double		n_dot_l;
-	t_point lb;
+	t_point 	lb;
 
 	lb = vector_div_by_scalar(l, vector_length(l));
-	i = 0;
-	n_dot_l = vector_dot(&scene->normal_buf[index], &lb);
+	nri[2] = 0;
+	nri[0] = vector_dot(&scene->normal_buf[index], &lb);
 	r = vector_scale(&scene->normal_buf[index], 2.0);
-	r = vector_scale(&r, n_dot_l);
+	r = vector_scale(&r, nri[0]);
 	r = vector_sub(&r, &lb);
 	d.x = -scene->ray_buf[index].dir.x;
 	d.y = -scene->ray_buf[index].dir.y;
 	d.z = -scene->ray_buf[index].dir.z;
-	r_dot_v = vector_dot(&r, &d);
-	if (r_dot_v > 0)
-		i += scene->light[j]->intensity * pow((double)r_dot_v / \
+	nri[1] = vector_dot(&r, &d);
+	if (nri[1] > 0)
+		nri[2] += scene->light[j]->intensity * pow((double)nri[1] / \
 		(vector_length(&r) * vector_length(&d)), \
 		scene->material_buf[index].specular);
-	return (i);
+	return (nri[2]);
 }
 
 t_color		reflection_color(t_scene *scene, int index)
@@ -99,20 +89,18 @@ t_color		reflection_color(t_scene *scene, int index)
 	t_point	l;
 	double	n_dot_l;
 	int		j;
-	t_point lb;
 	
 	j = -1;
 	i = 0;
 	while (++j < scene->light_nmb)
 	{
 		if (ft_strequ(scene->light[j]->type, "ambient"))
-			i += 0.2;
+			i += scene->light[j]->intensity;
 		else
 		{
 			l = get_light_vec(scene, index, &i, j);
-			lb = vector_div_by_scalar(&l, vector_length(&l));
 			n_dot_l = vector_dot(&scene->normal_buf[index], &l);
-			if (!(in_shadow(scene, index, lb, scene->light[j]->position)) && n_dot_l > 0)
+			if (!(in_shadow(scene, index, l, scene->light[j]->position)) && n_dot_l > 0)
 			{
 				if (scene->material_buf[index].specular != -1)
 					i += get_specular(scene, index, j, &l);
