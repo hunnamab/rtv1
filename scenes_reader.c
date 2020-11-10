@@ -6,7 +6,7 @@
 /*   By: hunnamab <hunnamab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/07 15:39:43 by hunnamab          #+#    #+#             */
-/*   Updated: 2020/11/10 14:19:09 by hunnamab         ###   ########.fr       */
+/*   Updated: 2020/11/10 14:31:27 by hunnamab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,13 +60,15 @@ static void	split_objects(int len, t_scene *scene, char *buf)
 	int		i;
 	int		start;
 	int		camera;
+	int		j;
 
 	i = 0;
 	start = 0;
 	camera = 0;
+	j = 0;
 	while (i < len)
 	{
-		if (buf[i + 1] == '{' && scene->obj_nmb > 0)
+		if (buf[i + 1] == '{' && j < scene->obj_nmb)
 		{
 			if (!(obj_name = ft_strsub(buf, start, (i - start))))
 				output_error(6);
@@ -78,65 +80,57 @@ static void	split_objects(int len, t_scene *scene, char *buf)
 			while (buf[i] != '}')
 				i++;
 			start = i + 3;
-			scene->obj_nmb--;
+			j++;
 		}
 		i++;
 	}
-	scene->obj_nmb -= scene->light_nmb - camera;
+	scene->obj_nmb = scene->obj_nmb - scene->light_nmb - camera;
 	if (scene->obj_nmb < 1 || scene->light_nmb < 1 || camera != 1)
 		output_error(0);
-}
-
-static void scene_description()
-{
-
 }
 
 static void	get_objects(char *buf, t_scene *scene, int len)
 {
 	char		*obj_name;
 	char		**obj_desc;
-	int			start;
-	int			n;
-	int			m;
-	int			i;
+	int			snmi[4];
 
-	i = 0;
-	n = 0;
-	m = 0;
-	start = 0;
+	snmi[0] = 0;
+	snmi[1] = 0;
+	snmi[2] = 0;
+	snmi[3] = 0;
 	if (!brackets(buf))
 		output_error(6);
 	scene->obj_nmb = count_objects(len, buf); // выясняем кол-во объектов сцены
 	split_objects(len, scene, buf);
 	scene->objs = protected_malloc(sizeof(t_object *), scene->obj_nmb); // создаем массив структур для объектов
 	scene->light = protected_malloc(sizeof(t_light *), scene->light_nmb);
-	while (i < len)
+	while (snmi[3] < len)
 	{
-		if (buf[i + 1] == '{')
+		if (buf[snmi[3] + 1] == '{')
 		{
-			obj_name = ft_strsub(buf, start, (i - start)); // записываем название объекта
-			obj_desc = get_description(buf, i + 3); // записываем описание объекта
+			obj_name = ft_strsub(buf, snmi[0], (snmi[3] - snmi[0])); // записываем название объекта
+			obj_desc = get_description(buf, snmi[3] + 3); // записываем описание объекта
 			if (!(ft_strequ(obj_name, "camera")) && \
-				!(ft_strequ(obj_name, "light")) && n < scene->obj_nmb)
+				!(ft_strequ(obj_name, "light")) && snmi[1] < scene->obj_nmb)
 			{
-				scene->objs[n] = get_parameters(obj_name, obj_desc); // создаем объект и получаем его характеристики
-				n++; // плюсуем индекс массива, если объект не камера
+				scene->objs[snmi[1]] = get_parameters(obj_name, obj_desc); // создаем объект и получаем его характеристики
+				snmi[1]++; // плюсуем индекс массива, если объект не камера
 			}
 			else if ((ft_strequ(obj_name, "camera")))
 				scene->camera = get_camera(obj_desc);
-			else if ((ft_strequ(obj_name, "light")) && m < scene->light_nmb)
+			else if ((ft_strequ(obj_name, "light")) && snmi[2] < scene->light_nmb)
 			{
-				scene->light[m] = get_light(obj_desc);
-				m++;
+				scene->light[snmi[2]] = get_light(obj_desc);
+				snmi[2]++;
 			}
 			ft_memdel((void **)&obj_name); // освобождаем строки
 			ft_memdel_double((void **)obj_desc);
-			while (buf[i] != '}') // переходим к описанию следующего объекта
-				i++;
-			start = i + 3;
+			while (buf[snmi[3]] != '}') // переходим к описанию следующего объекта
+				snmi[3]++;
+			snmi[0] = snmi[3] + 3;
 		}
-		i++;
+		snmi[3]++;
 	}
 	ft_memdel((void **)&buf);
 }
