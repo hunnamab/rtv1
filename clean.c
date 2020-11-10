@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   scene_clean.c                                      :+:      :+:    :+:   */
+/*   clean.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hunnamab <hunnamab@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pmetron <pmetron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/08 17:32:12 by pmetron           #+#    #+#             */
-/*   Updated: 2020/11/09 12:14:22 by hunnamab         ###   ########.fr       */
+/*   Updated: 2020/11/10 13:30:43 by pmetron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,13 +23,13 @@ void	clean_scene(t_scene *scene)
 	int i;
 
 	i = 0;
-	ft_memdel(&scene->normal_buf);
-	ft_memdel(&scene->material_buf);
-	ft_memdel(&scene->intersection_buf);
-	ft_memdel(&scene->ray_buf);
-	ft_memdel(&scene->viewport);
-	ft_memdel(&scene->index_buf);
-	ft_memdel(&scene->depth_buf);
+	ft_memdel((void **)&scene->normal_buf);
+	ft_memdel((void **)&scene->material_buf);
+	ft_memdel((void **)&scene->intersection_buf);
+	ft_memdel((void **)&scene->ray_buf);
+	ft_memdel((void **)&scene->viewport);
+	ft_memdel((void **)&scene->index_buf);
+	ft_memdel((void **)&scene->depth_buf);
 	while (i < scene->obj_nmb)
 	{
 		scene->objs[i]->clear_obj(scene->objs[i]);
@@ -38,11 +38,11 @@ void	clean_scene(t_scene *scene)
 	i = 0;
 	while (i < scene->light_nmb)
 	{
-		ft_memdel(&scene->light[i]->type);
-		ft_memdel(&scene->light[i]);
+		ft_memdel((void **)&scene->light[i]->type);
+		ft_memdel((void **)&scene->light[i]);
 		i++;
 	}
 	free(scene->light);
 	free(scene->objs);
-	ft_memdel(&scene);
+	ft_memdel((void **)&scene);
 }

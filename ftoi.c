@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ftoi.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hunnamab <hunnamab@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pmetron <pmetron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/07 14:34:00 by pmetron           #+#    #+#             */
-/*   Updated: 2020/11/07 17:04:57 by hunnamab         ###   ########.fr       */
+/*   Updated: 2020/11/10 13:27:36 by pmetron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,6 @@ double	ftoi(char *str)
 		buf *= 10;
 		i++;
 	}
-	ft_memdel(&str);
+	ft_memdel((void **)&str);
 	return (n * sign);
 }
