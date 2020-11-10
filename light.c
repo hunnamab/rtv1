@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   light.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hunnamab <hunnamab@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pmetron <pmetron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/07 14:23:24 by pmetron           #+#    #+#             */
-/*   Updated: 2020/11/09 15:28:30 by hunnamab         ###   ########.fr       */
+/*   Updated: 2020/11/10 13:45:47 by pmetron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ t_light		*new_light(t_point position, t_point direction, const char *type, doubl
 	return (new_light);
 }
 
-t_point		get_light_vec(t_scene *scene, int index, double *i, int j)
+t_point		get_light_vec(t_scene *scene, int index, int j)
 {
 	t_point light_vec;
 
@@ -37,7 +37,7 @@ t_point		get_light_vec(t_scene *scene, int index, double *i, int j)
 	return (light_vec);
 }
 
-int			in_shadow(t_scene *scene, int index, t_point l, t_point l_pos)
+int			in_shadow(t_scene *scene, int index, t_point l)
 {
 	t_ray	ray;
 	int		i;
@@ -98,9 +98,9 @@ t_color		reflection_color(t_scene *scene, int index)
 			i += scene->light[j]->intensity;
 		else
 		{
-			l = get_light_vec(scene, index, &i, j);
+			l = get_light_vec(scene, index, j);
 			n_dot_l = vector_dot(&scene->normal_buf[index], &l);
-			if (!(in_shadow(scene, index, l, scene->light[j]->position)) && n_dot_l > 0)
+			if (!(in_shadow(scene, index, l)) && n_dot_l > 0)
 			{
 				if (scene->material_buf[index].specular != -1)
 					i += get_specular(scene, index, j, &l);

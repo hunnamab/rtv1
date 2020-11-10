@@ -6,7 +6,7 @@
 /*   By: pmetron <pmetron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/07 15:39:34 by hunnamab          #+#    #+#             */
-/*   Updated: 2020/11/10 13:18:38 by pmetron          ###   ########.fr       */
+/*   Updated: 2020/11/10 13:45:28 by pmetron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,9 +42,9 @@ void		draw_raycast(t_sdl *sdl, t_scene *scene);
 // light.c
 t_color		reflection_color(t_scene *scene, int index);
 t_light		*new_light(t_point position, t_point direction, const char *type, double intensity);
-t_point		get_light_vec(t_scene *scene, int index, double *i, int j);
+t_point		get_light_vec(t_scene *scene, int index, int j);
 double		get_specular(t_scene *scene, int index, int j, t_point *l);
-int			in_shadow(t_scene *scene, int index, t_point l, t_point l_pos);
+int			in_shadow(t_scene *scene, int index, t_point l);
 // vector.c
 t_point		vector_add(const t_point *v1, const t_point *v2);
 t_point		vector_scale(t_point *v, double c);
@@ -78,7 +78,7 @@ t_object	*new_triangle(t_point *vertex, double specular, t_color color, \
 							double *rotation);
 void		clear_triangle(t_object *obj);
 // plane.c
-double		intersect_ray_plane(t_ray *r, t_object *object, t_point *normal);
+double		intersect_ray_plane(t_ray *r, t_object *object);
 t_object	*new_plane(t_point point, t_point normal, double specular, \
 						t_color color, double *rotation);
 // cylinder.c

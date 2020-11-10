@@ -6,7 +6,7 @@
 /*   By: pmetron <pmetron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/07 14:22:24 by pmetron           #+#    #+#             */
-/*   Updated: 2020/11/09 13:09:34 by pmetron          ###   ########.fr       */
+/*   Updated: 2020/11/10 13:40:13 by pmetron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ void		get_plane_normal(t_scene *scene, int index, int obj_num)
 		scene->normal_buf[index] = vector_scale(&scene->normal_buf[index], -1);
 }
 
-double		intersect_ray_plane(t_ray *r, t_object *object, t_point *normal)
+double		intersect_ray_plane(t_ray *r, t_object *object)
 {
 	double	k1;
 	double	k2;

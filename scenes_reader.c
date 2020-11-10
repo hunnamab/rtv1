@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   scenes_reader.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hunnamab <hunnamab@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pmetron <pmetron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/07 15:39:43 by hunnamab          #+#    #+#             */
-/*   Updated: 2020/11/09 16:28:24 by hunnamab         ###   ########.fr       */
+/*   Updated: 2020/11/10 13:47:59 by pmetron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rtv1.h"
 
-t_object	*get_parameters(char *name, char **description, t_scene *scene)
+t_object	*get_parameters(char *name, char **description)
 {
 	t_object *obj;
 
@@ -67,7 +67,7 @@ char		**get_description(char *scene, int i)
 		output_error(6);
 	if (!(description = ft_strsplit(descr_buf, '\n')))
 		output_error(6);
-	ft_memdel(&descr_buf);
+	ft_memdel((void **)&descr_buf);
 	return (description);
 }
 
@@ -113,7 +113,7 @@ void	split_objects(int len, int *obj_nmb, int *light_nmb, char *buf)
 				light++;
 			if (ft_strequ(obj_name, "camera"))
 				camera++;
-			ft_memdel(&obj_name);
+			ft_memdel((void **)&obj_name);
 			while (buf[i] != '}')
 				i++;
 			start = i + 3;
@@ -163,7 +163,7 @@ void	get_objects(char *buf, t_scene *scene, int len)
 			if (!(ft_strequ(obj_name, "camera")) && !(ft_strequ(obj_name, "light")))
 			{
 				// создаем объект и получаем его характеристики
-				scene->objs[n] = get_parameters(obj_name, obj_desc, scene);
+				scene->objs[n] = get_parameters(obj_name, obj_desc);
 				// плюсуем индекс массива, если объект не камера
 				n++;
 			}
@@ -175,8 +175,8 @@ void	get_objects(char *buf, t_scene *scene, int len)
 				m++;
 			}
 			// освобождаем строки
-			ft_memdel(&obj_name);
-			ft_memdel_double(obj_desc);
+			ft_memdel((void **)&obj_name);
+			ft_memdel_double((void **)obj_desc);
 			// переходим к описанию следующего объекта
 			while (buf[i] != '}')
 				i++;
@@ -184,7 +184,7 @@ void	get_objects(char *buf, t_scene *scene, int len)
 		}
 		i++;
 	}
-	ft_memdel(&buf);
+	ft_memdel((void **)&buf);
 }
 
 void	read_scene(int fd, t_scene *scene)

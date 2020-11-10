@@ -6,7 +6,7 @@
 /*   By: pmetron <pmetron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/07 14:21:11 by pmetron           #+#    #+#             */
-/*   Updated: 2020/11/10 13:20:24 by pmetron          ###   ########.fr       */
+/*   Updated: 2020/11/10 13:35:22 by pmetron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	init_deepth(t_scene *scene)
 	get_rays_arr(scene);
 	scene->depth_buf = protected_malloc(sizeof(double), WID * HEI);
 	scene->index_buf = protected_malloc(sizeof(int), WID * HEI);
-	matrix = get_rotation_matrix(&scene->camera.rotation);
+	matrix = get_rotation_matrix(scene->camera.rotation);
 	while (++x < WID * HEI)
 		transform(&scene->ray_buf[x].dir, matrix, 1);
 	matr_free(matrix, 4);
@@ -46,7 +46,7 @@ void	init_default(t_scene *scene)
 	scene->intersection_buf = protected_malloc(sizeof(t_point), WID * HEI);
 	scene->index_buf = protected_malloc(sizeof(int), WID * HEI);
 	scene->depth_buf = protected_malloc(sizeof(double), WID * HEI);
-	matrix = get_rotation_matrix(&scene->camera.rotation);
+	matrix = get_rotation_matrix(scene->camera.rotation);
 	while (++x < WID * HEI)
 		transform(&scene->ray_buf[x].dir, matrix, 1);
 	matr_free(matrix, 4);
@@ -70,7 +70,7 @@ void	init_raycast(t_scene *scene)
 	scene->material_buf = protected_malloc(sizeof(t_material), WID * HEI);
 	scene->index_buf = protected_malloc(sizeof(int), WID * HEI);
 	scene->intersection_buf = protected_malloc(sizeof(t_point), WID * HEI);
-	matrix = get_rotation_matrix(&scene->camera.rotation);
+	matrix = get_rotation_matrix(scene->camera.rotation);
 	while (++x < WID * HEI)
 		transform(&scene->ray_buf[x].dir, matrix, 1);
 	matr_free(matrix, 4);
@@ -87,7 +87,7 @@ void	refresh_scene(t_scene *scene)
 	x = -1;
 	scene->viewport != NULL ? get_viewport(scene) : NULL;
 	scene->ray_buf != NULL ? get_rays_arr(scene) : NULL;
-	matrix = get_rotation_matrix(&scene->camera.rotation);
+	matrix = get_rotation_matrix(scene->camera.rotation);
 	while (++x < WID * HEI)
 		transform(&scene->ray_buf[x].dir, matrix, 1);
 	matr_free(matrix, 4);

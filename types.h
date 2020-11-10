@@ -6,7 +6,7 @@
 /*   By: pmetron <pmetron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/07 15:39:58 by hunnamab          #+#    #+#             */
-/*   Updated: 2020/11/10 13:08:39 by pmetron          ###   ########.fr       */
+/*   Updated: 2020/11/10 13:36:22 by pmetron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,7 +104,7 @@ typedef	struct		s_object3d
 	double			rotation[3];
 	t_color			color;
 	double			specular;
-	double			(*get_normal)(struct s_scene *, int, int);
+	void			(*get_normal)(struct s_scene *, int, int);
 	double			(*intersect)(t_ray *, struct s_object3d *);
 	void			(*clear_obj)(struct s_object3d *);
 }					t_object;
