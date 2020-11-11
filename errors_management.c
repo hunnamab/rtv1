@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   errors_management.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hunnamab <hunnamab@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pmetron <pmetron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/09 11:22:54 by hunnamab          #+#    #+#             */
-/*   Updated: 2020/11/09 11:27:05 by hunnamab         ###   ########.fr       */
+/*   Updated: 2020/11/11 12:10:03 by pmetron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	output_description(void)
 {
 	ft_putstr("usage: ./rtv1 [scene_file] [mode]*\n\n");
 	ft_putstr("*mode is an optional argument,");
-	ft_putstr(" it should be [default], [normal], [depth] or [flat_light]\n");
+	ft_putstr(" it should be [default], [normal], [depth] or [raycast]\n");
 	ft_putstr("\t1. default or no argument after scene file's name means");
 	ft_putstr(" the program draws the usual scene\n");
 	ft_putstr("\t2. normal means the program draws a normal map of");
@@ -45,5 +45,7 @@ void	output_error(int tag)
 		ft_putstr("Error: invalid file structure\n");
 		ft_putstr("Check brackets, spaces, etc.\n");
 	}
+	else if (tag == 7)
+		ft_putstr("Error: wrong drawing mode\n");
 	exit(0);
 }

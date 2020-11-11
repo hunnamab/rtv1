@@ -6,7 +6,7 @@
 /*   By: pmetron <pmetron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/07 15:39:34 by hunnamab          #+#    #+#             */
-/*   Updated: 2020/11/10 17:24:57 by pmetron          ###   ########.fr       */
+/*   Updated: 2020/11/11 12:08:18 by pmetron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -153,7 +153,7 @@ void		camera_down(t_scene *scene);
 // scene_clear.c
 void		clean_scene(t_scene *scene);
 // errors_management.c
-void		output_description();
+void		output_description(void);
 void		output_error(int tag);
 
 #endif
